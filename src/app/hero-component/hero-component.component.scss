@@ -22,12 +22,12 @@
 
     &__text--box {
       .heading--primary {
-        font-size: font-size(font-size-large);
+        font-size: font-size(font-size-xlarge);
         font-weight: font-weight(font-weight-light);
 
         &--span {
           color: var(--main-color);
-          font-size: font-size(font-size-large);
+          font-size: font-size(font-size-xlarge);
           font-weight: font-weight(font-weight-regular);
         }
       }
