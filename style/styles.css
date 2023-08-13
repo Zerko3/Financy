@@ -1,6 +1,15 @@
-// IMPORT OTHER SASS FILES
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
 
-@use "./style/sass/general-reset";
+body {
+  font-family: "Lato", sans-serif;
+}
 
 h1 {
   font-size: 3rem;
@@ -52,4 +61,4 @@ Default: 9px
 SPACING SYSTEM (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 
-*/
+*//*# sourceMappingURL=styles.css.map */
