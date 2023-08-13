@@ -1,14 +1,9 @@
 // IMPORT OTHER SASS FILES
 
 @use "./style/sass/general-reset";
+@use "./style/sass/global-variables" as *;
 
-h1 {
-  font-size: 3rem;
-}
-
-/* 
-
-
+/*
 
 
 ---01 TYPOGRAFHY SYSTEM

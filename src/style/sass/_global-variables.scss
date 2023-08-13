@@ -1,0 +1,33 @@
+html {
+  --main-color: #007bff;
+  --secondary-color: #17a2b8;
+  --white-color: #fff;
+  --background-color: #f7f7f7;
+  --gray-color: #6c757d;
+  --gray-color-darker: #343a40;
+}
+
+$font-weight: (
+  "font-weight-thin": 100,
+  "font-weight-light": 300,
+  "font-weight-regular": 400,
+  "font-weight-medium": 500,
+  "font-weight-bold": 700,
+  "font-weight-black": 900,
+);
+
+$font-size: (
+  "font-size-small": calc(1rem + 0.5vw),
+  "font-size-regular": calc(1.3rem + 1vw),
+  "font-size-medium": calc(1.3rem + 2vw),
+  "font-size-large": calc(1.3rem + 5vw),
+  "font-size-xlarge": calc(2.3rem + 5vw),
+);
+
+@function font-weight($font-weight-style) {
+  @return map-get($font-weight, $font-weight-style);
+}
+
+@function font-size($font-size-style) {
+  @return map-get($font-size, $font-size-style);
+}
