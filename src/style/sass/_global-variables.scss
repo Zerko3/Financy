@@ -17,11 +17,11 @@ $font-weight: (
 );
 
 $font-size: (
-  "font-size-small": calc(1rem + 0.5vw),
-  "font-size-regular": calc(1.3rem + 1vw),
-  "font-size-medium": calc(1.3rem + 2vw),
-  "font-size-large": calc(1.3rem + 5vw),
-  "font-size-xlarge": calc(2.3rem + 5vw),
+  "font-size-small": calc(1rem + 0.2vw),
+  "font-size-regular": calc(1.3rem + 0.5vw),
+  "font-size-medium": calc(1.3rem + 1vw),
+  "font-size-large": calc(1.3rem + 2vw),
+  "font-size-xlarge": calc(2.3rem + 2vw),
 );
 
 @function font-weight($font-weight-style) {
