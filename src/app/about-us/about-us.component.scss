@@ -1,0 +1,104 @@
+@use "../../style/sass/global-variables" as *;
+
+.section--aboutus {
+  height: 100vh;
+  width: 100vw;
+
+  .row {
+    height: 100%;
+    width: 100%;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+  }
+
+  &__content--box {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+
+    &__para--box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      position: relative;
+
+      &__header--box {
+        width: 100%;
+
+        &--span {
+          top: 10%;
+          left: -20%;
+          position: absolute;
+          font-size: 60rem;
+          z-index: -1;
+          font-weight: font-weight(font-weight-bold);
+          opacity: 0.1;
+          color: var(--main-color);
+        }
+
+        &--heading {
+          font-size: font-size(font-size-large);
+          font-weight: font-weight(font-weight-medium);
+          margin-bottom: 3.2rem;
+        }
+      }
+
+      &--para {
+        width: 100%;
+
+        &--lists {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+
+          li,
+          span {
+            font-size: font-size(font-size-regular);
+            font-weight: font-weight(font-weight-light);
+          }
+        }
+      }
+
+      &--link {
+        position: absolute;
+        bottom: 25%;
+        left: 0;
+        background-color: var(--main-color);
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-light);
+        color: var(--white-color);
+        padding: 1.2rem 2.4rem;
+        border-radius: 2rem;
+      }
+    }
+
+    &__img--box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+
+    &__img--box::after {
+      content: "";
+      position: absolute;
+      height: 70%;
+      width: 100%;
+      // background-color: var(--gray-color-lighter);
+      background-color: var(--main-color-lighter);
+      z-index: -1;
+    }
+  }
+}

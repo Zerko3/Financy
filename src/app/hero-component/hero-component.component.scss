@@ -31,6 +31,13 @@
           font-weight: font-weight(font-weight-regular);
         }
       }
+      &--para {
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-light);
+        color: var(--main-color);
+        text-align: center;
+        margin-top: 1rem;
+      }
       &--links {
         display: flex;
         align-items: center;
