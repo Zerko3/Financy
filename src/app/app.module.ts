@@ -12,13 +12,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
     AppComponent,
     HeroComponentComponent,
     LoginComponentComponent,
-    AboutUsComponent
+    AboutUsComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
