@@ -11,4 +11,7 @@ export class LoginComponentComponent {
   userHeroNavigation() {
     this.router.navigate(['']);
   }
+
+  // TODO:
+  // form validation
 }
