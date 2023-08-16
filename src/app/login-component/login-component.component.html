@@ -1,1 +1,60 @@
-<p>login-component works!</p>
+<section class="section--login">
+  <div class="row">
+    <div class="section--login__content--box">
+      <div class="section--login__content--box__img--box">
+        <span class="section--login__content--box__img--box--logo"
+          >FinancY</span
+        >
+        <h3 class="section--login__content--box__img--box--heading">
+          Take control over your money.
+        </h3>
+        <p class="section--login__content--box__img--box--text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
+          expedita qui quos magnam, tempore explicabo ut voluptate quis.
+        </p>
+        <div class="section--login__content--box__img--box__carousel--box">
+          <div
+            class="section--login__content--box__img--box__carousel--box--carousel"
+          >
+            <p
+              class="section--login__content--box__img--box__carousel--box--carousel--para"
+            >
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias
+              fuga a labore quos soluta odit adipisci rerum dicta rem veritatis
+              vero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?
+            </p>
+            <div
+              class="section--login__content--box__img--box__carousel--box--carousel__user--box"
+            >
+              <img src="../../assets/img/user-logo.jpeg" alt="user" />
+              <span>Name Surname</span>
+            </div>
+          </div>
+          <div
+            class="section--login__content--box__img--box__carousel--box__spans--box"
+          >
+            <span class="one"></span>
+            <span class="two"></span>
+            <span class="three"></span>
+          </div>
+        </div>
+      </div>
+      <div class="section--login__content--box__text--box">
+        <form>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" required />
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required />
+          <button type="submit">Enter</button>
+        </form>
+        <a
+          #navigationHome
+          (click)="userHeroNavigation()"
+          class="section--login__content--box__text--box--link"
+          href="#"
+          >Back</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
