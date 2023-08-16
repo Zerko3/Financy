@@ -18,6 +18,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
+    position: relative;
 
     &__img--box {
       display: flex;
@@ -32,11 +33,120 @@
         content: "";
         position: absolute;
         align-items: center;
-        height: 50rem;
-        width: 50rem;
+        height: 40rem;
+        width: 40rem;
         border-radius: 50%;
         border: 1rem dotted var(--main-color);
         z-index: 10;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        align-items: center;
+        height: 60rem;
+        width: 60rem;
+        border-radius: 50%;
+        border: 1rem dotted var(--gray-color-lighter);
+        z-index: -1;
+      }
+    }
+
+    &__para--box {
+      position: absolute;
+      top: 30%;
+      right: -14%;
+      width: 40%;
+
+      &__heading--box {
+        position: relative;
+        &--circle {
+          content: "";
+          position: absolute;
+          top: 10%;
+          left: -15%;
+          height: 4rem;
+          width: 4rem;
+          border-radius: 50%;
+          border: 0.4rem dotted var(--main-color);
+        }
+        &--heading {
+          font-size: font-size(font-size-medium);
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+        }
+      }
+
+      &__text--box {
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-light);
+      }
+    }
+
+    &__para--box--two {
+      position: absolute;
+      bottom: 30%;
+      right: -17%;
+      width: 40%;
+    }
+
+    &__para--box--three {
+      position: absolute;
+      bottom: 30%;
+      left: -17%;
+      width: 40%;
+
+      &__heading--box {
+        position: relative;
+        &--circle {
+          content: "";
+          position: absolute;
+          top: 10%;
+          right: -15%;
+          height: 4rem;
+          width: 4rem;
+          border-radius: 50%;
+          border: 0.4rem dotted var(--main-color);
+        }
+        &--heading {
+          font-size: font-size(font-size-medium);
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+        }
+      }
+
+      &__text--box {
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-light);
+      }
+    }
+    &__para--box--four {
+      position: absolute;
+      top: 30%;
+      left: -14%;
+      width: 40%;
+
+      &__heading--box {
+        position: relative;
+        &--circle {
+          content: "";
+          position: absolute;
+          top: 10%;
+          right: -15%;
+          height: 4rem;
+          width: 4rem;
+          border-radius: 50%;
+          border: 0.4rem dotted var(--main-color);
+        }
+        &--heading {
+          font-size: font-size(font-size-medium);
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+        }
+      }
+
+      &__text--box {
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-light);
       }
     }
   }
