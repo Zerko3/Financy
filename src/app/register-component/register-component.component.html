@@ -39,19 +39,27 @@
           </div>
         </div>
       </div>
-      <!-- TODO: -->
-      <!-- change form for register -->
+
       <div class="section--register__content--box__text--box">
+        <h2>Signup</h2>
+        <div class="section--register__content--box__text--box__heading--box">
+          <h3>Already have an account?</h3>
+          <a #navigationLogin (click)="userHeroNavigation(navigationLogin)"
+            >Login</a
+          >
+        </div>
         <form>
-          <h3>What type of an account?</h3>
-          <div class="radio-btns">
-            <div>
-              <label for="accType">Personal</label>
-              <input type="radio" name="accType" id="accType" />
-            </div>
-            <div>
-              <label for="accType">Profesional</label>
-              <input type="radio" name="accType" id="accType" />
+          <div class="form__upper">
+            <h3>Looking for?</h3>
+            <div class="radio-btns">
+              <div>
+                <label for="accType">Personal</label>
+                <input type="radio" name="accType" id="Personal" />
+              </div>
+              <div>
+                <label for="accType">Profesional</label>
+                <input type="radio" name="accType" id="Profesional" />
+              </div>
             </div>
           </div>
           <label for="username">Username:</label>
@@ -64,9 +72,8 @@
         </form>
         <a
           #navigationHome
-          (click)="userHeroNavigation()"
+          (click)="userHeroNavigation(navigationHome)"
           class="section--register__content--box__text--box--link"
-          href="#"
           >Back</a
         >
       </div>
