@@ -40,12 +40,23 @@
         </div>
       </div>
       <div class="section--login__content--box__text--box">
-        <form>
+        <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
           <label for="username">Username:</label>
-          <input type="text" name="username" id="username" required />
+          <input type="text" name="username" id="username" required ngModel />
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" required />
-          <button type="submit">Enter</button>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            ngModel
+          />
+          <button
+            [disabled]="loginForm.valid ? formStatus : !formStatus"
+            type="submit"
+          >
+            Enter
+          </button>
         </form>
         <a
           #navigationHome
