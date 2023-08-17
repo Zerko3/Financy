@@ -8,6 +8,9 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { AboutUsComponent } from './about-us/about-us.component';
 import { RegisterComponentComponent } from './register-component/register-component.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InvestingComponent } from './dashboard/investing/investing.component';
+import { ExpenseComponent } from './dashboard/expense/expense.component';
+import { SaveingsComponent } from './dashboard/saveings/saveings.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AboutUsComponent,
     RegisterComponentComponent,
     DashboardComponent,
+    InvestingComponent,
+    ExpenseComponent,
+    SaveingsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
