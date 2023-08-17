@@ -48,27 +48,50 @@
             >Login</a
           >
         </div>
-        <form>
+        <form #form="ngForm" (submit)="onSubmit(form)">
           <div class="form__upper">
             <h3>Looking for?</h3>
             <div class="radio-btns">
               <div>
-                <label for="accType">Personal</label>
-                <input type="radio" name="accType" id="Personal" />
+                <label for="Personal">Personal</label>
+                <input
+                  type="radio"
+                  name="accType"
+                  id="Personal"
+                  value="personal"
+                  ngModel
+                />
               </div>
               <div>
-                <label for="accType">Profesional</label>
-                <input type="radio" name="accType" id="Profesional" />
+                <label for="Profesional">Profesional</label>
+                <input
+                  type="radio"
+                  name="accType"
+                  id="Profesional"
+                  value="profesional"
+                  ngModel
+                />
               </div>
             </div>
           </div>
           <label for="username">Username:</label>
-          <input type="text" name="username" id="username" required />
+          <input type="text" name="username" id="username" required ngModel />
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" required ngModel />
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" required />
-          <button type="submit">Create account</button>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            ngModel
+          />
+          <button
+            [disabled]="form.valid ? formStatus : !formStatus"
+            type="submit"
+          >
+            {{ form.valid ? "Create account" : "Please fill the form" }}
+          </button>
         </form>
         <a
           #navigationHome
