@@ -1,0 +1,21 @@
+@use "../../../style/sass/global-variables" as *;
+
+.section--navigation {
+  padding: 1.2rem 2.4rem;
+  width: 100vw;
+  height: auto;
+
+  &__navigation--box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    a {
+      font-size: font-size(font-size-regular);
+      font-weight: font-weight(font-weight-light);
+      color: var(--gray-color-darker);
+      cursor: pointer;
+    }
+  }
+}
