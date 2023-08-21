@@ -17,12 +17,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [
-      { path: 'expense', component: ExpenseComponent },
-      { path: 'investing', component: InvestingComponent },
-      { path: 'saveings', component: SaveingsComponent },
-    ],
   },
+  { path: 'expense', component: ExpenseComponent },
+  { path: 'investing', component: InvestingComponent },
+  { path: 'saveings', component: SaveingsComponent },
 
   { path: '**', redirectTo: 'hero', pathMatch: 'full' },
 ];

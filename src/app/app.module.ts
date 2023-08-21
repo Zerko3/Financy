@@ -11,7 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InvestingComponent } from './dashboard/investing/investing.component';
 import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
-import { NavigationComponent } from './dashboard/navigation/navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [

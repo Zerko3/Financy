@@ -19,15 +19,15 @@ export class NavigationComponent {
     }
 
     if (e.innerText === 'Investing') {
-      this.router.navigate(['dashboard/investing']);
+      this.router.navigate(['/investing']);
     }
 
     if (e.innerText === 'Monthly expenses') {
-      this.router.navigate(['dashboard/expense']);
+      this.router.navigate(['/expense']);
     }
 
     if (e.innerText === 'Saveings') {
-      this.router.navigate(['dashboard/saveings']);
+      this.router.navigate(['/saveings']);
     }
   }
 }
