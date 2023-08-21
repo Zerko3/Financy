@@ -2,8 +2,18 @@
   <div class="section--dashboard__navigation--box">
     <app-navigation></app-navigation>
   </div>
+  <router-outlet></router-outlet>
+
   <div class="section--dashboard__content--box">
-    <router-outlet></router-outlet>
-    <h1>Hello world!</h1>
+    <div class="section--dashboard__content--box__transactions--box">
+      <div
+        class="section--dashboard__content--box__transactions--box--transactions"
+      >
+        <h1>Transactions:</h1>
+      </div>
+      <div
+        class="section--dashboard__content--box__transactions--box--money"
+      ></div>
+    </div>
   </div>
 </section>

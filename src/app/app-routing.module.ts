@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'hero', component: HeroComponentComponent },
   { path: 'login', component: LoginComponentComponent },
   { path: 'register', component: RegisterComponentComponent },
+
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -22,6 +23,8 @@ const routes: Routes = [
       { path: 'saveings', component: SaveingsComponent },
     ],
   },
+
+  { path: '**', redirectTo: 'hero', pathMatch: 'full' },
 ];
 
 @NgModule({
