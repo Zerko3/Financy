@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { InvestingComponent } from './dashboard/investing/investing.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
+import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hero', pathMatch: 'full' },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'investing', component: InvestingComponent },
   { path: 'saveings', component: SaveingsComponent },
 
-  { path: '**', redirectTo: 'hero', pathMatch: 'full' },
+  { path: '**', component: WildcardComponentComponent },
 ];
 
 @NgModule({

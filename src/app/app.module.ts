@@ -12,6 +12,7 @@ import { InvestingComponent } from './dashboard/investing/investing.component';
 import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     ExpenseComponent,
     SaveingsComponent,
     NavigationComponent,
+    WildcardComponentComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
