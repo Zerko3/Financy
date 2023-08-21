@@ -7,11 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
+  clickedOnNav: boolean;
+
   constructor(private router: Router) {}
 
   userNavigate(e: HTMLAnchorElement) {
     if (e.innerText === 'Overview') {
       this.router.navigate(['dashboard']);
+
+      this.clickedOnNav = false;
     }
 
     if (e.innerText === 'Investing') {
