@@ -20,6 +20,11 @@ export class RegisterComponentComponent {
   email: string = '';
   constructor(private router: Router, private accountService: AccountService) {}
 
+  // TODO:
+  // 1. Form data validation
+  // 2. Better UX design when invalid or valid data
+  // 3. Navigation auth to dashboard after valid register
+
   userHeroNavigation(e: HTMLAnchorElement) {
     if (e.innerText === 'Login') {
       this.router.navigate(['/login']);

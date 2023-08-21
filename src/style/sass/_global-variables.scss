@@ -28,10 +28,21 @@ $font-size: (
   "font-size-xlarge": calc(2.3rem + 2vw),
 );
 
+$break-points: (
+  "break-point-small": 400px,
+  "break-point-medium": 600px,
+  "break-point-tablet": 800px,
+  "break-point-desktop": 1300px,
+);
+
 @function font-weight($font-weight-style) {
   @return map-get($font-weight, $font-weight-style);
 }
 
 @function font-size($font-size-style) {
   @return map-get($font-size, $font-size-style);
+}
+
+@function break-point($break-point-limit) {
+  @return map-get($break-points, $break-point-limit);
 }
