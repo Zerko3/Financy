@@ -29,5 +29,9 @@ export class NavigationComponent {
     if (e.innerText === 'Saveings') {
       this.router.navigate(['/saveings']);
     }
+
+    if (e.innerText === 'Logout') {
+      this.router.navigate(['']);
+    }
   }
 }
