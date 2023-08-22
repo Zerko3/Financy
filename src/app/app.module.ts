@@ -13,6 +13,7 @@ import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { WildcardComponentComponent } from './wildcard-component/wildcard-compon
     NavigationComponent,
     WildcardComponentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, NgChartsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

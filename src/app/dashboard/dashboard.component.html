@@ -5,12 +5,79 @@
   <router-outlet></router-outlet>
 
   <div class="section--dashboard__content--box">
+    <h1>Subscriptions</h1>
     <div class="section--dashboard__content--box__subscriptions">
-      <a>Add subscription</a>
+      <a class="section--dashboard__content--box__subscriptions--add"
+        >Add subscription</a
+      >
+      <!-- 1 -->
+      <div
+        class="section--dashboard__content--box__subscriptions__subscription--box"
+      >
+        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
+        <div>
+          <h3>Amazon prime</h3>
+          <span>13EUR</span>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div
+        class="section--dashboard__content--box__subscriptions__subscription--box"
+      >
+        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
+        <div>
+          <h3>Amazon prime</h3>
+          <span>13EUR</span>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div
+        class="section--dashboard__content--box__subscriptions__subscription--box"
+      >
+        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
+        <div>
+          <h3>Amazon prime</h3>
+          <span>13EUR</span>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div
+        class="section--dashboard__content--box__subscriptions__subscription--box"
+      >
+        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
+        <div>
+          <h3>Amazon prime</h3>
+          <span>13EUR</span>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div
+        class="section--dashboard__content--box__subscriptions__subscription--box"
+      >
+        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
+        <div>
+          <h3>Amazon prime</h3>
+          <span>13EUR</span>
+        </div>
+      </div>
     </div>
+    <h1>Accounts</h1>
     <div class="section--dashboard__content--box__cards--box">
+      <a class="section--dashboard__content--box__cards--box--add">Add card</a>
+      <!-- 1 -->
       <div class="section--dashboard__content--box__cards--box--card">
-        <a>Add card</a>
+        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <span>3000EUR</span>
+      </div>
+      <!-- 2 -->
+      <div class="section--dashboard__content--box__cards--box--card">
+        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <span>3000EUR</span>
+      </div>
+      <!-- 3 -->
+      <div class="section--dashboard__content--box__cards--box--card">
+        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <span>3000EUR</span>
       </div>
     </div>
     <div class="section--dashboard__content--box__transactions--box">
@@ -18,21 +85,63 @@
         class="section--dashboard__content--box__transactions--box--transactions"
       >
         <h1>Transactions:</h1>
-        <a>Add transaction</a>
+        <a
+          class="section--dashboard__content--box__transactions--box--transactions--add"
+          >Add transaction</a
+        >
         <div>
           <ul>
-            <li>xxxxxx:xxxxxx date:xxxx</li>
-            <li>xxxxxx:xxxxxx date:xxxx</li>
-            <li>xxxxxx:xxxxxx date:xxxx</li>
-            <li>xxxxxx:xxxxxx date:xxxx</li>
-            <li>xxxxxx:xxxxxx date:xxxx</li>
-            <li>xxxxxx:xxxxxx date:xxxx</li>
+            <div>
+              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
+              <li>NAME</li>
+              <li>TYPE</li>
+              <li>TAG</li>
+              <li>MONEY</li>
+            </div>
+            <div>
+              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
+              <li>NAME</li>
+              <li>TYPE</li>
+              <li>TAG</li>
+              <li>MONEY</li>
+            </div>
+            <div>
+              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
+              <li>NAME</li>
+              <li>TYPE</li>
+              <li>TAG</li>
+              <li>MONEY</li>
+            </div>
+            <div>
+              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
+              <li>NAME</li>
+              <li>TYPE</li>
+              <li>TAG</li>
+              <li>MONEY</li>
+            </div>
           </ul>
         </div>
       </div>
       <div class="section--dashboard__content--box__transactions--box--money">
-        1000eur
-        <span>Monthly +40eur</span>
+        <div
+          class="chart-container"
+          style="
+            position: relative;
+            height: 30rem;
+            width: 30rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <canvas
+            baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'doughnut'"
+          >
+          </canvas>
+        </div>
       </div>
     </div>
   </div>
