@@ -19,3 +19,12 @@ a {
   text-decoration: none;
   list-style-type: none;
 }
+.dx-widget,
+.dx-widget *,
+.dx-widget ::after,
+.dx-widget ::before,
+.dx-widget::after,
+.dx-widget::before {
+  font-size: 1.2rem !important;
+  width: auto;
+}

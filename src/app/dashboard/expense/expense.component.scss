@@ -2,6 +2,7 @@
 .section--expense {
   height: 100vh;
   width: 100vw;
+  padding: 1.2rem 2.4rem;
 
   &__expense--box {
     height: 100%;
@@ -10,15 +11,58 @@
     &__invoice {
       height: auto;
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
 
       &--subcriptions {
+        text-align: center;
         font-size: 3rem;
+        background-color: yellow;
+        width: 100%;
+        height: auto;
+      }
+
+      &--food {
+        text-align: center;
+        font-size: 3rem;
+        background-color: yellow;
+        width: 100%;
+        height: auto;
+      }
+
+      &--fun {
+        text-align: center;
+        font-size: 3rem;
+        background-color: yellow;
+        width: 100%;
+        height: auto;
+      }
+
+      &--bills {
+        text-align: center;
+        font-size: 3rem;
+        background-color: yellow;
+        width: 100%;
+        height: auto;
+      }
+
+      &--random {
+        text-align: center;
+        font-size: 3rem;
+        background-color: yellow;
+        width: 100%;
+        height: auto;
       }
     }
 
     &__tracking {
       height: 100%;
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
