@@ -18,6 +18,8 @@ import {
   DxChartModule,
   DxSelectBoxModule,
   DxPieChartModule,
+  DxDataGridModule,
+  DxButtonModule,
 } from 'devextreme-angular';
 
 @NgModule({
@@ -41,6 +43,8 @@ import {
     DxChartModule,
     DxSelectBoxModule,
     DxPieChartModule,
+    DxDataGridModule,
+    DxButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

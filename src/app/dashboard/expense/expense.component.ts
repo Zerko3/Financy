@@ -8,5 +8,15 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['./expense.component.scss'],
 })
 export class ExpenseComponent {
+  expenses = [
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+    },
+  ];
+  columns = ['Date', 'Money', 'Expanses', 'Name', 'Status'];
   constructor(private navigationService: NavigationService) {}
 }
