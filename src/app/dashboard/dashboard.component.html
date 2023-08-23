@@ -130,25 +130,24 @@
         </div>
       </div>
       <div class="section--dashboard__content--box__transactions--box--money">
-        <div
-          class="chart-container"
-          style="
-            position: relative;
-            height: 30rem;
-            width: 30rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          "
+        <dx-pie-chart
+          id="pie"
+          type="doughnut"
+          palette="Soft Pastel"
+          [dataSource]="userMoney"
         >
-          <canvas
-            baseChart
-            [data]="barChartData"
-            [options]="barChartOptions"
-            [type]="'doughnut'"
-          >
-          </canvas>
-        </div>
+          <dxi-series argumentField="region">
+            <dxo-label [visible]="true" format="millions">
+              <dxo-connector [visible]="true"></dxo-connector>
+            </dxo-label>
+          </dxi-series>
+
+          <dxo-legend
+            [margin]="0"
+            horizontalAlignment="right"
+            verticalAlignment="top"
+          ></dxo-legend>
+        </dx-pie-chart>
       </div>
     </div>
   </div>

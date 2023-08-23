@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent {
   clickedOnNav: boolean;
+  clickedOnLogout: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -31,7 +32,16 @@ export class NavigationComponent {
     }
 
     if (e.innerText === 'Logout') {
+      this.clickedOnLogout = true;
+    }
+
+    if (e.innerText === 'No') {
+      this.clickedOnLogout = false;
+    }
+
+    if (e.innerText === 'Yes') {
       this.router.navigate(['']);
+      this.clickedOnLogout = false;
     }
   }
 }

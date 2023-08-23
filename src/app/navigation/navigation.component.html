@@ -7,5 +7,10 @@
     >
     <a #saveingsLink (click)="userNavigate(saveingsLink)">Saveings</a>
     <a #logoutLink (click)="userNavigate(logoutLink)">Logout</a>
+    <ng-container *ngIf="clickedOnLogout">
+      <div>Are you sure you want to logout?</div>
+      <a #logoutLink (click)="userNavigate(logoutLink)">Yes</a>
+      <a #logoutLinkNo (click)="userNavigate(logoutLinkNo)">No</a>
+    </ng-container>
   </div>
 </section>

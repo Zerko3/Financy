@@ -55,6 +55,23 @@
           class="section--investing__investing--box__investings--overview__money--box__percante"
           >4% GREEN/RED 40 EUR</span
         >
+        <dx-chart [dataSource]="moneyInfo"
+          ><dxi-series
+            *ngFor="let energy of energySources"
+            [valueField]="energy.value"
+            [name]="energy.name"
+          >
+          </dxi-series
+          ><dxo-common-series-settings #seriesSettings argumentField="country">
+          </dxo-common-series-settings>
+          <dxo-margin [bottom]="20"></dxo-margin>
+          <dxo-argument-axis
+            [valueMarginsEnabled]="false"
+            discreteAxisDivisionMode="crossLabels"
+          >
+          </dxo-argument-axis>
+          ></dx-chart
+        >
       </div>
       <div
         class="section--investing__investing--box__investings--overview__portfolio--box"

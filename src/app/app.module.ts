@@ -13,7 +13,12 @@ import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
-import { NgChartsModule } from 'ng2-charts';
+// DEVEXTREME
+import {
+  DxChartModule,
+  DxSelectBoxModule,
+  DxPieChartModule,
+} from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,14 @@ import { NgChartsModule } from 'ng2-charts';
     NavigationComponent,
     WildcardComponentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, NgChartsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    DxChartModule,
+    DxSelectBoxModule,
+    DxPieChartModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,18 +6,32 @@ import { ChartData } from 'chart.js';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  barChartOptions;
-
-  barChartData: ChartData<'doughnut', { key: string; value: number }[]> = {
-    datasets: [
-      {
-        data: [
-          { key: 'Income', value: 50 },
-          { key: 'Expanse', value: 50 },
-        ],
-      },
-    ],
-  };
+  userMoney = [
+    {
+      region: 'Asia',
+      val: 4119626293,
+    },
+    {
+      region: 'Africa',
+      val: 1012956064,
+    },
+    {
+      region: 'Northern America',
+      val: 344124520,
+    },
+    {
+      region: 'Latin America and the Caribbean',
+      val: 590946440,
+    },
+    {
+      region: 'Europe',
+      val: 727082222,
+    },
+    {
+      region: 'Oceania',
+      val: 35104756,
+    },
+  ];
   constructor() {}
 
   ngOnInit(): void {}
