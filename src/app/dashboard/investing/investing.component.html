@@ -47,31 +47,43 @@
       <div
         class="section--investing__investing--box__investings--overview__money--box"
       >
-        <span
-          class="section--investing__investing--box__investings--overview__money--box__full--money"
-          >4000EUR</span
+        <div
+          class="section--investing__investing--box__investings--overview__money--box__money--overall"
         >
-        <span
-          class="section--investing__investing--box__investings--overview__money--box__percante"
-          >4% GREEN/RED 40 EUR</span
-        >
-        <dx-chart [dataSource]="moneyInfo"
-          ><dxi-series
-            *ngFor="let energy of energySources"
-            [valueField]="energy.value"
-            [name]="energy.name"
+          <span
+            class="section--investing__investing--box__investings--overview__money--box__money--overall__full--money"
+            ><span>Balance</span>&euro;4000,00</span
           >
-          </dxi-series
-          ><dxo-common-series-settings #seriesSettings argumentField="country">
-          </dxo-common-series-settings>
-          <dxo-margin [bottom]="20"></dxo-margin>
-          <dxo-argument-axis
-            [valueMarginsEnabled]="false"
-            discreteAxisDivisionMode="crossLabels"
+          <span
+            class="section--investing__investing--box__investings--overview__money--box__money--overall__percante"
+            >4% 40 EUR</span
           >
-          </dxo-argument-axis>
-          ></dx-chart
+          <a class="porfolio--btn">View portfolio</a>
+        </div>
+        <div
+          class="section--investing__investing--box__investings--overview__money--box__chart--box"
         >
+          <dx-chart [dataSource]="moneyInfo"
+            ><dxi-series
+              *ngFor="let energy of energySources"
+              [valueField]="energy.value"
+              [name]="energy.name"
+            >
+            </dxi-series
+            ><dxo-common-series-settings
+              #seriesSettings
+              argumentField="portfolio"
+            >
+            </dxo-common-series-settings>
+            <dxo-margin [bottom]="20"></dxo-margin>
+            <dxo-argument-axis
+              [valueMarginsEnabled]="false"
+              discreteAxisDivisionMode="crossLabels"
+            >
+            </dxo-argument-axis>
+            ></dx-chart
+          >
+        </div>
       </div>
       <div
         class="section--investing__investing--box__investings--overview__portfolio--box"

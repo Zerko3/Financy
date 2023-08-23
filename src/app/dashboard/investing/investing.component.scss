@@ -70,25 +70,51 @@
       justify-content: center;
 
       &__money--box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
         outline: 1px solid var(--main-color);
         padding: 1.2rem 2.4rem;
         border-radius: 11px;
         height: auto;
         width: 100%;
 
-        &__full--money {
-          font-size: font-size(font-size-large);
-          font-weight: font-weight(font-weight-light);
-        }
+        &__money--overall {
+          padding: 1.2rem 2.4rem;
+          gap: 1rem;
+          margin: 3.2rem 0;
+          position: relative;
 
-        &__percante {
-          font-size: font-size(font-size-small);
-          font-weight: font-weight(font-weight-light);
-          color: green;
+          .porfolio--btn {
+            position: absolute;
+            right: 2.4rem;
+            bottom: 1.2rem;
+            cursor: pointer;
+            font-size: font-size(font-size-small);
+            background-color: var(--main-color);
+            color: var(--white-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9px;
+          }
+
+          &__full--money {
+            margin-top: 3.2rem;
+            position: relative;
+            font-size: font-size(font-size-large);
+            font-weight: font-weight(font-weight-bold);
+
+            span {
+              position: absolute;
+              top: -40%;
+              left: 0;
+              font-size: font-size(font-size-regular);
+              font-weight: font-weight(font-weight-regular);
+            }
+          }
+
+          &__percante {
+            margin-left: 1.2rem;
+            font-size: font-size(font-size-regular);
+            font-weight: font-weight(font-weight-light);
+            color: green;
+          }
         }
       }
     }
