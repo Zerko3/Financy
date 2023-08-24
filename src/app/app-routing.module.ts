@@ -8,6 +8,9 @@ import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { InvestingComponent } from './dashboard/investing/investing.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
 import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
+import { ExpenseFormComponent } from './dashboard/expense/expense-form/expense-form.component';
+import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
+import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hero', pathMatch: 'full' },
@@ -19,9 +22,21 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
   },
-  { path: 'expense', component: ExpenseComponent },
-  { path: 'investing', component: InvestingComponent },
-  { path: 'saveings', component: SaveingsComponent },
+  {
+    path: 'expense',
+    component: ExpenseComponent,
+    children: [{ path: 'expenseForm', component: ExpenseFormComponent }],
+  },
+  {
+    path: 'investing',
+    component: InvestingComponent,
+    children: [{ path: 'investingForm', component: InvestingFormComponent }],
+  },
+  {
+    path: 'saveings',
+    component: SaveingsComponent,
+    children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
+  },
 
   { path: '**', component: WildcardComponentComponent },
 ];

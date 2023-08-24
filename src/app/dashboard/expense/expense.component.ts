@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
@@ -111,7 +112,16 @@ export class ExpenseComponent {
     },
   ];
   columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
-  constructor(private navigationService: NavigationService) {}
+  constructor(
+    private navigationService: NavigationService,
+    private router: Router
+  ) {}
+
+  // TODO:
+  // 1. Connect form to component
+  userFormNavigation() {
+    this.router.navigate(['expense/expenseForm']);
+  }
 
   // TODO:
   // 1. Get valid row

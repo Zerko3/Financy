@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-saveings',
@@ -111,7 +112,11 @@ export class SaveingsComponent {
   ];
   columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  userNavigationForm() {
+    this.router.navigate(['saveings/saveingsForm']);
+  }
 
   cellStyle(e) {
     if (e.rowType === 'data' && e.column.dataField === 'Status') {

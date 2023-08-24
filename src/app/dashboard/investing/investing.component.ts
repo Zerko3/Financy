@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-investing',
@@ -14,4 +15,10 @@ export class InvestingComponent {
     { portfolio: new Date('December 27, 1995 03:24:00'), euro: 4390 },
     { portfolio: new Date('December 30, 1995 03:24:00'), euro: 5100 },
   ];
+
+  constructor(private router: Router) {}
+
+  userFormNavigate() {
+    this.router.navigate(['investing/investingForm']);
+  }
 }
