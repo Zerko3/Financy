@@ -5,4 +5,117 @@ import { Component } from '@angular/core';
   templateUrl: './saveings.component.html',
   styleUrls: ['./saveings.component.scss'],
 })
-export class SaveingsComponent {}
+export class SaveingsComponent {
+  allowedPageSizes = [10, 'all'];
+  displayMode = 'full';
+  showPageSizeSelector = true;
+  showInfo = true;
+  showNavButtons = true;
+  // TODO:
+  // 1. model or interface?
+  // 2. service to store the data for now
+  // 3. later on call the data from firebase
+  // 4. Service will get and post this valid data
+  // 5. give or recive data from service
+
+  // WILL REMOVE
+  expenses = [
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Netflix',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+    {
+      Date: new Date(),
+      Money: 100,
+      Expanses: 'Subscription',
+      Name: 'Apple',
+      Status: 'Paid',
+      Account: 'Paypal',
+    },
+  ];
+  columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
+
+  constructor() {}
+
+  cellStyle(e) {
+    if (e.rowType === 'data' && e.column.dataField === 'Status') {
+      e.cellElement.classList.add('test');
+    }
+  }
+}

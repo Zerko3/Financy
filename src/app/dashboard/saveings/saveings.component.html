@@ -1,2 +1,120 @@
 <app-navigation></app-navigation>
-<h1>HELLO SAVEINGS</h1>
+<section class="section--saveings">
+  <div class="section--saveings__content--box">
+    <div class="section--saveings__content--box__accounts--overview">
+      <!-- account 1 -->
+      <div
+        class="section--saveings__content--box__accounts--overview__account--box"
+      >
+        <div
+          class="section--saveings__content--box__accounts--overview__account--box__icon--box"
+        >
+          <i class="dx-icon-user"></i>
+        </div>
+        <h1>Account balance</h1>
+        <span
+          class="section--saveings__content--box__accounts--overview__account--box--money"
+          >4000</span
+        >
+        <a
+          class="section--saveings__content--box__accounts--overview__account--box--link"
+          >View accounts</a
+        >
+      </div>
+      <!-- account 2 -->
+      <div
+        class="section--saveings__content--box__accounts--overview__account--box"
+      >
+        <div
+          class="section--saveings__content--box__accounts--overview__account--box__icon--box"
+        >
+          <i class="dx-icon-user"></i>
+        </div>
+        <h1>Investing</h1>
+        <span
+          class="section--saveings__content--box__accounts--overview__account--box--money"
+          >4000</span
+        >
+        <a
+          class="section--saveings__content--box__accounts--overview__account--box--link"
+          >View investing</a
+        >
+      </div>
+
+      <!-- overall -->
+      <div
+        class="section--saveings__content--box__accounts--overview__account--box"
+      >
+        <div
+          class="section--saveings__content--box__accounts--overview__account--box__icon--box"
+        >
+          <i class="dx-icon-user"></i>
+        </div>
+        <h1>Total balance</h1>
+        <span
+          class="section--saveings__content--box__accounts--overview__account--box--money"
+          >4000</span
+        >
+        <a
+          class="section--saveings__content--box__accounts--overview__account--box--link"
+          >View overall</a
+        >
+      </div>
+    </div>
+    <div class="section--saveings__content--box__adding--money">
+      <dx-data-grid
+        [repaintChangesOnly]="true"
+        (onCellPrepared)="cellStyle($event)"
+        [showBorders]="true"
+        [dataSource]="expenses"
+        [columns]="columns"
+      >
+        <dxo-search-panel
+          [visible]="true"
+          [width]="240"
+          placeholder="Search..."
+        ></dxo-search-panel>
+        <dxo-paging [pageSize]="10"> </dxo-paging>
+        <dxo-pager
+          [visible]="true"
+          [allowedPageSizes]="allowedPageSizes"
+          [displayMode]="displayMode"
+          [showPageSizeSelector]="showPageSizeSelector"
+          [showInfo]="showInfo"
+          [showNavigationButtons]="showNavButtons"
+        >
+        </dxo-pager>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Date"
+          dataType="datetime"
+          format="M/d/yyyy, HH:mm"
+        ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Money"
+          format="currency"
+          [editorOptions]="{ format: 'currency', showClearButton: true }"
+        ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Expanses"
+        ></dxi-column>
+        <dxi-column aligment="left" [width]="200" dataField="Name"></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Account"
+        ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Status"
+        ></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+</section>

@@ -34,10 +34,11 @@
 
     &__invoice {
       height: auto;
-      width: 100%;
+      width: auto;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: center;
+      gap: 3rem;
 
       &--subcriptions,
       &--food,
@@ -55,7 +56,7 @@
     }
 
     &__tracking {
-      margin-top: 9.8rem;
+      margin-top: 3rem;
       height: auto;
       width: 100%;
       display: flex;

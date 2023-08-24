@@ -120,10 +120,6 @@ export class ExpenseComponent {
   cellStyle(e) {
     if (e.rowType === 'data' && e.column.dataField === 'Status') {
       e.cellElement.classList.add('test');
-      // e.cellElement.style.color = 'green';
-      // e.cellElement.style.fontWeight = 'bold';
-
-      // e.cellElement.addClass = 'test';
     }
   }
 }
