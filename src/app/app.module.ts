@@ -21,6 +21,8 @@ import {
   DxDataGridModule,
   DxButtonModule,
 } from 'devextreme-angular';
+import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
+import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import {
     SaveingsComponent,
     NavigationComponent,
     WildcardComponentComponent,
+    InvestingFormComponent,
+    SaveingsFormComponent,
   ],
   imports: [
     BrowserModule,
