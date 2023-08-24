@@ -6,6 +6,29 @@
 
   <div class="section--dashboard__content--box">
     <div class="section--dashboard__content--box__heading--box">
+      <h1>Accounts</h1>
+      <a class="section--dashboard__content--box__subscriptions--add"
+        >Add account</a
+      >
+    </div>
+    <div class="section--dashboard__content--box__cards--box">
+      <!-- 1 -->
+      <div class="section--dashboard__content--box__cards--box--card">
+        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <span>3000EUR</span>
+      </div>
+      <!-- 2 -->
+      <div class="section--dashboard__content--box__cards--box--card">
+        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <span>3000EUR</span>
+      </div>
+      <!-- 3 -->
+      <div class="section--dashboard__content--box__cards--box--card">
+        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <span>3000EUR</span>
+      </div>
+    </div>
+    <div class="section--dashboard__content--box__heading--box">
       <h1>Subscriptions</h1>
       <a class="section--dashboard__content--box__subscriptions--add"
         >Add subscription</a
@@ -63,29 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="section--dashboard__content--box__heading--box">
-      <h1>Accounts</h1>
-      <a class="section--dashboard__content--box__subscriptions--add"
-        >Add account</a
-      >
-    </div>
-    <div class="section--dashboard__content--box__cards--box">
-      <!-- 1 -->
-      <div class="section--dashboard__content--box__cards--box--card">
-        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>3000EUR</span>
-      </div>
-      <!-- 2 -->
-      <div class="section--dashboard__content--box__cards--box--card">
-        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>3000EUR</span>
-      </div>
-      <!-- 3 -->
-      <div class="section--dashboard__content--box__cards--box--card">
-        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>3000EUR</span>
-      </div>
-    </div>
+
     <div class="section--dashboard__content--box__heading--box">
       <h1>Transactions</h1>
       <a class="section--dashboard__content--box__subscriptions--add"
@@ -136,17 +137,13 @@
           palette="Soft Pastel"
           [dataSource]="userMoney"
         >
-          <dxi-series argumentField="region">
-            <dxo-label [visible]="true" format="millions">
-              <dxo-connector [visible]="true"></dxo-connector>
-            </dxo-label>
-          </dxi-series>
+          <dxi-series argumentField="region"></dxi-series>
 
-          <dxo-legend
+          <!-- <dxo-legend
             [margin]="0"
             horizontalAlignment="right"
-            verticalAlignment="top"
-          ></dxo-legend>
+            verticalAlignment="left"
+          ></dxo-legend> -->
         </dx-pie-chart>
       </div>
     </div>

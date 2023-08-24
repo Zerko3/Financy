@@ -1,40 +1,90 @@
 <app-navigation></app-navigation>
 <section class="section--expense">
   <div class="section--expense__expense--box">
+    <div class="section--expense__expense--box__heading--box">
+      <h1 class="section--expense__expense--box--heading">Invoice</h1>
+      <a class="section--expense__expense--box--add">Add transaction</a>
+    </div>
     <div class="section--expense__expense--box__invoice">
       <div class="section--expense__expense--box__invoice--subcriptions">
+        <i class="dx-icon-refresh"></i>
         <h1>Subscriptions</h1>
         <span>100EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--food">
-        <h1>Subscriptions</h1>
+        <i class="dx-icon-money"></i>
+        <h1>Bills</h1>
         <span>100EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--fun">
-        <h1>Subscriptions</h1>
+        <i class="dx-icon-food"></i>
+        <h1>Restaurants</h1>
         <span>100EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--bills">
-        <h1>Subscriptions</h1>
+        <i class="dx-icon-cart"></i>
+        <h1>Random</h1>
         <span>100EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--random">
-        <h1>Subscriptions</h1>
+        <i class="dx-icon-user"></i>
+        <h1>Clothes</h1>
         <span>100EUR</span>
       </div>
     </div>
     <div class="section--expense__expense--box__tracking">
       <dx-data-grid
+        [repaintChangesOnly]="true"
+        (onCellPrepared)="cellStyle($event)"
         [showBorders]="true"
         [dataSource]="expenses"
         [columns]="columns"
       >
-        <dxi-column [width]="150" dataField="Date"></dxi-column>
-        <dxi-column [width]="150" dataField="Money"></dxi-column>
-        <dxi-column [width]="150" dataField="Expanses"></dxi-column>
-        <dxi-column [width]="150" dataField="Name"></dxi-column>
-        <dxi-column [width]="150" dataField="Status"></dxi-column>
-        <dxi-column [width]="150" dataField="Account"></dxi-column>
+        <dxo-search-panel
+          [visible]="true"
+          [width]="240"
+          placeholder="Search..."
+        ></dxo-search-panel>
+        <dxo-paging [pageSize]="10"> </dxo-paging>
+        <dxo-pager
+          [visible]="true"
+          [allowedPageSizes]="allowedPageSizes"
+          [displayMode]="displayMode"
+          [showPageSizeSelector]="showPageSizeSelector"
+          [showInfo]="showInfo"
+          [showNavigationButtons]="showNavButtons"
+        >
+        </dxo-pager>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Date"
+          dataType="datetime"
+          format="M/d/yyyy, HH:mm"
+        ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Money"
+          format="currency"
+          [editorOptions]="{ format: 'currency', showClearButton: true }"
+        ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Expanses"
+        ></dxi-column>
+        <dxi-column aligment="left" [width]="200" dataField="Name"></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Account"
+        ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="Status"
+        ></dxi-column>
       </dx-data-grid>
     </div>
   </div>
