@@ -26,11 +26,19 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   expenses: Expense[] = [];
   columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
   formClickStatus: boolean = false;
+  subscriptionMoney: number = 0;
+  billMoney: number = 0;
+  restaurantMoney: number = 0;
+  randomMoney: number = 0;
+  clothesMoney: number = 0;
+
   constructor(private router: Router, private expenseService: ExpenseService) {}
 
   ngOnInit(): void {
     // this gets called only when i come back to the component
     this.expenses = this.expenseService.getExpenseData();
+
+    // add the same for money as i did for table
 
     // this gets called all the time since its an observable
     this.expenseServiceSubscribable = this.expenseService.dataSubject.subscribe(
@@ -39,6 +47,18 @@ export class ExpenseComponent implements OnInit, OnDestroy {
         this.expenses.push(data);
         console.log(this.expenses);
         console.log('yo');
+
+        if (data.expenseType === 'Subscription') {
+          this.subscriptionMoney += data.money;
+        } else if (data.expenseType === 'Bills') {
+          this.billMoney += data.money;
+        } else if (data.expenseType === 'Restaurants') {
+          this.restaurantMoney += data.money;
+        } else if (data.expenseType === 'Random') {
+          this.randomMoney += data.money;
+        } else if (data.expenseType === 'Clothes') {
+          this.clothesMoney += data.money;
+        }
       }
     );
   }

@@ -13,27 +13,27 @@
       <div class="section--expense__expense--box__invoice--subcriptions">
         <i class="dx-icon-refresh"></i>
         <h1>Subscriptions</h1>
-        <span>100EUR</span>
+        <span>{{ subscriptionMoney === 0 ? 0 : subscriptionMoney }}EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--food">
         <i class="dx-icon-money"></i>
         <h1>Bills</h1>
-        <span>100EUR</span>
+        <span>{{ billMoney === 0 ? 0 : billMoney }}EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--fun">
         <i class="dx-icon-food"></i>
         <h1>Restaurants</h1>
-        <span>100EUR</span>
+        <span>{{ restaurantMoney === 0 ? 0 : restaurantMoney }}EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--bills">
         <i class="dx-icon-cart"></i>
         <h1>Random</h1>
-        <span>100EUR</span>
+        <span>{{ randomMoney === 0 ? 0 : randomMoney }}EUR</span>
       </div>
       <div class="section--expense__expense--box__invoice--random">
         <i class="dx-icon-user"></i>
         <h1>Clothes</h1>
-        <span>100EUR</span>
+        <span>{{ clothesMoney === 0 ? 0 : clothesMoney }}EUR</span>
       </div>
     </div>
     <div class="section--expense__expense--box__tracking">
