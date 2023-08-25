@@ -39,6 +39,11 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.expenses = this.expenseService.getExpenseData();
 
     // add the same for money as i did for table
+    this.billMoney = this.expenseService.billMoney;
+    this.restaurantMoney = this.expenseService.restaurantMoney;
+    this.randomMoney = this.expenseService.randomMoney;
+    this.clothesMoney = this.expenseService.clothesMoney;
+    this.subscriptionMoney = this.expenseService.subscriptionMoney;
 
     // this gets called all the time since its an observable
     this.expenseServiceSubscribable = this.expenseService.dataSubject.subscribe(
