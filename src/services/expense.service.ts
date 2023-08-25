@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Expense } from 'src/interfaces/expanse.interface';
+import { Expense } from 'src/interfaces/expense.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {

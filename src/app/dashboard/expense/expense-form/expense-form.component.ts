@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Expense } from 'src/interfaces/expanse.interface';
+import { Expense } from 'src/interfaces/expense.interface';
 import { ExpenseService } from 'src/services/expense.service';
 
 @Component({
