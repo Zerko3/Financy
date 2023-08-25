@@ -1,1 +1,51 @@
-<p>expense-form works!</p>
+<section class="section--expense">
+  <div>
+    <dx-form width="50rem" labelLocation="top" [formData]="formData">
+      <dxi-item itemType="group" caption="Track your expanse" [colCount]="2">
+        <dxi-item
+          editorType="dxSelectBox"
+          [editorOptions]="positionEditorOptionsExpense"
+          dataField="expanse"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Expense is required"
+          ></dxi-validation-rule>
+          <dxo-label template="Expense"></dxo-label
+        ></dxi-item>
+        <dxi-item dataField="date"></dxi-item>
+
+        <dxi-item dataField="company"></dxi-item>
+        <dxi-item
+          dataField="account"
+          editorType="dxSelectBox"
+          [editorOptions]="positionEditorOptions"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Account is required"
+          ></dxi-validation-rule>
+          <dxo-label template="Accounts"></dxo-label
+        ></dxi-item>
+
+        <dxi-item
+          editorType="dxSelectBox"
+          dataField="status"
+          [editorOptions]="positionEditorOptionsStatus"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Status is required"
+          ></dxi-validation-rule>
+          <dxo-label template="Status"></dxo-label
+        ></dxi-item>
+        <dxi-item dataField="money"></dxi-item>
+        <dxi-item
+          [colSpan]="2"
+          itemType="button"
+          [buttonOptions]="submitButtonOptions"
+        ></dxi-item>
+      </dxi-item>
+    </dx-form>
+  </div>
+</section>

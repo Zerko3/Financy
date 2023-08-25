@@ -8,4 +8,6 @@ export class Account {
     this.email = email;
     this.accType = accType;
   }
+
+  // TODO:
 }

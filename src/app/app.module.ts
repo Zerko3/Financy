@@ -13,6 +13,7 @@ import { ExpenseComponent } from './dashboard/expense/expense.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
+import { ExpenseFormComponent } from './dashboard/expense/expense-form/expense-form.component';
 // DEVEXTREME
 import {
   DxChartModule,
@@ -20,6 +21,10 @@ import {
   DxPieChartModule,
   DxDataGridModule,
   DxButtonModule,
+  DxTextAreaModule,
+  DxDateBoxModule,
+  DxFormModule,
+  DxDropDownBoxModule,
 } from 'devextreme-angular';
 import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
 import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
@@ -39,6 +44,7 @@ import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/savein
     WildcardComponentComponent,
     InvestingFormComponent,
     SaveingsFormComponent,
+    ExpenseFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,10 @@ import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/savein
     DxPieChartModule,
     DxDataGridModule,
     DxButtonModule,
+    DxTextAreaModule,
+    DxDateBoxModule,
+    DxFormModule,
+    DxDropDownBoxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
