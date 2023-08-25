@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationService } from 'src/services/navigation.service';
+import { Subscription } from 'rxjs';
+import { Expense } from 'src/interfaces/expanse.interface';
+import { ExpenseService } from 'src/services/expense.service';
 
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
   styleUrls: ['./expense.component.scss'],
 })
-export class ExpenseComponent {
+export class ExpenseComponent implements OnInit, OnDestroy {
   allowedPageSizes = [10, 'all'];
   displayMode = 'full';
   showPageSizeSelector = true;
@@ -20,107 +22,41 @@ export class ExpenseComponent {
   // 4. Service will get and post this valid data
   // 5. give or recive data from service
 
-  // WILL REMOVE
-  expenses = [
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Netflix',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-  ];
+  expenseServiceSubscribable: Subscription;
+  expenses: Expense[] = [];
   columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
-  constructor(
-    private navigationService: NavigationService,
-    private router: Router
-  ) {}
+  formClickStatus: boolean = false;
+  constructor(private router: Router, private expenseService: ExpenseService) {}
+
+  ngOnInit(): void {
+    // this gets called only when i come back to the component
+    this.expenses = this.expenseService.getExpenseData();
+
+    // this gets called all the time since its an observable
+    this.expenseServiceSubscribable = this.expenseService.dataSubject.subscribe(
+      (data) => {
+        console.log(data);
+        this.expenses.push(data);
+        console.log(this.expenses);
+        console.log('yo');
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    console.log('UNSUBSCRIBED');
+    this.expenseServiceSubscribable.unsubscribe();
+  }
 
   // TODO:
   // 1. Connect form to component
   userFormNavigation() {
-    this.router.navigate(['expense/expenseForm']);
+    this.formClickStatus = !this.formClickStatus;
+    if (this.formClickStatus) {
+      this.router.navigate(['expense/expenseForm']);
+    } else {
+      this.router.navigate(['expense']);
+    }
   }
 
   // TODO:
@@ -128,7 +64,7 @@ export class ExpenseComponent {
   // 2. Get valid data and pass on the color
   // 3. Add multiple color options for paid unpaid subscription food ,....
   cellStyle(e) {
-    if (e.rowType === 'data' && e.column.dataField === 'Status') {
+    if (e.rowType === 'data' && e.column.dataField === 'billStatus') {
       e.cellElement.classList.add('test');
     }
   }

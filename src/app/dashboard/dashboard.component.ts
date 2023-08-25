@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Expense } from 'src/interfaces/expanse.interface';
+import { ExpenseService } from 'src/services/expense.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  expenseData: Expense[] = [];
   userMoney = [
     {
       region: 'Asia',
@@ -32,7 +35,9 @@ export class DashboardComponent implements OnInit {
       val: 35104756,
     },
   ];
-  constructor() {}
+  constructor(private expenseService: ExpenseService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.expenseData = this.expenseService.getExpenseData();
+  }
 }

@@ -62,36 +62,40 @@
         <dxi-column
           alignment="left"
           [width]="200"
-          dataField="Date"
+          dataField="date"
           dataType="datetime"
           format="M/d/yyyy, HH:mm"
         ></dxi-column>
         <dxi-column
           alignment="left"
           [width]="200"
-          dataField="Money"
+          dataField="money"
           format="currency"
           [editorOptions]="{ format: 'currency', showClearButton: true }"
         ></dxi-column>
         <dxi-column
           alignment="left"
           [width]="200"
-          dataField="Expanses"
+          dataField="expenseType"
         ></dxi-column>
-        <dxi-column aligment="left" [width]="200" dataField="Name"></dxi-column>
+        <dxi-column
+          aligment="left"
+          [width]="200"
+          dataField="companyName"
+        ></dxi-column>
         <dxi-column
           alignment="left"
           [width]="200"
-          dataField="Account"
+          dataField="account"
         ></dxi-column>
         <dxi-column
           alignment="left"
           [width]="200"
-          dataField="Status"
+          dataField="billStatus"
         ></dxi-column>
       </dx-data-grid>
     </div>
   </div>
 </section>
-<!-- TODO: -->
+
 <router-outlet></router-outlet>

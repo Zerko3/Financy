@@ -62,6 +62,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      .dx-widget,
+      .dx-widget *,
+      .dx-widget ::after,
+      .dx-widget ::before,
+      .dx-widget::after,
+      .dx-widget::before {
+        font-size: 1.4rem !important;
+        width: 100%;
+      }
     }
   }
 }

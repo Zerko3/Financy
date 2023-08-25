@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Expense } from 'src/interfaces/expanse.interface';
+import { ExpenseService } from 'src/services/expense.service';
 
 @Component({
   selector: 'app-expense-form',
@@ -6,29 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./expense-form.component.scss'],
 })
 export class ExpenseFormComponent {
-  companys = ['Test1', 'Test2'];
+  // TODO:
+  // 1. Add dynamic accounts
   accounts = ['Account 1', 'Account 2'];
   status = ['paid', 'pending'];
   expense = ['Subscription', 'Bills', 'Restaurants', 'Random', 'Clothes'];
-  formData: {
-    expanse: string;
-    date: Date;
-    company: string;
-    status: string;
-    account: string[];
-    money: number;
-  } = {
-    expanse: '',
+
+  expenseData: Expense = {
+    expenseType: '',
     date: new Date(),
-    company: '',
-    account: this.accounts,
-    status: '',
     money: 0,
+    companyName: '',
+    billStatus: '',
+    account: '',
   };
 
   submitButtonOptions = {
     text: 'Submit',
-    type: 'default',
+    type: 'normal',
     useSubmitBehavior: true,
   };
 
@@ -49,4 +46,15 @@ export class ExpenseFormComponent {
     searchEnabled: true,
     value: '',
   };
+
+  e: any;
+
+  constructor(private expenseService: ExpenseService) {}
+
+  // get data from form and pass to serive
+  onSubmitForm(e: any) {
+    e.preventDefault();
+    let data = this.expenseData;
+    this.expenseService.storeExpenseData(data);
+  }
 }

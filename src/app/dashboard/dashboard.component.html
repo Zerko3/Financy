@@ -98,34 +98,13 @@
         class="section--dashboard__content--box__transactions--box--transactions"
       >
         <div>
-          <ul>
+          <ul *ngFor="let expense of expenseData">
             <div>
-              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
-              <li>NAME</li>
-              <li>TYPE</li>
-              <li>TAG</li>
-              <li>MONEY</li>
-            </div>
-            <div>
-              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
-              <li>NAME</li>
-              <li>TYPE</li>
-              <li>TAG</li>
-              <li>MONEY</li>
-            </div>
-            <div>
-              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
-              <li>NAME</li>
-              <li>TYPE</li>
-              <li>TAG</li>
-              <li>MONEY</li>
-            </div>
-            <div>
-              <img src="../../assets/img/Amazon-logo.jpeg" alt="amazon logo" />
-              <li>NAME</li>
-              <li>TYPE</li>
-              <li>TAG</li>
-              <li>MONEY</li>
+              <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
+              <li>{{ expense.companyName }}</li>
+              <li>{{ expense.expenseType }}</li>
+              <li>{{ expense.billStatus }}</li>
+              <li>{{ expense.money }}</li>
             </div>
           </ul>
         </div>
@@ -138,12 +117,6 @@
           [dataSource]="userMoney"
         >
           <dxi-series argumentField="region"></dxi-series>
-
-          <!-- <dxo-legend
-            [margin]="0"
-            horizontalAlignment="right"
-            verticalAlignment="left"
-          ></dxo-legend> -->
         </dx-pie-chart>
       </div>
     </div>
