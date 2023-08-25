@@ -6,6 +6,7 @@ import { Expense } from 'src/interfaces/expanse.interface';
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
   expanseFromArray: Expense[] = [];
+  expenseSubscrptionArray: Expense[] = [];
   subscriptionMoney: number = 0;
   billMoney: number = 0;
   restaurantMoney: number = 0;
@@ -18,6 +19,8 @@ export class ExpenseService {
   storeExpenseData(data: Expense) {
     if (data.expenseType === 'Subscription') {
       this.subscriptionMoney += data.money;
+      // push to the subscription array for DOM display
+      this.expenseSubscrptionArray.push(data);
     } else if (data.expenseType === 'Bills') {
       this.billMoney += data.money;
     } else if (data.expenseType === 'Restaurants') {
@@ -32,6 +35,11 @@ export class ExpenseService {
 
     //when data is captured give it to the form
     this.dataSubject.next(data);
+  }
+
+  // get subscription data
+  getSubscriptionData() {
+    return this.expenseSubscrptionArray.slice();
   }
 
   // get data and display it in overview

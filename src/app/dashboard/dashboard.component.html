@@ -35,54 +35,15 @@
       >
     </div>
     <div class="section--dashboard__content--box__subscriptions">
-      <!-- 1 -->
+      <!-- new -->
       <div
+        *ngFor="let subscription of subscriptionArray"
         class="section--dashboard__content--box__subscriptions__subscription--box"
       >
         <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
         <div>
-          <h3>Amazon prime</h3>
-          <span>13EUR</span>
-        </div>
-      </div>
-      <!-- 2 -->
-      <div
-        class="section--dashboard__content--box__subscriptions__subscription--box"
-      >
-        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
-        <div>
-          <h3>Amazon prime</h3>
-          <span>13EUR</span>
-        </div>
-      </div>
-      <!-- 3 -->
-      <div
-        class="section--dashboard__content--box__subscriptions__subscription--box"
-      >
-        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
-        <div>
-          <h3>Amazon prime</h3>
-          <span>13EUR</span>
-        </div>
-      </div>
-      <!-- 4 -->
-      <div
-        class="section--dashboard__content--box__subscriptions__subscription--box"
-      >
-        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
-        <div>
-          <h3>Amazon prime</h3>
-          <span>13EUR</span>
-        </div>
-      </div>
-      <!-- 5 -->
-      <div
-        class="section--dashboard__content--box__subscriptions__subscription--box"
-      >
-        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
-        <div>
-          <h3>Amazon prime</h3>
-          <span>13EUR</span>
+          <h3>{{ subscription.companyName }}</h3>
+          <span>{{ subscription.money }}EUR</span>
         </div>
       </div>
     </div>

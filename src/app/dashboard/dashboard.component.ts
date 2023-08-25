@@ -9,6 +9,7 @@ import { ExpenseService } from 'src/services/expense.service';
 })
 export class DashboardComponent implements OnInit {
   expenseData: Expense[] = [];
+  subscriptionArray: Expense[] = [];
   userMoney = [
     {
       region: 'Asia',
@@ -39,5 +40,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.expenseData = this.expenseService.getExpenseData();
+    this.subscriptionArray = this.expenseService.getSubscriptionData();
   }
 }
