@@ -1,1 +1,16 @@
-<p>saveings-form works!</p>
+<section class="section--saveingsForm">
+  <div>
+    <form (submit)="onSubmitForm($event)">
+      <dx-form width="50rem" labelLocation="top" [formData]="savingsData">
+        <dxi-item itemType="group" caption="Track your savings" [colCount]="1">
+          <dxi-item dataField="date"></dxi-item>
+          <dxi-item dataField="money"></dxi-item>
+          <dxi-item
+            itemType="button"
+            [buttonOptions]="submitButtonOptions"
+          ></dxi-item>
+        </dxi-item>
+      </dx-form>
+    </form>
+  </div>
+</section>

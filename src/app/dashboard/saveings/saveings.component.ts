@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./saveings.component.scss'],
 })
 export class SaveingsComponent {
-  allowedPageSizes = [10, 'all'];
-  displayMode = 'full';
-  showPageSizeSelector = true;
-  showInfo = true;
-  showNavButtons = true;
+  allowedPageSizes: [number, string] = [10, 'all'];
+  displayMode: string = 'full';
+  showPageSizeSelector: boolean = true;
+  showInfo: boolean = true;
+  showNavButtons: boolean = true;
   // TODO:
   // 1. model or interface?
   // 2. service to store the data for now
@@ -110,7 +110,14 @@ export class SaveingsComponent {
       Account: 'Paypal',
     },
   ];
-  columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
+  columns: string[] = [
+    'Date',
+    'Money',
+    'Expanses',
+    'Name',
+    'Status',
+    'Account',
+  ];
 
   constructor(private router: Router) {}
 
