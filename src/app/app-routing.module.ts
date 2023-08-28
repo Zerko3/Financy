@@ -11,6 +11,7 @@ import { WildcardComponentComponent } from './wildcard-component/wildcard-compon
 import { ExpenseFormComponent } from './dashboard/expense/expense-form/expense-form.component';
 import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
 import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
+import { BankAccountComponent } from './dashboard/bank-account/bank-account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hero', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    children: [{ path: 'createCard', component: BankAccountComponent }],
   },
   {
     path: 'expense',

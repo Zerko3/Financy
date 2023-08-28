@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
@@ -29,7 +30,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private expenseService: ExpenseService,
     private saveingService: SaveingsService,
-    private investingService: InvestingService
+    private investingService: InvestingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,5 +51,9 @@ export class DashboardComponent implements OnInit {
 
     // 1 is negative
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
+  }
+
+  onUserNavigate() {
+    this.router.navigate(['dashboard/createCard']);
   }
 }

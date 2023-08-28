@@ -1,1 +1,25 @@
-<p>bank-account works!</p>
+<form (submit)="onSubmitForm($event)">
+  <dx-form width="50rem" labelLocation="top" [formData]="bankAccountData">
+    <dxi-item itemType="group" caption="Track your expanse" [colCount]="1">
+      <dxi-item dataField="bankAccountName"></dxi-item>
+      <dxi-item
+        editorType="dxSelectBox"
+        [editorOptions]="positionEditorOptionsCardType"
+        dataField="bankAccountCard"
+      >
+        <dxi-validation-rule
+          type="required"
+          message="Card type is required"
+        ></dxi-validation-rule>
+        <dxo-label template="Card type"></dxo-label
+      ></dxi-item>
+      <dxi-item dataField="bankAccountValidDate"></dxi-item>
+      <dxi-item dataField="bankMoneyStatus"></dxi-item>
+      <dxi-item
+        [colSpan]="1"
+        itemType="button"
+        [buttonOptions]="submitButtonOptions"
+      ></dxi-item>
+    </dxi-item>
+  </dx-form>
+</form>
