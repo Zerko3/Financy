@@ -68,6 +68,25 @@
               <li>{{ expense.money }}</li>
             </div>
           </ul>
+
+          <ul *ngFor="let investment of investingData">
+            <div>
+              <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
+              <li>{{ investment.investingName }}</li>
+              <li>{{ investment.investingAmountOfMoney }}</li>
+              <li>{{ investment.typeOfInvesting }}</li>
+              <li>{{ investment.account }}</li>
+            </div>
+          </ul>
+
+          <ul *ngFor="let saveing of savingsData">
+            <div>
+              <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
+              <li>{{ saveing.amountOfMoneySaved }}</li>
+              <li>{{ saveing.account }}</li>
+              <li>{{ saveing.typeOfSaveings }}</li>
+            </div>
+          </ul>
         </div>
       </div>
       <div class="section--dashboard__content--box__transactions--box--money">
@@ -75,9 +94,9 @@
           id="pie"
           type="doughnut"
           palette="Soft Pastel"
-          [dataSource]="userMoney"
+          [dataSource]="overviewExpenses"
         >
-          <dxi-series argumentField="region"></dxi-series>
+          <dxi-series argumentField="typeOfExpense"></dxi-series>
         </dx-pie-chart>
       </div>
     </div>

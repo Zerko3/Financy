@@ -7,10 +7,13 @@ import { Investing } from 'src/interfaces/investing.interface';
 export class InvestingService {
   investingDataArray: Investing[] = [];
   investingSubscribe = new Subject<Investing>();
+  totalInvestment: number = 0;
   constructor() {}
 
   // store
   storeInvestingData(data: Investing) {
+    this.totalInvestment = data.investingAmountOfMoney;
+
     this.investingDataArray.push(data);
 
     this.investingSubscribe.next(data);

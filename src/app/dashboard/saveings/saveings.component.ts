@@ -51,9 +51,10 @@ export class SaveingsComponent implements OnInit, OnDestroy {
     }
   }
 
+  // TODO
   cellStyle(e) {
     if (e.rowType === 'data' && e.column.dataField === 'Status') {
-      e.cellElement.classList.add('test');
+      // e.cellElement.classList.add('test');
     }
   }
 }

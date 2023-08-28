@@ -12,11 +12,14 @@ export class ExpenseService {
   restaurantMoney: number = 0;
   randomMoney: number = 0;
   clothesMoney: number = 0;
+  totalExpense: number = 0;
   dataSubject = new Subject<Expense>();
   constructor() {}
 
   // store data
   storeExpenseData(data: Expense) {
+    this.totalExpense += data.money;
+
     if (data.expenseType === 'Subscription') {
       this.subscriptionMoney += data.money;
       // push to the subscription array for DOM display
