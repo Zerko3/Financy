@@ -1,7 +1,9 @@
 <app-navigation></app-navigation>
 <!-- TODO: -->
-<a (click)="userNavigationForm()">Add saveings</a>
 <section class="section--saveings">
+  <a class="section--saveings--add" (click)="userNavigationForm()"
+    >Add saveings</a
+  >
   <div class="section--saveings__content--box">
     <div class="section--saveings__content--box__accounts--overview">
       <!-- account 1 -->
@@ -35,7 +37,7 @@
         <h1>Saveings</h1>
         <span
           class="section--saveings__content--box__accounts--overview__account--box--money"
-          >{{ totalMoneySaved }}EUR</span
+          >{{ totalMoneySaved === 0 ? 0 : totalMoneySaved }}EUR</span
         >
         <a
           class="section--saveings__content--box__accounts--overview__account--box--link"

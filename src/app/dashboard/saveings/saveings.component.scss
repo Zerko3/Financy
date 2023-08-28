@@ -3,6 +3,16 @@
 .section--saveings {
   height: 100vh;
   width: 100vw;
+
+  &--add {
+    cursor: pointer;
+    font-size: font-size(font-size-small);
+    background-color: var(--main-color);
+    color: var(--white-color);
+    padding: 0.5rem 1rem;
+    border-radius: 9px;
+  }
+
   &__content--box {
     height: 100%;
     width: 100%;
@@ -10,6 +20,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     &__accounts--overview {
       display: flex;
       align-items: center;

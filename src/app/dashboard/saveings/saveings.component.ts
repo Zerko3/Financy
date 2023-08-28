@@ -15,16 +15,11 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   showPageSizeSelector: boolean = true;
   showInfo: boolean = true;
   showNavButtons: boolean = true;
-  // TODO:
-  // 2. service to store the data for now
-  // 3. later on call the data from firebase
-  // 4. Service will get and post this valid data
-  // 5. give or recive data from service
-
   saveingsFormDataArray: Saveings[] = [];
   columns: string[] = ['Date', 'Money', 'Status', 'Account'];
   saveingSubscribe: Subscription;
   totalMoneySaved: number = 0;
+  clickedOnNavigation: boolean = false;
 
   constructor(
     private router: Router,
@@ -48,7 +43,12 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   }
 
   userNavigationForm() {
-    this.router.navigate(['saveings/saveingsForm']);
+    this.clickedOnNavigation = !this.clickedOnNavigation;
+    if (this.clickedOnNavigation) {
+      this.router.navigate(['saveings/saveingsForm']);
+    } else {
+      this.router.navigate(['saveings']);
+    }
   }
 
   cellStyle(e) {

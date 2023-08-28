@@ -1,1 +1,23 @@
-<p>investing-form works!</p>
+<form (submit)="onSubmitForm($event)">
+  <dx-form width="50rem" labelLocation="top" [formData]="investingData">
+    <dxi-item itemType="group" caption="Track your savings" [colCount]="1">
+      <dxi-item dataField="investingDate"></dxi-item>
+      <dxi-item dataField="investingAmountOfMoney"></dxi-item>
+      <dxi-item dataField="investingName"></dxi-item>
+      <dxi-item
+        editorType="dxSelectBox"
+        dataField="account"
+        [editorOptions]="positionEditorOptions"
+      ></dxi-item>
+      <dxi-item
+        editorType="dxSelectBox"
+        dataField="typeOfInvesting"
+        [editorOptions]="positionEditorOptionsTypeOfInvesting"
+      ></dxi-item>
+      <dxi-item
+        itemType="button"
+        [buttonOptions]="submitButtonOptions"
+      ></dxi-item>
+    </dxi-item>
+  </dx-form>
+</form>
