@@ -25,6 +25,8 @@ import {
   DxDateBoxModule,
   DxFormModule,
   DxDropDownBoxModule,
+  DxListModule,
+  DxTemplateModule,
 } from 'devextreme-angular';
 import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
 import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
@@ -59,6 +61,8 @@ import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/savein
     DxDateBoxModule,
     DxFormModule,
     DxDropDownBoxModule,
+    DxListModule,
+    DxTemplateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

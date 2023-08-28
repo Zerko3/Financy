@@ -9,38 +9,22 @@
       <div
         class="section--investing__investing--box__investings__investing--list"
       >
-        <ul>
-          <div>
-            <img src="../../../assets/img/netflix-logo.png" alt="Netflix" />
-            <li>NAME</li>
-            <li>DATE</li>
-            <li>AMOUNT</li>
-          </div>
-          <div>
-            <img src="../../../assets/img/netflix-logo.png" alt="Netflix" />
-            <li>NAME</li>
-            <li>DATE</li>
-            <li>AMOUNT</li>
-          </div>
-          <div>
-            <img src="../../../assets/img/netflix-logo.png" alt="Netflix" />
-            <li>NAME</li>
-            <li>DATE</li>
-            <li>AMOUNT</li>
-          </div>
-          <div>
-            <img src="../../../assets/img/netflix-logo.png" alt="Netflix" />
-            <li>NAME</li>
-            <li>DATE</li>
-            <li>AMOUNT</li>
-          </div>
-          <div>
-            <img src="../../../assets/img/netflix-logo.png" alt="Netflix" />
-            <li>NAME</li>
-            <li>DATE</li>
-            <li>AMOUNT</li>
-          </div>
-        </ul>
+        <dx-list
+          [dataSource]="investingDataArray"
+          [searchEnabled]="true"
+          searchExpr="Name"
+          searchMode="contains"
+        >
+          <div *dxTemplate="let investment of 'item'">
+            <div class="investing--list">
+              <div>{{ investment.investingDate }}</div>
+              <div>{{ investment.investingName }}</div>
+              <div>{{ investment.investingAmountOfMoney }}</div>
+              <div>{{ investment.typeOfInvesting }}</div>
+              <div>{{ investment.account }}</div>
+            </div>
+          </div></dx-list
+        >
       </div>
     </div>
     <div class="section--investing__investing--box__investings--overview">

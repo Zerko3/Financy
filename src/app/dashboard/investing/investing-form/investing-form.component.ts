@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Investing } from 'src/interfaces/investing.interface';
+import { InvestingService } from 'src/services/investing.service';
 
 @Component({
   selector: 'app-investing-form',
@@ -10,8 +11,11 @@ export class InvestingFormComponent {
   investingData: Investing = {
     investingName: '',
     investingAmountOfMoney: 0,
-    investingDate: new Date(),
+    investingDate: new Date().toLocaleDateString(),
+    account: '',
+    typeOfInvesting: '',
   };
+
   accounts = ['Account 1', 'Account 2'];
   investingTypes = ['Daily', 'Weekly', 'Monthly', 'Additional investment'];
   positionEditorOptions = {
@@ -32,9 +36,12 @@ export class InvestingFormComponent {
 
   // TODO:
   // 1. delnice
-  constructor() {}
+  constructor(private investingDataService: InvestingService) {}
+
   onSubmitForm(e) {
     console.log(e);
     console.log(this.investingData);
+    let data = this.investingData;
+    this.investingDataService.storeInvestingData(data);
   }
 }

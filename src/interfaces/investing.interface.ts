@@ -3,5 +3,7 @@ export interface Investing {
   // 1.If better name idea refactor later
   investingName: string;
   investingAmountOfMoney: number;
-  investingDate: Date;
+  investingDate: Date | string;
+  account: string;
+  typeOfInvesting: string;
 }
