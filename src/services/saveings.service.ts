@@ -6,6 +6,7 @@ import { Saveings } from 'src/interfaces/saveings.interface';
 export class SaveingsService {
   saveingsArray: Saveings[] = [];
   saveing = new Subject<Saveings>();
+  totalMoneySaved: number = 0;
   constructor() {}
 
   storeSaveingsData(data: Saveings) {
@@ -13,10 +14,15 @@ export class SaveingsService {
 
     // subscribe to data
     this.saveing.next(data);
+    this.totalMoneySaved += data.amountOfMoneySaved;
   }
 
   getSaveingsData() {
     // return data
     return this.saveingsArray.slice();
+  }
+
+  getMoneySaved() {
+    return this.totalMoneySaved;
   }
 }

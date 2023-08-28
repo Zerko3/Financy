@@ -24,6 +24,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   saveingsFormDataArray: Saveings[] = [];
   columns: string[] = ['Date', 'Money', 'Status', 'Account'];
   saveingSubscribe: Subscription;
+  totalMoneySaved: number = 0;
 
   constructor(
     private router: Router,
@@ -32,9 +33,11 @@ export class SaveingsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.saveingsFormDataArray = this.saveingsService.getSaveingsData();
+    this.totalMoneySaved = this.saveingsService.getMoneySaved();
 
     this.saveingSubscribe = this.saveingsService.saveing.subscribe((data) => {
       console.log(data);
+      this.totalMoneySaved += data.amountOfMoneySaved;
       this.saveingsFormDataArray.push(data);
     });
   }
