@@ -13,6 +13,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
   energySources = [{ value: 'euro', name: 'investing value' }];
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
+  clickedOnNavigation: boolean = false;
 
   moneyInfo = [
     { portfolio: new Date('December 20, 1995 03:24:00'), euro: 4000 },
@@ -43,6 +44,11 @@ export class InvestingComponent implements OnInit, OnDestroy {
   }
 
   userFormNavigate() {
-    this.router.navigate(['investing/investingForm']);
+    this.clickedOnNavigation = !this.clickedOnNavigation;
+    if (this.clickedOnNavigation) {
+      this.router.navigate(['investing/investingForm']);
+    } else {
+      this.router.navigate(['investing']);
+    }
   }
 }
