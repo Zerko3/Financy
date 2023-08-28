@@ -14,20 +14,13 @@
       >
     </div>
     <div class="section--dashboard__content--box__cards--box">
-      <!-- 1 -->
-      <div class="section--dashboard__content--box__cards--box--card">
+      <!-- NEW -->
+      <div
+        class="section--dashboard__content--box__cards--box--card"
+        *ngFor="let card of bankCardsArray"
+      >
         <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>3000EUR</span>
-      </div>
-      <!-- 2 -->
-      <div class="section--dashboard__content--box__cards--box--card">
-        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>3000EUR</span>
-      </div>
-      <!-- 3 -->
-      <div class="section--dashboard__content--box__cards--box--card">
-        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>3000EUR</span>
+        <span>{{ card.bankMoneyStatus }}</span>
       </div>
     </div>
     <div class="section--dashboard__content--box__heading--box">

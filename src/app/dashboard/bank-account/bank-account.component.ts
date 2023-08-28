@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
+import { BankCardService } from 'src/services/bankCard.service';
 
 @Component({
   selector: 'app-bank-account',
@@ -26,10 +27,12 @@ export class BankAccountComponent {
     searchEnabled: true,
     value: '',
   };
-  constructor() {}
+  constructor(private bankCardService: BankCardService) {}
 
   onSubmitForm(e) {
     console.log(e);
-    console.log(this.bankAccountData);
+
+    let data = this.bankAccountData;
+    this.bankCardService.storeBankCard(data);
   }
 }
