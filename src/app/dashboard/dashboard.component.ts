@@ -46,10 +46,8 @@ export class DashboardComponent implements OnInit {
 
     // 0 is positive
     this.overviewExpenses[0].val = this.positiveMoney;
-    console.log(this.overviewExpenses[0].val);
 
     // 1 is negative
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
-    console.log(this.overviewExpenses[1].val);
   }
 }
