@@ -9,6 +9,7 @@ import { BankCardService } from 'src/services/bankCard.service';
 })
 export class BankAccountComponent {
   cards = ['Visa', 'Mastercard'];
+  cardGoal = ['Saveings', 'Spending'];
   bankAccountData: BankAccount = {
     bankMoneyStatus: 0,
     bankAccountValidDate: new Date(),
@@ -20,6 +21,12 @@ export class BankAccountComponent {
     text: 'Submit',
     type: 'normal',
     useSubmitBehavior: true,
+  };
+
+  positionEditorOptionsCardGoal = {
+    items: this.cardGoal,
+    searchEnabled: true,
+    value: '',
   };
 
   positionEditorOptionsCardType = {
