@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Saveings } from 'src/interfaces/saveings.interface';
+import { SaveingsService } from 'src/services/saveings.service';
 
 @Component({
   selector: 'app-saveings',
   templateUrl: './saveings.component.html',
   styleUrls: ['./saveings.component.scss'],
 })
-export class SaveingsComponent {
+export class SaveingsComponent implements OnInit, OnDestroy {
   allowedPageSizes: [number, string] = [10, 'all'];
   displayMode: string = 'full';
   showPageSizeSelector: boolean = true;
@@ -19,10 +21,28 @@ export class SaveingsComponent {
   // 4. Service will get and post this valid data
   // 5. give or recive data from service
 
-  saveingsFormData: Saveings[] = [];
+  saveingsFormDataArray: Saveings[] = [];
   columns: string[] = ['Date', 'Money', 'Status', 'Account'];
+  saveingSubscribe: Subscription;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private saveingsService: SaveingsService
+  ) {}
+
+  ngOnInit(): void {
+    this.saveingsFormDataArray = this.saveingsService.getSaveingsData();
+
+    this.saveingSubscribe = this.saveingsService.saveing.subscribe((data) => {
+      console.log(data);
+      this.saveingsFormDataArray.push(data);
+    });
+  }
+
+  ngOnDestroy(): void {
+    console.log('UNSUBSCRIBE - SAVEING');
+    this.saveingSubscribe.unsubscribe();
+  }
 
   userNavigationForm() {
     this.router.navigate(['saveings/saveingsForm']);

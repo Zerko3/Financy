@@ -15,10 +15,22 @@ export class SaveingsFormComponent {
     account: '',
   };
 
-  account = ['Account 1', 'Account 2'];
+  account: string[] = ['Account 1', 'Account 2'];
+  typeOfSaveings: string[] = [
+    'Daily saveing',
+    'Weekly saveing',
+    'Monthly saveing',
+    'Additional saveing',
+  ];
 
   positionEditorOptions = {
     items: this.account,
+    searchEnabled: true,
+    value: '',
+  };
+
+  positionEditorOptionsTypeOfSaveing = {
+    items: this.typeOfSaveings,
     searchEnabled: true,
     value: '',
   };

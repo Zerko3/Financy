@@ -10,7 +10,11 @@
             dataField="account"
             [editorOptions]="positionEditorOptions"
           ></dxi-item>
-          <dxi-item dataField="typeOfSaveings"></dxi-item>
+          <dxi-item
+            editorType="dxSelectBox"
+            dataField="typeOfSaveings"
+            [editorOptions]="positionEditorOptionsTypeOfSaveing"
+          ></dxi-item>
           <dxi-item
             itemType="button"
             [buttonOptions]="submitButtonOptions"
