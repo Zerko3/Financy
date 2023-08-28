@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Saveings } from 'src/interfaces/saveings.interface';
+import { SaveingsService } from 'src/services/saveings.service';
 
 @Component({
   selector: 'app-saveings-form',
@@ -6,17 +8,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./saveings-form.component.scss'],
 })
 export class SaveingsFormComponent {
-  savingsData: {
-    date: Date;
-    money: number;
-  } = { date: new Date(), money: 0 };
+  saveingsData: Saveings = {
+    amountOfMoneySaved: 0,
+    dateOfSaveings: new Date(),
+    typeOfSaveings: '',
+    account: '',
+  };
+
+  account = ['Account 1', 'Account 2'];
+
+  positionEditorOptions = {
+    items: this.account,
+    searchEnabled: true,
+    value: '',
+  };
 
   submitButtonOptions = {
     text: 'Submit',
     type: 'normal',
     useSubmitBehavior: true,
   };
-  constructor() {}
+  constructor(private saveingsService: SaveingsService) {}
 
-  onSubmitForm(e) {}
+  onSubmitForm(e) {
+    console.log(e);
+    console.log(this.saveingsData);
+
+    let data = this.saveingsData;
+    this.saveingsService.storeSaveingsData(data);
+  }
 }

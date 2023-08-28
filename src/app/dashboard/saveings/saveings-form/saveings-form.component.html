@@ -1,10 +1,16 @@
 <section class="section--saveingsForm">
   <div>
     <form (submit)="onSubmitForm($event)">
-      <dx-form width="50rem" labelLocation="top" [formData]="savingsData">
+      <dx-form width="50rem" labelLocation="top" [formData]="saveingsData">
         <dxi-item itemType="group" caption="Track your savings" [colCount]="1">
-          <dxi-item dataField="date"></dxi-item>
-          <dxi-item dataField="money"></dxi-item>
+          <dxi-item dataField="dateOfSaveings"></dxi-item>
+          <dxi-item dataField="amountOfMoneySaved"></dxi-item>
+          <dxi-item
+            editorType="dxSelectBox"
+            dataField="account"
+            [editorOptions]="positionEditorOptions"
+          ></dxi-item>
+          <dxi-item dataField="typeOfSaveings"></dxi-item>
           <dxi-item
             itemType="button"
             [buttonOptions]="submitButtonOptions"

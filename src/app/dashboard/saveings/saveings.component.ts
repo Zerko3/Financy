@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Saveings } from 'src/interfaces/saveings.interface';
 
 @Component({
   selector: 'app-saveings',
@@ -13,111 +14,13 @@ export class SaveingsComponent {
   showInfo: boolean = true;
   showNavButtons: boolean = true;
   // TODO:
-  // 1. model or interface?
   // 2. service to store the data for now
   // 3. later on call the data from firebase
   // 4. Service will get and post this valid data
   // 5. give or recive data from service
 
-  // WILL REMOVE
-  expenses = [
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Netflix',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-    {
-      Date: new Date(),
-      Money: 100,
-      Expanses: 'Subscription',
-      Name: 'Apple',
-      Status: 'Paid',
-      Account: 'Paypal',
-    },
-  ];
-  columns: string[] = [
-    'Date',
-    'Money',
-    'Expanses',
-    'Name',
-    'Status',
-    'Account',
-  ];
+  saveingsFormData: Saveings[] = [];
+  columns: string[] = ['Date', 'Money', 'Status', 'Account'];
 
   constructor(private router: Router) {}
 
