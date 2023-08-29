@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Investing } from 'src/interfaces/investing.interface';
+import { Stock } from 'src/interfaces/stock.interface';
 import { InvestingService } from 'src/services/investing.service';
 
 @Component({
@@ -10,22 +11,24 @@ import { InvestingService } from 'src/services/investing.service';
   styleUrls: ['./investing.component.scss'],
 })
 export class InvestingComponent implements OnInit, OnDestroy {
-  energySources = [{ value: 'euro', name: 'investing value' }];
+  energySources = [{ value: 'investedAmount', name: 'investing value' }];
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
   clickedOnNavigation: boolean = false;
+  investingTotalAmount: number = 0;
 
-  moneyInfo = [
-    { portfolio: new Date('December 20, 1995 03:24:00'), euro: 4000 },
-    { portfolio: new Date('December 25, 1995 03:24:00'), euro: 4170 },
-    { portfolio: new Date('December 27, 1995 03:24:00'), euro: 4390 },
-    { portfolio: new Date('December 30, 1995 03:24:00'), euro: 5100 },
-  ];
+  investingAmount: Stock[] = [];
 
   constructor(
     private router: Router,
     private investingDataService: InvestingService
   ) {}
+
+  // TODO:
+  // 1. Choose if i will have an API here to track investing stocks
+  // 2. Get data for all the invested money
+  // 3. If i will have API call then i can track the sucess rate of my investing
+  // 4. Button to swich views between invested amount and the current state of the money
 
   ngOnInit(): void {
     this.investingDataArray = this.investingDataService.getInvestingData();
@@ -35,6 +38,15 @@ export class InvestingComponent implements OnInit, OnDestroy {
         console.log(data);
         this.investingDataArray.push(data);
         console.log(this.investingDataArray);
+
+        // display on DOM
+        const stock = {
+          investedDate: data.investingDate,
+          investedAmount: data.investingAmountOfMoney,
+        };
+
+        this.investingAmount.push(stock);
+        this.investingTotalAmount += data.investingAmountOfMoney;
       });
   }
 
