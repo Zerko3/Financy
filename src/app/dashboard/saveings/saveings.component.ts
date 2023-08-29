@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Saveings } from 'src/interfaces/saveings.interface';
+import { BankCardService } from 'src/services/bankCard.service';
 import { SaveingsService } from 'src/services/saveings.service';
 
 @Component({
@@ -20,15 +21,27 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   saveingSubscribe: Subscription;
   totalMoneySaved: number = 0;
   clickedOnNavigation: boolean = false;
+  totalAccountMoney: number = 0;
+  accountBalance: number = 0;
 
   constructor(
     private router: Router,
-    private saveingsService: SaveingsService
+    private saveingsService: SaveingsService,
+    private bankCardService: BankCardService
   ) {}
 
   ngOnInit(): void {
     this.saveingsFormDataArray = this.saveingsService.getSaveingsData();
-    this.totalMoneySaved = this.saveingsService.getMoneySaved();
+
+    this.totalAccountMoney =
+      this.bankCardService.totalMoneyInBankAccount +
+      this.saveingsService.totalMoneySaved;
+
+    this.accountBalance = this.bankCardService.totalMoneyInSpendingAccounts;
+
+    this.totalMoneySaved =
+      this.saveingsService.totalMoneySaved +
+      this.bankCardService.totalMoneyInSaveingAccounts;
 
     this.saveingSubscribe = this.saveingsService.saveing.subscribe((data) => {
       console.log(data);

@@ -18,7 +18,7 @@
         <h1>Account balance</h1>
         <span
           class="section--saveings__content--box__accounts--overview__account--box--money"
-          >4000</span
+          >{{ accountBalance === 0 ? 0 : accountBalance }}EUR</span
         >
         <a
           class="section--saveings__content--box__accounts--overview__account--box--link"
@@ -57,7 +57,7 @@
         <h1>Total balance</h1>
         <span
           class="section--saveings__content--box__accounts--overview__account--box--money"
-          >4000</span
+          >{{ totalAccountMoney === 0 ? 0 : totalAccountMoney }}EUR</span
         >
         <a
           class="section--saveings__content--box__accounts--overview__account--box--link"

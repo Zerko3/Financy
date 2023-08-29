@@ -5,6 +5,9 @@ import { BankAccount } from 'src/interfaces/bankAccount.interface';
 @Injectable({ providedIn: 'root' })
 export class BankCardService {
   bankCardArray: BankAccount[] = [];
+  totalMoneyInBankAccount: number = 0;
+  totalMoneyInSpendingAccounts: number = 0;
+  totalMoneyInSaveingAccounts: number = 0;
   bankCardSaveingTypeArray: BankAccount[] = [];
   bankCardSpendingTypeArray: BankAccount[] = [];
   bankCardSubscribe = new Subject<BankAccount>();
@@ -18,13 +21,24 @@ export class BankCardService {
     // Store valid card based on the type into its array
     if (data.bankAccountName === 'Saveings') {
       this.bankCardSaveingTypeArray.push(data);
+
+      // calc for saveings account
+      this.totalMoneyInSaveingAccounts += data.bankMoneyStatus;
     }
 
     if (data.bankAccountName === 'Spending') {
       this.bankCardSpendingTypeArray.push(data);
+
+      // calc for spending account number
+      this.totalMoneyInSpendingAccounts += data.bankMoneyStatus;
     }
-    // call the valid array later on
+
+    // calc for total balance
+    this.totalMoneyInBankAccount =
+      this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
   }
+
+  getMoneyInBankAccount() {}
 
   // get bankacc
   getBankCard() {

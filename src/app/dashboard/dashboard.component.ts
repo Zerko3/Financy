@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   savedMoney: number = 0;
   positiveMoney: number = 0;
   bankCardSubscribe: Subscription;
+  clickOnNavigation: boolean = false;
 
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
@@ -73,6 +74,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onUserNavigate() {
-    this.router.navigate(['dashboard/createCard']);
+    this.clickOnNavigation = !this.clickOnNavigation;
+
+    if (this.clickOnNavigation) {
+      this.router.navigate(['dashboard/createCard']);
+    } else {
+      this.router.navigate(['dashboard']);
+    }
   }
 }
