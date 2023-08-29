@@ -15,6 +15,9 @@
     </div>
     <div class="section--dashboard__content--box__cards--box">
       <!-- NEW -->
+      <ng-container *ngIf="bankCardsArray.length < 1">
+        <div>Add an account to track expenses and more!</div>
+      </ng-container>
       <div
         class="section--dashboard__content--box__cards--box--card"
         *ngFor="let card of bankCardsArray"
@@ -31,6 +34,9 @@
     </div>
     <div class="section--dashboard__content--box__subscriptions">
       <!-- new -->
+      <ng-container *ngIf="subscriptionArray.length < 1">
+        <div>No current subscriptions!</div>
+      </ng-container>
       <div
         *ngFor="let subscription of subscriptionArray"
         class="section--dashboard__content--box__subscriptions__subscription--box"
@@ -54,6 +60,9 @@
         class="section--dashboard__content--box__transactions--box--transactions"
       >
         <div>
+          <ng-container *ngIf="expenseData.length < 1">
+            <div>No transaction history avalible!</div>
+          </ng-container>
           <ul *ngFor="let expense of expenseData">
             <div>
               <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
