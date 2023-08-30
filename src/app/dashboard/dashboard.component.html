@@ -11,7 +11,10 @@
       >
     </div>
     <div class="section--dashboard__content--box__heading--box">
-      <h1>Card overview</h1>
+      <div>
+        <p class="circle"></p>
+        <h1>Card overview</h1>
+      </div>
       <a
         (click)="onUserNavigate()"
         class="section--dashboard__content--box__subscriptions--add"
@@ -21,7 +24,9 @@
     <div class="section--dashboard__content--box__cards--box">
       <!-- NEW -->
       <ng-container *ngIf="bankCardsArray.length < 1">
-        <div>Add an account to track expenses and more!</div>
+        <div class="placeholder--text">
+          Add a card to track expenses and more!
+        </div>
       </ng-container>
       <div
         class="section--dashboard__content--box__cards--box--card"
@@ -32,7 +37,10 @@
       </div>
     </div>
     <div class="section--dashboard__content--box__heading--box">
-      <h1>Subscriptions</h1>
+      <div>
+        <p class="circle"></p>
+        <h1>Subscriptions</h1>
+      </div>
       <a class="section--dashboard__content--box__subscriptions--add"
         ><i class="dx-icon-add"></i>Add subscription</a
       >
@@ -40,7 +48,7 @@
     <div class="section--dashboard__content--box__subscriptions">
       <!-- new -->
       <ng-container *ngIf="subscriptionArray.length < 1">
-        <div>No current subscriptions!</div>
+        <div class="placeholder--text">No current subscriptions!</div>
       </ng-container>
       <div
         *ngFor="let subscription of subscriptionArray"
@@ -54,19 +62,26 @@
       </div>
     </div>
 
+    <!-- transactions -->
     <div class="section--dashboard__content--box__heading--box">
-      <h1>Recent Transactions</h1>
+      <div>
+        <p class="circle"></p>
+        <h1>Recent Transactions</h1>
+      </div>
       <a class="section--dashboard__content--box__subscriptions--add"
         ><i class="dx-icon-add"></i>Add transaction</a
       >
     </div>
+
     <div class="section--dashboard__content--box__transactions--box">
       <div
         class="section--dashboard__content--box__transactions--box--transactions"
       >
         <div>
           <ng-container *ngIf="expenseData.length < 1">
-            <div>No transaction history avalible!</div>
+            <div class="placeholder--text">
+              No transaction history avalible!
+            </div>
           </ng-container>
           <ul *ngFor="let expense of expenseData">
             <div>
@@ -98,15 +113,31 @@
           </ul>
         </div>
       </div>
-      <div class="section--dashboard__content--box__transactions--box--money">
-        <dx-pie-chart
-          id="pie"
-          type="doughnut"
-          palette="Soft Pastel"
-          [dataSource]="overviewExpenses"
+      <div
+        class="section--dashboard__content--box__transactions--box--transactions__spending--overview"
+      >
+        <div
+          class="section--dashboard__content--box__transactions--box--transactions__spending--overview__heading--box"
         >
-          <dxi-series argumentField="typeOfExpense"></dxi-series>
-        </dx-pie-chart>
+          <div>
+            <p class="circle"></p>
+            <h1>Monthly Summary</h1>
+          </div>
+        </div>
+
+        <!--  -->
+        <div class="section--dashboard__content--box__transactions--box--money">
+          <ng-container *ngIf="expenseData.length > 0">
+            <dx-pie-chart
+              id="pie"
+              type="doughnut"
+              palette="Soft Pastel"
+              [dataSource]="overviewExpenses"
+            >
+              <dxi-series argumentField="typeOfExpense"></dxi-series>
+            </dx-pie-chart>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>

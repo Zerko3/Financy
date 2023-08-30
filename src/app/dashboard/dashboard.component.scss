@@ -38,8 +38,22 @@
       padding: 0 1.2rem;
       margin-top: 3.2rem;
 
-      h1 {
-        font-size: font-size(font-size-regular);
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .circle {
+          height: 1.5rem;
+          width: 1.5rem;
+          border-radius: 50%;
+          background-color: var(--main-color);
+        }
+
+        h1 {
+          font-size: font-size(font-size-regular);
+        }
       }
 
       .section--dashboard__content--box__subscriptions--add {
@@ -71,7 +85,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--background-color);
 
         img {
           height: auto;
@@ -100,17 +113,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 3.2rem 0;
       padding: 1.2rem 2.4rem;
       width: 100%;
       height: auto;
       border-radius: 11px;
-      background-color: var(--gray-color-lighter-modified);
       position: relative;
 
       &--card {
-        background-color: var(--gray-color-lighter-modified);
-
         height: auto;
         width: 30rem;
         position: relative;
@@ -131,10 +140,9 @@
     }
 
     &__transactions--box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 45vh;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: auto;
       width: 100%;
       padding: 1.2rem 2.4rem;
       margin-top: 3.2rem;
@@ -146,6 +154,9 @@
         width: 100%;
         height: 100%;
         position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
 
         h1 {
           font-size: font-size(font-size-medium);
@@ -176,6 +187,43 @@
             }
           }
         }
+
+        &__spending--overview {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+          gap: 3rem;
+
+          &__heading--box {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0 1.2rem;
+
+            div {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 1rem;
+
+              .circle {
+                height: 1.5rem;
+                width: 1.5rem;
+                border-radius: 50%;
+                background-color: var(--main-color);
+              }
+
+              h1 {
+                font-size: font-size(font-size-regular);
+              }
+            }
+          }
+        }
       }
 
       &--money {
@@ -192,4 +240,12 @@
       }
     }
   }
+}
+
+.placeholder--text {
+  font-size: font-size(font-size-regular);
+}
+
+dx-pie-chart {
+  height: 15rem;
 }
