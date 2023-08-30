@@ -1,15 +1,17 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from '../../models/account.model';
 import { AccountService } from 'src/services/account.service';
+import { RegisterService } from 'src/services/register.service';
+import { Carousel } from 'src/interfaces/carousel.interface';
 
 @Component({
   selector: 'app-register-component',
   templateUrl: './register-component.component.html',
   styleUrls: ['./register-component.component.scss'],
 })
-export class RegisterComponentComponent {
+export class RegisterComponentComponent implements OnInit {
   @ViewChild('form', { static: false }) form: NgForm;
   @ViewChild('navigationLogin')
   navigationLogin: ElementRef;
@@ -18,7 +20,20 @@ export class RegisterComponentComponent {
   username: string = '';
   accountType: string = '';
   email: string = '';
-  constructor(private router: Router, private accountService: AccountService) {}
+  userCarousel = [
+    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias fuga a labore quos soluta odit adipisci rerum dicta rem veritatis vero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?',
+  ];
+  userCarouselArray: Carousel[] = [];
+  slideshowDelay = 2000;
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    private registerService: RegisterService
+  ) {}
+
+  ngOnInit(): void {
+    this.userCarouselArray = this.registerService.carouselArray;
+  }
 
   // TODO:
   // 1. Form data validation

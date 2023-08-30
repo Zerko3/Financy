@@ -67,32 +67,32 @@
         background-color: var(--main-color-darker);
         width: 70%;
         border-radius: 2rem;
-        &--carousel {
-          padding: 1.2rem 2.4rem;
+        // &--carousel {
+        //   padding: 1.2rem 2.4rem;
 
-          &--para {
-            color: var(--white-color);
-            font-size: font-size(font-size-small);
-          }
+        //   &--para {
+        //     color: var(--white-color);
+        //     font-size: font-size(font-size-small);
+        //   }
 
-          &__user--box {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 1rem;
-            margin-top: 1.2rem;
+        //   &__user--box {
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: flex-start;
+        //     gap: 1rem;
+        //     margin-top: 1.2rem;
 
-            span {
-              font-size: font-size(font-size-small);
-              color: var(--white-color);
-            }
+        //     span {
+        //       font-size: font-size(font-size-small);
+        //       color: var(--white-color);
+        //     }
 
-            img {
-              border-radius: 50%;
-              height: 4rem;
-            }
-          }
-        }
+        //     img {
+        //       border-radius: 50%;
+        //       height: 4rem;
+        //     }
+        //   }
+        // }
         &__spans--box {
           position: absolute;
           bottom: -1.5rem;
@@ -235,3 +235,38 @@
     }
   }
 }
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel--para {
+  font-size: font-size(font-size-small);
+  color: var(--white-color);
+}
+
+.carousel__user--box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    height: auto;
+    border-radius: 50%;
+    height: 4rem;
+  }
+
+  span {
+    font-size: font-size(font-size-small);
+    color: var(--white-color);
+  }
+}
+
+// ::ng-deep .dx-gallery-wrapper {
+// }

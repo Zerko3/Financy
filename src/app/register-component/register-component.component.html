@@ -16,26 +16,26 @@
           <div
             class="section--register__content--box__img--box__carousel--box--carousel"
           >
-            <p
-              class="section--register__content--box__img--box__carousel--box--carousel--para"
+            <dx-gallery
+              [dataSource]="userCarouselArray"
+              [height]="150"
+              [slideshowDelay]="slideshowDelay"
+              [loop]="false"
+              [showNavButtons]="true"
+              [showIndicator]="true"
+              ><div *dxTemplate="let user of 'item'">
+                <div class="carousel">
+                  <p class="carousel--para">
+                    {{ user.userOpinion }}
+                  </p>
+
+                  <div class="carousel__user--box">
+                    <img src="../../assets/img/user-logo.jpeg" alt="user" />
+                    <span>{{ user.userName }}</span>
+                  </div>
+                </div>
+              </div></dx-gallery
             >
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias
-              fuga a labore quos soluta odit adipisci rerum dicta rem veritatis
-              vero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?
-            </p>
-            <div
-              class="section--register__content--box__img--box__carousel--box--carousel__user--box"
-            >
-              <img src="../../assets/img/user-logo.jpeg" alt="user" />
-              <span>Name Surname</span>
-            </div>
-          </div>
-          <div
-            class="section--register__content--box__img--box__carousel--box__spans--box"
-          >
-            <span class="one"></span>
-            <span class="two"></span>
-            <span class="three"></span>
           </div>
         </div>
       </div>
