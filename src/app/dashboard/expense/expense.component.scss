@@ -2,17 +2,25 @@
 .section--expense {
   height: 100vh;
   width: 100vw;
-  padding: 1.2rem 2.4rem;
+  position: relative;
+
+  &__navigation--box {
+    position: absolute;
+    width: 10%;
+  }
 
   &__expense--box {
-    height: 100%;
-    width: 100%;
+    left: 5%;
+    position: absolute;
+    height: auto;
+    width: -webkit-fill-available;
 
     &__heading--box {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       margin-bottom: 3.2rem;
+      padding: 1.2rem 2.4rem;
       gap: 1rem;
     }
     &--add {
@@ -70,8 +78,18 @@
       .dx-widget::after,
       .dx-widget::before {
         font-size: 1.4rem !important;
-        width: 100%;
       }
     }
   }
+}
+
+.dx-widget,
+.dx-widget *,
+.dx-widget ::after,
+.dx-widget ::before,
+.dx-widget::after,
+.dx-widget::before {
+  font-size: 1.4rem !important;
+  background-color: transparent;
+  width: 150rem;
 }
