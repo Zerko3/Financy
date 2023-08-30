@@ -20,11 +20,8 @@ export class RegisterComponentComponent implements OnInit {
   username: string = '';
   accountType: string = '';
   email: string = '';
-  userCarousel = [
-    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias fuga a labore quos soluta odit adipisci rerum dicta rem veritatis vero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?',
-  ];
   userCarouselArray: Carousel[] = [];
-  slideshowDelay = 2000;
+  slideshowDelay: number = 2000;
   constructor(
     private router: Router,
     private accountService: AccountService,
