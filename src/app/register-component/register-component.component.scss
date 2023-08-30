@@ -248,6 +248,7 @@
 .carousel--para {
   font-size: font-size(font-size-small);
   color: var(--white-color);
+  white-space: normal;
 }
 
 .carousel__user--box {
@@ -267,6 +268,3 @@
     color: var(--white-color);
   }
 }
-
-// ::ng-deep .dx-gallery-wrapper {
-// }
