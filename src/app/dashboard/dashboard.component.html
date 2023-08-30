@@ -5,12 +5,17 @@
   <router-outlet></router-outlet>
 
   <div class="section--dashboard__content--box">
+    <div class="section--dashboard__content--box__user--greating">
+      <span class="section--dashboard__content--box__user--greating--hello"
+        >👋 Hello, User</span
+      >
+    </div>
     <div class="section--dashboard__content--box__heading--box">
-      <h1>Accounts</h1>
+      <h1>Card overview</h1>
       <a
         (click)="onUserNavigate()"
         class="section--dashboard__content--box__subscriptions--add"
-        >Add account</a
+        ><i class="dx-icon-add"></i>Add cards</a
       >
     </div>
     <div class="section--dashboard__content--box__cards--box">
@@ -29,7 +34,7 @@
     <div class="section--dashboard__content--box__heading--box">
       <h1>Subscriptions</h1>
       <a class="section--dashboard__content--box__subscriptions--add"
-        >Add subscription</a
+        ><i class="dx-icon-add"></i>Add subscription</a
       >
     </div>
     <div class="section--dashboard__content--box__subscriptions">
@@ -50,9 +55,9 @@
     </div>
 
     <div class="section--dashboard__content--box__heading--box">
-      <h1>Transactions</h1>
+      <h1>Recent Transactions</h1>
       <a class="section--dashboard__content--box__subscriptions--add"
-        >Add transaction</a
+        ><i class="dx-icon-add"></i>Add transaction</a
       >
     </div>
     <div class="section--dashboard__content--box__transactions--box">

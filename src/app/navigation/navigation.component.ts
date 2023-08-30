@@ -13,33 +13,14 @@ export class NavigationComponent {
   constructor(private router: Router) {}
 
   userNavigate(e: HTMLAnchorElement) {
-    if (e.innerText === 'Overview') {
-      this.router.navigate(['dashboard']);
+    this.clickedOnLogout = true;
+    console.log(e.className);
 
-      this.clickedOnNav = false;
-    }
-
-    if (e.innerText === 'Investing') {
-      this.router.navigate(['/investing']);
-    }
-
-    if (e.innerText === 'Monthly expenses') {
-      this.router.navigate(['/expense']);
-    }
-
-    if (e.innerText === 'Saveings') {
-      this.router.navigate(['/saveings']);
-    }
-
-    if (e.innerText === 'Logout') {
-      this.clickedOnLogout = true;
-    }
-
-    if (e.innerText === 'No') {
+    if (e.className === 'logout--no') {
       this.clickedOnLogout = false;
     }
 
-    if (e.innerText === 'Yes') {
+    if (e.className === 'logout--yes') {
       this.router.navigate(['']);
       this.clickedOnLogout = false;
     }
