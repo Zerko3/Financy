@@ -1,10 +1,13 @@
-<app-navigation></app-navigation>
-<!-- TODO: -->
 <section class="section--saveings">
-  <a class="section--saveings--add" (click)="userNavigationForm()"
-    >Add saveings</a
-  >
+  <div class="section--saveings__navigation--box">
+    <app-navigation></app-navigation>
+  </div>
   <div class="section--saveings__content--box">
+    <a
+      class="section--saveings__content--box--add"
+      (click)="userNavigationForm()"
+      >Add saveings</a
+    >
     <div class="section--saveings__content--box__accounts--overview">
       <!-- account 1 -->
       <div
@@ -118,5 +121,4 @@
   </div>
 </section>
 
-<!-- TODO: -->
 <router-outlet></router-outlet>

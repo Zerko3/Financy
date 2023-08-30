@@ -85,6 +85,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
         img {
           height: auto;
@@ -169,12 +170,18 @@
             align-items: flex-start;
             justify-content: center;
             flex-direction: column;
+            margin-bottom: 1rem;
 
             div {
+              // box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+              box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
               display: flex;
               align-items: center;
               justify-content: center;
-              gap: 1rem;
+              gap: 2rem;
+              padding: 1.2rem 2rem;
+              border-radius: 2rem;
 
               img {
                 height: auto;
@@ -247,5 +254,5 @@
 }
 
 dx-pie-chart {
-  height: 15rem;
+  height: auto;
 }
