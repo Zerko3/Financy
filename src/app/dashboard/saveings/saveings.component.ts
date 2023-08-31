@@ -47,6 +47,8 @@ export class SaveingsComponent implements OnInit, OnDestroy {
       console.log(data);
       this.totalMoneySaved += data.amountOfMoneySaved;
       this.saveingsFormDataArray.push(data);
+
+      this.totalAccountMoney += data.amountOfMoneySaved;
     });
   }
 

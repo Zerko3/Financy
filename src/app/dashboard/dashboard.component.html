@@ -33,11 +33,21 @@
         *ngFor="let card of bankCardsArray"
       >
         <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>{{
-          deductedMoney === 0
-            ? card.bankMoneyStatus
-            : card.bankMoneyStatus - deductedMoney
-        }}</span>
+        <ng-container *ngIf="card.bankAccountName === 'Spending'">
+          <span>{{
+            deductedMoney === 0
+              ? card.bankMoneyStatus
+              : card.bankMoneyStatus - deductedMoney
+          }}</span>
+        </ng-container>
+        <!-- TODO: -->
+        <ng-container *ngIf="card.bankAccountName === 'Saveings'">
+          <span>{{
+            addedSaveings === 0
+              ? card.bankMoneyStatus
+              : card.bankMoneyStatus + addedSaveings
+          }}</span>
+        </ng-container>
       </div>
     </div>
     <div class="section--dashboard__content--box__heading--box">

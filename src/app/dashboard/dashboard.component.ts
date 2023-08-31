@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   bankCardSubscribe: Subscription;
   clickOnNavigation: boolean = false;
   deductedMoney: number = 0;
+  addedSaveings: number = 0;
 
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
@@ -58,6 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // get deducted money to change the account number
     this.deductedMoney = this.expenseService.getMoneyDeducted();
+    this.addedSaveings = this.saveingService.getMoneySaved();
 
     // overwrite the val in obj
     this.investedMoney += this.investingService.totalInvestment;

@@ -15,13 +15,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   showPageSizeSelector = true;
   showInfo = true;
   showNavButtons = true;
-  // TODO:
-  // 1. model or interface?
-  // 2. service to store the data for now
-  // 3. later on call the data from firebase
-  // 4. Service will get and post this valid data
-  // 5. give or recive data from service
-
   expenseServiceSubscribable: Subscription;
   expenses: Expense[] = [];
   columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
