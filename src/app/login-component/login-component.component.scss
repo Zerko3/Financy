@@ -67,50 +67,6 @@
         background-color: var(--main-color-darker);
         width: 70%;
         border-radius: 2rem;
-        &--carousel {
-          padding: 1.2rem 2.4rem;
-
-          &--para {
-            color: var(--white-color);
-            font-size: font-size(font-size-small);
-          }
-
-          &__user--box {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 1rem;
-            margin-top: 1.2rem;
-
-            span {
-              font-size: font-size(font-size-small);
-              color: var(--white-color);
-            }
-
-            img {
-              border-radius: 50%;
-              height: 4rem;
-            }
-          }
-        }
-        &__spans--box {
-          position: absolute;
-          bottom: -1.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1rem;
-          width: 100%;
-
-          .one,
-          .two,
-          .three {
-            background-color: var(--white-color);
-            height: 1rem;
-            width: 1rem;
-            border-radius: 50%;
-          }
-        }
       }
     }
 
@@ -160,5 +116,39 @@
         }
       }
     }
+  }
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel--para {
+  font-size: font-size(font-size-small);
+  color: var(--white-color);
+  white-space: normal;
+}
+
+.carousel__user--box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    height: auto;
+    border-radius: 50%;
+    height: 4rem;
+  }
+
+  span {
+    font-size: font-size(font-size-small);
+    color: var(--white-color);
   }
 }

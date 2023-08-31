@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Carousel } from 'src/interfaces/carousel.interface';
 
 @Injectable({ providedIn: 'root' })
-export class RegisterService {
+export class LoginService {
   carouselArray: Carousel[] = [
     {
       userOpinion:
