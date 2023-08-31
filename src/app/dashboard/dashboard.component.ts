@@ -43,12 +43,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  // TODO:
-  // 1. Create card
-  // 2. Based on card change money later on
-  // 3. If spending deductc money from card if i spend money
-  // 4. If saveings add money to card if i add money to saveings
-
   ngOnInit(): void {
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();
@@ -99,5 +93,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['dashboard']);
     }
+  }
+
+  onCardClick(e) {
+    // 1. Get the correct card
+    const testData = e.target.offsetParent;
+    // 2. Remove card from array
+    for (const card of this.bankCardsArray) {
+      if (testData.getAttribute('data-card-id') === card.ID) {
+        this.bankCardsArray.splice(testData, 1);
+        break;
+      }
+    }
+    console.log(this.bankCardsArray);
+
+    // 3. Later -> remove money of this card from account
   }
 }

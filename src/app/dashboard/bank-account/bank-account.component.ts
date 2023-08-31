@@ -15,6 +15,7 @@ export class BankAccountComponent {
     bankAccountValidDate: new Date(),
     bankAccountCard: '',
     bankAccountName: '',
+    ID: new Date().valueOf().toLocaleString(),
   };
 
   submitButtonOptions = {

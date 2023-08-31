@@ -31,8 +31,10 @@
       <div
         class="section--dashboard__content--box__cards--box--card"
         *ngFor="let card of bankCardsArray"
+        [attr.data-card-id]="card.ID"
       >
         <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <p #ref (click)="onCardClick($event)" class="delete--card">X</p>
         <ng-container *ngIf="card.bankAccountName === 'Spending'">
           <span>{{
             deductedMoney === 0

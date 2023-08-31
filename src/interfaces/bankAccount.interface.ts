@@ -5,4 +5,5 @@ export interface BankAccount {
   bankAccountValidDate: Date;
   bankAccountCard: string;
   bankAccountName: string;
+  ID: string;
 }
