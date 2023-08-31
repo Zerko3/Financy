@@ -13,12 +13,16 @@ export class ExpenseService {
   randomMoney: number = 0;
   clothesMoney: number = 0;
   totalExpense: number = 0;
+  moneyDeducted: number = 0;
   dataSubject = new Subject<Expense>();
   constructor() {}
 
   // store data
   storeExpenseData(data: Expense) {
     this.totalExpense += data.money;
+
+    // get money deducted
+    this.moneyDeducted += data.money;
 
     if (data.expenseType === 'Subscription') {
       this.subscriptionMoney += data.money;
@@ -34,7 +38,6 @@ export class ExpenseService {
       this.clothesMoney += data.money;
     }
     this.expanseFromArray.push(data);
-    console.log(this.expanseFromArray);
 
     //when data is captured give it to the form
     this.dataSubject.next(data);
@@ -48,5 +51,10 @@ export class ExpenseService {
   // get data and display it in overview
   getExpenseData() {
     return this.expanseFromArray.slice();
+  }
+
+  // get money deducted
+  getMoneyDeducted() {
+    return this.moneyDeducted;
   }
 }

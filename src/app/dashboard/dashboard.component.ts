@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   positiveMoney: number = 0;
   bankCardSubscribe: Subscription;
   clickOnNavigation: boolean = false;
+  deductedMoney: number = 0;
 
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
@@ -41,6 +42,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  // TODO:
+  // 1. Create card
+  // 2. Based on card change money later on
+  // 3. If spending deductc money from card if i spend money
+  // 4. If saveings add money to card if i add money to saveings
+
   ngOnInit(): void {
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();
@@ -48,6 +55,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.savingsData = this.saveingService.getSaveingsData();
     this.investingData = this.investingService.getInvestingData();
+
+    // get deducted money to change the account number
+    this.deductedMoney = this.expenseService.getMoneyDeducted();
 
     // overwrite the val in obj
     this.investedMoney += this.investingService.totalInvestment;
@@ -60,6 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // 1 is negative
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
 
+    // create card
     this.bankCardSubscribe = this.bankCardService.bankCardSubscribe.subscribe(
       (data) => {
         console.log(data);

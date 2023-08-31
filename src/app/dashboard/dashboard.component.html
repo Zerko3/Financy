@@ -33,7 +33,11 @@
         *ngFor="let card of bankCardsArray"
       >
         <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <span>{{ card.bankMoneyStatus }}</span>
+        <span>{{
+          deductedMoney === 0
+            ? card.bankMoneyStatus
+            : card.bankMoneyStatus - deductedMoney
+        }}</span>
       </div>
     </div>
     <div class="section--dashboard__content--box__heading--box">

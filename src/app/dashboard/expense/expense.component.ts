@@ -51,7 +51,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
         console.log(data);
         this.expenses.push(data);
         console.log(this.expenses);
-        console.log('yo');
 
         if (data.expenseType === 'Subscription') {
           this.subscriptionMoney += data.money;
