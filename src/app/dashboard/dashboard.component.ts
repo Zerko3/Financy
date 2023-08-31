@@ -52,10 +52,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();
+    console.log(this.expenseData);
+    console.log(this.expenseData.length);
     this.subscriptionArray = this.expenseService.getSubscriptionData();
 
     this.savingsData = this.saveingService.getSaveingsData();
+    console.log(this.savingsData);
+    console.log(this.savingsData.length);
     this.investingData = this.investingService.getInvestingData();
+    console.log(this.investingData);
 
     // get deducted money to change the account number
     this.deductedMoney = this.expenseService.getMoneyDeducted();

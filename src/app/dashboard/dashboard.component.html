@@ -40,7 +40,6 @@
               : card.bankMoneyStatus - deductedMoney
           }}</span>
         </ng-container>
-        <!-- TODO: -->
         <ng-container *ngIf="card.bankAccountName === 'Saveings'">
           <span>{{
             addedSaveings === 0
@@ -92,7 +91,13 @@
         class="section--dashboard__content--box__transactions--box--transactions"
       >
         <div>
-          <ng-container *ngIf="expenseData.length < 1">
+          <ng-container
+            *ngIf="
+              expenseData.length === 0 &&
+              investingData.length === 0 &&
+              savingsData.length === 0
+            "
+          >
             <div class="placeholder--text">
               No transaction history avalible!
             </div>
