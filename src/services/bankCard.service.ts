@@ -50,12 +50,18 @@ export class BankCardService {
         storedMoney += card.bankMoneyStatus;
         console.log(storedMoney);
         this.totalMoneyInSaveingAccounts = storedMoney;
+
+        this.totalMoneyInBankAccount =
+          this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
       }
 
       if (card.bankAccountName === 'Spending') {
         this.bankCardSpendingTypeArray.push(card);
         storedMoney += card.bankMoneyStatus;
         this.totalMoneyInSpendingAccounts = storedMoney;
+
+        this.totalMoneyInBankAccount =
+          this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
       }
     }
 
