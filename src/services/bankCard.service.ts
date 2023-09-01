@@ -38,7 +38,32 @@ export class BankCardService {
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
   }
 
-  // get bankacc
+  overwriteBankCardsArray(bankCards: BankAccount[]) {
+    // 1. loop over array to see what is saveings card and spending
+    this.bankCardSpendingTypeArray = [];
+    this.bankCardSaveingTypeArray = [];
+    let storedMoney: number = 0;
+
+    for (const card of bankCards) {
+      if (card.bankAccountName === 'Saveings') {
+        this.bankCardSaveingTypeArray.push(card);
+        storedMoney += card.bankMoneyStatus;
+        console.log(storedMoney);
+        this.totalMoneyInSaveingAccounts = storedMoney;
+      }
+
+      if (card.bankAccountName === 'Spending') {
+        this.bankCardSpendingTypeArray.push(card);
+        this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
+      }
+    }
+
+    // overwrite the array
+    this.bankCardArray = bankCards;
+    return this.bankCardArray;
+  }
+
+  // get bankacc cards
   getBankCard() {
     return this.bankCardArray.slice();
   }

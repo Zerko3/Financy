@@ -33,6 +33,8 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.saveingsFormDataArray = this.saveingsService.getSaveingsData();
 
+    console.log(this.bankCardService.totalMoneyInSaveingAccounts);
+
     this.totalAccountMoney =
       this.bankCardService.totalMoneyInBankAccount +
       this.saveingsService.totalMoneySaved;

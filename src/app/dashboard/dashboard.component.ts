@@ -46,15 +46,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();
-    console.log(this.expenseData);
-    console.log(this.expenseData.length);
+
     this.subscriptionArray = this.expenseService.getSubscriptionData();
 
     this.savingsData = this.saveingService.getSaveingsData();
-    console.log(this.savingsData);
-    console.log(this.savingsData.length);
+
     this.investingData = this.investingService.getInvestingData();
-    console.log(this.investingData);
 
     // get deducted money to change the account number
     this.deductedMoney = this.expenseService.getMoneyDeducted();
@@ -74,7 +71,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // create card
     this.bankCardSubscribe = this.bankCardService.bankCardSubscribe.subscribe(
       (data) => {
-        console.log(data);
         this.bankCardsArray.push(data);
       }
     );
@@ -96,7 +92,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   // TODO:
-  // BUG -> The data does return if you leve the component and come back
   // BUG -> Data does not sync upon deletion
   onCardClick(e) {
     // 1. Get the correct card
@@ -106,13 +101,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (testData.getAttribute('data-card-id') === card.ID) {
         let index = this.bankCardsArray.indexOf(card);
         this.bankCardsArray.splice(index, 1);
+
         break;
       }
-
-      // get this new array into the serviceCard array and mutate it so it will display the correct value
     }
-    console.log(this.bankCardsArray);
+
+    this.bankCardService.overwriteBankCardsArray(this.bankCardsArray);
     return this.bankCardsArray;
-    // 3. Later -> remove money of this card from account
   }
 }
