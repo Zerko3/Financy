@@ -265,3 +265,22 @@
 dx-pie-chart {
   height: auto;
 }
+
+.card--deletion--btn i,
+.card--not--deletion--btn i {
+  font-size: font-size(font-size-regular);
+  color: var(--white-color);
+  position: absolute;
+  right: 3rem;
+  top: 6rem;
+  width: auto;
+  cursor: pointer;
+}
+
+.card--deletion--btn i {
+  top: 6rem;
+}
+
+.card--not--deletion--btn i {
+  top: 8rem;
+}

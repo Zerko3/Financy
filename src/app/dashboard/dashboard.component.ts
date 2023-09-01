@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   clickOnNavigation: boolean = false;
   deductedMoney: number = 0;
   addedSaveings: number = 0;
+  clickedOnDeleteButton: boolean = false;
 
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
@@ -91,22 +92,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  // TODO:
-  // BUG -> Data does not sync upon deletion
+  onClickForDelete() {
+    this.clickedOnDeleteButton = !this.clickedOnDeleteButton;
+  }
+
   onCardClick(e) {
-    // 1. Get the correct card
-    const testData = e.target.offsetParent;
-    // 2. Remove card from array
-    for (const card of this.bankCardsArray) {
-      if (testData.getAttribute('data-card-id') === card.ID) {
-        let index = this.bankCardsArray.indexOf(card);
-        this.bankCardsArray.splice(index, 1);
+    if (!this.clickedOnDeleteButton) {
+      return null;
+    } else {
+      // 1. Get the correct card
+      const testData = e.target.offsetParent;
+      // 2. Remove card from array
+      for (const card of this.bankCardsArray) {
+        if (testData.getAttribute('data-card-id') === card.ID) {
+          let index = this.bankCardsArray.indexOf(card);
+          this.bankCardsArray.splice(index, 1);
 
-        break;
+          break;
+        }
       }
-    }
 
-    this.bankCardService.overwriteBankCardsArray(this.bankCardsArray);
-    return this.bankCardsArray;
+      this.bankCardService.overwriteBankCardsArray(this.bankCardsArray);
+      return this.bankCardsArray;
+    }
   }
 }
