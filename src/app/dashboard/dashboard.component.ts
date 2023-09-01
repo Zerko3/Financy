@@ -95,18 +95,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  // TODO:
+  // BUG -> The data does return if you leve the component and come back
+  // BUG -> Data does not sync upon deletion
   onCardClick(e) {
     // 1. Get the correct card
     const testData = e.target.offsetParent;
     // 2. Remove card from array
     for (const card of this.bankCardsArray) {
       if (testData.getAttribute('data-card-id') === card.ID) {
-        this.bankCardsArray.splice(testData, 1);
+        let index = this.bankCardsArray.indexOf(card);
+        this.bankCardsArray.splice(index, 1);
         break;
       }
+
+      // get this new array into the serviceCard array and mutate it so it will display the correct value
     }
     console.log(this.bankCardsArray);
-
+    return this.bankCardsArray;
     // 3. Later -> remove money of this card from account
   }
 }

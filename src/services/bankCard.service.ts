@@ -38,8 +38,6 @@ export class BankCardService {
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
   }
 
-  getMoneyInBankAccount() {}
-
   // get bankacc
   getBankCard() {
     return this.bankCardArray.slice();
