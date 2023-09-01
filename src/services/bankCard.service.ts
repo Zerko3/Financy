@@ -54,7 +54,8 @@ export class BankCardService {
 
       if (card.bankAccountName === 'Spending') {
         this.bankCardSpendingTypeArray.push(card);
-        this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
+        storedMoney += card.bankMoneyStatus;
+        this.totalMoneyInSpendingAccounts = storedMoney;
       }
     }
 
