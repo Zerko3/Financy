@@ -39,24 +39,45 @@ export class BankCardService {
   }
 
   overwriteBankCardsArray(bankCards: BankAccount[]) {
+    console.log(bankCards);
+    if (bankCards.length === 0) {
+      this.totalMoneyInSaveingAccounts = 0;
+      this.totalMoneyInSpendingAccounts = 0;
+      this.totalMoneyInBankAccount = 0;
+    }
+
     // 1. loop over array to see what is saveings card and spending
     this.bankCardSpendingTypeArray = [];
     this.bankCardSaveingTypeArray = [];
-    let storedMoney: number = 0;
+    let savedMoney: number = 0;
+    let spendingMoney: number = 0;
 
     // When the last card is deleted the function gets passed "null" so it wont activate the storedMoney and overwrite the totalMoneyInSaveingAccounts
     for (const card of bankCards) {
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
-        storedMoney += card.bankMoneyStatus;
-        console.log(storedMoney);
-        this.totalMoneyInSaveingAccounts = storedMoney;
+
+        savedMoney += card.bankMoneyStatus;
+        console.log(savedMoney);
+        this.totalMoneyInSaveingAccounts = savedMoney;
       }
 
       if (card.bankAccountName === 'Spending') {
         this.bankCardSpendingTypeArray.push(card);
-        storedMoney += card.bankMoneyStatus;
-        this.totalMoneyInSpendingAccounts = storedMoney;
+
+        spendingMoney += card.bankMoneyStatus;
+        console.log(spendingMoney);
+        this.totalMoneyInSpendingAccounts = spendingMoney;
+      }
+
+      if (this.bankCardSaveingTypeArray.length === 0) {
+        console.log('zero in saveings');
+        this.totalMoneyInSaveingAccounts = 0;
+      }
+
+      if (this.bankCardSpendingTypeArray.length === 0) {
+        console.log('zero in spending');
+        this.totalMoneyInSpendingAccounts = 0;
       }
     }
 
