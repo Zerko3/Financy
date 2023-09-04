@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   deductedMoney: number = 0;
   addedSaveings: number = 0;
   clickedOnDeleteButton: boolean = false;
+  correctCard: string = '';
 
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
@@ -86,8 +87,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.router.navigate(['dashboard/createCard']);
   }
 
-  onClickForDelete() {
+  onClickForDelete(e: any) {
+    console.log(e);
     this.clickedOnDeleteButton = !this.clickedOnDeleteButton;
+
+    this.correctCard = e;
   }
 
   onCardClick(e) {

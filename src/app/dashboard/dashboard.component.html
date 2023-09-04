@@ -34,16 +34,26 @@
         [attr.data-card-id]="card.ID"
       >
         <img src="../../assets/img/visa_card Background Removed.png" alt="" />
-        <p (click)="onCardClick($event)" class="delete--card">X</p>
-        <!-- TODO: -->
-        <!-- <ng-container *ngIf="clickedOnDeleteButton">
-          <p class="card--deletion--btn" #ref>
+        <p
+          [attr.data-card-id]="card.ID"
+          (click)="onClickForDelete(card.ID)"
+          class="delete--card"
+        >
+          {{ card.ID ? "X" : "" }}
+        </p>
+
+        <ng-container *ngIf="clickedOnDeleteButton && correctCard === card.ID">
+          <p (click)="onCardClick($event)" class="card--deletion--btn">
             <i class="dx-icon-check"></i>
           </p>
-          <p (click)="onClickForDelete()" class="card--not--deletion--btn">
+          <p
+            (click)="onClickForDelete($event)"
+            class="card--not--deletion--btn"
+          >
             <i class="dx-icon-close"></i>
           </p>
-        </ng-container> -->
+        </ng-container>
+
         <ng-container *ngIf="card.bankAccountName === 'Spending'">
           <span>{{
             deductedMoney === 0
