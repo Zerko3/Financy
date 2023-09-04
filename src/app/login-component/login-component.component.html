@@ -48,6 +48,7 @@
             ngModel
           />
           <button
+            [ngClass]="loginForm.valid ? 'validForm' : ''"
             [disabled]="loginForm.valid ? formStatus : !formStatus"
             type="submit"
           >
