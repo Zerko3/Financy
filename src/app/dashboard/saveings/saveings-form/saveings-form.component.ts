@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Saveings } from 'src/interfaces/saveings.interface';
+import { BankCardService } from 'src/services/bankCard.service';
 import { SaveingsService } from 'src/services/saveings.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { SaveingsService } from 'src/services/saveings.service';
   templateUrl: './saveings-form.component.html',
   styleUrls: ['./saveings-form.component.scss'],
 })
-export class SaveingsFormComponent {
+export class SaveingsFormComponent implements OnInit {
   saveingsData: Saveings = {
     amountOfMoneySaved: 0,
     dateOfSaveings: new Date(),
@@ -16,7 +17,7 @@ export class SaveingsFormComponent {
     account: '',
   };
 
-  account: string[] = ['Account 1', 'Account 2'];
+  account: string[] = [];
   typeOfSaveings: string[] = [
     'Daily saveing',
     'Weekly saveing',
@@ -43,8 +44,14 @@ export class SaveingsFormComponent {
   };
   constructor(
     private saveingsService: SaveingsService,
+    private bankCardService: BankCardService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.account = this.bankCardService.getAccountNames();
+    this.positionEditorOptions.items = this.account;
+  }
 
   onUserCloseForm() {
     this.router.navigate(['saveings']);

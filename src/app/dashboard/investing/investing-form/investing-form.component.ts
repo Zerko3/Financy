@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Investing } from 'src/interfaces/investing.interface';
+import { BankCardService } from 'src/services/bankCard.service';
 import { InvestingService } from 'src/services/investing.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { InvestingService } from 'src/services/investing.service';
   templateUrl: './investing-form.component.html',
   styleUrls: ['./investing-form.component.scss'],
 })
-export class InvestingFormComponent {
+export class InvestingFormComponent implements OnInit {
   investingData: Investing = {
     investingName: '',
     investingAmountOfMoney: 0,
@@ -17,7 +18,7 @@ export class InvestingFormComponent {
     typeOfInvesting: '',
   };
 
-  accounts = ['Account 1', 'Account 2'];
+  accounts: string[] = [];
   investingTypes = ['Daily', 'Weekly', 'Monthly', 'Additional investment'];
   positionEditorOptions = {
     items: this.accounts,
@@ -39,8 +40,14 @@ export class InvestingFormComponent {
   // 1. delnice
   constructor(
     private investingDataService: InvestingService,
+    private bankCardService: BankCardService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.accounts = this.bankCardService.getAccountNames();
+    this.positionEditorOptions.items = this.bankCardService.getAccountNames();
+  }
 
   onUserCloseForm() {
     this.router.navigate(['investing']);

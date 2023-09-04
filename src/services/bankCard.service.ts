@@ -5,16 +5,19 @@ import { BankAccount } from 'src/interfaces/bankAccount.interface';
 @Injectable({ providedIn: 'root' })
 export class BankCardService {
   bankCardArray: BankAccount[] = [];
+  cardNames: string[] = [];
   totalMoneyInBankAccount: number = 0;
   totalMoneyInSpendingAccounts: number = 0;
   totalMoneyInSaveingAccounts: number = 0;
   bankCardSaveingTypeArray: BankAccount[] = [];
   bankCardSpendingTypeArray: BankAccount[] = [];
   bankCardSubscribe = new Subject<BankAccount>();
+
   constructor() {}
   // store bankacc
   storeBankCard(data: BankAccount) {
     this.bankCardArray.push(data);
+    this.cardNames.push(data.bankAccountName);
 
     this.bankCardSubscribe.next(data);
 
@@ -39,7 +42,6 @@ export class BankCardService {
   }
 
   overwriteBankCardsArray(bankCards: BankAccount[]) {
-    console.log(bankCards);
     if (bankCards.length === 0) {
       this.totalMoneyInSaveingAccounts = 0;
       this.totalMoneyInSpendingAccounts = 0;
@@ -58,7 +60,7 @@ export class BankCardService {
         this.bankCardSaveingTypeArray.push(card);
 
         savedMoney += card.bankMoneyStatus;
-        console.log(savedMoney);
+
         this.totalMoneyInSaveingAccounts = savedMoney;
       }
 
@@ -66,17 +68,15 @@ export class BankCardService {
         this.bankCardSpendingTypeArray.push(card);
 
         spendingMoney += card.bankMoneyStatus;
-        console.log(spendingMoney);
+
         this.totalMoneyInSpendingAccounts = spendingMoney;
       }
 
       if (this.bankCardSaveingTypeArray.length === 0) {
-        console.log('zero in saveings');
         this.totalMoneyInSaveingAccounts = 0;
       }
 
       if (this.bankCardSpendingTypeArray.length === 0) {
-        console.log('zero in spending');
         this.totalMoneyInSpendingAccounts = 0;
       }
     }
@@ -100,5 +100,9 @@ export class BankCardService {
 
   getSpendingCards() {
     return this.bankCardSpendingTypeArray.slice();
+  }
+
+  getAccountNames() {
+    return this.cardNames.slice();
   }
 }

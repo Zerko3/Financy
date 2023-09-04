@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Expense } from 'src/interfaces/expense.interface';
+import { BankCardService } from 'src/services/bankCard.service';
 import { ExpenseService } from 'src/services/expense.service';
 
 @Component({
@@ -8,10 +9,10 @@ import { ExpenseService } from 'src/services/expense.service';
   templateUrl: './expense-form.component.html',
   styleUrls: ['./expense-form.component.scss'],
 })
-export class ExpenseFormComponent {
+export class ExpenseFormComponent implements OnInit {
   // TODO:
   // 1. Add dynamic accounts
-  accounts = ['Account 1', 'Account 2'];
+  accounts: string[] = [];
   status = ['paid', 'pending'];
   expense = ['Subscription', 'Bills', 'Restaurants', 'Random', 'Clothes'];
 
@@ -50,7 +51,16 @@ export class ExpenseFormComponent {
 
   e: any;
 
-  constructor(private expenseService: ExpenseService, private router: Router) {}
+  constructor(
+    private expenseService: ExpenseService,
+    private router: Router,
+    private bankCardService: BankCardService
+  ) {}
+
+  ngOnInit(): void {
+    this.accounts = this.bankCardService.getAccountNames();
+    this.positionEditorOptions.items = this.bankCardService.getAccountNames();
+  }
 
   onUserCloseForm() {
     this.router.navigate(['expense']);
