@@ -1,4 +1,7 @@
-<form (submit)="onSubmitForm($event)">
+<form class="bankCard--form" (submit)="onSubmitForm($event)">
+  <div (click)="onUserCloseForm()">
+    <i class="dx-icon-close"></i>
+  </div>
   <dx-form width="50rem" labelLocation="top" [formData]="bankAccountData">
     <dxi-item itemType="group" caption="Track your expanse" [colCount]="1">
       <dxi-item

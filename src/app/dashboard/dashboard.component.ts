@@ -83,13 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onUserNavigate() {
-    this.clickOnNavigation = !this.clickOnNavigation;
-
-    if (this.clickOnNavigation) {
-      this.router.navigate(['dashboard/createCard']);
-    } else {
-      this.router.navigate(['dashboard']);
-    }
+    this.router.navigate(['dashboard/createCard']);
   }
 
   onClickForDelete() {

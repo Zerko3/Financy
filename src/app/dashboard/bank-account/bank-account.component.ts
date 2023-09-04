@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { BankCardService } from 'src/services/bankCard.service';
 
@@ -35,7 +36,15 @@ export class BankAccountComponent {
     searchEnabled: true,
     value: '',
   };
-  constructor(private bankCardService: BankCardService) {}
+
+  constructor(
+    private bankCardService: BankCardService,
+    private router: Router
+  ) {}
+
+  onUserCloseForm() {
+    this.router.navigate(['dashboard']);
+  }
 
   onSubmitForm(e) {
     console.log(e);
