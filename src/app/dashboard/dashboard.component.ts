@@ -9,6 +9,7 @@ import { Saveings } from 'src/interfaces/saveings.interface';
 import { BankCardService } from 'src/services/bankCard.service';
 import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';
+import { LoginService } from 'src/services/login.service';
 import { SaveingsService } from 'src/services/saveings.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   addedSaveings: number = 0;
   clickedOnDeleteButton: boolean = false;
   correctCard: string = '';
+  username: string;
 
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
@@ -42,10 +44,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private saveingService: SaveingsService,
     private investingService: InvestingService,
     private bankCardService: BankCardService,
+    private loginService: LoginService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.username = this.loginService.getUsername();
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();
 

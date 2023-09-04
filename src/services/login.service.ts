@@ -20,5 +20,15 @@ export class LoginService {
       userName: 'Bob Teemo',
     },
   ];
+
+  username: string = '';
   constructor() {}
+
+  storeUsername(username: string) {
+    this.username = username;
+  }
+
+  getUsername() {
+    return this.username;
+  }
 }
