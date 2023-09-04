@@ -192,6 +192,7 @@
         button {
           background-color: var(--main-color);
           color: var(--white-color);
+          transition: all 0.35;
         }
       }
     }
@@ -232,6 +233,8 @@
   }
 }
 
-.selectedRadio {
-  background-color: red;
+.validForm {
+  transition: all 0.35s !important;
+  background-color: var(--white-color) !important;
+  color: var(--gray-color-darker) !important;
 }

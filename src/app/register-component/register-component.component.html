@@ -52,7 +52,7 @@
           <div class="form__upper">
             <h3>Looking for?</h3>
             <div class="radio-btns">
-              <div [ngClass]="clickedOnRadio ? 'selectedRadio' : ''">
+              <div>
                 <label for="Personal">Personal</label>
                 <input
                   type="radio"
@@ -62,7 +62,7 @@
                   ngModel
                 />
               </div>
-              <div [ngClass]="clickedOnRadio ? 'selectedRadio' : ''">
+              <div>
                 <label for="Profesional">Profesional</label>
                 <input
                   type="radio"
@@ -87,6 +87,7 @@
             ngModel
           />
           <button
+            [ngClass]="form.valid ? 'validForm' : ''"
             [disabled]="form.valid ? formStatus : !formStatus"
             type="submit"
           >
