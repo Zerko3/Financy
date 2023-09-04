@@ -44,26 +44,24 @@ export class BankCardService {
     this.bankCardSaveingTypeArray = [];
     let storedMoney: number = 0;
 
+    // When the last card is deleted the function gets passed "null" so it wont activate the storedMoney and overwrite the totalMoneyInSaveingAccounts
     for (const card of bankCards) {
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
         storedMoney += card.bankMoneyStatus;
         console.log(storedMoney);
         this.totalMoneyInSaveingAccounts = storedMoney;
-
-        this.totalMoneyInBankAccount =
-          this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
       }
 
       if (card.bankAccountName === 'Spending') {
         this.bankCardSpendingTypeArray.push(card);
         storedMoney += card.bankMoneyStatus;
         this.totalMoneyInSpendingAccounts = storedMoney;
-
-        this.totalMoneyInBankAccount =
-          this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
       }
     }
+
+    this.totalMoneyInBankAccount =
+      this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
 
     // overwrite the array
     this.bankCardArray = bankCards;
