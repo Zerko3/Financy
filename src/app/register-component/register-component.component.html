@@ -52,7 +52,7 @@
           <div class="form__upper">
             <h3>Looking for?</h3>
             <div class="radio-btns">
-              <div>
+              <div [ngClass]="clickedOnRadio ? 'selectedRadio' : ''">
                 <label for="Personal">Personal</label>
                 <input
                   type="radio"
@@ -62,7 +62,7 @@
                   ngModel
                 />
               </div>
-              <div>
+              <div [ngClass]="clickedOnRadio ? 'selectedRadio' : ''">
                 <label for="Profesional">Profesional</label>
                 <input
                   type="radio"

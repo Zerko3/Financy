@@ -51,7 +51,7 @@
             [disabled]="loginForm.valid ? formStatus : !formStatus"
             type="submit"
           >
-            Enter
+            {{ loginForm.valid ? "Enter" : "Enter your information" }}
           </button>
         </form>
         <a

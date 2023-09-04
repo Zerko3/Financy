@@ -67,50 +67,6 @@
         background-color: var(--main-color-darker);
         width: 70%;
         border-radius: 2rem;
-        // &--carousel {
-        //   padding: 1.2rem 2.4rem;
-
-        //   &--para {
-        //     color: var(--white-color);
-        //     font-size: font-size(font-size-small);
-        //   }
-
-        //   &__user--box {
-        //     display: flex;
-        //     align-items: center;
-        //     justify-content: flex-start;
-        //     gap: 1rem;
-        //     margin-top: 1.2rem;
-
-        //     span {
-        //       font-size: font-size(font-size-small);
-        //       color: var(--white-color);
-        //     }
-
-        //     img {
-        //       border-radius: 50%;
-        //       height: 4rem;
-        //     }
-        //   }
-        // }
-        &__spans--box {
-          position: absolute;
-          bottom: -1.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1rem;
-          width: 100%;
-
-          .one,
-          .two,
-          .three {
-            background-color: var(--white-color);
-            height: 1rem;
-            width: 1rem;
-            border-radius: 50%;
-          }
-        }
       }
     }
 
@@ -198,11 +154,17 @@
               padding: 1.2rem 2.4rem;
               border-radius: 11px;
               width: 100%;
+              transition: all 0.35s;
 
               label {
                 cursor: pointer;
                 font-size: 1.5rem;
                 color: var(--gray-color-darke);
+              }
+
+              &:has(input[type="radio"]:checked) {
+                background-color: var(--main-color) !important;
+                color: var(--white-color);
               }
             }
           }
@@ -268,4 +230,8 @@
     font-size: font-size(font-size-small);
     color: var(--white-color);
   }
+}
+
+.selectedRadio {
+  background-color: red;
 }

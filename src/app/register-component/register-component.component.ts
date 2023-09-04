@@ -16,12 +16,14 @@ export class RegisterComponentComponent implements OnInit {
   @ViewChild('navigationLogin')
   navigationLogin: ElementRef;
   @ViewChild('navigationHome') navigationHome: ElementRef;
+
   formStatus: boolean = false;
   username: string = '';
   accountType: string = '';
   email: string = '';
   userCarouselArray: Carousel[] = [];
   slideshowDelay: number = 2000;
+  clickedOnRadio: boolean = false;
   constructor(
     private router: Router,
     private accountService: AccountService,
