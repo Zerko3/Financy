@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Expense } from 'src/interfaces/expense.interface';
 import { ExpenseService } from 'src/services/expense.service';
 
@@ -49,7 +50,11 @@ export class ExpenseFormComponent {
 
   e: any;
 
-  constructor(private expenseService: ExpenseService) {}
+  constructor(private expenseService: ExpenseService, private router: Router) {}
+
+  onUserCloseForm() {
+    this.router.navigate(['expense']);
+  }
 
   // get data from form and pass to serive
   onSubmitForm(e: any) {

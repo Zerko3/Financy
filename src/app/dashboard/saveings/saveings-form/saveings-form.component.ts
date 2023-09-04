@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Saveings } from 'src/interfaces/saveings.interface';
 import { SaveingsService } from 'src/services/saveings.service';
 
@@ -40,7 +41,14 @@ export class SaveingsFormComponent {
     type: 'normal',
     useSubmitBehavior: true,
   };
-  constructor(private saveingsService: SaveingsService) {}
+  constructor(
+    private saveingsService: SaveingsService,
+    private router: Router
+  ) {}
+
+  onUserCloseForm() {
+    this.router.navigate(['saveings']);
+  }
 
   onSubmitForm(e) {
     console.log(e);

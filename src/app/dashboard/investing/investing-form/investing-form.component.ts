@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Investing } from 'src/interfaces/investing.interface';
 import { InvestingService } from 'src/services/investing.service';
 
@@ -36,11 +37,16 @@ export class InvestingFormComponent {
 
   // TODO:
   // 1. delnice
-  constructor(private investingDataService: InvestingService) {}
+  constructor(
+    private investingDataService: InvestingService,
+    private router: Router
+  ) {}
+
+  onUserCloseForm() {
+    this.router.navigate(['investing']);
+  }
 
   onSubmitForm(e) {
-    console.log(e);
-    console.log(this.investingData);
     let data = this.investingData;
     this.investingDataService.storeInvestingData(data);
   }

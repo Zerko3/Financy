@@ -16,3 +16,11 @@
     justify-content: center;
   }
 }
+
+div i {
+  font-size: font-size(font-size-medium);
+  position: absolute;
+  top: -0.5rem;
+  right: 2rem;
+  cursor: pointer;
+}

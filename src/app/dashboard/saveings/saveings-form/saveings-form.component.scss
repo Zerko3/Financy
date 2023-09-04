@@ -1,0 +1,23 @@
+@use "../../../../style/sass/global-variables" as *;
+
+.saveings--form {
+  padding: 1.2rem 2.4rem;
+  position: absolute;
+  background-color: var(--main-color);
+  background-color: #b3d7ff;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div i {
+  font-size: font-size(font-size-medium);
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  cursor: pointer;
+}

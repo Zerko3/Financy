@@ -18,7 +18,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   expenseServiceSubscribable: Subscription;
   expenses: Expense[] = [];
   columns = ['Date', 'Money', 'Expanses', 'Name', 'Status', 'Account'];
-  formClickStatus: boolean = false;
   subscriptionMoney: number = 0;
   billMoney: number = 0;
   restaurantMoney: number = 0;
@@ -68,12 +67,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   // TODO:
   // 1. Connect form to component
   userFormNavigation() {
-    this.formClickStatus = !this.formClickStatus;
-    if (this.formClickStatus) {
-      this.router.navigate(['expense/expenseForm']);
-    } else {
-      this.router.navigate(['expense']);
-    }
+    this.router.navigate(['expense/expenseForm']);
   }
 
   // TODO:

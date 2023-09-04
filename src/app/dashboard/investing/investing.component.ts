@@ -14,9 +14,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
   energySources = [{ value: 'investedAmount', name: 'investing value' }];
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
-  clickedOnNavigation: boolean = false;
   investingTotalAmount: number = 0;
-
   investingAmount: Stock[] = [];
 
   constructor(
@@ -56,11 +54,6 @@ export class InvestingComponent implements OnInit, OnDestroy {
   }
 
   userFormNavigate() {
-    this.clickedOnNavigation = !this.clickedOnNavigation;
-    if (this.clickedOnNavigation) {
-      this.router.navigate(['investing/investingForm']);
-    } else {
-      this.router.navigate(['investing']);
-    }
+    this.router.navigate(['investing/investingForm']);
   }
 }

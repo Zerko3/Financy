@@ -1,6 +1,9 @@
 <section class="section--expense">
   <div>
     <form (submit)="onSubmitForm($event)">
+      <div (click)="onUserCloseForm()">
+        <i class="dx-icon-close"></i>
+      </div>
       <dx-form width="50rem" labelLocation="top" [formData]="expenseData">
         <dxi-item itemType="group" caption="Track your expanse" [colCount]="2">
           <dxi-item

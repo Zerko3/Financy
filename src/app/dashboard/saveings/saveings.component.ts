@@ -20,7 +20,6 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   columns: string[] = ['Date', 'Money', 'Status', 'Account'];
   saveingSubscribe: Subscription;
   totalMoneySaved: number = 0;
-  clickedOnNavigation: boolean = false;
   totalAccountMoney: number = 0;
   accountBalance: number = 0;
 
@@ -60,12 +59,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   }
 
   userNavigationForm() {
-    this.clickedOnNavigation = !this.clickedOnNavigation;
-    if (this.clickedOnNavigation) {
-      this.router.navigate(['saveings/saveingsForm']);
-    } else {
-      this.router.navigate(['saveings']);
-    }
+    this.router.navigate(['saveings/saveingsForm']);
   }
 
   // TODO
