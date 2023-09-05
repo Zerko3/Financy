@@ -1,4 +1,4 @@
-<form class="investing--form" (submit)="onSubmitForm($event)">
+<form #form="ngForm" class="investing--form" (submit)="onSubmitForm()">
   <div (click)="onUserCloseForm()">
     <i class="dx-icon-close"></i>
   </div>
@@ -24,3 +24,9 @@
     </dxi-item>
   </dx-form>
 </form>
+
+<dx-toast
+  [visible]="isVisibleToast"
+  [type]="type"
+  [message]="message"
+></dx-toast>

@@ -75,7 +75,6 @@ export class ExpenseFormComponent implements OnInit {
     console.log(data);
 
     if (this.form.status === 'VALID') {
-      console.log('yo');
       this.isVisibleToast = true;
       this.message = `The expense: ${data.expenseType} with ${data.money} dolars was added.`;
     }

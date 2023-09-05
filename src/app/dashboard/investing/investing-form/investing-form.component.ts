@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Investing } from 'src/interfaces/investing.interface';
 import { BankCardService } from 'src/services/bankCard.service';
@@ -36,6 +37,11 @@ export class InvestingFormComponent implements OnInit {
     useSubmitBehavior: true,
   };
 
+  @ViewChild('form') form: NgForm;
+  isVisibleToast: boolean = false;
+  type: string = 'success';
+  message: string = '';
+
   // TODO:
   // 1. delnice
   constructor(
@@ -53,8 +59,13 @@ export class InvestingFormComponent implements OnInit {
     this.router.navigate(['investing']);
   }
 
-  onSubmitForm(e) {
+  onSubmitForm() {
     let data = this.investingData;
     this.investingDataService.storeInvestingData(data);
+
+    if (this.form.status === 'VALID') {
+      this.isVisibleToast = true;
+      this.message = `Investment added: ${data.investingName} with ${data.investingAmountOfMoney} dolars.`;
+    }
   }
 }
