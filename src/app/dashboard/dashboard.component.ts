@@ -104,11 +104,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.bankCardSubscribe.unsubscribe();
   }
 
-  // TODO:
   onUserNavigate(e) {
     console.log(e.target.textContent);
     if (e.target.textContent === 'Add cards') {
       this.router.navigate(['dashboard/createCard']);
+    }
+
+    if (e.target.textContent === 'Add subscription') {
+      this.router.navigate(['expense/expenseForm']);
+    }
+
+    if (e.target.textContent === 'Add transaction') {
+      this.router.navigate(['expense/expenseForm']);
     }
   }
 

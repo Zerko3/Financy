@@ -104,7 +104,9 @@
         <p class="circle"></p>
         <h1>Recent Transactions</h1>
       </div>
-      <a class="section--dashboard__content--box__subscriptions--add"
+      <a
+        (click)="onUserNavigate($event)"
+        class="section--dashboard__content--box__subscriptions--add"
         ><i class="dx-icon-add"></i>Add transaction</a
       >
     </div>
