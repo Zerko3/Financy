@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Expense } from 'src/interfaces/expense.interface';
 import { BankCardService } from 'src/services/bankCard.service';
@@ -10,12 +11,10 @@ import { ExpenseService } from 'src/services/expense.service';
   styleUrls: ['./expense-form.component.scss'],
 })
 export class ExpenseFormComponent implements OnInit {
-  // TODO:
-  // 1. Add dynamic accounts
+  @ViewChild('form') form: NgForm;
   accounts: string[] = [];
   status = ['paid', 'pending'];
   expense = ['Subscription', 'Bills', 'Restaurants', 'Random', 'Clothes'];
-
   expenseData: Expense = {
     expenseType: '',
     date: new Date(),
@@ -50,6 +49,9 @@ export class ExpenseFormComponent implements OnInit {
   };
 
   e: any;
+  isVisibleToast: boolean = false;
+  type: string = 'success';
+  message: string = '';
 
   constructor(
     private expenseService: ExpenseService,
@@ -67,9 +69,15 @@ export class ExpenseFormComponent implements OnInit {
   }
 
   // get data from form and pass to serive
-  onSubmitForm(e: any) {
-    e.preventDefault();
+  onSubmitForm() {
     let data = this.expenseData;
     this.expenseService.storeExpenseData(data);
+    console.log(data);
+
+    if (this.form.status === 'VALID') {
+      console.log('yo');
+      this.isVisibleToast = true;
+      this.message = `The expense: ${data.expenseType} with ${data.money} dolars was added.`;
+    }
   }
 }
