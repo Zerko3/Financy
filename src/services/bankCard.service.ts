@@ -17,7 +17,7 @@ export class BankCardService {
   // store bankacc
   storeBankCard(data: BankAccount) {
     this.bankCardArray.push(data);
-    this.cardNames.push(data.bankAccountName);
+    this.cardNames.push(data.bankAccountCustomName);
 
     this.bankCardSubscribe.next(data);
 

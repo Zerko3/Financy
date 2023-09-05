@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
@@ -18,6 +24,8 @@ import { SaveingsService } from 'src/services/saveings.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  @ViewChild('navigation') addCards: ElementRef;
+  @ViewChild('test') test: ElementRef;
   bankCardsArray: BankAccount[] = [];
   expenseData: Expense[] = [];
   savingsData: Saveings[] = [];
@@ -47,6 +55,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private router: Router
   ) {}
+
+  // TODO:
+  // 1. Sync user account data when I spend or save money
+  // 2. How to do this?
+  // 3. When I store the accounts i need to display the name and the ID
+  // 4. So based on ID we wil go "this is the ID and take this money and do something with it at the ID.money and then display it"
+
+  // TODO:
+  // 1. Instead of Spending, Saveing show cutom name
 
   ngOnInit(): void {
     this.username = this.loginService.getUsername();
@@ -87,8 +104,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.bankCardSubscribe.unsubscribe();
   }
 
-  onUserNavigate() {
-    this.router.navigate(['dashboard/createCard']);
+  // TODO:
+  onUserNavigate(e) {
+    console.log(e.target.textContent);
+    if (e.target.textContent === 'Add cards') {
+      this.router.navigate(['dashboard/createCard']);
+    }
   }
 
   onClickForDelete(e: any) {

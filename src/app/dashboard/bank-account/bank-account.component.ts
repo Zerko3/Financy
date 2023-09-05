@@ -16,6 +16,7 @@ export class BankAccountComponent {
     bankAccountValidDate: new Date(),
     bankAccountCard: '',
     bankAccountName: '',
+    bankAccountCustomName: '',
     ID: new Date().valueOf().toLocaleString(),
   };
 

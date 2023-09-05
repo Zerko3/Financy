@@ -16,7 +16,7 @@
         <h1>Card overview</h1>
       </div>
       <a
-        (click)="onUserNavigate()"
+        (click)="onUserNavigate($event)"
         class="section--dashboard__content--box__subscriptions--add"
         ><i class="dx-icon-add"></i>Add cards</a
       >
@@ -75,7 +75,9 @@
         <p class="circle"></p>
         <h1>Subscriptions</h1>
       </div>
-      <a class="section--dashboard__content--box__subscriptions--add"
+      <a
+        (click)="onUserNavigate($event)"
+        class="section--dashboard__content--box__subscriptions--add"
         ><i class="dx-icon-add"></i>Add subscription</a
       >
     </div>
