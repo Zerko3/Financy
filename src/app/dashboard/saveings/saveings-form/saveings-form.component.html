@@ -1,6 +1,6 @@
 <section class="section--saveingsForm">
   <div>
-    <form class="saveings--form" (submit)="onSubmitForm($event)">
+    <form #form="ngForm" class="saveings--form" (submit)="onSubmitForm()">
       <div (click)="onUserCloseForm()">
         <i class="dx-icon-close"></i>
       </div>
@@ -27,3 +27,9 @@
     </form>
   </div>
 </section>
+
+<dx-toast
+  [visible]="isVisibleToast"
+  [type]="type"
+  [message]="message"
+></dx-toast>

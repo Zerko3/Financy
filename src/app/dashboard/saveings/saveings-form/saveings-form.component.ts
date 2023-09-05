@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Saveings } from 'src/interfaces/saveings.interface';
 import { BankCardService } from 'src/services/bankCard.service';
@@ -10,6 +11,10 @@ import { SaveingsService } from 'src/services/saveings.service';
   styleUrls: ['./saveings-form.component.scss'],
 })
 export class SaveingsFormComponent implements OnInit {
+  @ViewChild('form') form: NgForm;
+  isVisibleToast: boolean = false;
+  type: string = 'success';
+  message: string = '';
   saveingsData: Saveings = {
     amountOfMoneySaved: 0,
     dateOfSaveings: new Date(),
@@ -57,11 +62,15 @@ export class SaveingsFormComponent implements OnInit {
     this.router.navigate(['saveings']);
   }
 
-  onSubmitForm(e) {
-    console.log(e);
+  onSubmitForm() {
     console.log(this.saveingsData);
 
     let data = this.saveingsData;
     this.saveingsService.storeSaveingsData(data);
+
+    if (this.form.status === 'VALID') {
+      this.isVisibleToast = true;
+      this.message = `Saving added: ${data.typeOfSaveings} with ${data.amountOfMoneySaved} dolars.`;
+    }
   }
 }
