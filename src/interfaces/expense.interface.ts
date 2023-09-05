@@ -5,4 +5,5 @@ export interface Expense {
   companyName: string;
   billStatus: string;
   account: string;
+  ID: string;
 }

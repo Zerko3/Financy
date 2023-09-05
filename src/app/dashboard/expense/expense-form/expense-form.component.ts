@@ -22,6 +22,7 @@ export class ExpenseFormComponent implements OnInit {
     companyName: '',
     billStatus: '',
     account: '',
+    ID: '',
   };
 
   submitButtonOptions = {
@@ -70,6 +71,7 @@ export class ExpenseFormComponent implements OnInit {
 
   // get data from form and pass to serive
   onSubmitForm() {
+    this.expenseData.ID = this.expenseData.account;
     let data = this.expenseData;
     this.expenseService.storeExpenseData(data);
     console.log(data);

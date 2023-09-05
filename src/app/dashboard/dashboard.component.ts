@@ -25,7 +25,6 @@ import { SaveingsService } from 'src/services/saveings.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('navigation') addCards: ElementRef;
-  @ViewChild('test') test: ElementRef;
   bankCardsArray: BankAccount[] = [];
   expenseData: Expense[] = [];
   savingsData: Saveings[] = [];
@@ -35,6 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   savedMoney: number = 0;
   positiveMoney: number = 0;
   bankCardSubscribe: Subscription;
+  expenseSubscription: Subscription;
   clickOnNavigation: boolean = false;
   deductedMoney: number = 0;
   addedSaveings: number = 0;
@@ -56,13 +56,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  // TODO:
-  // 1. Sync user account data when I spend or save money
-  // 2. How to do this?
-  // 3. When I store the accounts i need to display the name and the ID
-  // 4. So based on ID we wil go "this is the ID and take this money and do something with it at the ID.money and then display it"
-
   ngOnInit(): void {
+    this.expenseService.dataSubject.subscribe((data) => {
+      // get ID
+      for (const card of this.bankCardsArray) {
+        // match ID and if ID === ID than deduct money
+        if (card.bankAccountCustomName === data.ID) {
+          card.bankMoneyStatus = card.bankMoneyStatus - data.money;
+
+          break;
+        }
+      }
+    });
     this.username = this.loginService.getUsername();
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();

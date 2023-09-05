@@ -15,11 +15,13 @@ export class ExpenseService {
   totalExpense: number = 0;
   moneyDeducted: number = 0;
   dataSubject = new Subject<Expense>();
+
   constructor() {}
 
   // store data
   storeExpenseData(data: Expense) {
     this.totalExpense += data.money;
+    this.dataSubject.next(data);
 
     // get money deducted
     this.moneyDeducted += data.money;
@@ -38,9 +40,6 @@ export class ExpenseService {
       this.clothesMoney += data.money;
     }
     this.expanseFromArray.push(data);
-
-    //when data is captured give it to the form
-    this.dataSubject.next(data);
   }
 
   // get subscription data
