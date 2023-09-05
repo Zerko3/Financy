@@ -62,9 +62,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // 3. When I store the accounts i need to display the name and the ID
   // 4. So based on ID we wil go "this is the ID and take this money and do something with it at the ID.money and then display it"
 
-  // TODO:
-  // 1. Instead of Spending, Saveing show cutom name
-
   ngOnInit(): void {
     this.username = this.loginService.getUsername();
     this.bankCardsArray = this.bankCardService.getBankCard();

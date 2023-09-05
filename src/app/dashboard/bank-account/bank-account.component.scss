@@ -21,3 +21,12 @@ div i {
   right: 2rem;
   cursor: pointer;
 }
+
+::ng-deep .dx-toast-content {
+  min-width: 30rem;
+  max-width: 40rem;
+}
+
+::ng-deep .dx-toast-content > * {
+  font-size: 1.5rem;
+}

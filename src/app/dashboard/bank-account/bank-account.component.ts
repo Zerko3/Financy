@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { BankCardService } from 'src/services/bankCard.service';
@@ -9,6 +10,10 @@ import { BankCardService } from 'src/services/bankCard.service';
   styleUrls: ['./bank-account.component.scss'],
 })
 export class BankAccountComponent {
+  @ViewChild('form') form: NgForm;
+  isVisibleToast: boolean = false;
+  type: string = 'success';
+  message: string = '';
   cards = ['Visa', 'Mastercard'];
   cardGoal = ['Saveings', 'Spending'];
   bankAccountData: BankAccount = {
@@ -47,10 +52,16 @@ export class BankAccountComponent {
     this.router.navigate(['dashboard']);
   }
 
-  onSubmitForm(e) {
-    console.log(e);
+  onSubmitForm() {
+    console.log(this.form);
 
     let data = this.bankAccountData;
     this.bankCardService.storeBankCard(data);
+
+    if (this.form.status === 'VALID') {
+      console.log('yo');
+      this.message = `The card named: ${data.bankAccountCustomName} was created.`;
+      this.isVisibleToast = true;
+    }
   }
 }
