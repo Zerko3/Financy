@@ -73,8 +73,8 @@ export class ExpenseFormComponent implements OnInit {
   onSubmitForm() {
     this.expenseData.ID = this.expenseData.account;
     let data = this.expenseData;
-    this.expenseService.storeExpenseData(data);
     console.log(data);
+    this.expenseService.storeExpenseData(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;

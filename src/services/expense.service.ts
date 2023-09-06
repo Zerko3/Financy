@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, share } from 'rxjs';
 
 import { Expense } from 'src/interfaces/expense.interface';
 
@@ -13,18 +13,16 @@ export class ExpenseService {
   randomMoney: number = 0;
   clothesMoney: number = 0;
   totalExpense: number = 0;
-  moneyDeducted: number = 0;
   dataSubject = new Subject<Expense>();
+  moneyChangeSubject = new Subject<Expense>();
 
   constructor() {}
 
   // store data
   storeExpenseData(data: Expense) {
+    console.log('fire');
+    this.dataSubject.next(data); //this gets fired onec so its correct here ->the bug is in dashboard potentialy
     this.totalExpense += data.money;
-    this.dataSubject.next(data);
-
-    // get money deducted
-    this.moneyDeducted += data.money;
 
     if (data.expenseType === 'Subscription') {
       this.subscriptionMoney += data.money;
@@ -50,10 +48,5 @@ export class ExpenseService {
   // get data and display it in overview
   getExpenseData() {
     return this.expanseFromArray.slice();
-  }
-
-  // get money deducted
-  getMoneyDeducted() {
-    return this.moneyDeducted;
   }
 }

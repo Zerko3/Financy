@@ -20,6 +20,7 @@ export class SaveingsFormComponent implements OnInit {
     dateOfSaveings: new Date(),
     typeOfSaveings: '',
     account: '',
+    ID: '',
   };
 
   account: string[] = [];
@@ -63,9 +64,9 @@ export class SaveingsFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-    console.log(this.saveingsData);
-
+    this.saveingsData.ID = this.saveingsData.account;
     let data = this.saveingsData;
+    console.log(data);
     this.saveingsService.storeSaveingsData(data);
 
     if (this.form.status === 'VALID') {

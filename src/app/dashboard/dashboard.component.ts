@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, take } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
@@ -35,9 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   positiveMoney: number = 0;
   bankCardSubscribe: Subscription;
   expenseSubscription: Subscription;
+  saveingSubscription: Subscription;
   clickOnNavigation: boolean = false;
-  deductedMoney: number = 0;
-  addedSaveings: number = 0;
   clickedOnDeleteButton: boolean = false;
   correctCard: string = '';
   username: string;
@@ -57,17 +56,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.expenseService.dataSubject.subscribe((data) => {
-      // get ID
-      for (const card of this.bankCardsArray) {
-        // match ID and if ID === ID than deduct money
-        if (card.bankAccountCustomName === data.ID) {
-          card.bankMoneyStatus = card.bankMoneyStatus - data.money;
+    console.log('The init started - DASHBOARD');
 
-          break;
-        }
-      }
-    });
     this.username = this.loginService.getUsername();
     this.bankCardsArray = this.bankCardService.getBankCard();
     this.expenseData = this.expenseService.getExpenseData();
@@ -77,10 +67,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.savingsData = this.saveingService.getSaveingsData();
 
     this.investingData = this.investingService.getInvestingData();
-
-    // get deducted money to change the account number
-    this.deductedMoney = this.expenseService.getMoneyDeducted();
-    this.addedSaveings = this.saveingService.getMoneySaved();
 
     // overwrite the val in obj
     this.investedMoney += this.investingService.totalInvestment;
@@ -97,12 +83,51 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.bankCardSubscribe = this.bankCardService.bankCardSubscribe.subscribe(
       (data) => {
         this.bankCardsArray.push(data);
+
+        return this.bankCardsArray;
       }
     );
+
+    // TODO:
+    // 1. Bug is present if i have saveing and spending cards present
+
+    this.expenseSubscription = this.expenseService.dataSubject
+      .pipe(take(1))
+      .subscribe((data) => {
+        // get ID
+        let newMoney = 0;
+        for (const card of this.bankCardsArray) {
+          // match ID and if ID === ID than deduct money
+          if (card.bankAccountCustomName === data.ID) {
+            newMoney = card.bankMoneyStatus - data.money;
+            card.bankMoneyStatus = newMoney;
+            break;
+          }
+        }
+        return this.bankCardsArray;
+      });
+
+    // bug not working like it should -> why -> mby because the array has both the spending and saveing cards?
+    this.saveingSubscription = this.saveingService.saveing
+      .pipe(take(1))
+      .subscribe((data) => {
+        // get ID
+        let newMoney = 0;
+        for (const card of this.bankCardsArray) {
+          // match ID and if ID === ID than deduct money
+          if (card.bankAccountCustomName === data.ID) {
+            newMoney = card.bankMoneyStatus + data.amountOfMoneySaved;
+            card.bankMoneyStatus = newMoney;
+            break;
+          }
+        }
+        return this.bankCardsArray;
+      });
   }
 
   ngOnDestroy(): void {
     console.log('UNSUBSCRIBE - DASHBOARD');
+
     this.bankCardSubscribe.unsubscribe();
   }
 

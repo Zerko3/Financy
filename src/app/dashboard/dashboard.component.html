@@ -55,19 +55,10 @@
         </ng-container>
 
         <ng-container *ngIf="card.bankAccountName === 'Spending'">
-          <!-- <span>{{
-            deductedMoney === 0
-              ? card.bankMoneyStatus
-              : card.bankMoneyStatus - deductedMoney
-          }}</span> -->
           <span>{{ card.bankMoneyStatus }}</span>
         </ng-container>
         <ng-container *ngIf="card.bankAccountName === 'Saveings'">
-          <span>{{
-            addedSaveings === 0
-              ? card.bankMoneyStatus
-              : card.bankMoneyStatus + addedSaveings
-          }}</span>
+          <span>{{ card.bankMoneyStatus }}</span>
         </ng-container>
       </div>
     </div>
