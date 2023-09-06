@@ -88,9 +88,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     );
 
-    // TODO:
-    // 1. Bug is present if i have saveing and spending cards present
-
     this.expenseSubscription = this.expenseService.dataSubject
       .pipe(take(1))
       .subscribe((data) => {
@@ -104,10 +101,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             break;
           }
         }
+
+        // IS THIS EVEN A GOOD PRACTICE
+        // call a service method
+        this.bankCardService.overwriteBankCardsArray(this.bankCardsArray);
         return this.bankCardsArray;
       });
 
-    // bug not working like it should -> why -> mby because the array has both the spending and saveing cards?
     this.saveingSubscription = this.saveingService.saveing
       .pipe(take(1))
       .subscribe((data) => {
