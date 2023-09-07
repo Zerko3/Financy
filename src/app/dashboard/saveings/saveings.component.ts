@@ -46,10 +46,10 @@ export class SaveingsComponent implements OnInit, OnDestroy {
 
     this.saveingSubscribe = this.state.saveing.subscribe((data) => {
       console.log(data);
-      this.totalMoneySaved += data.amountOfMoneySaved;
+      this.totalMoneySaved += data.money;
       this.saveingsFormDataArray.push(data);
 
-      this.totalAccountMoney += data.amountOfMoneySaved;
+      this.totalAccountMoney += data.money;
     });
   }
 

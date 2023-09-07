@@ -17,7 +17,7 @@ export class SaveingsFormComponent implements OnInit {
   type: string = 'success';
   message: string = '';
   saveingsData: Saveings = {
-    amountOfMoneySaved: 0,
+    money: 0,
     dateOfSaveings: new Date(),
     typeOfSaveings: '',
     account: '',
@@ -69,14 +69,22 @@ export class SaveingsFormComponent implements OnInit {
     this.saveingsData.ID = this.saveingsData.account;
     let data = this.saveingsData;
     console.log(data);
+
+    // pass data to subject
+    this.state.storeSubscribeForSaveing(data);
+
+    // pass data to service
     this.saveingsService.storeSaveingsData(data);
 
     // pass data to state
     this.state.storeSaveingsDataInState(data);
 
+    // pass data to state for array and DOM
+    this.state.getMoneyChange(data);
+
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
-      this.message = `Saving added: ${data.typeOfSaveings} with ${data.amountOfMoneySaved} dolars.`;
+      this.message = `Saving added: ${data.typeOfSaveings} with ${data.money} dolars.`;
     }
   }
 }

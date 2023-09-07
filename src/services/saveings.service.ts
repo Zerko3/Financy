@@ -10,7 +10,7 @@ export class SaveingsService {
   constructor() {}
 
   storeSaveingsData(data: Saveings) {
-    this.totalMoneySaved += data.amountOfMoneySaved;
+    this.totalMoneySaved += data.money;
   }
 
   getMoneySaved() {

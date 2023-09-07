@@ -65,29 +65,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private expenseService: ExpenseService,
     private saveingService: SaveingsService,
     private investingService: InvestingService,
-    private bankCardService: BankCardService,
     private loginService: LoginService,
     private router: Router
   ) {}
-
-  // TODO:
-  // 1. There is a strange bug that casts multiple subject calls when calling different saveing or spending cards
 
   ngOnInit(): void {
     console.log('The init started - DASHBOARD');
 
     this.username = this.loginService.getUsername();
 
+    // get cards for DOM
     this.bankCardsArray = this.state.getBankCard();
+    // get expense data for DOM
     this.expenseData = this.state.getExpenseData();
 
+    // get subscription data for DOM
     this.subscriptionArray = this.state.getSubscriptionData();
 
+    // get saveings data for DOM
     this.savingsData = this.state.getSaveingsData();
 
+    // get investing data for DOM
     this.investingData = this.state.getInvestingData();
 
-    // overwrite the val in obj
+    // overwrite the val in obj -> used to display the graph on DOM
     this.investedMoney += this.investingService.totalInvestment;
     this.savedMoney += this.saveingService.totalMoneySaved;
     this.positiveMoney = this.investedMoney + this.savedMoney;
@@ -98,60 +99,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // 1 is negative
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
 
+    // get cards as soon as user creates the cards -> pass to array to display on DOM
     this.bankCardSubscribe = this.state.bankCardSubscribe.subscribe((data) => {
       this.bankCardsArray.push(data);
 
-      return this.bankCardsArray;
-    });
-
-    // SOME RANDOM BUGS ARE STILL PRESENT -> FOR EXAMPLE IF YOU CREATE A NEW CARD LATER ON AS A SAVEINGS IT WILL GET MORE MONEY WHEN YOU ADD MONEY TO SAVEINGS (SO IF I HAD 3 TRANSACTIONS PRIOR TO CREATING THE NEW CARD IT WILL GO 3 X WHAT AMOUT I INPUTED -> WHY AND HOW)
-    this.expenseSubscription = this.state.dataSubject
-      .pipe(take(1))
-      .subscribe((data) => {
-        console.log('spending subject started');
-        // get ID
-        let newMoney = 0;
-        for (const card of this.bankCardsArray) {
-          // match ID and if ID === ID than deduct money
-          if (card.bankAccountCustomName === data.ID) {
-            console.log(
-              `The card ID: ${data.ID} is the same as the card name: ${card.bankAccountCustomName}`
-            );
-            newMoney = card.bankMoneyStatus - data.money;
-            card.bankMoneyStatus = newMoney;
-            console.log(card);
-            console.log(this.bankCardsArray);
-
-            break;
-          }
-        }
-        // IS THIS EVEN A GOOD PRACTICE
-        // call a service method
-        this.state.overwriteBankCardsArray(this.bankCardsArray);
-        // SHOULD THIS RETURN BE COMMENTED OUT?
-        return this.bankCardsArray;
-      });
-
-    // SOME RANDOM BUGS ARE STILL PRESENT -> FOR EXAMPLE IF YOU CREATE A NEW CARD LATER ON AS A SAVEINGS IT WILL GET MORE MONEY WHEN YOU ADD MONEY TO SAVEINGS (SO IF I HAD 3 TRANSACTIONS PRIOR TO CREATING THE NEW CARD IT WILL GO 3 X WHAT AMOUT I INPUTED -> WHY AND HOW)
-    this.destroy = this.state.saveing.pipe(take(1)).subscribe((data) => {
-      console.log('saveing subject started');
-      // get ID
-      let newMoney = 0;
-      for (const card of this.bankCardsArray) {
-        // match ID and if ID === ID than deduct money
-        if (card.bankAccountCustomName === data.ID) {
-          console.log(
-            `The card ID: ${data.ID} is the same as the card name: ${card.bankAccountCustomName}`
-          );
-          newMoney = card.bankMoneyStatus + data.amountOfMoneySaved;
-          card.bankMoneyStatus = newMoney;
-          console.log(card);
-          break;
-        }
-      }
-      // IS THIS EVEN A GOOD PRACTICE
-      // call a service method
-      this.state.overwriteBankCardsArray(this.bankCardsArray);
       return this.bankCardsArray;
     });
   }
@@ -159,8 +110,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     console.log('UNSUBSCRIBE - DASHBOARD');
     this.bankCardSubscribe.unsubscribe();
-    // this.destroy.unsubscribe();
-    // this.expenseSubscription.unsubscribe();
   }
 
   onUserNavigate(e) {

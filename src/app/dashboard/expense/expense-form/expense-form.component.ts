@@ -79,10 +79,18 @@ export class ExpenseFormComponent implements OnInit {
     this.expenseData.ID = this.expenseData.account;
     let data = this.expenseData;
     console.log(data);
+
+    // pass data to expense service for expence component
     this.expenseService.storeExpenseData(data);
+
+    // pass data to state method for subject
+    this.state.storeSubscribeForDataSubject(data);
 
     // pass data to state
     this.state.storeExpenseDataInState(data);
+
+    // pass data to state to array for DOM
+    this.state.getMoneyChange(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
