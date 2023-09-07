@@ -18,11 +18,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
   investingTotalAmount: number = 0;
   investingAmount: Stock[] = [];
 
-  constructor(
-    private state: State,
-    private router: Router,
-    private investingDataService: InvestingService
-  ) {}
+  constructor(private state: State, private router: Router) {}
 
   // TODO:
   // 1. Choose if i will have an API here to track investing stocks
@@ -33,27 +29,9 @@ export class InvestingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.investingDataArray = this.state.getInvestingData();
 
-    // this.investingSubscribe =
-    //   this.investingDataService.investingSubscribe.subscribe((data) => {
-    //     console.log(data);
-    //     this.investingDataArray.push(data);
-    //     console.log(this.investingDataArray);
-
-    //     // display on DOM
-    //     const stock = {
-    //       investedDate: data.investingDate,
-    //       investedAmount: data.investingAmountOfMoney,
-    //     };
-
-    //     this.investingAmount.push(stock);
-    //     this.investingTotalAmount += data.investingAmountOfMoney;
-    //   });
-
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
       (data) => {
-        console.log(data);
         this.investingDataArray.push(data);
-        console.log(this.investingDataArray);
 
         // display on DOM
         const stock = {

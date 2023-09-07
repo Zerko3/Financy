@@ -6,20 +6,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  Subject,
-  Subscription,
-  distinctUntilChanged,
-  take,
-  takeUntil,
-} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
 import { Saveings } from 'src/interfaces/saveings.interface';
-import { BankCardService } from 'src/services/bankCard.service';
 import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';
 import { LoginService } from 'src/services/login.service';

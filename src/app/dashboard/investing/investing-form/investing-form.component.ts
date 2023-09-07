@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Investing } from 'src/interfaces/investing.interface';
-import { BankCardService } from 'src/services/bankCard.service';
 import { InvestingService } from 'src/services/investing.service';
 import { State } from 'src/services/state.service';
 
@@ -48,14 +47,10 @@ export class InvestingFormComponent implements OnInit {
   constructor(
     private state: State,
     private investingDataService: InvestingService,
-    private bankCardService: BankCardService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // this.accounts = this.bankCardService.getAccountNames();
-    // this.positionEditorOptions.items = this.bankCardService.getAccountNames();
-
     this.accounts = this.state.getAccountNames();
     this.positionEditorOptions.items = this.state.getAccountNames();
   }

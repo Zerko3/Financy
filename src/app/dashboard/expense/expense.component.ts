@@ -35,19 +35,15 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     // this gets called only when i come back to the component
     this.expenses = this.state.getExpenseData();
 
-    // add the same for money as i did for table
     this.billMoney = this.expenseService.billMoney;
     this.restaurantMoney = this.expenseService.restaurantMoney;
     this.randomMoney = this.expenseService.randomMoney;
     this.clothesMoney = this.expenseService.clothesMoney;
     this.subscriptionMoney = this.expenseService.subscriptionMoney;
 
-    // this gets called all the time since its an observable
     this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
       (data) => {
-        console.log(data);
         this.expenses.push(data);
-        console.log(this.expenses);
 
         if (data.expenseType === 'Subscription') {
           this.subscriptionMoney += data.money;

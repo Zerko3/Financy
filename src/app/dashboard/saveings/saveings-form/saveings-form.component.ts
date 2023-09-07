@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Saveings } from 'src/interfaces/saveings.interface';
-import { BankCardService } from 'src/services/bankCard.service';
 import { SaveingsService } from 'src/services/saveings.service';
 import { State } from 'src/services/state.service';
 
@@ -52,7 +51,6 @@ export class SaveingsFormComponent implements OnInit {
   constructor(
     private state: State,
     private saveingsService: SaveingsService,
-    private bankCardService: BankCardService,
     private router: Router
   ) {}
 
@@ -68,7 +66,6 @@ export class SaveingsFormComponent implements OnInit {
   onSubmitForm() {
     this.saveingsData.ID = this.saveingsData.account;
     let data = this.saveingsData;
-    console.log(data);
 
     // pass data to subject
     this.state.storeSubscribeForSaveing(data);

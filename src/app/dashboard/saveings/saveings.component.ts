@@ -27,8 +27,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   constructor(
     private state: State,
     private router: Router,
-    private saveingsService: SaveingsService,
-    private bankCardService: BankCardService
+    private saveingsService: SaveingsService
   ) {}
 
   ngOnInit(): void {

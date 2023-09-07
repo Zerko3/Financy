@@ -30,26 +30,13 @@ export class State {
   saveingMoneySubject = new Subject<Saveings>();
   constructor() {}
 
-  // SOME THINKING SINCE THIS DOES OBIOUSLY NOT WORK THE WAY I WANT IT
-  // 1. get data from forms in here
-  // 2. loop over the array
-  // 3. mach the ID of the card with ID of the spending
-  // 4. deduct or add money to the card
-  // 5. pass the array to the dashboard to render on DOM
-  // 6. event emmiter?
-
-  // TODO:
-  // Add ID to investing if i want to add it in here
+  // small bug when it comes to displaying money in saveing ->check objects
   getMoneyChange(userInput: Expense | Saveings) {
     console.log(userInput);
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
         if (card.bankAccountCustomName === userInput.ID) {
-          console.log(
-            `The card ID: ${userInput.ID} is the same as the card name: ${card.bankAccountCustomName}`
-          );
-
           newMoney = card.bankMoneyStatus + userInput.money;
           card.bankMoneyStatus = newMoney;
 
@@ -61,10 +48,6 @@ export class State {
 
       if (card.bankAccountName === 'Spending') {
         if (card.bankAccountCustomName === userInput.ID) {
-          console.log(
-            `The card ID: ${userInput.ID} is the same as the card name: ${card.bankAccountCustomName}`
-          );
-
           newMoney = card.bankMoneyStatus - userInput.money;
           card.bankMoneyStatus = newMoney;
 
@@ -80,7 +63,7 @@ export class State {
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
 
     // return the data
-    console.log(this.bankCardsArray);
+
     return this.bankCardsArray;
   }
 
@@ -181,9 +164,6 @@ export class State {
   }
 
   storeExpenseDataInState(data: Expense) {
-    // commented for now
-    // this.dataSubject.next(data); //this gets fired onec so its correct here ->the bug is in dashboard potentialy
-
     //  push to the subscription array for DOM display
     if (data.expenseType === 'Subscription') {
       this.subscriptionArray.push(data);
@@ -192,19 +172,11 @@ export class State {
     this.expenseData.push(data);
   }
 
-  // is this the problem that the type safe is different?
   storeInvestingDataInState(data: Investing) {
     this.investingData.push(data);
-
-    // this.investingSubscribe.next(data);
   }
 
   storeSaveingsDataInState(data: Saveings) {
-    // subscribe to data
-    // console.log('fire saveing');
-    // this.saveing.next(data);
-    // console.log('saveing.next() called with data:', data);
-
     this.savingsData.push(data);
   }
 
