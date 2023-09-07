@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Expense } from 'src/interfaces/expense.interface';
 import { BankCardService } from 'src/services/bankCard.service';
 import { ExpenseService } from 'src/services/expense.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-expense-form',
@@ -55,14 +56,18 @@ export class ExpenseFormComponent implements OnInit {
   message: string = '';
 
   constructor(
+    private state: State,
     private expenseService: ExpenseService,
     private router: Router,
     private bankCardService: BankCardService
   ) {}
 
   ngOnInit(): void {
-    this.accounts = this.bankCardService.getAccountNames();
-    this.positionEditorOptions.items = this.bankCardService.getAccountNames();
+    // this.accounts = this.bankCardService.getAccountNames();
+    // this.positionEditorOptions.items = this.bankCardService.getAccountNames();
+
+    this.accounts = this.state.getAccountNames();
+    this.positionEditorOptions.items = this.accounts;
   }
 
   onUserCloseForm() {
@@ -75,6 +80,9 @@ export class ExpenseFormComponent implements OnInit {
     let data = this.expenseData;
     console.log(data);
     this.expenseService.storeExpenseData(data);
+
+    // pass data to state
+    this.state.storeExpenseDataInState(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Investing } from 'src/interfaces/investing.interface';
 import { BankCardService } from 'src/services/bankCard.service';
 import { InvestingService } from 'src/services/investing.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-investing-form',
@@ -45,14 +46,18 @@ export class InvestingFormComponent implements OnInit {
   // TODO:
   // 1. delnice
   constructor(
+    private state: State,
     private investingDataService: InvestingService,
     private bankCardService: BankCardService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.accounts = this.bankCardService.getAccountNames();
-    this.positionEditorOptions.items = this.bankCardService.getAccountNames();
+    // this.accounts = this.bankCardService.getAccountNames();
+    // this.positionEditorOptions.items = this.bankCardService.getAccountNames();
+
+    this.accounts = this.state.getAccountNames();
+    this.positionEditorOptions.items = this.state.getAccountNames();
   }
 
   onUserCloseForm() {
@@ -62,6 +67,8 @@ export class InvestingFormComponent implements OnInit {
   onSubmitForm() {
     let data = this.investingData;
     this.investingDataService.storeInvestingData(data);
+
+    this.state.storeInvestingDataInState(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;

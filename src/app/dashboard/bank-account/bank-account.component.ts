@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { BankCardService } from 'src/services/bankCard.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-bank-account',
@@ -44,6 +45,7 @@ export class BankAccountComponent {
   };
 
   constructor(
+    private state: State,
     private bankCardService: BankCardService,
     private router: Router
   ) {}
@@ -54,9 +56,12 @@ export class BankAccountComponent {
 
   onSubmitForm() {
     console.log(this.form);
-
     let data = this.bankAccountData;
-    this.bankCardService.storeBankCard(data);
+
+    // pass data to state
+    this.state.storeBankCard(data);
+
+    // this.bankCardService.storeBankCard(data);
 
     if (this.form.status === 'VALID') {
       console.log('yo');

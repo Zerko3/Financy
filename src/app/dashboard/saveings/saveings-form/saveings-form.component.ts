@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Saveings } from 'src/interfaces/saveings.interface';
 import { BankCardService } from 'src/services/bankCard.service';
 import { SaveingsService } from 'src/services/saveings.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-saveings-form',
@@ -49,13 +50,14 @@ export class SaveingsFormComponent implements OnInit {
     useSubmitBehavior: true,
   };
   constructor(
+    private state: State,
     private saveingsService: SaveingsService,
     private bankCardService: BankCardService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.account = this.bankCardService.getAccountNames();
+    this.account = this.state.getAccountNames();
     this.positionEditorOptions.items = this.account;
   }
 
@@ -68,6 +70,9 @@ export class SaveingsFormComponent implements OnInit {
     let data = this.saveingsData;
     console.log(data);
     this.saveingsService.storeSaveingsData(data);
+
+    // pass data to state
+    this.state.storeSaveingsDataInState(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;

@@ -5,8 +5,8 @@ import { Investing } from 'src/interfaces/investing.interface';
 
 @Injectable({ providedIn: 'root' })
 export class InvestingService {
-  investingDataArray: Investing[] = [];
-  investingSubscribe = new Subject<Investing>();
+  // investingDataArray: Investing[] = [];
+  // investingSubscribe = new Subject<Investing>();
   totalInvestment: number = 0;
   constructor() {}
 
@@ -14,13 +14,13 @@ export class InvestingService {
   storeInvestingData(data: Investing) {
     this.totalInvestment = data.investingAmountOfMoney;
 
-    this.investingDataArray.push(data);
+    // this.investingDataArray.push(data);
 
-    this.investingSubscribe.next(data);
+    // this.investingSubscribe.next(data);
   }
 
   // get
-  getInvestingData() {
-    return this.investingDataArray.slice();
-  }
+  // getInvestingData() {
+  //   return this.investingDataArray.slice();
+  // }
 }

@@ -6,7 +6,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, Subscription, take } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subject,
+  Subscription,
+  distinctUntilChanged,
+  take,
+  takeUntil,
+} from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
@@ -17,6 +24,7 @@ import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';
 import { LoginService } from 'src/services/login.service';
 import { SaveingsService } from 'src/services/saveings.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,12 +38,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   savingsData: Saveings[] = [];
   investingData: Investing[] = [];
   subscriptionArray: Expense[] = [];
+
   investedMoney: number = 0;
   savedMoney: number = 0;
   positiveMoney: number = 0;
-  bankCardSubscribe: Subscription;
-  expenseSubscription: Subscription;
-  saveingSubscription: Subscription;
+
   clickOnNavigation: boolean = false;
   clickedOnDeleteButton: boolean = false;
   correctCard: string = '';
@@ -46,7 +53,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     { typeOfExpense: 'negative', val: 0 },
   ];
 
+  // testing
+
+  private destroy: Subscription;
+  bankCardSubscribe: Subscription;
+  expenseSubscription: Subscription;
+  saveingSubscription: Subscription;
+
   constructor(
+    private state: State,
     private expenseService: ExpenseService,
     private saveingService: SaveingsService,
     private investingService: InvestingService,
@@ -55,18 +70,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  // TODO:
+  // 1. There is a strange bug that casts multiple subject calls when calling different saveing or spending cards
+
   ngOnInit(): void {
     console.log('The init started - DASHBOARD');
 
     this.username = this.loginService.getUsername();
-    this.bankCardsArray = this.bankCardService.getBankCard();
-    this.expenseData = this.expenseService.getExpenseData();
 
-    this.subscriptionArray = this.expenseService.getSubscriptionData();
+    this.bankCardsArray = this.state.getBankCard();
+    this.expenseData = this.state.getExpenseData();
 
-    this.savingsData = this.saveingService.getSaveingsData();
+    this.subscriptionArray = this.state.getSubscriptionData();
 
-    this.investingData = this.investingService.getInvestingData();
+    this.savingsData = this.state.getSaveingsData();
+
+    this.investingData = this.state.getInvestingData();
 
     // overwrite the val in obj
     this.investedMoney += this.investingService.totalInvestment;
@@ -79,56 +98,69 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // 1 is negative
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
 
-    // create card
-    this.bankCardSubscribe = this.bankCardService.bankCardSubscribe.subscribe(
-      (data) => {
-        this.bankCardsArray.push(data);
+    this.bankCardSubscribe = this.state.bankCardSubscribe.subscribe((data) => {
+      this.bankCardsArray.push(data);
 
-        return this.bankCardsArray;
-      }
-    );
+      return this.bankCardsArray;
+    });
 
-    this.expenseSubscription = this.expenseService.dataSubject
+    // SOME RANDOM BUGS ARE STILL PRESENT -> FOR EXAMPLE IF YOU CREATE A NEW CARD LATER ON AS A SAVEINGS IT WILL GET MORE MONEY WHEN YOU ADD MONEY TO SAVEINGS (SO IF I HAD 3 TRANSACTIONS PRIOR TO CREATING THE NEW CARD IT WILL GO 3 X WHAT AMOUT I INPUTED -> WHY AND HOW)
+    this.expenseSubscription = this.state.dataSubject
       .pipe(take(1))
       .subscribe((data) => {
+        console.log('spending subject started');
         // get ID
         let newMoney = 0;
         for (const card of this.bankCardsArray) {
           // match ID and if ID === ID than deduct money
           if (card.bankAccountCustomName === data.ID) {
+            console.log(
+              `The card ID: ${data.ID} is the same as the card name: ${card.bankAccountCustomName}`
+            );
             newMoney = card.bankMoneyStatus - data.money;
             card.bankMoneyStatus = newMoney;
+            console.log(card);
+            console.log(this.bankCardsArray);
+
             break;
           }
         }
-
         // IS THIS EVEN A GOOD PRACTICE
         // call a service method
-        this.bankCardService.overwriteBankCardsArray(this.bankCardsArray);
+        this.state.overwriteBankCardsArray(this.bankCardsArray);
+        // SHOULD THIS RETURN BE COMMENTED OUT?
         return this.bankCardsArray;
       });
 
-    this.saveingSubscription = this.saveingService.saveing
-      .pipe(take(1))
-      .subscribe((data) => {
-        // get ID
-        let newMoney = 0;
-        for (const card of this.bankCardsArray) {
-          // match ID and if ID === ID than deduct money
-          if (card.bankAccountCustomName === data.ID) {
-            newMoney = card.bankMoneyStatus + data.amountOfMoneySaved;
-            card.bankMoneyStatus = newMoney;
-            break;
-          }
+    // SOME RANDOM BUGS ARE STILL PRESENT -> FOR EXAMPLE IF YOU CREATE A NEW CARD LATER ON AS A SAVEINGS IT WILL GET MORE MONEY WHEN YOU ADD MONEY TO SAVEINGS (SO IF I HAD 3 TRANSACTIONS PRIOR TO CREATING THE NEW CARD IT WILL GO 3 X WHAT AMOUT I INPUTED -> WHY AND HOW)
+    this.destroy = this.state.saveing.pipe(take(1)).subscribe((data) => {
+      console.log('saveing subject started');
+      // get ID
+      let newMoney = 0;
+      for (const card of this.bankCardsArray) {
+        // match ID and if ID === ID than deduct money
+        if (card.bankAccountCustomName === data.ID) {
+          console.log(
+            `The card ID: ${data.ID} is the same as the card name: ${card.bankAccountCustomName}`
+          );
+          newMoney = card.bankMoneyStatus + data.amountOfMoneySaved;
+          card.bankMoneyStatus = newMoney;
+          console.log(card);
+          break;
         }
-        return this.bankCardsArray;
-      });
+      }
+      // IS THIS EVEN A GOOD PRACTICE
+      // call a service method
+      this.state.overwriteBankCardsArray(this.bankCardsArray);
+      return this.bankCardsArray;
+    });
   }
 
   ngOnDestroy(): void {
     console.log('UNSUBSCRIBE - DASHBOARD');
-
     this.bankCardSubscribe.unsubscribe();
+    // this.destroy.unsubscribe();
+    // this.expenseSubscription.unsubscribe();
   }
 
   onUserNavigate(e) {
@@ -166,7 +198,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.bankCardService.overwriteBankCardsArray(this.bankCardsArray);
+    this.state.overwriteBankCardsArray(this.bankCardsArray);
     return this.bankCardsArray;
   }
 }

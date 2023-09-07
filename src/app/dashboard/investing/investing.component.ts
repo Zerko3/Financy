@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Investing } from 'src/interfaces/investing.interface';
 import { Stock } from 'src/interfaces/stock.interface';
 import { InvestingService } from 'src/services/investing.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-investing',
@@ -18,6 +19,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
   investingAmount: Stock[] = [];
 
   constructor(
+    private state: State,
     private router: Router,
     private investingDataService: InvestingService
   ) {}
@@ -29,10 +31,26 @@ export class InvestingComponent implements OnInit, OnDestroy {
   // 4. Button to swich views between invested amount and the current state of the money
 
   ngOnInit(): void {
-    this.investingDataArray = this.investingDataService.getInvestingData();
+    this.investingDataArray = this.state.getInvestingData();
 
-    this.investingSubscribe =
-      this.investingDataService.investingSubscribe.subscribe((data) => {
+    // this.investingSubscribe =
+    //   this.investingDataService.investingSubscribe.subscribe((data) => {
+    //     console.log(data);
+    //     this.investingDataArray.push(data);
+    //     console.log(this.investingDataArray);
+
+    //     // display on DOM
+    //     const stock = {
+    //       investedDate: data.investingDate,
+    //       investedAmount: data.investingAmountOfMoney,
+    //     };
+
+    //     this.investingAmount.push(stock);
+    //     this.investingTotalAmount += data.investingAmountOfMoney;
+    //   });
+
+    this.investingSubscribe = this.state.investingSubscribe.subscribe(
+      (data) => {
         console.log(data);
         this.investingDataArray.push(data);
         console.log(this.investingDataArray);
@@ -45,7 +63,8 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
         this.investingAmount.push(stock);
         this.investingTotalAmount += data.investingAmountOfMoney;
-      });
+      }
+    );
   }
 
   ngOnDestroy(): void {

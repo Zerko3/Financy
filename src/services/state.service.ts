@@ -1,0 +1,178 @@
+import { Injectable } from '@angular/core';
+import { BankAccount } from 'src/interfaces/bankAccount.interface';
+import { Expense } from 'src/interfaces/expense.interface';
+import { Investing } from 'src/interfaces/investing.interface';
+import { Saveings } from 'src/interfaces/saveings.interface';
+import { Subject } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class State {
+  // arrays
+  bankCardsArray: BankAccount[] = [];
+  expenseData: Expense[] = [];
+  savingsData: Saveings[] = [];
+  investingData: Investing[] = [];
+  subscriptionArray: Expense[] = [];
+  cardNames: string[] = [];
+  bankCardSaveingTypeArray: BankAccount[] = [];
+  bankCardSpendingTypeArray: BankAccount[] = [];
+
+  // money numbers
+  totalMoneyInBankAccount: number = 0;
+  totalMoneyInSpendingAccounts: number = 0;
+  totalMoneyInSaveingAccounts: number = 0;
+
+  // Subjects
+  bankCardSubscribe = new Subject<BankAccount>();
+  dataSubject = new Subject<Expense>();
+  investingSubscribe = new Subject<Investing>();
+  saveing = new Subject<Saveings>();
+  constructor() {}
+
+  // Store Data
+
+  // TRY TO REFACTOR THIS SO THAT I WILL RETURN THE ARRAYS
+  storeBankCard(data: BankAccount) {
+    this.bankCardSubscribe.next(data);
+
+    this.bankCardsArray.push(data);
+    this.cardNames.push(data.bankAccountCustomName);
+
+    // this.bankCardSubscribe.next(data);
+
+    // Store valid card based on the type into its array
+    if (data.bankAccountName === 'Saveings') {
+      this.bankCardSaveingTypeArray.push(data);
+
+      // calc for saveings account
+      this.totalMoneyInSaveingAccounts += data.bankMoneyStatus;
+    }
+
+    if (data.bankAccountName === 'Spending') {
+      this.bankCardSpendingTypeArray.push(data);
+
+      // calc for spending account number
+      this.totalMoneyInSpendingAccounts += data.bankMoneyStatus;
+    }
+
+    // calc for total balance
+    this.totalMoneyInBankAccount =
+      this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
+
+    // test return
+    return this.bankCardsArray;
+  }
+
+  overwriteBankCardsArray(bankCards: BankAccount[]) {
+    if (bankCards.length === 0) {
+      this.totalMoneyInSaveingAccounts = 0;
+      this.totalMoneyInSpendingAccounts = 0;
+      this.totalMoneyInBankAccount = 0;
+    }
+
+    // 1. loop over array to see what is saveings card and spending
+    this.bankCardSpendingTypeArray = [];
+    this.bankCardSaveingTypeArray = [];
+    let savedMoney: number = 0;
+    let spendingMoney: number = 0;
+
+    // When the last card is deleted the function gets passed "null" so it wont activate the storedMoney and overwrite the totalMoneyInSaveingAccounts
+    for (const card of bankCards) {
+      if (card.bankAccountName === 'Saveings') {
+        this.bankCardSaveingTypeArray.push(card);
+
+        savedMoney += card.bankMoneyStatus;
+
+        this.totalMoneyInSaveingAccounts = savedMoney;
+      }
+
+      if (card.bankAccountName === 'Spending') {
+        this.bankCardSpendingTypeArray.push(card);
+
+        spendingMoney += card.bankMoneyStatus;
+
+        this.totalMoneyInSpendingAccounts = spendingMoney;
+      }
+
+      if (this.bankCardSaveingTypeArray.length === 0) {
+        this.totalMoneyInSaveingAccounts = 0;
+      }
+
+      if (this.bankCardSpendingTypeArray.length === 0) {
+        this.totalMoneyInSpendingAccounts = 0;
+      }
+    }
+
+    this.totalMoneyInBankAccount =
+      this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
+
+    // overwrite the array
+    this.bankCardsArray = bankCards;
+    return this.bankCardsArray;
+  }
+
+  storeExpenseDataInState(data: Expense) {
+    console.log('fire');
+    this.dataSubject.next(data); //this gets fired onec so its correct here ->the bug is in dashboard potentialy
+
+    //  push to the subscription array for DOM display
+    if (data.expenseType === 'Subscription') {
+      this.subscriptionArray.push(data);
+    }
+
+    this.expenseData.push(data);
+  }
+
+  storeInvestingDataInState(data: Investing) {
+    this.investingData.push(data);
+
+    this.investingSubscribe.next(data);
+  }
+
+  storeSaveingsDataInState(data: Saveings) {
+    // subscribe to data
+    console.log('fire saveing');
+    this.saveing.next(data);
+
+    this.savingsData.push(data);
+  }
+
+  // Get Data
+
+  // get investing data
+  getInvestingData() {
+    return this.investingData.slice();
+  }
+
+  // get expense data
+  getExpenseData() {
+    return this.expenseData.slice();
+  }
+
+  // get subscription data
+  getSubscriptionData() {
+    return this.subscriptionArray.slice();
+  }
+
+  // get bankacc cards
+  getBankCard() {
+    return this.bankCardsArray.slice();
+  }
+
+  getSaveingsCards() {
+    return this.bankCardSaveingTypeArray.slice();
+  }
+
+  // get saveings data
+  getSaveingsData() {
+    return this.savingsData.slice();
+  }
+
+  getSpendingCards() {
+    return this.bankCardSpendingTypeArray.slice();
+  }
+
+  getAccountNames() {
+    return this.cardNames.slice();
+  }
+}

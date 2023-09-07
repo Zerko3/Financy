@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Expense } from 'src/interfaces/expense.interface';
 import { ExpenseService } from 'src/services/expense.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-expense',
@@ -24,11 +25,15 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   randomMoney: number = 0;
   clothesMoney: number = 0;
 
-  constructor(private router: Router, private expenseService: ExpenseService) {}
+  constructor(
+    private state: State,
+    private router: Router,
+    private expenseService: ExpenseService
+  ) {}
 
   ngOnInit(): void {
     // this gets called only when i come back to the component
-    this.expenses = this.expenseService.getExpenseData();
+    this.expenses = this.state.getExpenseData();
 
     // add the same for money as i did for table
     this.billMoney = this.expenseService.billMoney;
@@ -38,7 +43,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.subscriptionMoney = this.expenseService.subscriptionMoney;
 
     // this gets called all the time since its an observable
-    this.expenseServiceSubscribable = this.expenseService.dataSubject.subscribe(
+    this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
       (data) => {
         console.log(data);
         this.expenses.push(data);
@@ -64,8 +69,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.expenseServiceSubscribable.unsubscribe();
   }
 
-  // TODO:
-  // 1. Connect form to component
   userFormNavigation() {
     this.router.navigate(['expense/expenseForm']);
   }

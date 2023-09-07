@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Saveings } from 'src/interfaces/saveings.interface';
 import { BankCardService } from 'src/services/bankCard.service';
 import { SaveingsService } from 'src/services/saveings.service';
+import { State } from 'src/services/state.service';
 
 @Component({
   selector: 'app-saveings',
@@ -24,27 +25,26 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   accountBalance: number = 0;
 
   constructor(
+    private state: State,
     private router: Router,
     private saveingsService: SaveingsService,
     private bankCardService: BankCardService
   ) {}
 
   ngOnInit(): void {
-    this.saveingsFormDataArray = this.saveingsService.getSaveingsData();
+    this.saveingsFormDataArray = this.state.getSaveingsData();
 
     this.totalAccountMoney =
-      this.bankCardService.totalMoneyInBankAccount +
-      this.saveingsService.totalMoneySaved;
+      this.state.totalMoneyInBankAccount + this.saveingsService.totalMoneySaved;
 
     //  needs to be overwritten when user spend money
-    this.accountBalance = this.bankCardService.totalMoneyInSpendingAccounts;
-    // call a method and update the number
+    this.accountBalance = this.state.totalMoneyInSpendingAccounts;
 
     this.totalMoneySaved =
       this.saveingsService.totalMoneySaved +
-      this.bankCardService.totalMoneyInSaveingAccounts;
+      this.state.totalMoneyInSaveingAccounts;
 
-    this.saveingSubscribe = this.saveingsService.saveing.subscribe((data) => {
+    this.saveingSubscribe = this.state.saveing.subscribe((data) => {
       console.log(data);
       this.totalMoneySaved += data.amountOfMoneySaved;
       this.saveingsFormDataArray.push(data);
