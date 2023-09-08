@@ -9,98 +9,44 @@
             alt="Opened card img."
           />
         </div>
-        <!-- 1 -->
-        <div class="section--aboutus__content--box__para--box">
-          <div class="section--aboutus__content--box__para--box__heading--box">
-            <span
-              class="section--aboutus__content--box__para--box__heading--box--circle"
-            ></span>
-            <h2
-              class="section--aboutus__content--box__para--box__heading--box--heading"
-            >
-              Secure transactions
-            </h2>
-          </div>
-          <div class="section--aboutus__content--box__para--box__text--box">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              nesciunt totam cum ratione provident magnam voluptatem, cupiditate
-              eveniet? Tempore dicta fugiat eius, nostrum sapiente provident
-              obcaecati eum numquam vel totam.
-            </p>
-          </div>
-        </div>
 
-        <!-- 2 -->
-        <div class="section--aboutus__content--box__para--box--two">
-          <div class="section--aboutus__content--box__para--box__heading--box">
-            <span
-              class="section--aboutus__content--box__para--box__heading--box--circle"
-            ></span>
-            <h2
-              class="section--aboutus__content--box__para--box__heading--box--heading"
-            >
-              User's increase saveings by 5%
-            </h2>
-          </div>
-          <div class="section--aboutus__content--box__para--box__text--box">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              nesciunt totam cum ratione provident magnam voluptatem, cupiditate
-              eveniet? Tempore dicta fugiat eius, nostrum sapiente provident
-              obcaecati eum numquam vel totam.
-            </p>
-          </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="section--aboutus__content--box__para--box--three">
+        <div
+          *ngFor="let data of aboutUsData; let i = index"
+          [class]="'section--aboutus__content--box__para--box--' + (i + 1)"
+        >
           <div
-            class="section--aboutus__content--box__para--box--three__heading--box"
+            [class]="
+              'section--aboutus__content--box__para--box--' +
+              (i + 1) +
+              '__heading--box'
+            "
           >
             <span
-              class="section--aboutus__content--box__para--box--three__heading--box--circle"
+              [class]="
+                'section--aboutus__content--box__para--box--' +
+                (i + 1) +
+                '__heading--box--circle'
+              "
             ></span>
             <h2
-              class="section--aboutus__content--box__para--box--three__heading--box--heading"
+              [class]="
+                'section--aboutus__content--box__para--box--' +
+                (i + 1) +
+                '__heading--box--heading'
+              "
             >
-              Track your finances
+              {{ data.title }}
             </h2>
           </div>
           <div
-            class="section--aboutus__content--box__para--box--three__text--box"
+            [class]="
+              'section--aboutus__content--box__para--box--' +
+              (i + 1) +
+              '__text--box'
+            "
           >
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              nesciunt totam cum ratione provident magnam voluptatem, cupiditate
-              eveniet? Tempore dicta fugiat eius, nostrum sapiente provident
-              obcaecati eum numquam vel totam.
-            </p>
-          </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="section--aboutus__content--box__para--box--four">
-          <div
-            class="section--aboutus__content--box__para--box--four__heading--box"
-          >
-            <span
-              class="section--aboutus__content--box__para--box--four__heading--box--circle"
-            ></span>
-            <h2
-              class="section--aboutus__content--box__para--box--four__heading--box--heading"
-            >
-              Invest on the go
-            </h2>
-          </div>
-          <div
-            class="section--aboutus__content--box__para--box--four__text--box"
-          >
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              nesciunt totam cum ratione provident magnam voluptatem, cupiditate
-              eveniet? Tempore dicta fugiat eius, nostrum sapiente provident
-              obcaecati eum numquam vel totam.
+              {{ data.description }}
             </p>
           </div>
         </div>

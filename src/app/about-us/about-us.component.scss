@@ -53,7 +53,7 @@
       }
     }
 
-    &__para--box {
+    &__para--box--1 {
       position: absolute;
       top: 30%;
       right: -14%;
@@ -86,15 +86,40 @@
       }
     }
 
-    &__para--box--two {
+    &__para--box--2 {
       position: absolute;
       bottom: 30%;
       right: -17%;
       width: 40%;
       animation: text_animation 2.5s ease-in-out;
+
+      &__heading--box {
+        position: relative;
+        &--circle {
+          content: "";
+          position: absolute;
+          top: 10%;
+          left: -15%;
+          height: 5rem;
+          width: 5rem;
+          border-radius: 50%;
+          border: 0.4rem dotted var(--main-color);
+          animation: small_circle_animation 1s ease-in-out;
+        }
+        &--heading {
+          font-size: font-size(font-size-medium);
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+        }
+      }
+
+      &__text--box {
+        font-size: font-size(font-size-regular);
+        font-weight: font-weight(font-weight-light);
+      }
     }
 
-    &__para--box--three {
+    &__para--box--3 {
       position: absolute;
       bottom: 30%;
       left: -17%;
@@ -126,7 +151,7 @@
         font-weight: font-weight(font-weight-light);
       }
     }
-    &__para--box--four {
+    &__para--box--4 {
       position: absolute;
       top: 30%;
       left: -14%;
