@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Carousel } from 'src/interfaces/carousel.interface';
 
@@ -22,7 +23,13 @@ export class LoginService {
   ];
 
   username: string = '';
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  // TODO:
+  // get user data
+  getUserDataFromFirebase() {
+    this.http.get('');
+  }
 
   storeUsername(username: string) {
     this.username = username;
