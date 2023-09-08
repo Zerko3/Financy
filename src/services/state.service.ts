@@ -28,11 +28,69 @@ export class State {
   investingSubscribe = new Subject<Investing>();
   saveing = new Subject<Saveings>();
   saveingMoneySubject = new Subject<Saveings>();
+
+  // boolean values
+  toastSignal: boolean = false; //should this be a subject
+
   constructor() {}
 
-  // small bug when it comes to displaying money in saveing ->check objects
+  checkMoneyStatus(userInput: Expense | Saveings) {
+    let newMoney = 0;
+    for (const card of this.bankCardsArray) {
+      if (card.bankAccountName === 'Spending') {
+        if (card.bankMoneyStatus <= 0) {
+          console.log('The money in the card is 0 or less');
+
+          this.toastSignal = true;
+        } else {
+          this.toastSignal = false;
+        }
+
+        // calculate before doeing GUI stuff -> logic for less or 0
+        if (card.bankAccountCustomName === userInput.ID) {
+          newMoney = card.bankMoneyStatus - userInput.money;
+
+          if (newMoney < 0) {
+            this.toastSignal = true;
+          } else {
+            this.toastSignal = false;
+          }
+
+          break;
+        }
+      }
+
+      if (card.bankAccountName === 'Saveings') {
+        if (card.bankMoneyStatus < 0) {
+          console.log('The money in the card is less than 0');
+
+          this.toastSignal = true;
+        } else {
+          this.toastSignal = false;
+        }
+
+        // calculate before doeing GUI stuff -> logic for less or 0
+        if (card.bankAccountCustomName === userInput.ID) {
+          newMoney = card.bankMoneyStatus + userInput.money;
+
+          if (newMoney < 0) {
+            this.toastSignal = true;
+          } else {
+            this.toastSignal = false;
+          }
+
+          break;
+        }
+      }
+    }
+
+    return this.toastSignal;
+  }
+
+  // TODO:
+  // 1. Check if money is -1 and if so then aither delete or say "cannot spend money on this card".
+  // 2. Saveing card can have 0 money to start with
   getMoneyChange(userInput: Expense | Saveings) {
-    console.log(userInput);
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
