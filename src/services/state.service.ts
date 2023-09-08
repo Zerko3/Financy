@@ -28,9 +28,10 @@ export class State {
   investingSubscribe = new Subject<Investing>();
   saveing = new Subject<Saveings>();
   saveingMoneySubject = new Subject<Saveings>();
+  cardDeletion = new Subject<boolean>();
 
   // boolean values
-  toastSignal: boolean = false; //should this be a subject
+  toastSignal: boolean = false;
 
   constructor() {}
 
@@ -52,6 +53,9 @@ export class State {
 
           if (newMoney < 0) {
             this.toastSignal = true;
+          } else if (newMoney === 0) {
+            this.cardDeletion.next(true);
+            this.toastSignal = false;
           } else {
             this.toastSignal = false;
           }

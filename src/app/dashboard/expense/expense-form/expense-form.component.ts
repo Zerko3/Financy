@@ -81,20 +81,6 @@ export class ExpenseFormComponent implements OnInit {
     this.moneyStatusOnCard = this.state.checkMoneyStatus(data);
     console.log(this.moneyStatusOnCard);
 
-    // AT THE BEGINNING I NEED TO PASS THE MONEY TO GETMONEYCHANGE TO SEE IF THE MONEY IS 0 OR LESS THAN 0 ON CARD
-
-    // If money is less than 0 or 0 than show toast to signal we cant do this operation
-
-    // else i can pass the data to the rest of the methods
-
-    // should this be a sperate method
-
-    // the method loops over and cheks money status and returns a boolean
-
-    // inject this boolean here and if true allow other methods to be activated if not stop the process
-
-    // pass data to expense service for expence component -> here we update the expense DOM numbers
-
     if (!this.moneyStatusOnCard) {
       console.log('started');
       this.expenseService.storeExpenseData(data);
