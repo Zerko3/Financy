@@ -50,8 +50,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   expenseSubscription: Subscription;
   saveingSubscription: Subscription;
 
-  markForDeletion: boolean = false;
-
   constructor(
     private state: State,
     private expenseService: ExpenseService,
@@ -63,12 +61,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('The init started - DASHBOARD');
-
-    // card deletion signal from state
-    this.state.cardDeletion.subscribe((data) => {
-      console.log(data);
-      this.markForDeletion = true;
-    });
 
     this.username = this.loginService.getUsername();
 

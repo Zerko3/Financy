@@ -30,6 +30,7 @@ import {
   DxGalleryModule,
   DxPopupModule,
   DxToastModule,
+  DxPopoverModule,
 } from 'devextreme-angular';
 import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
 import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
@@ -71,6 +72,7 @@ import { BankAccountComponent } from './dashboard/bank-account/bank-account.comp
     DxGalleryModule,
     DxPopupModule,
     DxToastModule,
+    DxPopoverModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
