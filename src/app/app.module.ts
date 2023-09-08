@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { HeroComponentComponent } from './hero-component/hero-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -58,6 +59,7 @@ import { BankAccountComponent } from './dashboard/bank-account/bank-account.comp
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     DxChartModule,
     DxSelectBoxModule,
     DxPieChartModule,

@@ -21,6 +21,7 @@ export class RegisterComponentComponent implements OnInit {
   username: string = '';
   accountType: string = '';
   email: string = '';
+  password: string = '';
   userCarouselArray: Carousel[] = [];
   slideshowDelay: number = 2000;
   clickedOnRadio: boolean = false;
@@ -53,13 +54,21 @@ export class RegisterComponentComponent implements OnInit {
     this.username = e.value.username;
     this.email = e.value.email;
     this.accountType = e.value.accType;
+    this.password = e.value.password;
 
     // create new Account
-    const newUser = new Account(this.username, this.email, this.accountType);
+    const newUser = new Account(
+      this.username,
+      this.email,
+      this.accountType,
+      this.password
+    );
 
-    this.accountService.getNewAccounts(newUser);
+    console.log(newUser);
+
+    this.accountService.storeUserData(newUser);
 
     // only temporary -> after building I will do auth and then go to dashboard
-    this.router.navigate(['/dashboard']);
+    // this.router.navigate(['/dashboard']);
   }
 }
