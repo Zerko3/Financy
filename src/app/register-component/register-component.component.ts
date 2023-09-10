@@ -66,7 +66,14 @@ export class RegisterComponentComponent implements OnInit {
 
     console.log(newUser);
 
-    this.accountService.storeUserData(newUser);
+    this.accountService.singupUser(newUser).subscribe(
+      (responseData) => {
+        console.log(responseData);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     // only temporary -> after building I will do auth and then go to dashboard
     // this.router.navigate(['/dashboard']);

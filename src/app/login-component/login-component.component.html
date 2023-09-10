@@ -36,9 +36,13 @@
         </div>
       </div>
       <div class="section--login__content--box__text--box">
+        <div class="section--login__content--box__text--box__navigation--box">
+          <p>Dont have an account?</p>
+          <a (click)="userHeroNavigation($event)">Register</a>
+        </div>
         <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
-          <label for="username">Username:</label>
-          <input type="text" name="username" id="username" required ngModel />
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" required ngModel />
           <label for="password">Password</label>
           <input
             type="password"
@@ -57,7 +61,7 @@
         </form>
         <a
           #navigationHome
-          (click)="userHeroNavigation()"
+          (click)="userHeroNavigation($event)"
           class="section--login__content--box__text--box--link"
           >Back</a
         >
