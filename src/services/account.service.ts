@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Login } from 'src/interfaces/login.interface';
 import { Account } from 'src/models/account.model';
 
 interface AuthResponseData {
@@ -38,7 +39,7 @@ export class AccountService {
   // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
 
   // login user
-  loginUser(newUser) {
+  loginUser(newUser: Login) {
     return this.http.post<AuthResponseData>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`,
       {

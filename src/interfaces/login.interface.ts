@@ -4,4 +4,5 @@ export interface Login {
   // 2. Should i use the password here or not? GOOGLE
   email: string;
   password: string;
+  username?: string;
 }

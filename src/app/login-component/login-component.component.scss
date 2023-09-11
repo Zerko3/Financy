@@ -175,3 +175,9 @@
   background-color: var(--white-color) !important;
   color: var(--gray-color-darker) !important;
 }
+
+::ng-deep .dx-toast-content {
+  min-width: 30rem;
+  max-width: 40rem;
+  font-size: font-size(font-size-regular);
+}
