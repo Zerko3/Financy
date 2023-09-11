@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
-import { State } from './state.service';
 import { Subject, catchError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
