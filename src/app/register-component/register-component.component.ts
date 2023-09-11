@@ -25,6 +25,10 @@ export class RegisterComponentComponent implements OnInit {
   userCarouselArray: Carousel[] = [];
   slideshowDelay: number = 2000;
   clickedOnRadio: boolean = false;
+  isToastVisible: boolean = false;
+  type: string = '';
+  message: string = '';
+  errorStatus: boolean = false;
   constructor(
     private router: Router,
     private accountService: AccountService,
@@ -69,13 +73,39 @@ export class RegisterComponentComponent implements OnInit {
     this.accountService.singupUser(newUser).subscribe(
       (responseData) => {
         console.log(responseData);
+
+        if (e.form.status === 'VALID') {
+          // toast
+          this.isToastVisible = true;
+          this.type = 'success';
+          this.message = `You have registered. Welcome!`;
+
+          // reset the form
+          e.resetForm();
+
+          // navigate to dashboard
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1500);
+        }
       },
       (error) => {
         console.log(error);
+        this.isToastVisible = true;
+        this.type = error ? 'error' : 'success';
+        this.message = `Invalid user credentials. Please try again.`;
+        this.errorStatus = true;
+
+        // handle error messaging and redirection in here
+        if (this.errorStatus) {
+          console.log('ERROR WAS TRUE');
+
+          // reset form and navigate back to register
+          e.resetForm();
+          this.router.navigate(['/register']);
+        }
+        return;
       }
     );
-
-    // only temporary -> after building I will do auth and then go to dashboard
-    // this.router.navigate(['/dashboard']);
   }
 }

@@ -89,8 +89,6 @@ export class LoginComponentComponent implements OnInit {
         return;
       },
       (error) => {
-        // TODO:
-        // 1. Add toast or other visual indication in here
         this.isToastVisible = true;
         this.type = error ? 'error' : 'success';
         this.message = `Invalid user credentials. Please try again.`;
