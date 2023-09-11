@@ -75,12 +75,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log('ACTIVATED');
         this.bankCardsArray = data;
         this.state.getBankCardsArrayDataFromFirebase(data);
+        console.log(this.bankCardsArray);
       });
 
     this.username = this.loginService.getUsername();
 
     // get cards for DOM
     this.bankCardsArray = this.state.getBankCard();
+    console.log(this.bankCardsArray);
     // get expense data for DOM
     this.expenseData = this.state.getExpenseData();
 

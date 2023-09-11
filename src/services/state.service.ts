@@ -40,7 +40,13 @@ export class State {
 
     // ...
     for (const card of data) {
+      // get card names
       this.cardNames.push(card.bankAccountCustomName);
+
+      // get subscriptions
+
+      // get expenses
+
       // Store valid card based on the type into its array
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
@@ -173,6 +179,7 @@ export class State {
   // Store Data
 
   storeBankCard(data: BankAccount) {
+    console.log(data);
     this.bankCardSubscribe.next(data);
 
     this.bankCardsArray.push(data);
@@ -198,8 +205,9 @@ export class State {
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
 
     // TODO:
+    // BUG -> ARRAY NOT DISPLAYED INTO THE FIREBASE
     // 1. In here pass the valid array data into the Firebase dataserver to store it
-    this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
+    // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
     // test return
     return this.bankCardsArray;
@@ -259,7 +267,20 @@ export class State {
       this.subscriptionArray.push(data);
     }
 
+    // pass data into expenseArray so it will show on DOM
     this.expenseData.push(data);
+
+    // // pass data into bankCard object
+    for (const card of this.bankCardsArray) {
+      if (data.ID === card.bankAccountCustomName) {
+        console.log(card);
+        console.log(data);
+        card.expenseOnCard.push(data);
+        console.log(this.bankCardsArray);
+      }
+    }
+
+    return this.bankCardsArray;
   }
 
   storeInvestingDataInState(data: Investing) {

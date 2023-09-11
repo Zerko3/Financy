@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { State } from './state.service';
-import { Subject } from 'rxjs';
+import { Subject, catchError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
@@ -19,6 +19,7 @@ export class DataStorage {
 
   // store data in Firebase
   storeValidUserDataInFirebase(data: BankAccount[]) {
+    console.log(data);
     // 1. get user data
     // 2. pass user data to firebase
     this.http
@@ -47,12 +48,20 @@ export class DataStorage {
       .get<BankAccount[]>(
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
       )
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return [];
+        })
+      )
       .subscribe((data: BankAccount[]) => {
+        if (data.length === 0) {
+          return;
+        }
         console.log(data);
         this.cacheData = data;
         // pass this data so it will be visible on the DOM
 
-        // this is the subject way but it causes problems
         this.cardsArraySubject.next(data);
       });
   }

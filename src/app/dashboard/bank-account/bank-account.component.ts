@@ -23,6 +23,7 @@ export class BankAccountComponent {
     bankAccountName: '',
     bankAccountCustomName: '',
     ID: new Date().valueOf().toLocaleString(),
+    expenseOnCard: [],
   };
 
   submitButtonOptions = {
@@ -52,8 +53,12 @@ export class BankAccountComponent {
   onSubmitForm() {
     let data = this.bankAccountData;
 
+    console.log(data);
+
     // pass data to state
     this.state.storeBankCard(data);
+
+    // pass data to firebase
 
     if (this.form.status === 'VALID') {
       this.message = `The card named: ${data.bankAccountCustomName} was created.`;

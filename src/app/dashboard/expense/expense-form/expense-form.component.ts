@@ -93,6 +93,8 @@ export class ExpenseFormComponent implements OnInit {
 
       // pass data to state to array for DOM -> here we update the dahsboard DOM
       this.state.getMoneyChange(data);
+
+      // pass expense data into array inside bankAccount object to store in firebase
     }
 
     if (this.form.status === 'VALID') {

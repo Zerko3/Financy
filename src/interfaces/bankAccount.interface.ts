@@ -1,3 +1,5 @@
+import { Expense } from './expense.interface';
+
 export interface BankAccount {
   // TODO:
   // 1. If better name ideas refactor
@@ -7,4 +9,5 @@ export interface BankAccount {
   bankAccountName: string;
   bankAccountCustomName: string;
   ID: string;
+  expenseOnCard: any[];
 }
