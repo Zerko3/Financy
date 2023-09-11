@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
@@ -46,10 +46,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     { typeOfExpense: 'negative', val: 0 },
   ];
 
-  private destroy: Subscription;
+  // private destroy: Subscription;
   bankCardSubscribe: Subscription;
-  expenseSubscription: Subscription;
-  saveingSubscription: Subscription;
+  firebaseSubscribe: Subscription;
+  // expenseSubscription: Subscription;
+  // saveingSubscription: Subscription;
 
   constructor(
     private state: State,
@@ -68,9 +69,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dataStorage.getValidUserDataFromFirebase();
 
     // testing -> should i unsubscrube
-    this.dataStorage.cardsArraySubject.subscribe((data) => {
-      this.bankCardsArray = data;
-    });
+    this.firebaseSubscribe = this.dataStorage.cardsArraySubject
+      .pipe(take(1))
+      .subscribe((data) => {
+        console.log('ACTIVATED');
+        this.bankCardsArray = data;
+        this.state.getBankCardsArrayDataFromFirebase(data);
+      });
 
     this.username = this.loginService.getUsername();
 
@@ -110,6 +115,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     console.log('UNSUBSCRIBE - DASHBOARD');
     this.bankCardSubscribe.unsubscribe();
+    this.firebaseSubscribe.unsubscribe();
   }
 
   onUserNavigate(e) {

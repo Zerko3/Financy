@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class DataStorage {
   // test
   cardsArraySubject = new Subject<BankAccount[]>();
+  cacheData: BankAccount[] | null = null;
   constructor(private http: HttpClient) {}
 
   // https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/
@@ -36,13 +37,22 @@ export class DataStorage {
   //  1. Make it so that the data will be set globaly -> so i need to overrite the data in state
   // 2. Make it so that when i want to add or delete card this will update the correct way
   getValidUserDataFromFirebase() {
-    this.http
+    // if i have data on DOM then do NOT call this HTTP request
+    if (this.cacheData !== null) {
+      console.log('PRESENT DATA ON DOM');
+      return this.cacheData;
+    }
+
+    return this.http
       .get<BankAccount[]>(
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
       )
       .subscribe((data: BankAccount[]) => {
         console.log(data);
+        this.cacheData = data;
         // pass this data so it will be visible on the DOM
+
+        // this is the subject way but it causes problems
         this.cardsArraySubject.next(data);
       });
   }

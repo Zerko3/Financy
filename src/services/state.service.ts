@@ -32,8 +32,39 @@ export class State {
 
   // boolean values
   toastSignal: boolean = false;
-
+  // TODO:
+  // 1. When logic is done refactor the code since i have some duplicate code blocks
   constructor(private dataStorage: DataStorage) {}
+
+  getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
+    console.log(data);
+
+    // ...
+    for (const card of data) {
+      // Store valid card based on the type into its array
+      if (card.bankAccountName === 'Saveings') {
+        this.bankCardSaveingTypeArray.push(card);
+
+        // calc for saveings account
+        this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
+      }
+
+      if (card.bankAccountName === 'Spending') {
+        this.bankCardSpendingTypeArray.push(card);
+
+        // calc for spending account number
+        this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
+      }
+    }
+
+    // calc for total balance
+    this.totalMoneyInBankAccount =
+      this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
+
+    // overwrite data in array
+    this.bankCardsArray = data;
+    return this.bankCardsArray;
+  }
 
   checkMoneyStatus(userInput: Expense | Saveings) {
     let newMoney = 0;
@@ -90,9 +121,6 @@ export class State {
     return this.toastSignal;
   }
 
-  // TODO:
-  // 1. Check if money is -1 and if so then aither delete or say "cannot spend money on this card".
-  // 2. Saveing card can have 0 money to start with
   getMoneyChange(userInput: Expense | Saveings) {
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
@@ -130,17 +158,14 @@ export class State {
 
   // subscribe methods
 
-  // testing for now
   storeSubscribeForDataSubject(data: Expense) {
     this.dataSubject.next(data);
   }
 
-  // testing for now
   storeSubscribeForInvesting(data: Investing) {
     this.investingSubscribe.next(data);
   }
 
-  // testing for now
   storeSubscribeForSaveing(data: Saveings) {
     this.saveing.next(data);
   }
