@@ -4,6 +4,7 @@ import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
 import { Saveings } from 'src/interfaces/saveings.interface';
 import { Subject } from 'rxjs';
+import { DataStorage } from './data-storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class State {
@@ -32,7 +33,7 @@ export class State {
   // boolean values
   toastSignal: boolean = false;
 
-  constructor() {}
+  constructor(private dataStorage: DataStorage) {}
 
   checkMoneyStatus(userInput: Expense | Saveings) {
     let newMoney = 0;
@@ -170,6 +171,10 @@ export class State {
     // calc for total balance
     this.totalMoneyInBankAccount =
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
+
+    // TODO:
+    // 1. In here pass the valid array data into the Firebase dataserver to store it
+    this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
     // test return
     return this.bankCardsArray;

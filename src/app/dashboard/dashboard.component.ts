@@ -12,6 +12,7 @@ import { Expense } from 'src/interfaces/expense.interface';
 import { Investing } from 'src/interfaces/investing.interface';
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
 import { Saveings } from 'src/interfaces/saveings.interface';
+import { DataStorage } from 'src/services/data-storage.service';
 import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';
 import { LoginService } from 'src/services/login.service';
@@ -52,6 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private state: State,
+    private dataStorage: DataStorage,
     private expenseService: ExpenseService,
     private saveingService: SaveingsService,
     private investingService: InvestingService,
@@ -61,6 +63,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('The init started - DASHBOARD');
+
+    // call the method to get the data from Firebase
+    this.dataStorage.getValidUserDataFromFirebase();
+
+    // testing -> should i unsubscrube
+    this.dataStorage.cardsArraySubject.subscribe((data) => {
+      this.bankCardsArray = data;
+    });
 
     this.username = this.loginService.getUsername();
 
