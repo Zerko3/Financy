@@ -32,8 +32,7 @@ export class State {
 
   // boolean values
   toastSignal: boolean = false;
-  // TODO:
-  // 1. When logic is done refactor the code since i have some duplicate code blocks
+
   constructor(private dataStorage: DataStorage) {}
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
@@ -41,6 +40,7 @@ export class State {
 
     // ...
     for (const card of data) {
+      this.cardNames.push(card.bankAccountCustomName);
       // Store valid card based on the type into its array
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
