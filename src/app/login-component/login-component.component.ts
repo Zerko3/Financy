@@ -69,6 +69,7 @@ export class LoginComponentComponent implements OnInit {
 
         // handle valid data in here
         if (e.form.status === 'VALID') {
+          this.loginService.storeUsername(data.email);
           // toast
           this.isToastVisible = true;
           this.type = 'success';
