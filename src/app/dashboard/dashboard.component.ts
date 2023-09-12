@@ -81,6 +81,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         // pass the data into the state to manipultate other arrays with it
         this.state.getBankCardsArrayDataFromFirebase(data);
         console.log(this.bankCardsArray);
+        this.expenseData = this.state.getExpenseData();
+        this.subscriptionArray = this.state.getSubscriptionData();
 
         return this.bankCardsArray;
       }
