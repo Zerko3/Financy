@@ -33,12 +33,11 @@ export class State {
   // boolean values
   toastSignal: boolean = false;
 
-  // BUG -> Array is empty!!!! WHY!?!?!?!?!?!
-
   // TODO:
   // 1. Add money deduction and addition with firebase
   // 2. Add saveings to firebase and render on DOM
   // 3. Add cards into firebase as soon as they are created
+  // 4. Saveings data is not present in expense array inside the bankaccount object
 
   constructor(private dataStorage: DataStorage) {}
 
@@ -181,7 +180,7 @@ export class State {
     // store new money updates in firebase
     this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
-    // return the data
+    // return the data ->overrite the array
     return this.bankCardsArray;
   }
 
@@ -204,16 +203,8 @@ export class State {
   }
   // Store Data
 
-  storeBankCardInArray(data: BankAccount) {
-    this.bankCardsArray.push(data);
-  }
-
   passBankCardToState(data: BankAccount) {
     console.log(data);
-
-    // if this is present it append 2 times if its not present it wont even work lmao rolf xD
-
-    // this.bankCardsArray.push(data); //this causes double insert in array
 
     this.cardNames.push(data.bankAccountCustomName);
 
@@ -237,7 +228,6 @@ export class State {
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
 
     console.log(this.bankCardsArray);
-    return this.bankCardsArray;
   }
 
   overwriteBankCardsArray(bankCards: BankAccount[]) {
@@ -285,6 +275,20 @@ export class State {
 
     // overwrite the array
     this.bankCardsArray = bankCards;
+    return this.bankCardsArray;
+  }
+
+  storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
+    for (const card of this.bankCardsArray) {
+      if (data.ID === card.bankAccountCustomName) {
+        console.log(card);
+        console.log(data);
+        card.expenseOnCard.push(data);
+        console.log(this.bankCardsArray);
+        this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
+      }
+    }
+
     return this.bankCardsArray;
   }
 

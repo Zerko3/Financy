@@ -59,9 +59,6 @@ export class BankAccountComponent {
     // pass data to state
     this.state.passBankCardToState(data);
 
-    // pass card to store in array in state
-    this.state.storeBankCardInArray(data);
-
     // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
 

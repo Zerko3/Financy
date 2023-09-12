@@ -80,6 +80,8 @@ export class SaveingsFormComponent implements OnInit {
     // pass data to state for array and DOM
     this.state.getMoneyChange(data);
 
+    this.state.storeSaveingsDataInBankAccountExpenseArray(data);
+
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
       this.message = `Saving added: ${data.typeOfSaveings} with ${data.money} dolars.`;
