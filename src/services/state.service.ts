@@ -33,10 +33,6 @@ export class State {
   // boolean values
   toastSignal: boolean = false;
 
-  // TODO:
-  // 1. When adding a new card firebase needs to be updated
-  // 2.BUG -> When creating a new card it gets added 2 times
-
   constructor(private dataStorage: DataStorage) {}
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
@@ -180,13 +176,14 @@ export class State {
     this.saveing.next(data);
   }
 
+  storeSubscribeForCardCreation(data: BankAccount) {
+    this.bankCardSubscribe.next(data);
+  }
   // Store Data
 
   storeBankCard(data: BankAccount) {
     console.log(data);
-    this.bankCardSubscribe.next(data);
 
-    this.bankCardsArray.push(data);
     this.cardNames.push(data.bankAccountCustomName);
 
     // Store valid card based on the type into its array
@@ -213,7 +210,7 @@ export class State {
     // 1. In here pass the valid array data into the Firebase dataserver to store it
     // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
-    // test return
+    console.log(this.bankCardsArray);
     return this.bankCardsArray;
   }
 
@@ -274,9 +271,7 @@ export class State {
     // pass data into expenseArray so it will show on DOM
     this.expenseData.push(data);
 
-    // TODO:
-    // BUG -> DATA GETS STROED BUT DOES NOT GET DEDUCTED
-    // // pass data into bankCard object
+    // pass data into bankCard object
     for (const card of this.bankCardsArray) {
       if (data.ID === card.bankAccountCustomName) {
         console.log(card);

@@ -54,9 +54,13 @@ export class BankAccountComponent {
     let data = this.bankAccountData;
 
     console.log(data);
+    console.log('fire');
 
     // pass data to state
     this.state.storeBankCard(data);
+
+    // pass data to state subject -> TEST
+    this.state.storeSubscribeForCardCreation(data);
 
     // pass data to firebase
 

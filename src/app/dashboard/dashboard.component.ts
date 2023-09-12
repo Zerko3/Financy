@@ -65,24 +65,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('The init started - DASHBOARD');
 
+    // get cards for DOM -> this is needed to display cards back when we come back to the view
+    this.bankCardsArray = this.state.getBankCard();
+    console.log(this.bankCardsArray);
+
     // call the method to get the data from Firebase
     this.dataStorage.getValidUserDataFromFirebase();
 
     // testing -> should i unsubscrube
-    this.firebaseSubscribe = this.dataStorage.cardsArraySubject
-      .pipe(take(1))
-      .subscribe((data) => {
+    this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
+      (data) => {
         console.log('ACTIVATED');
+        // give data to the array
         this.bankCardsArray = data;
+
+        // pass the data into the state to manipultate other arrays with it
         this.state.getBankCardsArrayDataFromFirebase(data);
         console.log(this.bankCardsArray);
-      });
+
+        return this.bankCardsArray;
+      }
+    );
 
     this.username = this.loginService.getUsername();
 
-    // get cards for DOM
-    this.bankCardsArray = this.state.getBankCard();
-    console.log(this.bankCardsArray);
     // get expense data for DOM
     this.expenseData = this.state.getExpenseData();
 
@@ -107,11 +113,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
 
     // get cards as soon as user creates the cards -> pass to array to display on DOM
-    this.bankCardSubscribe = this.state.bankCardSubscribe.subscribe((data) => {
-      this.bankCardsArray.push(data);
+    this.bankCardSubscribe = this.state.bankCardSubscribe
+      .pipe(take(1))
+      .subscribe((data) => {
+        console.log('THE CARD WAS ADDDED TO THE DOM');
+        this.bankCardsArray.push(data);
+        console.log(this.bankCardsArray);
 
-      return this.bankCardsArray;
-    });
+        return this.bankCardsArray;
+      });
   }
 
   ngOnDestroy(): void {
