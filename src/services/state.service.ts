@@ -33,9 +33,11 @@ export class State {
   // boolean values
   toastSignal: boolean = false;
 
+  // BUG -> Array is empty!!!! WHY!?!?!?!?!?!
+
   // TODO:
   // 1. Add money deduction and addition with firebase
-
+  // 2. Add saveings to firebase and render on DOM
   // 3. Add cards into firebase as soon as they are created
 
   constructor(private dataStorage: DataStorage) {}
@@ -62,6 +64,8 @@ export class State {
         // calc for spending account number
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
       }
+
+      // BUG -> Saveings does not have the expense array in the object
 
       // get expenses
       if (card.expenseOnCard.length > 0) {
@@ -142,6 +146,8 @@ export class State {
   }
 
   getMoneyChange(userInput: Expense | Saveings) {
+    console.log(userInput);
+    console.log(this.bankCardsArray);
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
@@ -171,8 +177,11 @@ export class State {
     this.totalMoneyInBankAccount =
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
 
-    // return the data
+    console.log(this.bankCardsArray);
+    // store new money updates in firebase
+    this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
+    // return the data
     return this.bankCardsArray;
   }
 
@@ -195,8 +204,14 @@ export class State {
   }
   // Store Data
 
-  storeBankCard(data: BankAccount) {
+  storeBankCardInArray(data: BankAccount) {
+    this.bankCardsArray.push(data);
+  }
+
+  passBankCardToState(data: BankAccount) {
     console.log(data);
+
+    // if this is present it append 2 times if its not present it wont even work lmao rolf xD
 
     // this.bankCardsArray.push(data); //this causes double insert in array
 

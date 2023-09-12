@@ -1,5 +1,3 @@
-import { Expense } from './expense.interface';
-
 export interface BankAccount {
   // TODO:
   // 1. If better name ideas refactor

@@ -39,19 +39,24 @@ export class DataStorage {
       return this.cacheData;
     }
 
-    return this.http
-      .get<BankAccount[]>(
-        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
-      )
-      .subscribe((data: BankAccount[]) => {
-        if (data.length === 0) {
-          return;
-        }
-        console.log(data);
-        this.cacheData = data;
+    return (
+      this.http
+        .get<BankAccount[]>(
+          `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
+        )
+        .subscribe((data: BankAccount[]) => {
+          if (data.length === 0) {
+            return;
+          }
+          console.log(data);
+          this.cacheData = data;
 
-        // pass this data so it will be visible on the DOM
-        this.cardsArraySubject.next(data);
-      });
+          // pass this data so it will be visible on the DOM
+          this.cardsArraySubject.next(data);
+        }),
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

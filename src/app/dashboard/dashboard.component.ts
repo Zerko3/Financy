@@ -62,10 +62,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('The init started - DASHBOARD');
 
-    // get cards for DOM -> this is needed to display cards back when we come back to the view
-    this.bankCardsArray = this.state.getBankCard();
-    console.log(this.bankCardsArray);
-
     // call the method to get the data from Firebase
     this.dataStorage.getValidUserDataFromFirebase();
 
@@ -80,10 +76,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log(this.bankCardsArray);
         this.expenseData = this.state.getExpenseData();
         this.subscriptionArray = this.state.getSubscriptionData();
-
-        return this.bankCardsArray;
       }
     );
+
+    // get cards for DOM -> this is needed to display cards back when we come back to the view
+    this.bankCardsArray = this.state.getBankCard();
+    console.log(this.bankCardsArray);
 
     this.username = this.loginService.getUsername();
 
@@ -117,8 +115,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log('THE CARD WAS ADDDED TO THE DOM');
         this.bankCardsArray.push(data);
         console.log(this.bankCardsArray);
-
-        return this.bankCardsArray;
       });
   }
 
