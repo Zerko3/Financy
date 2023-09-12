@@ -34,10 +34,7 @@ export class State {
   toastSignal: boolean = false;
 
   // TODO:
-  // 1. Add money deduction and addition with firebase
-  // 2. Add saveings to firebase and render on DOM
-  // 3. Add cards into firebase as soon as they are created
-  // 4. Saveings data is not present in expense array inside the bankaccount object
+  // 1. BUG -> The saveings cards do not have expense array on them
 
   constructor(private dataStorage: DataStorage) {}
 
@@ -53,6 +50,10 @@ export class State {
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
 
+        // in here we need to loop over the expense array to store the data in the saveing array
+        // for (const expense of card.expenseOnCard) {
+        //   this.savingsData.push(expense);
+        // }
         // calc for saveings account
         this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
       }
@@ -201,12 +202,17 @@ export class State {
   storeSubscribeForCardCreation(data: BankAccount) {
     this.bankCardSubscribe.next(data);
   }
+
   // Store Data
 
   passBankCardToState(data: BankAccount) {
     console.log(data);
 
     this.cardNames.push(data.bankAccountCustomName);
+
+    // THIS HERE IS CAUSING SOME PROBLEMS -> THINK HOW TO SLOVE THIS PROBLEM
+
+    this.bankCardsArray.push(data);
 
     // Store valid card based on the type into its array
     if (data.bankAccountName === 'Saveings') {

@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log(this.bankCardsArray);
         this.expenseData = this.state.getExpenseData();
         this.subscriptionArray = this.state.getSubscriptionData();
+        this.savingsData = this.state.getSaveingsData();
       }
     );
 
@@ -113,7 +114,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((data) => {
         console.log('THE CARD WAS ADDDED TO THE DOM');
-        this.bankCardsArray.push(data);
+
+        // pass data to state
+        this.state.passBankCardToState(data);
+
         console.log(this.bankCardsArray);
       });
   }

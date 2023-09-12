@@ -56,9 +56,6 @@ export class BankAccountComponent {
     console.log(data);
     console.log('fire');
 
-    // pass data to state
-    this.state.passBankCardToState(data);
-
     // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
 
