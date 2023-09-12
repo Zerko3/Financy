@@ -46,11 +46,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     { typeOfExpense: 'negative', val: 0 },
   ];
 
-  // private destroy: Subscription;
   bankCardSubscribe: Subscription;
   firebaseSubscribe: Subscription;
-  // expenseSubscription: Subscription;
-  // saveingSubscription: Subscription;
 
   constructor(
     private state: State,

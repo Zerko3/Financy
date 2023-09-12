@@ -34,7 +34,9 @@ export class State {
   toastSignal: boolean = false;
 
   // TODO:
-  // 1. Update the subscruption expenses arrays when the data is loaded from the firebase
+  // 1. Add money deduction and addition with firebase
+
+  // 3. Add cards into firebase as soon as they are created
 
   constructor(private dataStorage: DataStorage) {}
 
@@ -45,15 +47,6 @@ export class State {
     for (const card of data) {
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
-
-      // get expenses
-      for (const expense of card.expenseOnCard) {
-        if (expense.expenseType === 'Subscription') {
-          this.subscriptionArray.push(expense);
-        }
-        this.expenseData.push(expense);
-        console.log(this.expenseData);
-      }
 
       // Store valid card based on the type into its array
       if (card.bankAccountName === 'Saveings') {
@@ -68,6 +61,19 @@ export class State {
 
         // calc for spending account number
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
+      }
+
+      // get expenses
+      if (card.expenseOnCard.length > 0) {
+        console.log(card.expenseOnCard);
+        for (const expese of card.expenseOnCard) {
+          console.log(expese);
+          this.expenseData.push(expese);
+
+          if (expese.expenseType === 'Subscription') {
+            this.subscriptionArray.push(expese);
+          }
+        }
       }
     }
 
@@ -191,6 +197,8 @@ export class State {
 
   storeBankCard(data: BankAccount) {
     console.log(data);
+
+    // this.bankCardsArray.push(data); //this causes double insert in array
 
     this.cardNames.push(data.bankAccountCustomName);
 

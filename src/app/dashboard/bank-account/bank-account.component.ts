@@ -59,7 +59,7 @@ export class BankAccountComponent {
     // pass data to state
     this.state.storeBankCard(data);
 
-    // pass data to state subject -> TEST
+    // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
 
     // pass data to firebase

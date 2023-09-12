@@ -12,10 +12,6 @@ export class DataStorage {
 
   // https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/
 
-  // TODO:
-  // 1. Get the valid arrays and store them in the firebase
-  // 2. Should i use PUT or POST to store user specific data
-
   // store data in Firebase
   storeValidUserDataInFirebase(data: BankAccount[]) {
     console.log(data);
@@ -47,20 +43,14 @@ export class DataStorage {
       .get<BankAccount[]>(
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
       )
-      .pipe(
-        catchError((error) => {
-          console.log(error);
-          return [];
-        })
-      )
       .subscribe((data: BankAccount[]) => {
         if (data.length === 0) {
           return;
         }
         console.log(data);
         this.cacheData = data;
-        // pass this data so it will be visible on the DOM
 
+        // pass this data so it will be visible on the DOM
         this.cardsArraySubject.next(data);
       });
   }
