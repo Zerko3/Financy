@@ -72,7 +72,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // call the method to get the data from Firebase
     this.dataStorage.getValidUserDataFromFirebase();
 
-    // testing -> should i unsubscrube
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
         console.log('ACTIVATED');

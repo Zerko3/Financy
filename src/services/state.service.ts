@@ -33,6 +33,9 @@ export class State {
   // boolean values
   toastSignal: boolean = false;
 
+  // TODO:
+  // 1. Update the subscruption expenses arrays when the data is loaded from the firebase
+
   constructor(private dataStorage: DataStorage) {}
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
@@ -43,9 +46,14 @@ export class State {
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
 
-      // get subscriptions
-
       // get expenses
+      for (const expense of card.expenseOnCard) {
+        if (expense.expenseType === 'Subscription') {
+          this.subscriptionArray.push(expense);
+        }
+        this.expenseData.push(expense);
+        console.log(this.expenseData);
+      }
 
       // Store valid card based on the type into its array
       if (card.bankAccountName === 'Saveings') {
@@ -204,11 +212,6 @@ export class State {
     // calc for total balance
     this.totalMoneyInBankAccount =
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
-
-    // TODO:
-    // BUG -> ARRAY NOT DISPLAYED INTO THE FIREBASE
-    // 1. In here pass the valid array data into the Firebase dataserver to store it
-    // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
     console.log(this.bankCardsArray);
     return this.bankCardsArray;
