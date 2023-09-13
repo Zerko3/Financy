@@ -33,14 +33,13 @@ export class State {
   // boolean values
   toastSignal: boolean = false;
 
-  // TODO:
-  // 1. BUG -> The saveings cards do not have expense array on them
-
   constructor(private dataStorage: DataStorage) {}
 
-  getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
-    console.log(data);
+  // TODO:
+  // 1. Get "saveings" card
+  // 2. Loop over thoes cards arrays and push the expenses into the saveings array to display on DOM
 
+  getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     // ...
     for (const card of data) {
       // get card names
@@ -50,10 +49,6 @@ export class State {
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
 
-        // in here we need to loop over the expense array to store the data in the saveing array
-        // for (const expense of card.expenseOnCard) {
-        //   this.savingsData.push(expense);
-        // }
         // calc for saveings account
         this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
       }
@@ -65,13 +60,9 @@ export class State {
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
       }
 
-      // BUG -> Saveings does not have the expense array in the object
-
       // get expenses
       if (card.expenseOnCard.length > 0) {
-        console.log(card.expenseOnCard);
         for (const expese of card.expenseOnCard) {
-          console.log(expese);
           this.expenseData.push(expese);
 
           if (expese.expenseType === 'Subscription') {
@@ -95,8 +86,6 @@ export class State {
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Spending') {
         if (card.bankMoneyStatus <= 0) {
-          console.log('The money in the card is 0 or less');
-
           this.toastSignal = true;
         } else {
           this.toastSignal = false;
@@ -120,8 +109,6 @@ export class State {
 
       if (card.bankAccountName === 'Saveings') {
         if (card.bankMoneyStatus < 0) {
-          console.log('The money in the card is less than 0');
-
           this.toastSignal = true;
         } else {
           this.toastSignal = false;
@@ -146,12 +133,9 @@ export class State {
   }
 
   getMoneyChange(userInput: Expense | Saveings) {
-    console.log(userInput);
-    console.log(this.bankCardsArray);
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
-        console.log('SAVEINGS WORKS HERE');
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus + userInput.money;
           card.bankMoneyStatus = newMoney;
@@ -178,7 +162,6 @@ export class State {
     this.totalMoneyInBankAccount =
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
 
-    console.log(this.bankCardsArray);
     // store new money updates in firebase
     this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
 
@@ -207,8 +190,6 @@ export class State {
   // Store Data
 
   passBankCardToState(data: BankAccount) {
-    console.log(data);
-
     this.cardNames.push(data.bankAccountCustomName);
 
     // THIS HERE IS CAUSING SOME PROBLEMS -> THINK HOW TO SLOVE THIS PROBLEM
@@ -233,8 +214,6 @@ export class State {
     // calc for total balance
     this.totalMoneyInBankAccount =
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
-
-    console.log(this.bankCardsArray);
   }
 
   overwriteBankCardsArray(bankCards: BankAccount[]) {
@@ -288,10 +267,7 @@ export class State {
   storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
     for (const card of this.bankCardsArray) {
       if (data.ID === card.bankAccountCustomName) {
-        console.log(card);
-        console.log(data);
         card.expenseOnCard.push(data);
-        console.log(this.bankCardsArray);
         this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
       }
     }
@@ -311,10 +287,7 @@ export class State {
     // pass data into bankCard object
     for (const card of this.bankCardsArray) {
       if (data.ID === card.bankAccountCustomName) {
-        console.log(card);
-        console.log(data);
         card.expenseOnCard.push(data);
-        console.log(this.bankCardsArray);
         this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
       }
     }

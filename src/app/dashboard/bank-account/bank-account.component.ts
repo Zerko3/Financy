@@ -53,9 +53,6 @@ export class BankAccountComponent {
   onSubmitForm() {
     let data = this.bankAccountData;
 
-    console.log(data);
-    console.log('fire');
-
     // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
 

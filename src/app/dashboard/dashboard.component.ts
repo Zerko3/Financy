@@ -60,20 +60,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('The init started - DASHBOARD');
-
     // call the method to get the data from Firebase
     this.dataStorage.getValidUserDataFromFirebase();
 
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
-        console.log('ACTIVATED');
         // give data to the array
         this.bankCardsArray = data;
 
         // pass the data into the state to manipultate other arrays with it
         this.state.getBankCardsArrayDataFromFirebase(data);
-        console.log(this.bankCardsArray);
         this.expenseData = this.state.getExpenseData();
         this.subscriptionArray = this.state.getSubscriptionData();
         this.savingsData = this.state.getSaveingsData();
@@ -82,7 +78,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // get cards for DOM -> this is needed to display cards back when we come back to the view
     this.bankCardsArray = this.state.getBankCard();
-    console.log(this.bankCardsArray);
 
     this.username = this.loginService.getUsername();
 
@@ -113,12 +108,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.bankCardSubscribe = this.state.bankCardSubscribe
       .pipe(take(1))
       .subscribe((data) => {
-        console.log('THE CARD WAS ADDDED TO THE DOM');
-
         // pass data to state
         this.state.passBankCardToState(data);
-
-        console.log(this.bankCardsArray);
       });
   }
 
