@@ -43,6 +43,8 @@
         <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
           <label for="email">Email:</label>
           <input type="text" name="email" id="email" required ngModel />
+          <label for="email">Username:</label>
+          <input type="text" name="username" id="username" required ngModel />
           <label for="password">Password</label>
           <input
             type="password"

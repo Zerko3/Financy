@@ -25,12 +25,6 @@ export class LoginService {
   username: string = '';
   constructor(private http: HttpClient) {}
 
-  // TODO:
-  // get user data
-  getUserDataFromFirebase() {
-    this.http.get('');
-  }
-
   storeUsername(username: string) {
     this.username = username;
   }

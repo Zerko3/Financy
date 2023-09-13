@@ -35,8 +35,11 @@ export class State {
 
   constructor(private dataStorage: DataStorage) {}
 
+  // BUG -> Saveings cards dont have array
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
+    console.log(data);
     for (const card of data) {
+      console.log(card);
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
 
@@ -47,8 +50,10 @@ export class State {
         // calc for saveings account
         this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
 
+        console.log(card.expenseOnCard);
         // loop over the arrays inside saveings cards
         for (const expense of card.expenseOnCard) {
+          console.log(expense);
           this.savingsData.push(expense);
         }
       }
@@ -192,8 +197,6 @@ export class State {
   passBankCardToState(data: BankAccount) {
     this.cardNames.push(data.bankAccountCustomName);
 
-    // THIS HERE IS CAUSING SOME PROBLEMS -> THINK HOW TO SLOVE THIS PROBLEM
-
     this.bankCardsArray.push(data);
 
     // Store valid card based on the type into its array
@@ -264,7 +267,9 @@ export class State {
     return this.bankCardsArray;
   }
 
+  // push saveings into firebase
   storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
+    console.log(data);
     for (const card of this.bankCardsArray) {
       if (data.ID === card.bankAccountCustomName) {
         card.expenseOnCard.push(data);

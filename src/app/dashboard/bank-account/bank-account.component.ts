@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
+import { LoginService } from 'src/services/login.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class BankAccountComponent {
   cards = ['Visa', 'Mastercard'];
   cardGoal = ['Saveings', 'Spending'];
   bankAccountData: BankAccount = {
+    userOfBankAccount: this.loginService.username,
     bankMoneyStatus: 0,
     bankAccountValidDate: new Date(),
     bankAccountCard: '',
@@ -44,7 +46,11 @@ export class BankAccountComponent {
     value: '',
   };
 
-  constructor(private state: State, private router: Router) {}
+  constructor(
+    private state: State,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
   onUserCloseForm() {
     this.router.navigate(['dashboard']);

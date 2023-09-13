@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Carousel } from 'src/interfaces/carousel.interface';
 import { Login } from 'src/interfaces/login.interface';
 import { AccountService } from 'src/services/account.service';
+import { DataStorage } from 'src/services/data-storage.service';
 import { LoginService } from 'src/services/login.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class LoginComponentComponent implements OnInit {
   slideshowDelay: number = 2000;
   userAccount: Login = {
     email: '',
+    username: '',
     password: '',
   };
 
@@ -28,7 +30,8 @@ export class LoginComponentComponent implements OnInit {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private dataStorage: DataStorage
   ) {}
 
   ngOnInit(): void {
@@ -57,11 +60,16 @@ export class LoginComponentComponent implements OnInit {
   onSubmit(e: NgForm) {
     this.userAccount = {
       email: e.form.value.email,
+      username: e.form.value.username,
       password: e.form.value.password,
     };
 
+    console.log(this.userAccount);
+
     // how to get username out of the Acount?
-    this.loginService.storeUsername(this.userAccount.email);
+    this.loginService.storeUsername(this.userAccount.username);
+
+    this.dataStorage.getCorrectUser(this.userAccount.username);
 
     this.accountService.loginUser(this.userAccount).subscribe(
       (data) => {
