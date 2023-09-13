@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
-import { Subject, catchError } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
@@ -22,7 +22,7 @@ export class DataStorage {
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`,
         data
       )
-      .subscribe((response) => {
+      .subscribe((response: BankAccount[]) => {
         console.log(response);
       });
   }

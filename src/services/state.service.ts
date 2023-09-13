@@ -151,6 +151,7 @@ export class State {
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
+        console.log('SAVEINGS WORKS HERE');
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus + userInput.money;
           card.bankMoneyStatus = newMoney;
