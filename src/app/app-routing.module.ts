@@ -12,6 +12,7 @@ import { ExpenseFormComponent } from './dashboard/expense/expense-form/expense-f
 import { InvestingFormComponent } from './dashboard/investing/investing-form/investing-form.component';
 import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
 import { BankAccountComponent } from './dashboard/bank-account/bank-account.component';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hero', pathMatch: 'full' },
@@ -22,21 +23,30 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [{ path: 'createCard', component: BankAccountComponent }],
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'createCard',
+        component: BankAccountComponent,
+      },
+    ],
   },
   {
     path: 'expense',
     component: ExpenseComponent,
+    canActivate: [AuthGuard],
     children: [{ path: 'expenseForm', component: ExpenseFormComponent }],
   },
   {
     path: 'investing',
     component: InvestingComponent,
+    canActivate: [AuthGuard],
     children: [{ path: 'investingForm', component: InvestingFormComponent }],
   },
   {
     path: 'saveings',
     component: SaveingsComponent,
+    canActivate: [AuthGuard],
     children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
   },
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthResponseData } from 'src/interfaces/authResponse.interface';
 import { Carousel } from 'src/interfaces/carousel.interface';
 import { Login } from 'src/interfaces/login.interface';
 import { AccountService } from 'src/services/account.service';
@@ -26,6 +27,7 @@ export class LoginComponentComponent implements OnInit {
   isToastVisible: boolean = false;
   type: string = '';
   message: string = '';
+  loginValid: boolean = false;
 
   constructor(
     private router: Router,
@@ -48,15 +50,6 @@ export class LoginComponentComponent implements OnInit {
     }
   }
 
-  // TODO:
-  // form validation
-
-  // TODO:
-  // 1. Get username and display username in hello
-  // 2. Validate the user credantials in firebase
-  // 3. Redirect to app if valid username and password and form
-  // 4. Else display error message
-  // 5. Create interface to be typesafe
   onSubmit(e: NgForm) {
     this.userAccount = {
       email: e.form.value.email,
@@ -72,12 +65,17 @@ export class LoginComponentComponent implements OnInit {
     this.dataStorage.getCorrectUser(this.userAccount.username);
 
     this.accountService.loginUser(this.userAccount).subscribe(
-      (data) => {
+      (data: AuthResponseData) => {
         console.log(data);
+        this.loginValid = true;
+        this.loginService.userLoggedIn(this.loginValid);
 
+        data.email = this.userAccount.username;
         // handle valid data in here
         if (e.form.status === 'VALID') {
+          // pass logedin user to service
           this.loginService.storeUsername(data.email);
+
           // toast
           this.isToastVisible = true;
           this.type = 'success';
@@ -90,9 +88,6 @@ export class LoginComponentComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['/dashboard']);
           }, 1500);
-
-          // do i need to do something with the data from the user in here?
-          // ...
         }
         return;
       },

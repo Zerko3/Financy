@@ -22,7 +22,7 @@ export class DataStorage {
   storeValidUserDataInFirebase(data: BankAccount[]) {
     this.http
       .put(
-        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${data[0].userOfBankAccount}/cards.json`,
+        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards.json`,
         data
       )
       .subscribe((response: BankAccount[]) => {

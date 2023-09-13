@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { AuthResponseData } from 'src/interfaces/authResponse.interface';
 import { Carousel } from 'src/interfaces/carousel.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +24,16 @@ export class LoginService {
   ];
 
   username: string = '';
-  constructor(private http: HttpClient) {}
+  isUserLoggedIn: boolean = false;
+  constructor() {}
+
+  userLoggedIn(isLoggedIn: boolean) {
+    this.isUserLoggedIn = isLoggedIn;
+  }
+
+  getUserLogedInStatus() {
+    return this.isUserLoggedIn;
+  }
 
   storeUsername(username: string) {
     this.username = username;
