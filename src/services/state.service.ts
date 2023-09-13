@@ -35,12 +35,7 @@ export class State {
 
   constructor(private dataStorage: DataStorage) {}
 
-  // TODO:
-  // 1. Get "saveings" card
-  // 2. Loop over thoes cards arrays and push the expenses into the saveings array to display on DOM
-
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
-    // ...
     for (const card of data) {
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
@@ -51,6 +46,11 @@ export class State {
 
         // calc for saveings account
         this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
+
+        // loop over the arrays inside saveings cards
+        for (const expense of card.expenseOnCard) {
+          this.savingsData.push(expense);
+        }
       }
 
       if (card.bankAccountName === 'Spending') {
@@ -58,15 +58,15 @@ export class State {
 
         // calc for spending account number
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
-      }
 
-      // get expenses
-      if (card.expenseOnCard.length > 0) {
-        for (const expese of card.expenseOnCard) {
-          this.expenseData.push(expese);
+        // get expenses
+        if (card.expenseOnCard.length > 0) {
+          for (const expese of card.expenseOnCard) {
+            this.expenseData.push(expese);
 
-          if (expese.expenseType === 'Subscription') {
-            this.subscriptionArray.push(expese);
+            if (expese.expenseType === 'Subscription') {
+              this.subscriptionArray.push(expese);
+            }
           }
         }
       }
