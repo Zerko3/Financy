@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { LoginService } from 'src/services/login.service';
+import { RegisterService } from 'src/services/register.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -17,8 +18,11 @@ export class BankAccountComponent {
   message: string = '';
   cards = ['Visa', 'Mastercard'];
   cardGoal = ['Saveings', 'Spending'];
+  loggedInUsername: string = this.loginService.username
+    ? this.loginService.username
+    : this.registerService.username;
   bankAccountData: BankAccount = {
-    userOfBankAccount: this.loginService.username,
+    userOfBankAccount: this.loggedInUsername,
     bankMoneyStatus: 0,
     bankAccountValidDate: new Date(),
     bankAccountCard: '',
@@ -49,7 +53,8 @@ export class BankAccountComponent {
   constructor(
     private state: State,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private registerService: RegisterService
   ) {}
 
   onUserCloseForm() {

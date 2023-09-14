@@ -1,11 +1,16 @@
 export class Account {
-  name: string;
+  username: string;
   email: string;
   accType: string;
   password: string;
 
-  constructor(name: string, email: string, accType: string, password: string) {
-    this.name = name;
+  constructor(
+    username: string,
+    email: string,
+    accType: string,
+    password: string
+  ) {
+    this.username = username;
     this.email = email;
     this.accType = accType;
     this.password = password;

@@ -40,7 +40,7 @@ export class State {
   // 2. If there are no cards (new account) the subject wont work
   // 3. Sometimes the money does not get deducted from the cards
   // 4. Instead of haveing an infinite array with cards i will make a tuple later on (4 max)
-  // 5. Guard for routing
+
   // 6. When i delete a card i want to delete it from firebase -> delete(...)
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {

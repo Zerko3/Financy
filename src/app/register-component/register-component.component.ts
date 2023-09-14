@@ -5,6 +5,7 @@ import { Account } from '../../models/account.model';
 import { AccountService } from 'src/services/account.service';
 import { RegisterService } from 'src/services/register.service';
 import { Carousel } from 'src/interfaces/carousel.interface';
+import { DataStorage } from 'src/services/data-storage.service';
 
 @Component({
   selector: 'app-register-component',
@@ -33,7 +34,8 @@ export class RegisterComponentComponent implements OnInit {
   constructor(
     private router: Router,
     private accountService: AccountService,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private dataStorage: DataStorage
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +67,12 @@ export class RegisterComponentComponent implements OnInit {
     );
 
     console.log(newUser);
+
+    // pass the username into the firebase to create a link for the api
+    this.dataStorage.getCorrectUser(newUser.username);
+
+    // pass the username into service to store it to display it in objects and on DOM
+    this.registerService.storeUsername(newUser.username);
 
     this.accountService.singupUser(newUser).subscribe(
       (responseData) => {

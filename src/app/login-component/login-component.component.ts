@@ -60,6 +60,7 @@ export class LoginComponentComponent implements OnInit {
     // how to get username out of the Acount?
     this.loginService.storeUsername(this.userAccount.username);
 
+    // this method getCorrectUser is used for linking the firebase to a specific user
     this.dataStorage.getCorrectUser(this.userAccount.username);
 
     this.accountService.loginUser(this.userAccount).subscribe(

@@ -22,8 +22,17 @@ export class RegisterService {
     },
   ];
 
+  username: string = '';
   registeredStauts: boolean = false;
   constructor() {}
+
+  storeUsername(username: string) {
+    this.username = username;
+  }
+
+  getUsername() {
+    return this.username;
+  }
 
   storeRegisterAccount(userRegister: boolean) {
     this.registeredStauts = userRegister;
