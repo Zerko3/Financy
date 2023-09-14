@@ -8,12 +8,16 @@ export class DataStorage {
   cardsArraySubject = new Subject<BankAccount[]>();
   cacheData: BankAccount[] | null = null;
   user: string = '';
+  userRegistered: boolean = false;
   constructor(private http: HttpClient) {}
 
   getCorrectUser(user: string) {
     console.log(user);
 
     this.user = user;
+
+    // if we get a user in here that means we are registered
+    this.userRegistered = true;
   }
 
   // old link `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
@@ -39,8 +43,8 @@ export class DataStorage {
 
   getValidUserDataFromFirebase() {
     // if i have data on DOM then do NOT call this HTTP request
-    if (this.cacheData !== null) {
-      console.log('PRESENT DATA ON DOM');
+    if (this.cacheData !== null || this.userRegistered) {
+      console.log('PRESENT DATA ON DOM OR USER REGISTERED.');
       return this.cacheData;
     }
 

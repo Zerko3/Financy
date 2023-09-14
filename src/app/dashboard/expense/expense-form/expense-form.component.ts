@@ -91,7 +91,7 @@ export class ExpenseFormComponent implements OnInit {
       // pass data to state -> here we update the arrays in state
       this.state.storeExpenseDataInState(data);
 
-      // pass data to state to array for DOM -> here we update the dahsboard DOM
+      // pass data to state to array for DOM -> here we update the dahsboard DOM cards
       this.state.getMoneyChange(data);
 
       // pass expense data into array inside bankAccount object to store in firebase

@@ -63,20 +63,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // call the method to get the data from Firebase
     this.dataStorage.getValidUserDataFromFirebase();
 
+    // i think for the first time when we create a card the guard clause doesnt work the right way so when we add an expanse etc it gets called in here and bellow resultiung in 2 times the call
+
+    // this subscribe gets the data as soons as i enter an expense from other logic. But it wont check the guard clause since that one is fired only after one call is already made.
+
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
         // give data to the array
         this.bankCardsArray = data;
+        console.log(this.bankCardsArray);
+
+        console.log('THIS IS FIRED');
 
         // pass the data into the state to manipultate other arrays with it
-        this.state.getBankCardsArrayDataFromFirebase(data);
-        this.expenseData = this.state.getExpenseData();
-        this.subscriptionArray = this.state.getSubscriptionData();
-        this.savingsData = this.state.getSaveingsData();
+        if (this.bankCardsArray.length > 0) {
+          this.state.getBankCardsArrayDataFromFirebase(data);
+          this.expenseData = this.state.getExpenseData();
+          this.subscriptionArray = this.state.getSubscriptionData();
+          this.savingsData = this.state.getSaveingsData();
+        } else return;
       }
     );
 
-    // REFECTOR THIS
     // get cards as soon as user creates the cards -> pass to array to display on DOM
     this.bankCardSubscribe = this.state.bankCardSubscribe
       .pipe(take(1))
