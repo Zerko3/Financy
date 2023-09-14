@@ -1,4 +1,5 @@
 @use "../../style/sass/global-variables" as *;
+@use "../../style/sass/mixins" as *;
 
 .section--aboutus {
   height: 100vh;
@@ -13,17 +14,15 @@
   }
 
   &__content--box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexbox--center--all;
+
     height: 100%;
     width: 100%;
     position: relative;
 
     &__img--box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flexbox--center--all;
+
       position: relative;
       &--img {
         height: auto;
