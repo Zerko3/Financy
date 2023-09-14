@@ -1,4 +1,6 @@
 @use "../../style/sass/global-variables" as *;
+@use "../../style/sass/mixins" as *;
+
 .section--wildcard {
   background-color: var(--background-color);
   height: 100vh;
@@ -21,9 +23,7 @@
     div {
       height: 100%;
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flexbox--center--all;
 
       h1 {
         font-size: font-size(font-size-medium);
