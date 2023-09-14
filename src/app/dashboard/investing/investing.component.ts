@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Investing } from 'src/interfaces/investing.interface';
 import { Stock } from 'src/interfaces/stock.interface';
-import { InvestingService } from 'src/services/investing.service';
 import { State } from 'src/services/state.service';
 
 @Component({

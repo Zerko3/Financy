@@ -75,14 +75,11 @@ export class ExpenseFormComponent implements OnInit {
   onSubmitForm() {
     this.expenseData.ID = this.expenseData.account;
     let data = this.expenseData;
-    console.log(data);
 
     // check money status -> if false then allow other methods to run if true then show toast
     this.moneyStatusOnCard = this.state.checkMoneyStatus(data);
-    console.log(this.moneyStatusOnCard);
 
     if (!this.moneyStatusOnCard) {
-      console.log('started');
       this.expenseService.storeExpenseData(data);
 
       // pass data to state method for subject -> here we update the exense DOM table

@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject, share } from 'rxjs';
-
 import { Expense } from 'src/interfaces/expense.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -16,8 +14,6 @@ export class ExpenseService {
 
   // store data
   storeExpenseData(data: Expense) {
-    console.log('fire');
-
     this.totalExpense += data.money;
 
     if (data.expenseType === 'Subscription') {

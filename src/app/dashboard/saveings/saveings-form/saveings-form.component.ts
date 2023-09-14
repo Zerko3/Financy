@@ -66,7 +66,6 @@ export class SaveingsFormComponent implements OnInit {
   onSubmitForm() {
     this.saveingsData.ID = this.saveingsData.account;
     let data = this.saveingsData;
-    console.log(data);
 
     // pass data to subject
     this.state.storeSubscribeForSaveing(data);

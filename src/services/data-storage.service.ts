@@ -12,8 +12,6 @@ export class DataStorage {
   constructor(private http: HttpClient) {}
 
   getCorrectUser(user: string) {
-    console.log(user);
-
     this.user = user;
   }
 
@@ -21,8 +19,6 @@ export class DataStorage {
     // if we get a user in here that means we are registered
     this.userRegistered = register;
   }
-
-  // old link `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
 
   // store data in Firebase
   storeValidUserDataInFirebase(data: BankAccount[]) {
@@ -37,11 +33,6 @@ export class DataStorage {
   }
 
   // get data from Firebase
-
-  // TESTING -> Can i dynamicly set a database user with users/${user}/cards.json
-  // GOAL -> with this each user would have his own small "database" instead of only being one
-
-  // OLD LINK `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
 
   getValidUserDataFromFirebase() {
     // if i have data on DOM then do NOT call this HTTP request

@@ -14,7 +14,6 @@ export class NavigationComponent {
 
   userNavigate(e: HTMLAnchorElement) {
     this.clickedOnLogout = true;
-    console.log(e.className);
 
     if (e.className === 'logout--no') {
       this.clickedOnLogout = false;

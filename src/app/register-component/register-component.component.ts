@@ -66,8 +66,6 @@ export class RegisterComponentComponent implements OnInit {
       this.password
     );
 
-    console.log(newUser);
-
     // pass the username into the firebase to create a link for the api
     this.dataStorage.getCorrectUser(newUser.username);
 

@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { Saveings } from 'src/interfaces/saveings.interface';
-import { BankCardService } from 'src/services/bankCard.service';
 import { SaveingsService } from 'src/services/saveings.service';
 import { State } from 'src/services/state.service';
 
@@ -44,7 +43,6 @@ export class SaveingsComponent implements OnInit, OnDestroy {
       this.state.totalMoneyInSaveingAccounts;
 
     this.saveingSubscribe = this.state.saveing.subscribe((data) => {
-      console.log(data);
       this.totalMoneySaved += data.money;
       this.saveingsFormDataArray.push(data);
 

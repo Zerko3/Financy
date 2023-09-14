@@ -67,9 +67,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (data) => {
         // give data to the array
         this.bankCardsArray = data;
-        console.log(this.bankCardsArray);
-
-        console.log('THIS IS FIRED');
 
         // pass the data into the state to manipultate other arrays with it
         if (this.bankCardsArray.length > 0) {
@@ -128,7 +125,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onUserNavigate(e) {
-    console.log(e.target.textContent);
     if (e.target.textContent === 'Add cards') {
       this.router.navigate(['dashboard/createCard']);
     }
@@ -143,7 +139,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onClickForDelete(e: any) {
-    console.log(e);
     this.clickedOnDeleteButton = !this.clickedOnDeleteButton;
 
     this.correctCard = e;

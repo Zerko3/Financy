@@ -41,9 +41,7 @@ export class State {
   // 4. Instead of haveing an infinite array with cards i will make a tuple later on (4 max)
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
-    console.log(data);
     for (const card of data) {
-      console.log(card);
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
 
@@ -54,10 +52,8 @@ export class State {
         // calc for saveings account
         this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
 
-        console.log(card.expenseOnCard);
         // loop over the arrays inside saveings cards
         for (const expense of card.expenseOnCard) {
-          console.log(expense);
           this.savingsData.push(expense);
         }
       }
@@ -273,7 +269,6 @@ export class State {
 
   // push saveings into firebase
   storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
-    console.log(data);
     for (const card of this.bankCardsArray) {
       if (data.ID === card.bankAccountCustomName) {
         card.expenseOnCard.push(data);
