@@ -11,3 +11,28 @@
 @mixin flexbox--collumn {
   flex-direction: column;
 }
+
+@mixin flexbox--space-betweem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flexbox--aling-flex__start__justify-space__between {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+@mixin flexbox--aling-flex__start__justify-center {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@mixin flexbox--aling-center__justify-flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}

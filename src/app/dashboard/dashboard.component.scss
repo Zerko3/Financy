@@ -1,4 +1,6 @@
 @use "../../style/sass/global-variables" as *;
+@use "../../style/sass/mixins" as *;
+
 .section--dashboard {
   background-color: var(--background-color);
   height: 100vh;
@@ -21,9 +23,8 @@
     &__user--greating {
       padding-top: 1.2rem;
       height: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
+      @include flexbox--center--all;
+
       &--hello {
         font-size: font-size(font-size-medium);
       }
@@ -31,17 +32,15 @@
 
     &__heading--box {
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include flexbox--space-betweem;
+
       gap: 1rem;
       padding: 0 1.2rem;
       margin-top: 3.2rem;
 
       div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexbox--center--all;
+
         gap: 1rem;
 
         .circle {
@@ -70,10 +69,10 @@
       margin: 3.2rem 0;
       width: 100%;
       height: auto;
-      display: flex;
+
       gap: 1rem;
-      align-items: center;
-      justify-content: center;
+      @include flexbox--center--all;
+
       position: relative;
 
       &__subscription--box {
@@ -82,9 +81,8 @@
         padding: 1.2rem 2.4rem;
         gap: 1rem;
         border-radius: 11px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexbox--center--all;
+
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
         img {
@@ -93,10 +91,8 @@
         }
 
         div {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
+          @include flexbox--center--all;
+          @include flexbox--collumn;
 
           h3,
           span {
@@ -111,9 +107,8 @@
     }
 
     &__cards--box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flexbox--center--all;
+
       padding: 1.2rem 2.4rem;
       width: 100%;
       height: auto;
@@ -165,9 +160,8 @@
         width: 100%;
         height: 100%;
         position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
+        @include flexbox--aling-flex__start__justify-space__between;
+
         overflow-y: scroll;
 
         h1 {
@@ -177,17 +171,15 @@
 
         div {
           ul {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            flex-direction: column;
+            @include flexbox--aling-flex__start__justify-center;
+            @include flexbox--collumn;
+
             margin-bottom: 1rem;
 
             div {
               box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
+              @include flexbox--center--all;
+
               gap: 2rem;
               padding: 1.2rem 2rem;
               border-radius: 2rem;
@@ -205,26 +197,23 @@
         }
 
         &__spending--overview {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          flex-direction: column;
+          @include flexbox--aling-center__justify-flex-start;
+          @include flexbox--collumn;
+
           width: 100%;
           height: 100%;
           gap: 3rem;
 
           &__heading--box {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            @include flexbox--space-betweem;
+
             gap: 1rem;
             padding: 0 1.2rem;
 
             div {
-              display: flex;
-              align-items: center;
-              justify-content: center;
+              @include flexbox--center--all;
+
               gap: 1rem;
 
               .circle {
@@ -245,9 +234,7 @@
       &--money {
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexbox--center--all;
 
         .chart-container {
           width: 100%;
