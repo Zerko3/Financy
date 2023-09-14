@@ -67,8 +67,6 @@ export class BankAccountComponent {
     // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
 
-    // pass data to firebase
-
     if (this.form.status === 'VALID') {
       this.message = `The card named: ${data.bankAccountCustomName} was created.`;
       this.isVisibleToast = true;

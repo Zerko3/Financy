@@ -76,6 +76,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     );
 
+    // REFECTOR THIS
+    // get cards as soon as user creates the cards -> pass to array to display on DOM
+    this.bankCardSubscribe = this.state.bankCardSubscribe
+      .pipe(take(1))
+      .subscribe((data) => {
+        // pass data to state
+        this.state.passBankCardToState(data);
+
+        // as soon as the data is passed into state call the return function on the array
+        this.bankCardsArray = this.state.getBankCard();
+      });
+
     // get cards for DOM -> this is needed to display cards back when we come back to the view
     this.bankCardsArray = this.state.getBankCard();
 
@@ -103,14 +115,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // 1 is negative
     this.overviewExpenses[1].val += this.expenseService.totalExpense;
-
-    // get cards as soon as user creates the cards -> pass to array to display on DOM
-    this.bankCardSubscribe = this.state.bankCardSubscribe
-      .pipe(take(1))
-      .subscribe((data) => {
-        // pass data to state
-        this.state.passBankCardToState(data);
-      });
   }
 
   ngOnDestroy(): void {
