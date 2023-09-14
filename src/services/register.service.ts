@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthResponseData } from 'src/interfaces/authResponse.interface';
 import { Carousel } from 'src/interfaces/carousel.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -20,5 +21,16 @@ export class RegisterService {
       userName: 'Bob Teemo',
     },
   ];
+
+  registeredStauts: boolean = false;
   constructor() {}
+
+  storeRegisterAccount(userRegister: boolean) {
+    this.registeredStauts = userRegister;
+  }
+
+  // we need this method for the auth
+  isUserRegistered() {
+    return this.registeredStauts;
+  }
 }

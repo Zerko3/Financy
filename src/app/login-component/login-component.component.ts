@@ -57,8 +57,6 @@ export class LoginComponentComponent implements OnInit {
       password: e.form.value.password,
     };
 
-    console.log(this.userAccount);
-
     // how to get username out of the Acount?
     this.loginService.storeUsername(this.userAccount.username);
 
@@ -66,7 +64,6 @@ export class LoginComponentComponent implements OnInit {
 
     this.accountService.loginUser(this.userAccount).subscribe(
       (data: AuthResponseData) => {
-        console.log(data);
         this.loginValid = true;
         this.loginService.userLoggedIn(this.loginValid);
 

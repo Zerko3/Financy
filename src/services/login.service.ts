@@ -31,6 +31,7 @@ export class LoginService {
     this.isUserLoggedIn = isLoggedIn;
   }
 
+  // we need this method for the auth guard
   getUserLogedInStatus() {
     return this.isUserLoggedIn;
   }

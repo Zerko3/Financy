@@ -29,6 +29,7 @@ export class RegisterComponentComponent implements OnInit {
   type: string = '';
   message: string = '';
   errorStatus: boolean = false;
+  registerStatus: boolean = false;
   constructor(
     private router: Router,
     private accountService: AccountService,
@@ -38,11 +39,6 @@ export class RegisterComponentComponent implements OnInit {
   ngOnInit(): void {
     this.userCarouselArray = this.registerService.carouselArray;
   }
-
-  // TODO:
-  // 1. Form data validation
-  // 2. Better UX design when invalid or valid data
-  // 3. Navigation auth to dashboard after valid register
 
   userHeroNavigation(e: HTMLAnchorElement) {
     if (e.innerText === 'Login') {
@@ -72,7 +68,9 @@ export class RegisterComponentComponent implements OnInit {
 
     this.accountService.singupUser(newUser).subscribe(
       (responseData) => {
-        console.log(responseData);
+        this.registerStatus = true;
+        // pass account to register service
+        this.registerService.storeRegisterAccount(this.registerStatus);
 
         if (e.form.status === 'VALID') {
           // toast
