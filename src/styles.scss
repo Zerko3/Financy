@@ -2,8 +2,7 @@
 
 @use "./style/sass/general-reset";
 @use "./style/sass/global-variables" as *;
-
-/*
+@use "./style/sass/mixins" as *; /*
 
 
 ---01 TYPOGRAFHY SYSTEM
