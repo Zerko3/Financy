@@ -37,11 +37,8 @@ export class State {
 
   // TODO:
   // 1. There are some strange edge cases
-  // 2. When creating a new account the first time when i add expense etc it gets shown 2 times
-  // 3. Sometimes the money does not get deducted from the cards (new accounts)
-  // 4. Instead of haveing an infinite array with cards i will make a tuple later on (4 max)
 
-  // 6. When i delete a card i want to delete it from firebase -> delete(...)
+  // 4. Instead of haveing an infinite array with cards i will make a tuple later on (4 max)
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     console.log(data);

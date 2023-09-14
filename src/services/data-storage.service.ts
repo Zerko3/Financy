@@ -15,9 +15,11 @@ export class DataStorage {
     console.log(user);
 
     this.user = user;
+  }
 
+  userIsRegistered(register: boolean) {
     // if we get a user in here that means we are registered
-    this.userRegistered = true;
+    this.userRegistered = register;
   }
 
   // old link `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/cards.json`
@@ -67,5 +69,17 @@ export class DataStorage {
         console.log(error);
       }
     );
+  }
+
+  // Delete valid data from account
+
+  deleteCardFromFirebase(card: number) {
+    this.http
+      .delete(
+        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards/${card}.json`
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

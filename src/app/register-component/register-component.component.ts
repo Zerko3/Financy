@@ -77,6 +77,9 @@ export class RegisterComponentComponent implements OnInit {
     this.accountService.singupUser(newUser).subscribe(
       (responseData) => {
         this.registerStatus = true;
+
+        this.dataStorage.userIsRegistered(this.registerStatus);
+
         // pass account to register service
         this.registerService.storeRegisterAccount(this.registerStatus);
 
