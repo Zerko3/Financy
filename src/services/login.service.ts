@@ -6,17 +6,17 @@ export class LoginService {
   carouselArray: Carousel[] = [
     {
       userOpinion:
-        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias fuga a labore quos soluta odit adipisci rerum dicta rem veritatisvero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?',
+        'I haveve been using this app for over a year now, and it is transformed my saving habits. The secure transactions make me feel confident about my financial data, and the 5% boost in savings is real! Plus, tracking my finances has never been easier. Highly recommend!',
       userName: 'Mark Willson',
     },
     {
       userOpinion:
-        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias fuga a labore quos soluta odit adipisci rerum dicta rem veritatisvero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?',
+        'It is super user-friendly, and I appreciate the added layer of security. The only reason I am not giving it 5 stars is that I wish they had more investment options. But overall, it is a fantastic platform for saving and investing.',
       userName: 'Jonna Morgan',
     },
     {
       userOpinion:
-        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias fuga a labore quos soluta odit adipisci rerum dicta rem veritatisvero, dolorum non, sed vitae blanditiis quae dolorem iste saepe?',
+        'FinancY has been a game-changer for me. The 5% increase in savings is no joke, and I have been able to reach my financial goals faster than I ever thought possible. Tracking my expenses has made me much more mindful of my spending.',
       userName: 'Bob Teemo',
     },
   ];

@@ -16,31 +16,26 @@ export class AboutUsComponent implements AfterViewInit {
     {
       title: 'Secure transactions',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuganesciunt totam cum ratione provident magnam voluptatem, cupiditateeveniet? Tempore dicta fugiat eius, nostrum sapiente providentobcaecati eum numquam vel totam.',
+        'We prioritize the security of your financial transactions above all else. We employ state-of-the-art encryption and security protocols to ensure that your personal and financial data is safeguarded at every step. Rest easy knowing that your money is in safe hands, allowing you to focus on your financial goals with peace of mind.',
     },
     {
       title: "User's increase saveings by 5%",
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuganesciunt totam cum ratione provident magnam voluptatem, cupiditateeveniet? Tempore dicta fugiat eius, nostrum sapiente providentobcaecati eum numquam vel totam.',
+        'With our innovative tools and expert insights, our users have consistently seen their savings increase by an average of 5%. We are here to empower you to reach your financial goals faster, whether it is building an emergency fund, saving for a dream vacation, or planning for retirement.',
     },
     {
       title: 'Track your finances',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuganesciunt totam cum ratione provident magnam voluptatem, cupiditateeveniet? Tempore dicta fugiat eius, nostrum sapiente providentobcaecati eum numquam vel totam.',
+        'Gain complete control over your finances. Our user-friendly interface and powerful tracking tools allow you to monitor your spending, set budget goals, and visualize your financial progress with ease.',
     },
     {
       title: 'Invest on the go',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuganesciunt totam cum ratione provident magnam voluptatem, cupiditateeveniet? Tempore dicta fugiat eius, nostrum sapiente providentobcaecati eum numquam vel totam.',
+        'Our mobile app provides a seamless and intuitive platform for managing your investments, whether you are a seasoned investor or just getting started. Take control of your financial future and invest at your convenience with us.',
     },
   ];
 
   constructor() {}
-  // TODO:
-  // 1. Add ngFor to the about me section to render it dynamicly
-  // 2. create an array of objects each containing a title and description
-  // 3. render all of them to the DOM
-  // 4. in scss change the style to :nth-child() to style dynamicly or even loop over the style with the @loop or what ever that syntax is
 
   ngAfterViewInit(): void {
     // observer
