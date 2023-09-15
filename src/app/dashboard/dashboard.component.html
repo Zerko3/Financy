@@ -120,34 +120,51 @@
               No transaction history avalible!
             </div>
           </ng-container>
-          <ul *ngFor="let expense of expenseData">
-            <div>
-              <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
-              <li>{{ expense.companyName }}</li>
-              <li>{{ expense.expenseType }}</li>
-              <li>{{ expense.billStatus }}</li>
-              <li>{{ expense.money }}</li>
-            </div>
-          </ul>
+          <ng-container
+            *ngIf="
+              expenseData.length > 0 ||
+              investingData.length > 0 ||
+              subscriptionArray.length > 0
+            "
+          >
+            <ul *ngFor="let expense of expenseData">
+              <div>
+                <img
+                  src="../../assets/img/netflix-logo.png"
+                  alt="amazon logo"
+                />
+                <li>{{ expense.companyName }}</li>
+                <li>{{ expense.expenseType }}</li>
+                <li>{{ expense.billStatus }}</li>
+                <li>{{ expense.money }}</li>
+              </div>
+            </ul>
 
-          <ul *ngFor="let investment of investingData">
-            <div>
-              <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
-              <li>{{ investment.typeOfInvesting }}</li>
-              <li>{{ investment.money }}</li>
-              <li>{{ investment.investingName }}</li>
-              <li>{{ investment.account }}</li>
-            </div>
-          </ul>
+            <ul *ngFor="let investment of investingData">
+              <div>
+                <img
+                  src="../../assets/img/netflix-logo.png"
+                  alt="amazon logo"
+                />
+                <li>{{ investment.typeOfInvesting }}</li>
+                <li>{{ investment.money }}</li>
+                <li>{{ investment.investingName }}</li>
+                <li>{{ investment.account }}</li>
+              </div>
+            </ul>
 
-          <ul *ngFor="let saveing of savingsData">
-            <div>
-              <img src="../../assets/img/netflix-logo.png" alt="amazon logo" />
-              <li>{{ saveing.money }}</li>
-              <li>{{ saveing.account }}</li>
-              <li>{{ saveing.typeOfSaveings }}</li>
-            </div>
-          </ul>
+            <ul *ngFor="let saveing of savingsData">
+              <div>
+                <img
+                  src="../../assets/img/netflix-logo.png"
+                  alt="amazon logo"
+                />
+                <li>{{ saveing.money }}</li>
+                <li>{{ saveing.account }}</li>
+                <li>{{ saveing.typeOfSaveings }}</li>
+              </div>
+            </ul>
+          </ng-container>
         </div>
       </div>
       <div

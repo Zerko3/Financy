@@ -147,6 +147,13 @@ export class State {
   getMoneyChangeAndUpdateFirebase(userInput: Expense | Saveings | Investing) {
     console.log(userInput);
 
+    // update the subscription array
+    if (userInput.expenseType === 'Subscription') {
+      console.log('Adding sub to array');
+      this.subscriptionArray.push(userInput);
+      console.log(this.subscriptionArray);
+    }
+
     // update money in the card and show on DOM
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
@@ -176,11 +183,6 @@ export class State {
 
         // update the expense data array
         this.expenseData.push(userInput);
-
-        // update the subscription array
-        if (userInput.expenseType === 'Subscription') {
-          this.subscriptionArray.push(userInput);
-        }
       }
     }
 
@@ -296,53 +298,6 @@ export class State {
     return this.bankCardsArray;
   }
 
-  // push saveings into firebase
-  // storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
-  //   for (const card of this.bankCardsArray) {
-  //     if (data.ID === card.bankAccountCustomName) {
-  //       card.expenseOnCard.push(data);
-  //       // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
-  //     }
-  //   }
-
-  //   // return this.bankCardsArray;
-  // }
-
-  // storeExpenseDataInState(data: Expense) {
-  //   //  push to the subscription array for DOM display
-  //   if (data.expenseType === 'Subscription') {
-  //     this.subscriptionArray.push(data);
-  //   }
-
-  //   // pass data into expenseArray so it will show on DOM
-  //   this.expenseData.push(data);
-
-  //   // pass data into bankCard object
-  //   for (const card of this.bankCardsArray) {
-  //     if (data.ID === card.bankAccountCustomName) {
-  //       card.expenseOnCard.push(data);
-  //       // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
-  //     }
-  //   }
-
-  //   // return this.bankCardsArray;
-  // }
-
-  // storeInvestingDataInState(data: Investing) {
-  //   this.investingData.push(data);
-
-  //   for (const card of this.bankCardsArray) {
-  //     if (data.ID === card.bankAccountCustomName) {
-  //       card.expenseOnCard.push(data);
-  //       // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
-  //     }
-  //   }
-  // }
-
-  // storeSaveingsDataInState(data: Saveings) {
-  //   this.savingsData.push(data);
-  // }
-
   // Get Data
 
   // get investing data
@@ -352,6 +307,7 @@ export class State {
 
   // get expense data
   getExpenseData() {
+    console.log('yo');
     return this.expenseData.slice();
   }
 

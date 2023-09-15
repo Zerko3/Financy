@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // get expense data for DOM
     this.expenseData = this.state.getExpenseData();
-
+    console.log(this.expenseData);
     // get subscription data for DOM
     this.subscriptionArray = this.state.getSubscriptionData();
 
