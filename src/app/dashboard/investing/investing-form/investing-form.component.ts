@@ -67,7 +67,7 @@ export class InvestingFormComponent implements OnInit {
     // pass data to service
     this.investingDataService.storeInvestingData(data);
 
-    // pass data to state
+    // pass data to state and to store in firebase
     this.state.storeInvestingDataInState(data);
 
     // pass data to state to array for DOM -> here we update the dahsboard DOM cards

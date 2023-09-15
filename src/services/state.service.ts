@@ -136,6 +136,7 @@ export class State {
   }
 
   getMoneyChange(userInput: Expense | Saveings | Investing) {
+    console.log(userInput);
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
@@ -299,6 +300,13 @@ export class State {
 
   storeInvestingDataInState(data: Investing) {
     this.investingData.push(data);
+
+    for (const card of this.bankCardsArray) {
+      if (data.ID === card.bankAccountCustomName) {
+        card.expenseOnCard.push(data);
+        this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
+      }
+    }
   }
 
   storeSaveingsDataInState(data: Saveings) {
