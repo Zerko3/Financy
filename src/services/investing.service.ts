@@ -8,6 +8,6 @@ export class InvestingService {
 
   // store
   storeInvestingData(data: Investing) {
-    this.totalInvestment = data.investingAmountOfMoney;
+    this.totalInvestment = data.money;
   }
 }

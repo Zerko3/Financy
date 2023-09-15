@@ -13,10 +13,11 @@ import { State } from 'src/services/state.service';
 export class InvestingFormComponent implements OnInit {
   investingData: Investing = {
     investingName: '',
-    investingAmountOfMoney: 0,
+    money: 0,
     investingDate: new Date().toLocaleDateString(),
     account: '',
     typeOfInvesting: '',
+    ID: '',
   };
 
   accounts: string[] = [];
@@ -60,14 +61,21 @@ export class InvestingFormComponent implements OnInit {
   }
 
   onSubmitForm() {
+    this.investingData.ID = this.investingData.account;
     let data = this.investingData;
+
+    // pass data to service
     this.investingDataService.storeInvestingData(data);
 
+    // pass data to state
     this.state.storeInvestingDataInState(data);
+
+    // pass data to state to array for DOM -> here we update the dahsboard DOM cards
+    this.state.getMoneyChange(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
-      this.message = `Investment added: ${data.investingName} with ${data.investingAmountOfMoney} dolars.`;
+      this.message = `Investment added: ${data.investingName} with ${data.money} dolars.`;
     }
   }
 }

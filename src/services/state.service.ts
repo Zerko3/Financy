@@ -36,9 +36,7 @@ export class State {
   constructor(private dataStorage: DataStorage) {}
 
   // TODO:
-  // 1. There are some strange edge cases
-
-  // 4. Instead of haveing an infinite array with cards i will make a tuple later on (4 max)
+  // finish investing logic
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     for (const card of data) {
@@ -137,7 +135,7 @@ export class State {
     return this.toastSignal;
   }
 
-  getMoneyChange(userInput: Expense | Saveings) {
+  getMoneyChange(userInput: Expense | Saveings | Investing) {
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
