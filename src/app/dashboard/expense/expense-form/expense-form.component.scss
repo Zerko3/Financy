@@ -1,4 +1,6 @@
 @use "../../../../style/sass/global-variables" as *;
+@use "../../../../style/sass/mixins" as *;
+
 .section--expense {
   width: 100vw;
 
@@ -11,9 +13,7 @@
     right: 1rem;
     z-index: 20;
     width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexbox--center--all;
   }
 }
 
