@@ -1,4 +1,5 @@
 @use "../../../style/sass/global-variables" as *;
+@use "../../../style/sass/mixins" as *;
 
 .section--investing {
   height: 100vh;
@@ -23,9 +24,8 @@
       padding: 1.2rem 2.4rem;
 
       &__heading--box {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        @include flexbox--flex-start;
+
         gap: 1rem;
         margin-bottom: 3.2rem;
         h1 {
@@ -43,15 +43,12 @@
       }
 
       &__investing--list {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        @include flexbox--flex-start;
 
         ul {
           div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @include flexbox--center--all;
+
             gap: 1rem;
 
             img {
@@ -70,9 +67,7 @@
     &__investings--overview {
       height: 100%;
       width: 100%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      @include flexbox--aling-flex__start__justify-center;
 
       &__money--box {
         padding: 1.2rem 2.4rem;
@@ -125,8 +120,6 @@
 }
 
 .investing--list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexbox--center--all;
   gap: 1rem;
 }
