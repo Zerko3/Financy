@@ -74,6 +74,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.expenseData = this.state.getExpenseData();
           this.subscriptionArray = this.state.getSubscriptionData();
           this.savingsData = this.state.getSaveingsData();
+          this.investingData = this.state.getInvestingData();
         } else return;
       }
     );

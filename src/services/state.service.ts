@@ -38,6 +38,12 @@ export class State {
   // TODO:
   // finish investing logic
 
+  // TODO:
+  // When all the logic is done, refactor the code. A few methods can be joined together or shortened!
+
+  // BUG:
+  // 1. Money does not get deducted the right way
+
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     for (const card of data) {
       // get card names
@@ -69,6 +75,9 @@ export class State {
 
             if (expese.expenseType === 'Subscription') {
               this.subscriptionArray.push(expese);
+            }
+            if (expese.expenseType === 'Investing') {
+              this.investingData.push(expese);
             }
           }
         }
@@ -135,8 +144,10 @@ export class State {
     return this.toastSignal;
   }
 
-  getMoneyChange(userInput: Expense | Saveings | Investing) {
+  getMoneyChangeAndUpdateFirebase(userInput: Expense | Saveings | Investing) {
     console.log(userInput);
+
+    // update money in the card and show on DOM
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
@@ -148,6 +159,9 @@ export class State {
           this.totalMoneyInSaveingAccounts += userInput.money;
           break;
         }
+
+        // update saveings array
+        this.savingsData.push(userInput);
       }
 
       if (card.bankAccountName === 'Spending') {
@@ -159,6 +173,22 @@ export class State {
           this.totalMoneyInSpendingAccounts -= userInput.money;
           break;
         }
+
+        // update the expense data array
+        this.expenseData.push(userInput);
+
+        // update the subscription array
+        if (userInput.expenseType === 'Subscription') {
+          this.subscriptionArray.push(userInput);
+        }
+      }
+    }
+
+    // push the expense | inesting | saveings into the valid card
+    for (const card of this.bankCardsArray) {
+      if (userInput.ID === card.bankAccountCustomName) {
+        card.expenseOnCard.push(userInput);
+        // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
       }
     }
 
@@ -267,51 +297,51 @@ export class State {
   }
 
   // push saveings into firebase
-  storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
-    for (const card of this.bankCardsArray) {
-      if (data.ID === card.bankAccountCustomName) {
-        card.expenseOnCard.push(data);
-        this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
-      }
-    }
+  // storeSaveingsDataInBankAccountExpenseArray(data: Saveings) {
+  //   for (const card of this.bankCardsArray) {
+  //     if (data.ID === card.bankAccountCustomName) {
+  //       card.expenseOnCard.push(data);
+  //       // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
+  //     }
+  //   }
 
-    return this.bankCardsArray;
-  }
+  //   // return this.bankCardsArray;
+  // }
 
-  storeExpenseDataInState(data: Expense) {
-    //  push to the subscription array for DOM display
-    if (data.expenseType === 'Subscription') {
-      this.subscriptionArray.push(data);
-    }
+  // storeExpenseDataInState(data: Expense) {
+  //   //  push to the subscription array for DOM display
+  //   if (data.expenseType === 'Subscription') {
+  //     this.subscriptionArray.push(data);
+  //   }
 
-    // pass data into expenseArray so it will show on DOM
-    this.expenseData.push(data);
+  //   // pass data into expenseArray so it will show on DOM
+  //   this.expenseData.push(data);
 
-    // pass data into bankCard object
-    for (const card of this.bankCardsArray) {
-      if (data.ID === card.bankAccountCustomName) {
-        card.expenseOnCard.push(data);
-        this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
-      }
-    }
+  //   // pass data into bankCard object
+  //   for (const card of this.bankCardsArray) {
+  //     if (data.ID === card.bankAccountCustomName) {
+  //       card.expenseOnCard.push(data);
+  //       // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
+  //     }
+  //   }
 
-    return this.bankCardsArray;
-  }
+  //   // return this.bankCardsArray;
+  // }
 
-  storeInvestingDataInState(data: Investing) {
-    this.investingData.push(data);
+  // storeInvestingDataInState(data: Investing) {
+  //   this.investingData.push(data);
 
-    for (const card of this.bankCardsArray) {
-      if (data.ID === card.bankAccountCustomName) {
-        card.expenseOnCard.push(data);
-        this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
-      }
-    }
-  }
+  //   for (const card of this.bankCardsArray) {
+  //     if (data.ID === card.bankAccountCustomName) {
+  //       card.expenseOnCard.push(data);
+  //       // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
+  //     }
+  //   }
+  // }
 
-  storeSaveingsDataInState(data: Saveings) {
-    this.savingsData.push(data);
-  }
+  // storeSaveingsDataInState(data: Saveings) {
+  //   this.savingsData.push(data);
+  // }
 
   // Get Data
 

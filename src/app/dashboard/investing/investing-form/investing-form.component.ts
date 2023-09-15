@@ -14,9 +14,10 @@ export class InvestingFormComponent implements OnInit {
   investingData: Investing = {
     investingName: '',
     money: 0,
-    investingDate: new Date().toLocaleDateString(),
+    date: new Date().toLocaleDateString(),
     account: '',
     typeOfInvesting: '',
+    expenseType: 'Investing',
     ID: '',
   };
 
@@ -68,10 +69,10 @@ export class InvestingFormComponent implements OnInit {
     this.investingDataService.storeInvestingData(data);
 
     // pass data to state and to store in firebase
-    this.state.storeInvestingDataInState(data);
+    // this.state.storeInvestingDataInState(data);
 
     // pass data to state to array for DOM -> here we update the dahsboard DOM cards
-    this.state.getMoneyChange(data);
+    this.state.getMoneyChangeAndUpdateFirebase(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;

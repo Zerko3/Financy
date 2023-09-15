@@ -21,7 +21,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   // BUGS:
   // 1. When i add an investemnt it does not append right away -> subject
-  // 2. The money does not get deducted in card that has paid for the investment
+
   // 3. The money pool does not get updated
 
   // TODO:
@@ -44,11 +44,12 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
       (data) => {
+        console.log('Working subject');
         this.investingDataArray.push(data);
 
         // display on DOM
         const stock = {
-          investedDate: data.investingDate,
+          investedDate: data.date,
           investedAmount: data.money,
         };
 
