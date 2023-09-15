@@ -42,7 +42,6 @@ export class State {
   // When all the logic is done, refactor the code. A few methods can be joined together or shortened!
 
   // BUG:
-  // 1. Money does not get deducted the right way
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     for (const card of data) {
@@ -158,6 +157,9 @@ export class State {
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
+        // update saveings array
+        this.savingsData.push(userInput);
+
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus + userInput.money;
           card.bankMoneyStatus = newMoney;
@@ -166,12 +168,12 @@ export class State {
           this.totalMoneyInSaveingAccounts += userInput.money;
           break;
         }
-
-        // update saveings array
-        this.savingsData.push(userInput);
       }
 
       if (card.bankAccountName === 'Spending') {
+        // update the expense data array
+        this.expenseData.push(userInput);
+
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus - userInput.money;
           card.bankMoneyStatus = newMoney;
@@ -180,9 +182,6 @@ export class State {
           this.totalMoneyInSpendingAccounts -= userInput.money;
           break;
         }
-
-        // update the expense data array
-        this.expenseData.push(userInput);
       }
     }
 
@@ -190,7 +189,6 @@ export class State {
     for (const card of this.bankCardsArray) {
       if (userInput.ID === card.bankAccountCustomName) {
         card.expenseOnCard.push(userInput);
-        // this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
       }
     }
 
