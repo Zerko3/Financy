@@ -23,7 +23,7 @@
     &__user--greating {
       padding-top: 1.2rem;
       height: 3rem;
-      @include flexbox--center--all;
+      @include flexbox--flex-start;
 
       &--hello {
         font-size: font-size(font-size-medium);
