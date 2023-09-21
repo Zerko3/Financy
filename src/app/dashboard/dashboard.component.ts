@@ -59,9 +59,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  // TODO:
+  // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
+
   ngOnInit(): void {
     // call the method to get the data from Firebase
-    this.dataStorage.getValidUserDataFromFirebase();
+    // TODO:
+    // 1. If statment if [] empty dont call since then the data in firebase is empty anyway -> explain better
+
+    // only call the backend Firebase if bankCardsArray.length is 0.
+    if (this.bankCardsArray.length === 0) {
+      this.dataStorage.getValidUserDataFromFirebase();
+    }
+    // this.dataStorage.getValidUserDataFromFirebase();
 
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {

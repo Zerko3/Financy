@@ -9,6 +9,7 @@ export class DataStorage {
   cacheData: BankAccount[] | null = null;
   user: string = '';
   userRegistered: boolean = false;
+  userLoggedIn: boolean = false;
   constructor(private http: HttpClient) {}
 
   getCorrectUser(user: string) {
@@ -18,6 +19,10 @@ export class DataStorage {
   userIsRegistered(register: boolean) {
     // if we get a user in here that means we are registered
     this.userRegistered = register;
+  }
+
+  userIsLoggedInButNoDataOnDom(loggedIn: boolean) {
+    this.userLoggedIn = loggedIn;
   }
 
   // store data in Firebase
@@ -36,20 +41,19 @@ export class DataStorage {
 
   getValidUserDataFromFirebase() {
     // if i have data on DOM then do NOT call this HTTP request
-    if (this.cacheData !== null || this.userRegistered) {
+    if (this.cacheData !== null || this.userRegistered || this.userLoggedIn) {
       console.log('PRESENT DATA ON DOM OR USER REGISTERED.');
       return this.cacheData;
     }
 
     return (
       this.http
-        .get<BankAccount[]>(
+        .get<BankAccount[] | null>(
           `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards.json`
         )
-        .subscribe((data: BankAccount[]) => {
-          if (data.length === 0) {
-            return;
-          }
+        .subscribe((data: BankAccount[] | null) => {
+          // if i get null return
+          if (data === null) return;
 
           this.cacheData = data;
 

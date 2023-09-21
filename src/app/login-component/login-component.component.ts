@@ -29,6 +29,9 @@ export class LoginComponentComponent implements OnInit {
   message: string = '';
   loginValid: boolean = false;
 
+  // test
+  userLoggedIn: boolean = false;
+
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -56,6 +59,12 @@ export class LoginComponentComponent implements OnInit {
       username: e.form.value.username,
       password: e.form.value.password,
     };
+
+    // Somehow i need to check if i dont have data in the backend
+    // this.userLoggedIn = true;
+
+    // pass the userLoggedin boolean to service
+    this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
 
     // how to get username out of the Acount?
     this.loginService.storeUsername(this.userAccount.username);

@@ -23,7 +23,9 @@
     </div>
     <div class="section--dashboard__content--box__cards--box">
       <!-- NEW -->
-      <ng-container *ngIf="bankCardsArray.length < 1">
+      <!-- TODO: -->
+      <!-- NOT GOOD CAUSING MASSIVE CALLES!!! -->
+      <ng-container *ngIf="bankCardsArray.length === 0">
         <div class="placeholder--text">
           Add a card to track expenses and more!
         </div>

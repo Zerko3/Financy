@@ -144,13 +144,9 @@ export class State {
   }
 
   getMoneyChangeAndUpdateFirebase(userInput: Expense | Saveings | Investing) {
-    console.log(userInput);
-
     // update the subscription array
     if (userInput.expenseType === 'Subscription') {
-      console.log('Adding sub to array');
       this.subscriptionArray.push(userInput);
-      console.log(this.subscriptionArray);
     }
 
     // update money in the card and show on DOM

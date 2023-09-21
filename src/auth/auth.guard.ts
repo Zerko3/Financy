@@ -3,9 +3,6 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/services/login.service';
 import { RegisterService } from 'src/services/register.service';
 
-// TODO:
-// 1. Do the same for register
-
 export const AuthGuard = () => {
   const router = inject(Router);
   const auth = inject(LoginService);
