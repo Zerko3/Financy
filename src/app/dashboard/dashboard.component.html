@@ -87,7 +87,24 @@
         *ngFor="let subscription of subscriptionArray"
         class="section--dashboard__content--box__subscriptions__subscription--box"
       >
-        <img src="../../assets/img/Amazon-logo.jpeg" alt="Amazon logo" />
+        <div *ngFor="let card of bankCardsArray">
+          <ng-container *ngIf="card.bankAccountCustomName === subscription.ID">
+            <ng-container *ngIf="card.bankAccountCard === 'Mastercard'">
+              <img
+                class="img--sub"
+                src="../../assets/img/master_card.png"
+                alt="card"
+              />
+            </ng-container>
+            <ng-container *ngIf="card.bankAccountCard === 'Visa'">
+              <img
+                class="img--sub"
+                src="../../assets/img/visa_card.png"
+                alt="card"
+              />
+            </ng-container>
+          </ng-container>
+        </div>
         <div>
           <h3>{{ subscription.companyName }}</h3>
           <span>{{ subscription.money }}EUR</span>

@@ -85,7 +85,7 @@
 
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
-        img {
+        .img--sub {
           height: auto;
           width: 6rem;
         }
@@ -246,4 +246,9 @@ dx-pie-chart {
 .expense--list {
   @include flexbox--flex-start;
   gap: 1rem;
+}
+
+.img--sub {
+  height: auto;
+  width: 6rem;
 }
