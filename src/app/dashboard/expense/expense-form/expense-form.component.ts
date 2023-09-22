@@ -80,18 +80,14 @@ export class ExpenseFormComponent implements OnInit {
     this.moneyStatusOnCard = this.state.checkMoneyStatus(data);
 
     if (!this.moneyStatusOnCard) {
+      // pass data to service to display money on screen
       this.expenseService.storeExpenseData(data);
 
       // pass data to state method for subject -> here we update the exense DOM table
       this.state.storeSubscribeForDataSubject(data);
 
-      // pass data to state -> here we update the arrays in state
-      // this.state.storeExpenseDataInState(data);
-
       // pass data to state to array for DOM -> here we update the dahsboard DOM cards
       this.state.getMoneyChangeAndUpdateFirebase(data);
-
-      // pass expense data into array inside bankAccount object to store in firebase
     }
 
     if (this.form.status === 'VALID') {

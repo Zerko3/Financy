@@ -49,6 +49,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   bankCardSubscribe: Subscription;
   firebaseSubscribe: Subscription;
 
+  calledFirebase: boolean = false;
+
   constructor(
     private state: State,
     private dataStorage: DataStorage,
@@ -62,19 +64,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // TODO:
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
 
-  ngOnInit(): void {
-    // call the method to get the data from Firebase
-    // TODO:
-    // 1. If statment if [] empty dont call since then the data in firebase is empty anyway -> explain better
+  // BUG
+  // 1. When I add an expense etc it gets added twiec to the DOM. The problem is probs in the way the methods are called
 
+  ngOnInit(): void {
     // only call the backend Firebase if bankCardsArray.length is 0.
     if (this.bankCardsArray.length === 0) {
       this.dataStorage.getValidUserDataFromFirebase();
     }
-    // this.dataStorage.getValidUserDataFromFirebase();
 
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
+        // set call to true
+        this.calledFirebase = true;
+
         // give data to the array
         this.bankCardsArray = data;
 
@@ -90,15 +93,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
 
     // get cards as soon as user creates the cards -> pass to array to display on DOM
-    this.bankCardSubscribe = this.state.bankCardSubscribe
-      .pipe(take(1))
-      .subscribe((data) => {
-        // pass data to state
-        this.state.passBankCardToState(data);
+    this.bankCardSubscribe = this.state.bankCardSubscribe.subscribe((data) => {
+      // pass data to state
+      this.state.passBankCardToState(data);
 
-        // as soon as the data is passed into state call the return function on the array
-        this.bankCardsArray = this.state.getBankCard();
-      });
+      // as soon as the data is passed into state call the return function on the array
+      this.bankCardsArray = this.state.getBankCard();
+    });
 
     // get cards for DOM -> this is needed to display cards back when we come back to the view
     this.bankCardsArray = this.state.getBankCard();
@@ -118,6 +119,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // get investing data for DOM
     this.investingData = this.state.getInvestingData();
+
+    // // only call this methods if i did not call firebase
+    // if (this.calledFirebase) {
+    //   // get expense data for DOM
+    //   this.expenseData = this.state.getExpenseData();
+    //   console.log(this.expenseData);
+    //   // get subscription data for DOM
+    //   this.subscriptionArray = this.state.getSubscriptionData();
+    //   console.log(this.subscriptionArray);
+
+    //   // get saveings data for DOM
+    //   this.savingsData = this.state.getSaveingsData();
+    //   console.log(this.savingsData);
+
+    //   // get investing data for DOM
+    //   this.investingData = this.state.getInvestingData();
+    // }
 
     // overwrite the val in obj -> used to display the graph on DOM
     this.investedMoney += this.investingService.totalInvestment;
