@@ -47,8 +47,7 @@ export class State {
   // check if saveingstypearray logic can be shortened (it can be)
 
   // BUG:
-  // 1. When there is no data the first insert of data is displayed 2 times
-  // 2. The saveings array has some present bug -> when i add a saveing it get appended 2 times: 1 time from expense and 1 time from saveing (we get saveings from expense) -> so it append to expense first then add savrings to saveings and appends again
+  //  1. Saveing and Expense components dont have table data upon return
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     for (const card of data) {

@@ -69,9 +69,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // TODO:
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
 
-  // BUG
-  // 1. When I add an expense etc it gets added twiec to the DOM. The problem is probs in the way the methods are called
-
   ngOnInit(): void {
     // only call the backend Firebase if bankCardsArray.length is 0.
     if (this.bankCardsArray.length === 0) {
@@ -118,29 +115,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscriptionArray = this.state.getSubscriptionData();
     console.log(this.subscriptionArray);
 
-    // get saveings data for DOM
-    // this.savingsData = this.state.getSaveingsData();
-    // console.log(this.savingsData);
-
     // get investing data for DOM
     this.investingData = this.state.getInvestingData();
-
-    // // only call this methods if i did not call firebase
-    // if (this.calledFirebase) {
-    //   // get expense data for DOM
-    //   this.expenseData = this.state.getExpenseData();
-    //   console.log(this.expenseData);
-    //   // get subscription data for DOM
-    //   this.subscriptionArray = this.state.getSubscriptionData();
-    //   console.log(this.subscriptionArray);
-
-    //   // get saveings data for DOM
-    //   this.savingsData = this.state.getSaveingsData();
-    //   console.log(this.savingsData);
-
-    //   // get investing data for DOM
-    //   this.investingData = this.state.getInvestingData();
-    // }
 
     // overwrite the val in obj -> used to display the graph on DOM
     this.investedMoney += this.investingService.totalInvestment;
