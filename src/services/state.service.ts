@@ -28,6 +28,12 @@ export class State {
   totalMoneyInSpendingAccounts: number = 0;
   totalMoneyInSaveingAccounts: number = 0;
 
+  subscriptionMoney: number = 0;
+  billMoney: number = 0;
+  restaurantMoney: number = 0;
+  randomMoney: number = 0;
+  clothesMoney: number = 0;
+
   // Subjects
   bankCardSubscribe = new Subject<BankAccount>();
   dataSubject = new Subject<Expense>();
@@ -42,9 +48,9 @@ export class State {
 
   // TODO:
 
-  // finish investing logic
-  // When all the logic is done, refactor the code. A few methods can be joined together or shortened!
-  // check if saveingstypearray logic can be shortened (it can be)
+  // 1. Finish Investing logic
+  // 2. Get money number data from firebase and display them on expense component
+  // 3. Refactor the code
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     for (const card of data) {
@@ -87,7 +93,6 @@ export class State {
 
         for (const expense of card.expenseOnCard) {
           // push only expenses in expense card into this array to display it on expese component
-
           if (expense.expenseType !== 'Investing') {
             this.expenseDataForTable.push(expense);
           }
@@ -101,6 +106,11 @@ export class State {
 
     // overwrite data in array
     this.bankCardsArray = data;
+
+    // FIXME:
+    // pass this array to expense component to calc numbers
+    // this.expenseSubjectForTable.next(this.expenseDataForTable);
+
     return this.bankCardsArray;
   }
 

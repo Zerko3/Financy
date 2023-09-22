@@ -36,6 +36,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     // this gets called only when i come back to the component
     this.expenses = this.state.getExpenseDataForExpenseComponent();
 
+    // TODO:
     // get money numbers from firebase
     // ...
 
