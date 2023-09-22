@@ -46,9 +46,6 @@ export class State {
   // When all the logic is done, refactor the code. A few methods can be joined together or shortened!
   // check if saveingstypearray logic can be shortened (it can be)
 
-  // BUG:
-  //  1. Saveing and Expense components dont have table data upon return
-
   getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
     for (const card of data) {
       // get card names
@@ -158,10 +155,11 @@ export class State {
     return this.toastSignal;
   }
 
+  // FIXME:
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
   ) {
-    // update the expense array
+    // update the expense array -> need this for the dashboard DOM
     this.expenseData.push(userInput);
 
     // update the subscription array
@@ -184,12 +182,18 @@ export class State {
       }
 
       if (card.bankAccountName === 'Spending') {
+        // update the expense array for expense component DOM
+        if (userInput.expenseType !== 'Saveings') {
+          this.expenseDataForTable.push(userInput);
+        }
+
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus - userInput.money;
           card.bankMoneyStatus = newMoney;
 
           // calc for spending account number
           this.totalMoneyInSpendingAccounts -= userInput.money;
+
           break;
         }
       }
