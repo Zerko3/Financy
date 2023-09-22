@@ -69,6 +69,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // TODO:
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
 
+  // 2. Add "hide balance" to hide with ****
+
   ngOnInit(): void {
     // only call the backend Firebase if bankCardsArray.length is 0.
     if (this.bankCardsArray.length === 0) {

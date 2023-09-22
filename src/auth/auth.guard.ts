@@ -8,7 +8,7 @@ export const AuthGuard = () => {
   const auth = inject(LoginService);
   const registerStatus = inject(RegisterService);
 
-  // check if any of these methods returns false. If false user is not logged in or registered. This needs to be &&.
+  // check if any of these methods returns false. If false user is not logged in or registered.
   if (!auth.getUserLogedInStatus() && !registerStatus.isUserRegistered()) {
     return router.navigateByUrl('');
   }

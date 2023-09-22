@@ -155,7 +155,6 @@ export class State {
     return this.toastSignal;
   }
 
-  // FIXME:
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
   ) {
