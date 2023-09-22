@@ -33,7 +33,13 @@
         [attr.data-card-id]="card.ID"
         [id]="card.ID"
       >
-        <img src="../../assets/img/visa_card Background Removed.png" alt="" />
+        <ng-container *ngIf="card.bankAccountCard === 'Mastercard'">
+          <img src="../../assets/img/master_card.png" alt="card" />
+        </ng-container>
+
+        <ng-container *ngIf="card.bankAccountCard === 'Visa'">
+          <img src="../../assets/img/visa_card.png" alt="card" />
+        </ng-container>
         <p
           [attr.data-card-id]="card.ID"
           (click)="onClickForDelete(card.ID)"
