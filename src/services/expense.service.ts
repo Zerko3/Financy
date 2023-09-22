@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Expense } from 'src/interfaces/expense.interface';
+import { Expense } from 'src/interfaces/userMoneySpending.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {

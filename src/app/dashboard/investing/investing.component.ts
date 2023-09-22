@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Investing } from 'src/interfaces/investing.interface';
+
 import { Stock } from 'src/interfaces/stock.interface';
+import { Investing } from 'src/interfaces/userMoneySpending.interface';
 import { State } from 'src/services/state.service';
 
 @Component({

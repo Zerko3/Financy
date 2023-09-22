@@ -8,10 +8,14 @@ import {
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
-import { Expense } from 'src/interfaces/expense.interface';
-import { Investing } from 'src/interfaces/investing.interface';
+
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
-import { Saveings } from 'src/interfaces/saveings.interface';
+import {
+  Expense,
+  Saveings,
+  Investing,
+} from 'src/interfaces/userMoneySpending.interface';
+
 import { DataStorage } from 'src/services/data-storage.service';
 import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';

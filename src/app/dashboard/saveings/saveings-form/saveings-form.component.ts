@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Saveings } from 'src/interfaces/saveings.interface';
+import { Saveings } from 'src/interfaces/userMoneySpending.interface';
+
 import { SaveingsService } from 'src/services/saveings.service';
 import { State } from 'src/services/state.service';
 

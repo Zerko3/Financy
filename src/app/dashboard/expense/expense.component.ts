@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Expense } from 'src/interfaces/expense.interface';
+import { Expense } from 'src/interfaces/userMoneySpending.interface';
+
 import { ExpenseService } from 'src/services/expense.service';
 import { State } from 'src/services/state.service';
 

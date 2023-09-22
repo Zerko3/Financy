@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Expense } from 'src/interfaces/expense.interface';
+import { Expense } from 'src/interfaces/userMoneySpending.interface';
+
 import { ExpenseService } from 'src/services/expense.service';
 import { State } from 'src/services/state.service';
 

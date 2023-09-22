@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
-import { Expense } from 'src/interfaces/expense.interface';
-import { Investing } from 'src/interfaces/investing.interface';
-import { Saveings } from 'src/interfaces/saveings.interface';
+
 import { Subject } from 'rxjs';
 import { DataStorage } from './data-storage.service';
+import {
+  Expense,
+  Saveings,
+  Investing,
+} from 'src/interfaces/userMoneySpending.interface';
 
 @Injectable({ providedIn: 'root' })
 export class State {
@@ -36,6 +39,9 @@ export class State {
   constructor(private dataStorage: DataStorage) {}
 
   // TODO:
+  // 1. refactor interface for investing expense saveing into one and extend it
+  // 2. add all of this into expense array and only use that in the recent transaction
+
   // finish investing logic
   // When all the logic is done, refactor the code. A few methods can be joined together or shortened!
   // check if saveingstypearray logic can be shortened (it can be)
