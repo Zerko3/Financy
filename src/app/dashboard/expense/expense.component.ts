@@ -34,7 +34,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this gets called only when i come back to the component
-    this.expenses = this.state.getExpenseData();
+    this.expenses = this.state.getExpenseDataForExpenseComponent();
 
     this.billMoney = this.expenseService.billMoney;
     this.restaurantMoney = this.expenseService.restaurantMoney;

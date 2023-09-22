@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import DataSource from 'devextreme/data/data_source';
 import { Subscription, take } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 
@@ -118,8 +119,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     console.log(this.subscriptionArray);
 
     // get saveings data for DOM
-    this.savingsData = this.state.getSaveingsData();
-    console.log(this.savingsData);
+    // this.savingsData = this.state.getSaveingsData();
+    // console.log(this.savingsData);
 
     // get investing data for DOM
     this.investingData = this.state.getInvestingData();

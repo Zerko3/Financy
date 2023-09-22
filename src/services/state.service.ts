@@ -7,16 +7,18 @@ import {
   Expense,
   Saveings,
   Investing,
+  UserMoneySpending,
 } from 'src/interfaces/userMoneySpending.interface';
 
 @Injectable({ providedIn: 'root' })
 export class State {
   // arrays
   bankCardsArray: BankAccount[] = [];
-  expenseData: Expense[] = [];
+  expenseData: UserMoneySpending[] = [];
   savingsData: Saveings[] = [];
   investingData: Investing[] = [];
   subscriptionArray: Expense[] = [];
+  expenseDataForTable: Expense[] = [];
   cardNames: string[] = [];
   bankCardSaveingTypeArray: BankAccount[] = [];
   bankCardSpendingTypeArray: BankAccount[] = [];
@@ -55,6 +57,21 @@ export class State {
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
 
+      // get expenses
+      if (card.expenseOnCard.length > 0) {
+        for (const expese of card.expenseOnCard) {
+          this.expenseData.push(expese);
+          console.log(this.expenseData);
+
+          if (expese.expenseType === 'Subscription') {
+            this.subscriptionArray.push(expese);
+          }
+          if (expese.expenseType === 'Investing') {
+            this.investingData.push(expese);
+          }
+        }
+      }
+
       // Store valid card based on the type into its array
       if (card.bankAccountName === 'Saveings') {
         this.bankCardSaveingTypeArray.push(card);
@@ -74,17 +91,11 @@ export class State {
         // calc for spending account number
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
 
-        // get expenses
-        if (card.expenseOnCard.length > 0) {
-          for (const expese of card.expenseOnCard) {
-            this.expenseData.push(expese);
+        for (const expense of card.expenseOnCard) {
+          // push only expenses in expense card into this array to display it on expese component
 
-            if (expese.expenseType === 'Subscription') {
-              this.subscriptionArray.push(expese);
-            }
-            if (expese.expenseType === 'Investing') {
-              this.investingData.push(expese);
-            }
+          if (expense.expenseType !== 'Investing') {
+            this.expenseDataForTable.push(expense);
           }
         }
       }
@@ -150,25 +161,21 @@ export class State {
     return this.toastSignal;
   }
 
-  getMoneyChangeAndUpdateFirebase(userInput: Expense | Saveings | Investing) {
+  getMoneyChangeAndUpdateFirebase(
+    userInput: UserMoneySpending | Expense | Saveings | Investing
+  ) {
+    // update the expense array
+    this.expenseData.push(userInput);
+
     // update the subscription array
     if (userInput.expenseType === 'Subscription') {
       this.subscriptionArray.push(userInput);
-    }
-
-    // update the expense array
-    if (userInput.expenseType !== 'Saveings') {
-      // update the expense data array -> needs to not push saveings in
-      this.expenseData.push(userInput);
     }
 
     // update money in the card and show on DOM
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Saveings') {
-        // update saveings array
-        this.savingsData.push(userInput);
-
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus + userInput.money;
           card.bankMoneyStatus = newMoney;
@@ -311,8 +318,12 @@ export class State {
 
   // get expense data
   getExpenseData() {
-    console.log('yo');
     return this.expenseData.slice();
+  }
+
+  // get expense data for expense component
+  getExpenseDataForExpenseComponent() {
+    return this.expenseDataForTable.slice();
   }
 
   // get subscription data
