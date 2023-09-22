@@ -41,8 +41,6 @@ export class State {
   constructor(private dataStorage: DataStorage) {}
 
   // TODO:
-  // 1. refactor interface for investing expense saveing into one and extend it
-  // 2. add all of this into expense array and only use that in the recent transaction
 
   // finish investing logic
   // When all the logic is done, refactor the code. A few methods can be joined together or shortened!

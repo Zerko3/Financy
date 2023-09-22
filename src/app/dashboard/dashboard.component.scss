@@ -161,38 +161,10 @@
         height: 100%;
         position: relative;
         @include flexbox--aling-flex__start__justify-space__between;
-        overflow-y: scroll;
 
         h1 {
           font-size: font-size(font-size-medium);
           margin-bottom: 3.2rem;
-        }
-
-        div {
-          ul {
-            @include flexbox--aling-flex__start__justify-center;
-            @include flexbox--collumn;
-
-            margin-bottom: 1rem;
-
-            div {
-              box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-              @include flexbox--center--all;
-
-              gap: 2rem;
-              padding: 1.2rem 2rem;
-              border-radius: 2rem;
-
-              img {
-                height: auto;
-                width: 6rem;
-              }
-
-              li {
-                font-size: font-size(font-size-small);
-              }
-            }
-          }
         }
 
         &__spending--overview {
