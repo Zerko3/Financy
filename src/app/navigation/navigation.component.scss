@@ -12,6 +12,7 @@ aside {
   overflow-x: hidden;
   width: auto;
   background-color: var(--background-color);
+  position: relative;
 
   &__navigation--box {
     height: 100%;
@@ -43,7 +44,26 @@ aside {
   }
 }
 
+.logout__box {
+  position: relative;
+}
+
+.logout--prompt,
+.logout--yes,
+.logout--no {
+  position: absolute;
+  z-index: 2;
+  left: -2rem;
+}
+
+.logout--yes {
+  top: 1rem;
+}
+.logout--no {
+  top: 4rem;
+}
+
 .logout--prompt {
+  top: -2rem;
   font-size: 1.2rem;
-  text-align: center;
 }

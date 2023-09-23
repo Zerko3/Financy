@@ -8,15 +8,20 @@
       <a #logoutLink (click)="userNavigate(logoutLink)"
         ><i class="dx-icon-runner"></i
       ></a>
-      <ng-container *ngIf="clickedOnLogout">
-        <p class="logout--prompt">Logout?</p>
-        <a class="logout--yes" #logoutLink (click)="userNavigate(logoutLink)"
-          ><i class="dx-icon-check"></i
-        ></a>
-        <a class="logout--no" #logoutLinkNo (click)="userNavigate(logoutLinkNo)"
-          ><i class="dx-icon-close"></i
-        ></a>
-      </ng-container>
+      <div class="logout__box">
+        <ng-container *ngIf="clickedOnLogout">
+          <p class="logout--prompt">Logout?</p>
+          <a class="logout--yes" #logoutLink (click)="userNavigate(logoutLink)"
+            ><i id="yes__icon" class="dx-icon-check"></i
+          ></a>
+          <a
+            class="logout--no"
+            #logoutLinkNo
+            (click)="userNavigate(logoutLinkNo)"
+            ><i id="no__icon" class="dx-icon-close"></i
+          ></a>
+        </ng-container>
+      </div>
     </div>
   </section>
 </aside>

@@ -27,6 +27,7 @@
       &--img {
         height: auto;
         width: 70%;
+        animation: text_animation 1s ease-in;
       }
       &::before {
         content: "";
