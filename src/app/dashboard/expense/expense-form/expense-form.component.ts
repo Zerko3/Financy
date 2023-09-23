@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Expense } from 'src/interfaces/userMoneySpending.interface';
 
-import { ExpenseService } from 'src/services/expense.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -57,11 +56,7 @@ export class ExpenseFormComponent implements OnInit {
 
   moneyStatusOnCard: boolean = false;
 
-  constructor(
-    private state: State,
-    private expenseService: ExpenseService,
-    private router: Router
-  ) {}
+  constructor(private state: State, private router: Router) {}
 
   ngOnInit(): void {
     this.accounts = this.state.getAccountNames();
@@ -81,9 +76,6 @@ export class ExpenseFormComponent implements OnInit {
     this.moneyStatusOnCard = this.state.checkMoneyStatus(data);
 
     if (!this.moneyStatusOnCard) {
-      // pass data to service to display money on screen
-      this.expenseService.storeExpenseData(data);
-
       // pass data to state method for subject -> here we update the exense DOM table
       this.state.storeSubscribeForDataSubject(data);
 

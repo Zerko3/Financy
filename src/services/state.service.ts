@@ -28,12 +28,6 @@ export class State {
   totalMoneyInSpendingAccounts: number = 0;
   totalMoneyInSaveingAccounts: number = 0;
 
-  subscriptionMoney: number = 0;
-  billMoney: number = 0;
-  restaurantMoney: number = 0;
-  randomMoney: number = 0;
-  clothesMoney: number = 0;
-
   // Subjects
   bankCardSubscribe = new Subject<BankAccount>();
   dataSubject = new Subject<Expense>();
@@ -61,7 +55,6 @@ export class State {
       if (card.expenseOnCard.length > 0) {
         for (const expese of card.expenseOnCard) {
           this.expenseData.push(expese);
-          console.log(this.expenseData);
 
           if (expese.expenseType === 'Subscription') {
             this.subscriptionArray.push(expese);
@@ -106,10 +99,6 @@ export class State {
 
     // overwrite data in array
     this.bankCardsArray = data;
-
-    // FIXME:
-    // pass this array to expense component to calc numbers
-    // this.expenseSubjectForTable.next(this.expenseDataForTable);
 
     return this.bankCardsArray;
   }

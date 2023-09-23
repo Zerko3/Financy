@@ -18,7 +18,6 @@ import {
 } from 'src/interfaces/userMoneySpending.interface';
 
 import { DataStorage } from 'src/services/data-storage.service';
-import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';
 import { LoginService } from 'src/services/login.service';
 import { SaveingsService } from 'src/services/saveings.service';
@@ -59,7 +58,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private state: State,
     private dataStorage: DataStorage,
-    private expenseService: ExpenseService,
     private saveingService: SaveingsService,
     private investingService: InvestingService,
     private loginService: LoginService,
@@ -112,10 +110,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // get expense data for DOM
     this.expenseData = this.state.getExpenseData();
-    console.log(this.expenseData);
+
     // get subscription data for DOM
     this.subscriptionArray = this.state.getSubscriptionData();
-    console.log(this.subscriptionArray);
 
     // get investing data for DOM
     this.investingData = this.state.getInvestingData();
@@ -125,11 +122,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.savedMoney += this.saveingService.totalMoneySaved;
     this.positiveMoney = this.investedMoney + this.savedMoney;
 
+    // TODO:
+    // 1. Change this from pie to chart stock or similar
+
     // 0 is positive
-    this.overviewExpenses[0].val = this.positiveMoney;
+    // this.overviewExpenses[0].val = this.positiveMoney;
 
     // 1 is negative
-    this.overviewExpenses[1].val += this.expenseService.totalExpense;
+    // this.overviewExpenses[1].val += this.expenseService.totalExpense;
   }
 
   ngOnDestroy(): void {

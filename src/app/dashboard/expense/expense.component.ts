@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Expense } from 'src/interfaces/userMoneySpending.interface';
 
-import { ExpenseService } from 'src/services/expense.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -26,25 +25,25 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   randomMoney: number = 0;
   clothesMoney: number = 0;
 
-  constructor(
-    private state: State,
-    private router: Router,
-    private expenseService: ExpenseService
-  ) {}
+  constructor(private state: State, private router: Router) {}
 
   ngOnInit(): void {
     // this gets called only when i come back to the component
     this.expenses = this.state.getExpenseDataForExpenseComponent();
 
-    // TODO:
-    // get money numbers from firebase
-    // ...
-
-    this.billMoney = this.expenseService.billMoney;
-    this.restaurantMoney = this.expenseService.restaurantMoney;
-    this.randomMoney = this.expenseService.randomMoney;
-    this.clothesMoney = this.expenseService.clothesMoney;
-    this.subscriptionMoney = this.expenseService.subscriptionMoney;
+    for (const expense of this.expenses) {
+      if (expense.expenseType === 'Subscription') {
+        this.subscriptionMoney += expense.money;
+      } else if (expense.expenseType === 'Bills') {
+        this.billMoney += expense.money;
+      } else if (expense.expenseType === 'Restaurants') {
+        this.restaurantMoney += expense.money;
+      } else if (expense.expenseType === 'Random') {
+        this.randomMoney += expense.money;
+      } else if (expense.expenseType === 'Clothes') {
+        this.clothesMoney += expense.money;
+      }
+    }
 
     this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
       (data) => {
