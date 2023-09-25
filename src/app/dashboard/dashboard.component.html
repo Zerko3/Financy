@@ -180,12 +180,21 @@
               <svg *dxTemplate="let pieChart of 'centerTemplate'">
                 <text
                   text-anchor="middle"
-                  style="font-size: 18px"
+                  style="font-size: 25px"
+                  x="100"
+                  y="50"
+                  fill="#494949"
+                >
+                  <tspan x="100">Total account balance:</tspan>
+                </text>
+                <text
+                  text-anchor="middle"
+                  style="font-size: 25px"
                   x="100"
                   y="120"
                   fill="#494949"
                 >
-                  <tspan x="100">{{ positiveMoney }}</tspan>
+                  <tspan x="100">{{ positiveMoney }} EUR</tspan>
                 </text>
               </svg>
             </dx-pie-chart>

@@ -24,11 +24,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   totalAccountMoney: number = 0;
   accountBalance: number = 0;
 
-  constructor(
-    private state: State,
-    private router: Router,
-    private saveingsService: SaveingsService
-  ) {}
+  constructor(private state: State, private router: Router) {}
 
   ngOnInit(): void {
     // get data from firebase on init
@@ -36,15 +32,12 @@ export class SaveingsComponent implements OnInit, OnDestroy {
 
     //  needs to be overwritten when user spend money
     this.accountBalance = this.state.getTotalMoneyInSpendingAccount();
-    console.log(this.accountBalance);
 
     // get total money saved on DOM
     this.totalMoneySaved = this.state.getTotalMoneyInSaveingAccount();
-    console.log(this.totalMoneySaved);
 
     // update total account balance
     this.totalAccountMoney = this.accountBalance + this.totalMoneySaved;
-    console.log(this.totalAccountMoney);
 
     this.saveingSubscribe = this.state.saveing.subscribe((data) => {
       // push data into array for DOM display
@@ -52,9 +45,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
 
       this.totalMoneySaved += data.money;
 
-      // this.totalAccountMoney += data.money;
       this.totalAccountMoney = this.accountBalance + this.totalMoneySaved;
-      console.log(this.totalAccountMoney);
     });
   }
 

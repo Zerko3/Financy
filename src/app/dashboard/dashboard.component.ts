@@ -38,8 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   investingData: Investing[] = [];
   subscriptionArray: Expense[] = [];
 
-  investedMoney: number = 0;
-  savedMoney: number = 0;
+  negativeMoney: number = 0;
   positiveMoney: number = 0;
 
   clickOnNavigation: boolean = false;
@@ -97,8 +96,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.investingData = this.state.getInvestingData();
 
           // get total account balance form firebase
-          this.positiveMoney = this.state.totalMoneyInBankAccount;
-          console.log(this.positiveMoney);
+          this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
+          this.positiveMoney = this.state.getTotalMoneyInBankAccount();
+          this.overviewExpenses[0].val = this.positiveMoney;
+          this.overviewExpenses[1].val += this.negativeMoney;
         } else return;
       }
     );
@@ -126,17 +127,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // get investing data for DOM
     this.investingData = this.state.getInvestingData();
 
-    // FIXME:
-    // BUG -> when dipslaying money it now doesnt show at onec but later and gets appended 2x.
-    // TODO:
-    // 1. Use saveings component logic for money in here
     this.positiveMoney = this.state.getTotalMoneyInBankAccount();
+    this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
 
     // 0 is positive
     this.overviewExpenses[0].val = this.positiveMoney;
 
     // 1 is negative
-    this.overviewExpenses[1].val += this.expenseService.totalExpenseNumber;
+    this.overviewExpenses[1].val += this.negativeMoney;
   }
 
   ngOnDestroy(): void {
