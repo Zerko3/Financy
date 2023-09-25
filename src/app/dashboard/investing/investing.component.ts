@@ -12,7 +12,6 @@ import { State } from 'src/services/state.service';
   styleUrls: ['./investing.component.scss'],
 })
 export class InvestingComponent implements OnInit, OnDestroy {
-  stockPrice = [{ value: 'investedAmount', name: 'investing value' }];
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
   investingTotalAmount: number = 0;
@@ -41,21 +40,40 @@ export class InvestingComponent implements OnInit, OnDestroy {
   // 5. If api allows tracking realtime i think i can make a makeshitft money tracker
 
   ngOnInit(): void {
+    // get data on component load
     this.investingDataArray = this.state.getInvestingData();
+
+    for (const investment of this.investingDataArray) {
+      // get data into an object to push it into valid array
+      const stock = {
+        investedDate: investment.date,
+        investedAmount: investment.money,
+      };
+
+      // display on DOM
+      this.investingAmount.push(stock);
+      this.investingTotalAmount += investment.money;
+    }
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
       (data) => {
-        console.log('Working subject');
+        // TODO:
+        // 1. Check if there is the same date in the array if so then add together the invesmtent else just add it    normaly
+        // logic...
+
         this.investingDataArray.push(data);
+
+        console.log('Working subject');
 
         // get data into an object to push it into valid array
         const stock = {
           investedDate: data.date,
           investedAmount: data.money,
         };
-
         // display on DOM
         this.investingAmount.push(stock);
+
+        console.log(this.investingAmount);
         this.investingTotalAmount += data.money;
       }
     );

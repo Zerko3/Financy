@@ -11,22 +11,21 @@
       <div
         class="section--investing__investing--box__investings__investing--list"
       >
-        <dx-list
-          [dataSource]="investingDataArray"
-          [searchEnabled]="true"
-          searchExpr="Name"
-          searchMode="contains"
-        >
-          <div *dxTemplate="let investment of 'item'">
-            <div class="investing--list">
-              <div>{{ investment.investingDate }}</div>
-              <div>{{ investment.investingName }}</div>
-              <div>{{ investment.money }}</div>
-              <div>{{ investment.typeOfInvesting }}</div>
-              <div>{{ investment.account }}</div>
-            </div>
-          </div></dx-list
-        >
+        <dx-data-grid [dataSource]="investingDataArray" [showBorders]="true">
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="date"></dxi-column>
+          <dxi-column dataField="coinsToBuy"></dxi-column>
+          <dxi-column dataField="typeOfInvesting"></dxi-column>
+          <dxi-column format="currency" dataField="money"></dxi-column>
+          <dxo-summary>
+            <dxi-total-item
+              column="money"
+              summaryType="sum"
+              valueFormat="currency"
+            >
+            </dxi-total-item>
+          </dxo-summary>
+        </dx-data-grid>
       </div>
     </div>
     <div class="section--investing__investing--box__investings--overview">
@@ -49,26 +48,9 @@
         <div
           class="section--investing__investing--box__investings--overview__money--box__chart--box"
         >
-          <dx-chart [dataSource]="investingAmount"
-            ><dxi-series
-              *ngFor="let stock of stockPrice"
-              [valueField]="stock.value"
-              [name]="stock.name"
-            >
-            </dxi-series
-            ><dxo-common-series-settings
-              #seriesSettings
-              argumentField="investedDate"
-            >
-            </dxo-common-series-settings>
-            <dxo-margin [bottom]="20"></dxo-margin>
-            <dxo-argument-axis
-              [valueMarginsEnabled]="false"
-              discreteAxisDivisionMode="crossLabels"
-            >
-            </dxo-argument-axis>
-            ></dx-chart
-          >
+          <dx-chart [dataSource]="investingAmount">
+            <dxo-argument-axis argumentType="datetime"> </dxo-argument-axis>
+          </dx-chart>
         </div>
       </div>
       <div
