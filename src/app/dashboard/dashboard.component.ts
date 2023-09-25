@@ -8,19 +8,14 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
-
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
 import {
   Expense,
   Saveings,
   Investing,
 } from 'src/interfaces/userMoneySpending.interface';
-
 import { DataStorage } from 'src/services/data-storage.service';
-import { ExpenseService } from 'src/services/expense.service';
-import { InvestingService } from 'src/services/investing.service';
 import { LoginService } from 'src/services/login.service';
-import { SaveingsService } from 'src/services/saveings.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -60,18 +55,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private state: State,
     private dataStorage: DataStorage,
-    private investingService: InvestingService,
-    private saveingService: SaveingsService,
-    private expenseService: ExpenseService,
     private loginService: LoginService,
     private router: Router
   ) {}
 
   // TODO:
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
-
-  // 2. Add "hide balance" to hide with ****
-  // 3. Add object for chart -> needs positive money and negative money (should i add this to a srevice to trim down the code?)
 
   ngOnInit(): void {
     // only call the backend Firebase if bankCardsArray.length is 0.

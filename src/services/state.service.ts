@@ -43,10 +43,10 @@ export class State {
   // TODO:
 
   // 1. Finish Investing logic
-  // 2. Get money number data from firebase and display them on expense component
+
   // 3. Refactor the code
 
-  getBankCardsArrayDataFromFirebase(data: BankAccount[]) {
+  getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
     for (const card of data) {
       // get card names
       this.cardNames.push(card.bankAccountCustomName);
@@ -103,7 +103,7 @@ export class State {
     return this.bankCardsArray;
   }
 
-  checkMoneyStatus(userInput: Expense | Saveings) {
+  checkMoneyStatus(userInput: Expense | Saveings): boolean {
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Spending') {
@@ -156,7 +156,7 @@ export class State {
 
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
-  ) {
+  ): BankAccount[] {
     // update the expense array -> need this for the dashboard DOM
     this.expenseData.push(userInput);
 
@@ -235,7 +235,7 @@ export class State {
 
   // Store Data
 
-  passBankCardToState(data: BankAccount) {
+  passBankCardToState(data: BankAccount): void {
     this.cardNames.push(data.bankAccountCustomName);
 
     this.bankCardsArray.push(data);
@@ -260,7 +260,7 @@ export class State {
       this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
   }
 
-  overwriteBankCardsArray(bankCards: BankAccount[]) {
+  overwriteBankCardsArray(bankCards: BankAccount[]): BankAccount[] {
     if (bankCards.length === 0) {
       this.totalMoneyInSaveingAccounts = 0;
       this.totalMoneyInSpendingAccounts = 0;
@@ -310,58 +310,58 @@ export class State {
 
   // Get Data
 
-  getTotalMoneyInSaveingAccount() {
+  getTotalMoneyInSaveingAccount(): number {
     return this.totalMoneyInSaveingAccounts;
   }
 
-  getTotalMoneyInSpendingAccount() {
+  getTotalMoneyInSpendingAccount(): number {
     return this.totalMoneyInSpendingAccounts;
   }
 
   // get total money in bank account
-  getTotalMoneyInBankAccount() {
+  getTotalMoneyInBankAccount(): number {
     return this.totalMoneyInBankAccount;
   }
 
   // get investing data
-  getInvestingData() {
+  getInvestingData(): Investing[] {
     return this.investingData.slice();
   }
 
   // get expense data
-  getExpenseData() {
+  getExpenseData(): Expense[] {
     return this.expenseData.slice();
   }
 
   // get expense data for expense component
-  getExpenseDataForExpenseComponent() {
+  getExpenseDataForExpenseComponent(): Expense[] {
     return this.expenseDataForTable.slice();
   }
 
   // get subscription data
-  getSubscriptionData() {
+  getSubscriptionData(): Expense[] {
     return this.subscriptionArray.slice();
   }
 
   // get bankacc cards
-  getBankCard() {
+  getBankCard(): BankAccount[] {
     return this.bankCardsArray.slice();
   }
 
-  getSaveingsCards() {
+  getSaveingsCards(): BankAccount[] {
     return this.bankCardSaveingTypeArray.slice();
   }
 
   // get saveings data
-  getSaveingsData() {
+  getSaveingsData(): Saveings[] {
     return this.savingsData.slice();
   }
 
-  getSpendingCards() {
+  getSpendingCards(): BankAccount[] {
     return this.bankCardSpendingTypeArray.slice();
   }
 
-  getAccountNames() {
+  getAccountNames(): string[] {
     return this.cardNames.slice();
   }
 }
