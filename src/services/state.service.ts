@@ -310,6 +310,19 @@ export class State {
 
   // Get Data
 
+  getTotalMoneyInSaveingAccount() {
+    return this.totalMoneyInSaveingAccounts;
+  }
+
+  getTotalMoneyInSpendingAccount() {
+    return this.totalMoneyInSpendingAccounts;
+  }
+
+  // get total money in bank account
+  getTotalMoneyInBankAccount() {
+    return this.totalMoneyInBankAccount;
+  }
+
   // get investing data
   getInvestingData() {
     return this.investingData.slice();

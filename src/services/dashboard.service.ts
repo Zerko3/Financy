@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Saveings } from 'src/interfaces/userMoneySpending.interface';
 
 @Injectable({ providedIn: 'root' })
-export class SaveingsService {
+export class DashboardService {
   constructor() {}
+
+  // TODO:
+  // 1. Create line chart object
 }

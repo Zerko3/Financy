@@ -31,23 +31,30 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // get data from firebase on init
     this.saveingsFormDataArray = this.state.getSaveingsData();
 
-    this.totalAccountMoney =
-      this.state.totalMoneyInBankAccount + this.saveingsService.totalMoneySaved;
-
     //  needs to be overwritten when user spend money
-    this.accountBalance = this.state.totalMoneyInSpendingAccounts;
+    this.accountBalance = this.state.getTotalMoneyInSpendingAccount();
+    console.log(this.accountBalance);
 
-    this.totalMoneySaved =
-      this.saveingsService.totalMoneySaved +
-      this.state.totalMoneyInSaveingAccounts;
+    // get total money saved on DOM
+    this.totalMoneySaved = this.state.getTotalMoneyInSaveingAccount();
+    console.log(this.totalMoneySaved);
+
+    // update total account balance
+    this.totalAccountMoney = this.accountBalance + this.totalMoneySaved;
+    console.log(this.totalAccountMoney);
 
     this.saveingSubscribe = this.state.saveing.subscribe((data) => {
-      this.totalMoneySaved += data.money;
+      // push data into array for DOM display
       this.saveingsFormDataArray.push(data);
 
-      this.totalAccountMoney += data.money;
+      this.totalMoneySaved += data.money;
+
+      // this.totalAccountMoney += data.money;
+      this.totalAccountMoney = this.accountBalance + this.totalMoneySaved;
+      console.log(this.totalAccountMoney);
     });
   }
 

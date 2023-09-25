@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Expense } from 'src/interfaces/userMoneySpending.interface';
+import { ExpenseService } from 'src/services/expense.service';
 
 import { State } from 'src/services/state.service';
 
@@ -24,8 +25,13 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   restaurantMoney: number = 0;
   randomMoney: number = 0;
   clothesMoney: number = 0;
+  totalMoneyExpense: number = 0;
 
-  constructor(private state: State, private router: Router) {}
+  constructor(
+    private state: State,
+    private router: Router,
+    private expenseService: ExpenseService
+  ) {}
 
   ngOnInit(): void {
     // this gets called only when i come back to the component
@@ -43,6 +49,13 @@ export class ExpenseComponent implements OnInit, OnDestroy {
       } else if (expense.expenseType === 'Clothes') {
         this.clothesMoney += expense.money;
       }
+
+      this.totalMoneyExpense =
+        this.subscriptionMoney +
+        this.billMoney +
+        this.restaurantMoney +
+        this.randomMoney +
+        this.clothesMoney;
     }
 
     this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
@@ -60,6 +73,13 @@ export class ExpenseComponent implements OnInit, OnDestroy {
         } else if (data.expenseType === 'Clothes') {
           this.clothesMoney += data.money;
         }
+
+        this.totalMoneyExpense =
+          this.subscriptionMoney +
+          this.billMoney +
+          this.restaurantMoney +
+          this.randomMoney +
+          this.clothesMoney;
       }
     );
   }

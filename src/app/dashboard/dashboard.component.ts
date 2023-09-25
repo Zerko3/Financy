@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -7,7 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import DataSource from 'devextreme/data/data_source';
-import { Subscription, take } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
@@ -18,6 +19,7 @@ import {
 } from 'src/interfaces/userMoneySpending.interface';
 
 import { DataStorage } from 'src/services/data-storage.service';
+import { ExpenseService } from 'src/services/expense.service';
 import { InvestingService } from 'src/services/investing.service';
 import { LoginService } from 'src/services/login.service';
 import { SaveingsService } from 'src/services/saveings.service';
@@ -45,6 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   correctCard: string = '';
   username: string;
 
+  // this is for pie
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
     { typeOfExpense: 'positive', val: 0 },
     { typeOfExpense: 'negative', val: 0 },
@@ -58,8 +61,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private state: State,
     private dataStorage: DataStorage,
-    private saveingService: SaveingsService,
     private investingService: InvestingService,
+    private saveingService: SaveingsService,
+    private expenseService: ExpenseService,
     private loginService: LoginService,
     private router: Router
   ) {}
@@ -68,6 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
 
   // 2. Add "hide balance" to hide with ****
+  // 3. Add object for chart -> needs positive money and negative money (should i add this to a srevice to trim down the code?)
 
   ngOnInit(): void {
     // only call the backend Firebase if bankCardsArray.length is 0.
@@ -90,6 +95,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.subscriptionArray = this.state.getSubscriptionData();
           this.savingsData = this.state.getSaveingsData();
           this.investingData = this.state.getInvestingData();
+
+          // get total account balance form firebase
+          this.positiveMoney = this.state.totalMoneyInBankAccount;
+          console.log(this.positiveMoney);
         } else return;
       }
     );
@@ -117,19 +126,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // get investing data for DOM
     this.investingData = this.state.getInvestingData();
 
-    // overwrite the val in obj -> used to display the graph on DOM
-    this.investedMoney += this.investingService.totalInvestment;
-    this.savedMoney += this.saveingService.totalMoneySaved;
-    this.positiveMoney = this.investedMoney + this.savedMoney;
-
+    // FIXME:
+    // BUG -> when dipslaying money it now doesnt show at onec but later and gets appended 2x.
     // TODO:
-    // 1. Change this from pie to chart stock or similar
+    // 1. Use saveings component logic for money in here
+    this.positiveMoney = this.state.getTotalMoneyInBankAccount();
 
     // 0 is positive
-    // this.overviewExpenses[0].val = this.positiveMoney;
+    this.overviewExpenses[0].val = this.positiveMoney;
 
     // 1 is negative
-    // this.overviewExpenses[1].val += this.expenseService.totalExpense;
+    this.overviewExpenses[1].val += this.expenseService.totalExpenseNumber;
   }
 
   ngOnDestroy(): void {
@@ -176,4 +183,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.state.overwriteBankCardsArray(this.bankCardsArray);
     return this.bankCardsArray;
   }
+
+  // TODO:
+  // 1. Get button
+  // 2. If true hide ballance else show
+  // 3. Hide with ***
+
+  hideMoneyBalanceOnCard() {}
 }

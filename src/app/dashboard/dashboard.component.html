@@ -166,14 +166,28 @@
         </div>
 
         <div class="section--dashboard__content--box__transactions--box--money">
+          <!-- PIE -->
           <ng-container *ngIf="expenseData.length > 0">
             <dx-pie-chart
               id="pie"
               type="doughnut"
               palette="Soft Pastel"
+              centerTemplate="centerTemplate"
+              [innerRadius]="0.65"
               [dataSource]="overviewExpenses"
             >
               <dxi-series argumentField="typeOfExpense"></dxi-series>
+              <svg *dxTemplate="let pieChart of 'centerTemplate'">
+                <text
+                  text-anchor="middle"
+                  style="font-size: 18px"
+                  x="100"
+                  y="120"
+                  fill="#494949"
+                >
+                  <tspan x="100">{{ positiveMoney }}</tspan>
+                </text>
+              </svg>
             </dx-pie-chart>
           </ng-container>
         </div>

@@ -72,16 +72,8 @@ export class SaveingsFormComponent implements OnInit {
     // pass data to subject
     this.state.storeSubscribeForSaveing(data);
 
-    // pass data to service
-    this.saveingsService.storeSaveingsData(data);
-
-    // pass data to state
-    // this.state.storeSaveingsDataInState(data);
-
     // pass data to state for array and DOM
     this.state.getMoneyChangeAndUpdateFirebase(data);
-
-    // this.state.storeSaveingsDataInBankAccountExpenseArray(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
