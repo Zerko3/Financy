@@ -55,7 +55,8 @@
         }
       }
 
-      .section--dashboard__content--box__subscriptions--add {
+      .section--dashboard__content--box__subscriptions--add,
+      .hide--balance {
         cursor: pointer;
         font-size: font-size(font-size-small);
         color: var(--main-color);

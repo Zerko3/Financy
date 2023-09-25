@@ -14,6 +14,12 @@
       <div>
         <p class="circle"></p>
         <h1>Card overview</h1>
+        <span
+          #hideBalance
+          (click)="hideMoneyBalanceOnCard($event)"
+          class="hide--balance"
+          >Hide balance</span
+        >
       </div>
       <a
         (click)="onUserNavigate($event)"
@@ -61,10 +67,14 @@
         </ng-container>
 
         <ng-container *ngIf="card.bankAccountName === 'Spending'">
-          <span>{{ card.bankMoneyStatus }}</span>
+          <span
+            >{{ !hideBalanceStatus ? card.bankMoneyStatus : "***" }} EUR</span
+          >
         </ng-container>
         <ng-container *ngIf="card.bankAccountName === 'Saveings'">
-          <span>{{ card.bankMoneyStatus }}</span>
+          <span
+            >{{ !hideBalanceStatus ? card.bankMoneyStatus : "***" }} EUR</span
+          >
         </ng-container>
       </div>
     </div>
@@ -146,7 +156,7 @@
                   <div>{{ expense.account }}</div>
                   <div>{{ expense.expenseType }}</div>
                   <div>{{ expense.billStatus }}</div>
-                  <div>{{ expense.money }}</div>
+                  <div>{{ expense.money }} EUR</div>
                 </div>
               </div></dx-list
             >
@@ -194,7 +204,9 @@
                   y="120"
                   fill="#494949"
                 >
-                  <tspan x="100">{{ positiveMoney }} EUR</tspan>
+                  <tspan x="100">
+                    {{ !hideBalanceStatus ? positiveMoney : "***" }} EUR
+                  </tspan>
                 </text>
               </svg>
             </dx-pie-chart>

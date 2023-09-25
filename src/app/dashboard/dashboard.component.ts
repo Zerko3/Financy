@@ -1,4 +1,3 @@
-import { DecimalPipe } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -7,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import DataSource from 'devextreme/data/data_source';
 import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 
@@ -32,6 +30,7 @@ import { State } from 'src/services/state.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('navigation') addCards: ElementRef;
+  @ViewChild('hideBalance') hideBalance: ElementRef;
   bankCardsArray: BankAccount[] = [];
   expenseData: Expense[] = [];
   savingsData: Saveings[] = [];
@@ -43,6 +42,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   clickOnNavigation: boolean = false;
   clickedOnDeleteButton: boolean = false;
+  hideBalanceStatus: boolean = false;
   correctCard: string = '';
   username: string;
 
@@ -182,10 +182,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.bankCardsArray;
   }
 
-  // TODO:
-  // 1. Get button
-  // 2. If true hide ballance else show
-  // 3. Hide with ***
+  hideMoneyBalanceOnCard(e: any) {
+    console.log(e.target.textContent);
 
-  hideMoneyBalanceOnCard() {}
+    if (e.target.textContent === 'Hide balance') {
+      // 1. set boolean value to true or false
+      this.hideBalanceStatus = !this.hideBalanceStatus;
+    }
+  }
 }
