@@ -13,7 +13,7 @@ import { State } from 'src/services/state.service';
 })
 export class InvestingFormComponent implements OnInit {
   investingData: Investing = {
-    investingName: '',
+    coins: '',
     money: 0,
     date: new Date().toLocaleDateString(),
     account: '',
@@ -23,7 +23,13 @@ export class InvestingFormComponent implements OnInit {
   };
 
   accounts: string[] = [];
-  investingTypes = ['Daily', 'Weekly', 'Monthly', 'Additional investment'];
+  coinsToBuy: string[] = ['BTC', 'ETH', 'BNB'];
+  investingTypes: string[] = [
+    'Daily',
+    'Weekly',
+    'Monthly',
+    'Additional investment',
+  ];
   positionEditorOptions = {
     items: this.accounts,
     searchEnabled: true,
@@ -38,6 +44,12 @@ export class InvestingFormComponent implements OnInit {
     text: 'Submit',
     type: 'normal',
     useSubmitBehavior: true,
+  };
+
+  positionEditorOptionsCoinsToBuy = {
+    items: this.coinsToBuy,
+    searchEnabled: true,
+    value: '',
   };
 
   @ViewChild('form') form: NgForm;
@@ -69,15 +81,15 @@ export class InvestingFormComponent implements OnInit {
     // pass data to service
     this.investingDataService.storeInvestingData(data);
 
-    // pass data to state and to store in firebase
-    // this.state.storeInvestingDataInState(data);
+    // pass data into subject for DOM display on investing component
+    this.state.storeSubscribeForInvesting(data);
 
     // pass data to state to array for DOM -> here we update the dahsboard DOM cards
     this.state.getMoneyChangeAndUpdateFirebase(data);
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
-      this.message = `Investment added: ${data.investingName} with ${data.money} dolars.`;
+      this.message = `Investment added: ${data.coins} with ${data.money} dolars.`;
     }
   }
 }

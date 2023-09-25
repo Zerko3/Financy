@@ -60,7 +60,7 @@ export class DataStorage {
           // pass this data so it will be visible on the DOM
           this.cardsArraySubject.next(data);
         }),
-      (error) => {
+      (error): void => {
         console.log(error);
       }
     );
@@ -68,7 +68,7 @@ export class DataStorage {
 
   // Delete valid data from account
 
-  deleteCardFromFirebase(card: number) {
+  deleteCardFromFirebase(card: number): void {
     this.http
       .delete(
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards/${card}.json`

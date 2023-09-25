@@ -12,7 +12,7 @@ import { State } from 'src/services/state.service';
   styleUrls: ['./investing.component.scss'],
 })
 export class InvestingComponent implements OnInit, OnDestroy {
-  energySources = [{ value: 'investedAmount', name: 'investing value' }];
+  stockPrice = [{ value: 'investedAmount', name: 'investing value' }];
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
   investingTotalAmount: number = 0;
@@ -48,12 +48,13 @@ export class InvestingComponent implements OnInit, OnDestroy {
         console.log('Working subject');
         this.investingDataArray.push(data);
 
-        // display on DOM
+        // get data into an object to push it into valid array
         const stock = {
           investedDate: data.date,
           investedAmount: data.money,
         };
 
+        // display on DOM
         this.investingAmount.push(stock);
         this.investingTotalAmount += data.money;
       }

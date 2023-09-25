@@ -51,9 +51,9 @@
         >
           <dx-chart [dataSource]="investingAmount"
             ><dxi-series
-              *ngFor="let energy of energySources"
-              [valueField]="energy.value"
-              [name]="energy.name"
+              *ngFor="let stock of stockPrice"
+              [valueField]="stock.value"
+              [name]="stock.name"
             >
             </dxi-series
             ><dxo-common-series-settings

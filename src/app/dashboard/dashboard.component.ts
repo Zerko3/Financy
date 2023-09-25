@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.firebaseSubscribe.unsubscribe();
   }
 
-  onUserNavigate(e) {
+  onUserNavigate(e): void {
     if (e.target.textContent === 'Add cards') {
       this.router.navigate(['dashboard/createCard']);
     }
@@ -146,13 +146,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClickForDelete(e: any) {
+  onClickForDelete(e: any): void {
     this.clickedOnDeleteButton = !this.clickedOnDeleteButton;
 
     this.correctCard = e;
   }
 
-  onCardClick(e) {
+  onCardClick(e): BankAccount[] {
     // 1. Get the correct card
     const testData = e.target.offsetParent;
     // 2. Remove card from array
@@ -171,7 +171,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.bankCardsArray;
   }
 
-  hideMoneyBalanceOnCard(e: any) {
+  hideMoneyBalanceOnCard(e: any): void {
     console.log(e.target.textContent);
 
     if (e.target.textContent === 'Hide balance') {

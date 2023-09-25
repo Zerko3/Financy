@@ -6,7 +6,11 @@
     <dxi-item itemType="group" caption="Track your savings" [colCount]="1">
       <dxi-item dataField="date"></dxi-item>
       <dxi-item dataField="money"></dxi-item>
-      <dxi-item dataField="investingName"></dxi-item>
+      <dxi-item
+        editorType="dxSelectBox"
+        dataField="coinsToBuy"
+        [editorOptions]="positionEditorOptionsCoinsToBuy"
+      ></dxi-item>
       <dxi-item
         editorType="dxSelectBox"
         dataField="account"
