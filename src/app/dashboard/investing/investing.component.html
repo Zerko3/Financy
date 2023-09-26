@@ -3,31 +3,6 @@
     <app-navigation></app-navigation>
   </div>
   <div class="section--investing__investing--box">
-    <div class="section--investing__investing--box__investings">
-      <div class="section--investing__investing--box__investings__heading--box">
-        <h1>Investing view</h1>
-        <a (click)="userFormNavigate()">Add investment</a>
-      </div>
-      <div
-        class="section--investing__investing--box__investings__investing--list"
-      >
-        <dx-data-grid [dataSource]="investingDataArray" [showBorders]="true">
-          <dxo-selection mode="single"></dxo-selection>
-          <dxi-column dataField="date"></dxi-column>
-          <dxi-column dataField="coinsToBuy"></dxi-column>
-          <dxi-column dataField="typeOfInvesting"></dxi-column>
-          <dxi-column format="currency" dataField="money"></dxi-column>
-          <dxo-summary>
-            <dxi-total-item
-              column="money"
-              summaryType="sum"
-              valueFormat="currency"
-            >
-            </dxi-total-item>
-          </dxo-summary>
-        </dx-data-grid>
-      </div>
-    </div>
     <div class="section--investing__investing--box__investings--overview">
       <div
         class="section--investing__investing--box__investings--overview__money--box"
@@ -56,6 +31,31 @@
       <div
         class="section--investing__investing--box__investings--overview__portfolio--box"
       ></div>
+    </div>
+    <div class="section--investing__investing--box__investings">
+      <div class="section--investing__investing--box__investings__heading--box">
+        <h1>Investing view</h1>
+        <a (click)="userFormNavigate()">Add investment</a>
+      </div>
+      <div
+        class="section--investing__investing--box__investings__investing--list"
+      >
+        <dx-data-grid [dataSource]="investingDataArray" [showBorders]="true">
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="date"></dxi-column>
+          <dxi-column dataField="coins"></dxi-column>
+          <dxi-column dataField="typeOfInvesting"></dxi-column>
+          <dxi-column format="currency" dataField="money"></dxi-column>
+          <dxo-summary>
+            <dxi-total-item
+              column="money"
+              summaryType="sum"
+              valueFormat="currency"
+            >
+            </dxi-total-item>
+          </dxo-summary>
+        </dx-data-grid>
+      </div>
     </div>
   </div>
 </section>

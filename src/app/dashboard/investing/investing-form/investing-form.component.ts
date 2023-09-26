@@ -23,7 +23,7 @@ export class InvestingFormComponent implements OnInit {
   };
 
   accounts: string[] = [];
-  coinsToBuy: string[] = ['BTC', 'ETH', 'BNB'];
+  coins: string[] = ['BTC', 'ETH', 'BNB'];
   investingTypes: string[] = [
     'Daily',
     'Weekly',
@@ -47,7 +47,7 @@ export class InvestingFormComponent implements OnInit {
   };
 
   positionEditorOptionsCoinsToBuy = {
-    items: this.coinsToBuy,
+    items: this.coins,
     searchEnabled: true,
     value: '',
   };
