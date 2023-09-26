@@ -12,19 +12,33 @@
         >
           <span
             class="section--investing__investing--box__investings--overview__money--box__money--overall__full--money"
-            ><span>Balance</span>&euro;{{ investingTotalAmount }}</span
           >
+            <span class="balance">Balance</span>
+            <span
+              (click)="hideInvestingBalance($event)"
+              #hideBalance
+              class="hide--balance"
+              >Hide balance</span
+            >
+            &euro;{{ !hideMoneyBalance ? investingTotalAmount : "***" }}
+          </span>
           <span
             class="section--investing__investing--box__investings--overview__money--box__money--overall__percante"
-            >4% 40 EUR</span
+          >
+            x</span
           >
           <a class="porfolio--btn">View portfolio</a>
         </div>
         <div
           class="section--investing__investing--box__investings--overview__money--box__chart--box"
         >
-          <dx-chart [dataSource]="investingAmount">
-            <dxo-argument-axis argumentType="datetime"> </dxo-argument-axis>
+          <dx-chart palette="Harmony Light" [dataSource]="investingAmount">
+            <dxi-series valueField="investedAmount"></dxi-series>
+            <dxo-common-series-settings
+              #commonSeries
+              argumentField="investedDate"
+              [type]="types[0]"
+            ></dxo-common-series-settings>
           </dx-chart>
         </div>
       </div>

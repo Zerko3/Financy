@@ -98,12 +98,25 @@
             font-size: font-size(font-size-large);
             font-weight: font-weight(font-weight-bold);
 
-            span {
+            .balance {
               position: absolute;
               top: -40%;
               left: 0;
               font-size: font-size(font-size-regular);
               font-weight: font-weight(font-weight-regular);
+            }
+
+            .hide--balance {
+              position: absolute;
+              left: 8rem;
+              width: max-content;
+              top: -40%;
+              cursor: pointer;
+              font-size: font-size(font-size-small);
+              color: var(--main-color);
+              i {
+                margin-right: 0.5rem;
+              }
             }
           }
 

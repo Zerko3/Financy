@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -12,10 +18,18 @@ import { State } from 'src/services/state.service';
   styleUrls: ['./investing.component.scss'],
 })
 export class InvestingComponent implements OnInit, OnDestroy {
+  @ViewChild('hideBalance', { static: false }) hideBalance: ElementRef;
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
   investingTotalAmount: number = 0;
   investingAmount: Stock[] = [];
+  types: string[] = [
+    'splinearea',
+    'stackedsplinearea',
+    'fullstackedsplinearea',
+  ];
+
+  hideMoneyBalance: boolean = false;
 
   constructor(private state: State, private router: Router) {}
 
@@ -44,37 +58,34 @@ export class InvestingComponent implements OnInit, OnDestroy {
     this.investingDataArray = this.state.getInvestingData();
 
     for (const investment of this.investingDataArray) {
+      this.investingTotalAmount += investment.money;
       // get data into an object to push it into valid array
+
+      // the chart needs to show how the TOTAL balance is moveing on the day to day
       const stock = {
         investedDate: investment.date,
-        investedAmount: investment.money,
+        investedAmount: this.investingTotalAmount,
       };
+      console.log(stock);
 
       // display on DOM
       this.investingAmount.push(stock);
-      this.investingTotalAmount += investment.money;
     }
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
       (data) => {
-        // TODO:
-        // 1. Check if there is the same date in the array if so then add together the invesmtent else just add it    normaly
-        // logic...
-
+        this.investingTotalAmount += data.money;
         this.investingDataArray.push(data);
-
-        console.log('Working subject');
 
         // get data into an object to push it into valid array
         const stock = {
           investedDate: data.date,
-          investedAmount: data.money,
+          investedAmount: this.investingTotalAmount,
         };
         // display on DOM
         this.investingAmount.push(stock);
 
         console.log(this.investingAmount);
-        this.investingTotalAmount += data.money;
       }
     );
   }
@@ -86,5 +97,17 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   userFormNavigate() {
     this.router.navigate(['investing/investingForm']);
+  }
+
+  calculateMoneyBalanceIncrese() {
+    // ...
+  }
+
+  hideInvestingBalance(e: any) {
+    // ...
+
+    if (e.target.textContent === 'Hide balance') {
+      this.hideMoneyBalance = !this.hideMoneyBalance;
+    }
   }
 }

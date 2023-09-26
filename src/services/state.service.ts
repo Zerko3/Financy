@@ -43,7 +43,7 @@ export class State {
   // TODO:
 
   // 1. Finish Investing logic
-  // 2. Investing gets appended into the expense table (should not happen)
+
   // 3. Refactor the code
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
@@ -181,7 +181,10 @@ export class State {
 
       if (card.bankAccountName === 'Spending') {
         // update the expense array for expense component DOM
-        if (userInput.expenseType !== 'Saveings') {
+        if (
+          userInput.expenseType !== 'Saveings' &&
+          userInput.expenseType !== 'Investing'
+        ) {
           this.expenseDataForTable.push(userInput);
         }
 
