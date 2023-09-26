@@ -21,7 +21,11 @@ export class InvestingComponent implements OnInit, OnDestroy {
   @ViewChild('hideBalance', { static: false }) hideBalance: ElementRef;
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
+
   investingTotalAmount: number = 0;
+  previousInvestingTotalAmount: number = 0;
+  moneyRelativeIncrese: number = 0;
+
   investingAmount: Stock[] = [];
   types: string[] = [
     'splinearea',
@@ -74,6 +78,9 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
       (data) => {
+        // get the previous total amount (needed for % increse calc -> not modulo!)
+        this.previousInvestingTotalAmount = this.investingTotalAmount;
+
         this.investingTotalAmount += data.money;
         this.investingDataArray.push(data);
 
@@ -86,6 +93,14 @@ export class InvestingComponent implements OnInit, OnDestroy {
         this.investingAmount.push(stock);
 
         console.log(this.investingAmount);
+
+        const moneyIncrese =
+          ((this.investingTotalAmount - this.previousInvestingTotalAmount) /
+            this.previousInvestingTotalAmount) *
+          100;
+        console.log(moneyIncrese);
+
+        this.moneyRelativeIncrese = +moneyIncrese.toFixed(2);
       }
     );
   }
@@ -101,11 +116,16 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   calculateMoneyBalanceIncrese() {
     // ...
+    // 1. get total money prior to increse
+    // 2. get new total money
+    // 3. get % of increse
+
+    const moneyIncrese =
+      this.previousInvestingTotalAmount / this.investingTotalAmount;
+    console.log(moneyIncrese);
   }
 
   hideInvestingBalance(e: any) {
-    // ...
-
     if (e.target.textContent === 'Hide balance') {
       this.hideMoneyBalance = !this.hideMoneyBalance;
     }
