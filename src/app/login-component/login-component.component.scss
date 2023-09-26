@@ -24,6 +24,11 @@
     padding: 0.3rem;
     border-radius: 2rem;
 
+    @include media-medium-big {
+      grid-template-columns: repeat(1, 1fr);
+      height: 70%;
+    }
+
     &__img--box {
       height: 100%;
       width: 100%;
@@ -65,6 +70,10 @@
         background-color: var(--main-color-darker);
         width: 70%;
         border-radius: 2rem;
+
+        @include media-medium-big {
+          display: none;
+        }
       }
     }
 
