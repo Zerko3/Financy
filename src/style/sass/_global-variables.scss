@@ -29,10 +29,18 @@ $font-size: (
 );
 
 $break-points: (
+  "break-point-small-extra": 358px,
   "break-point-small": 400px,
+  "break-point-bigger-small": 440px,
+  "break-point-medium-small-extra": 515px,
+  "break-point-medium-small": 555px,
   "break-point-medium": 600px,
+  "break-point-medium-big": 700px,
+  "break-point-tablet-small": 768px,
   "break-point-tablet": 800px,
-  "break-point-desktop": 1300px,
+  "break-point-tablet-big": 900px,
+  "break-point-desktop-small": 1300px,
+  "break-point-desktop": 1500px,
 );
 
 @function font-weight($font-weight-style) {

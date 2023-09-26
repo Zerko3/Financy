@@ -1,3 +1,5 @@
+@use "../../style/sass/global-variables" as *;
+
 @mixin flexbox--center--all {
   display: flex;
   align-items: center;
@@ -37,4 +39,85 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+}
+
+// media queries
+@mixin media-desktop {
+  @media screen and (min-width: break-point(break-point-desktop)) {
+    @content;
+  }
+}
+
+@mixin media-desktop-small {
+  @media screen and (max-width: break-point(break-point-desktop-small)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 900px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-tablet-big {
+  @media screen and (max-width: break-point(break-point-tablet-big)) {
+    @content;
+  }
+}
+//*-*-*-*-*-*-*-*-*-*-- The 800px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-tablet {
+  @media screen and (max-width: break-point(break-point-tablet)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 768px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-tablet-small {
+  @media screen and (max-width: break-point(break-point-tablet-small)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 635px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-medium-big {
+  @media screen and (max-width: break-point(break-point-medium-big)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 600px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-medium {
+  @media screen and (max-width: break-point(break-point-medium)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 550px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-medium-small {
+  @media screen and (max-width: break-point(break-point-medium-small)) {
+    @content;
+  }
+}
+//*-*-*-*-*-*-*-*-*-*-- The 515px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-medium-small-extra {
+  @media screen and (max-width: break-point(break-point-medium-small-extra)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 440px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-bigger-small {
+  @media screen and (max-width: break-point(break-point-bigger-small)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 400px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-small {
+  @media screen and (max-width: break-point(break-point-small)) {
+    @content;
+  }
+}
+
+//*-*-*-*-*-*-*-*-*-*-- The 358px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+@mixin media-small-extra {
+  @media screen and (max-width: break-point(break-point-small-extra)) {
+    @content;
+  }
 }

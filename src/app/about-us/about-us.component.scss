@@ -20,6 +20,14 @@
     width: 100%;
     position: relative;
 
+    @include media-bigger-small {
+      position: initial;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      align-items: center;
+      justify-content: center;
+    }
+
     &__img--box {
       @include flexbox--center--all;
 
@@ -28,6 +36,14 @@
         height: auto;
         width: 70%;
         animation: text_animation 1s ease-in;
+
+        @include media-desktop-small {
+          width: 50%;
+        }
+
+        @include media-bigger-small {
+          display: none;
+        }
       }
       &::before {
         content: "";
@@ -37,8 +53,26 @@
         width: 40rem;
         border-radius: 50%;
         border: 1rem dotted var(--main-color);
-        z-index: 10;
+        z-index: -1;
         animation: inner_border_animation 1s ease-in-out;
+
+        @include media-desktop-small {
+          height: 30rem;
+          width: 30rem;
+        }
+
+        @include media-medium-big {
+          opacity: 0.3;
+        }
+
+        @include media-medium-small-extra {
+          height: 20rem;
+          width: 20rem;
+        }
+
+        @include media-bigger-small {
+          display: none;
+        }
       }
       &::after {
         content: "";
@@ -50,6 +84,20 @@
         border: 1rem dotted var(--gray-color-lighter);
         z-index: -1;
         animation: outer_border_animation 1.3s ease-in-out;
+
+        @include media-desktop-small {
+          height: 50rem;
+          width: 50rem;
+        }
+
+        @include media-medium-small-extra {
+          height: 40rem;
+          width: 40rem;
+        }
+
+        @include media-bigger-small {
+          display: none;
+        }
       }
     }
 
@@ -60,6 +108,36 @@
       width: 40%;
       animation: text_animation 2.5s ease-in-out;
 
+      &--number {
+        display: none;
+      }
+
+      @include media-desktop-small {
+        right: -5%;
+        top: 32%;
+      }
+
+      @include media-tablet-big {
+        top: 25%;
+      }
+
+      @include media-bigger-small {
+        position: initial;
+        width: 100%;
+
+        &--number {
+          display: block;
+          position: relative;
+          z-index: -11;
+          top: 7rem;
+          left: 0;
+          font-size: 15rem;
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+          opacity: 0.2;
+        }
+      }
+
       &__heading--box {
         position: relative;
         &--circle {
@@ -72,6 +150,27 @@
           border-radius: 50%;
           border: 0.4rem dotted var(--main-color);
           animation: small_circle_animation 1s ease-in-out;
+
+          @include media-tablet-big {
+            height: 3rem;
+            width: 3rem;
+          }
+
+          @include media-medium-big {
+            height: 2rem;
+            width: 2rem;
+          }
+
+          @include media-medium-small {
+            height: 1rem;
+            width: 1rem;
+            background-color: var(--main-color);
+            border: none;
+          }
+
+          @include media-medium-small-extra {
+            display: none;
+          }
         }
         &--heading {
           font-size: font-size(font-size-medium);
@@ -83,6 +182,22 @@
       &__text--box {
         font-size: font-size(font-size-regular);
         font-weight: font-weight(font-weight-light);
+        width: 80%;
+        @include media-desktop-small {
+          width: 60%;
+        }
+
+        @include media-tablet-small {
+          width: 80%;
+        }
+
+        @include media-medium-small {
+          font-weight: font-weight(font-weight-bold);
+        }
+
+        @include media-bigger-small {
+          width: 100%;
+        }
       }
     }
 
@@ -93,6 +208,39 @@
       width: 40%;
       animation: text_animation 2.5s ease-in-out;
 
+      &--number {
+        display: none;
+      }
+
+      @include media-desktop-small {
+        right: -5%;
+      }
+
+      @include media-tablet-big {
+        bottom: 25%;
+      }
+
+      @include media-medium-big {
+        bottom: 20%;
+      }
+
+      @include media-bigger-small {
+        position: initial;
+        width: 100%;
+
+        &--number {
+          display: block;
+          position: relative;
+          z-index: -11;
+          top: 7rem;
+          left: 0;
+          font-size: 15rem;
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+          opacity: 0.2;
+        }
+      }
+
       &__heading--box {
         position: relative;
         &--circle {
@@ -105,6 +253,27 @@
           border-radius: 50%;
           border: 0.4rem dotted var(--main-color);
           animation: small_circle_animation 1s ease-in-out;
+
+          @include media-tablet-big {
+            height: 3rem;
+            width: 3rem;
+          }
+
+          @include media-medium-big {
+            height: 2rem;
+            width: 2rem;
+          }
+
+          @include media-medium-small {
+            height: 1rem;
+            width: 1rem;
+            background-color: var(--main-color);
+            border: none;
+          }
+
+          @include media-medium-small-extra {
+            display: none;
+          }
         }
         &--heading {
           font-size: font-size(font-size-medium);
@@ -116,6 +285,22 @@
       &__text--box {
         font-size: font-size(font-size-regular);
         font-weight: font-weight(font-weight-light);
+        width: 80%;
+        @include media-desktop-small {
+          width: 60%;
+        }
+
+        @include media-tablet-small {
+          width: 80%;
+        }
+
+        @include media-medium-small {
+          font-weight: font-weight(font-weight-bold);
+        }
+
+        @include media-bigger-small {
+          width: 100%;
+        }
       }
     }
 
@@ -126,6 +311,39 @@
       width: 40%;
       animation: text_animation 2.5s ease-in-out;
 
+      &--number {
+        display: none;
+      }
+
+      @include media-desktop-small {
+        left: -5%;
+      }
+
+      @include media-tablet-big {
+        bottom: 25%;
+      }
+
+      @include media-medium-big {
+        bottom: 20%;
+      }
+
+      @include media-bigger-small {
+        position: initial;
+        width: 100%;
+
+        &--number {
+          display: block;
+          position: relative;
+          z-index: -11;
+          top: 7rem;
+          left: 0;
+          font-size: 15rem;
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+          opacity: 0.2;
+        }
+      }
+
       &__heading--box {
         position: relative;
         &--circle {
@@ -138,17 +356,69 @@
           border-radius: 50%;
           border: 0.4rem dotted var(--main-color);
           animation: small_circle_animation 1s ease-in-out;
+
+          @include media-tablet-big {
+            height: 3rem;
+            width: 3rem;
+          }
+
+          @include media-medium-big {
+            height: 2rem;
+            width: 2rem;
+            right: -20%;
+          }
+
+          @include media-medium {
+            right: -35%;
+          }
+
+          @include media-medium-small {
+            height: 1rem;
+            width: 1rem;
+            background-color: var(--main-color);
+            border: none;
+          }
+
+          @include media-medium-small-extra {
+            display: none;
+          }
         }
         &--heading {
           font-size: font-size(font-size-medium);
           font-weight: font-weight(font-weight-light);
           color: var(--main-color);
+          left: 30%;
+          position: relative;
+          @include media-desktop-small {
+            left: 40%;
+          }
+
+          @include media-bigger-small {
+            position: initial;
+          }
         }
       }
 
       &__text--box {
         font-size: font-size(font-size-regular);
         font-weight: font-weight(font-weight-light);
+        position: relative;
+        left: 30%;
+        width: 80%;
+
+        @include media-desktop-small {
+          width: 60%;
+          left: 40%;
+        }
+
+        @include media-medium-small {
+          font-weight: font-weight(font-weight-bold);
+        }
+
+        @include media-bigger-small {
+          position: initial;
+          width: 100%;
+        }
       }
     }
     &__para--box--4 {
@@ -158,6 +428,36 @@
       width: 40%;
       animation: text_animation 2.5s ease-in-out;
 
+      &--number {
+        display: none;
+      }
+
+      @include media-desktop-small {
+        left: -5%;
+        top: 32%;
+      }
+
+      @include media-tablet-big {
+        top: 25%;
+      }
+
+      @include media-bigger-small {
+        position: initial;
+        width: 100%;
+
+        &--number {
+          display: block;
+          position: relative;
+          z-index: -11;
+          top: 7rem;
+          left: 0;
+          font-size: 15rem;
+          font-weight: font-weight(font-weight-light);
+          color: var(--main-color);
+          opacity: 0.2;
+        }
+      }
+
       &__heading--box {
         position: relative;
 
@@ -171,17 +471,64 @@
           border-radius: 50%;
           border: 0.4rem dotted var(--main-color);
           animation: small_circle_animation 1s ease-in-out;
+
+          @include media-tablet-big {
+            height: 3rem;
+            width: 3rem;
+          }
+
+          @include media-medium-big {
+            height: 2rem;
+            width: 2rem;
+          }
+
+          @include media-medium-small {
+            height: 1rem;
+            width: 1rem;
+            background-color: var(--main-color);
+            border: none;
+          }
+
+          @include media-medium-small-extra {
+            display: none;
+          }
         }
         &--heading {
           font-size: font-size(font-size-medium);
           font-weight: font-weight(font-weight-light);
           color: var(--main-color);
+          left: 30%;
+          position: relative;
+          @include media-desktop-small {
+            left: 40%;
+          }
+
+          @include media-bigger-small {
+            position: initial;
+          }
         }
       }
 
       &__text--box {
         font-size: font-size(font-size-regular);
         font-weight: font-weight(font-weight-light);
+        width: 80%;
+        left: 30%;
+        position: relative;
+
+        @include media-desktop-small {
+          left: 40%;
+          width: 60%;
+        }
+
+        @include media-medium-small {
+          font-weight: font-weight(font-weight-bold);
+        }
+
+        @include media-bigger-small {
+          position: initial;
+          width: 100%;
+        }
       }
     }
   }
