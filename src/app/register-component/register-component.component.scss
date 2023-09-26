@@ -24,6 +24,11 @@
     padding: 0.3rem;
     border-radius: 2rem;
 
+    @include media-medium-big {
+      grid-template-columns: repeat(1, 1fr);
+      height: 70%;
+    }
+
     &__img--box {
       height: 100%;
       width: 100%;
@@ -50,21 +55,42 @@
         color: var(--white-color);
         font-size: font-size(font-size-large);
         font-weight: font-weight(font-weight-regular);
+
+        @include media-small {
+          margin-top: 1.2rem;
+        }
       }
 
       &--text {
-        margin-top: 3.2rem;
+        margin: 3.2rem 0 10rem 0;
         color: var(--white-color);
         font-size: font-size(font-size-regular);
         font-weight: font-weight(font-weight-light);
+
+        @include media-medium-big {
+          margin: 3.2rem 0 0 0;
+        }
+
+        @include media-small {
+          display: none;
+        }
       }
 
       &__carousel--box {
         position: absolute;
         bottom: 2rem;
         background-color: var(--main-color-darker);
-        width: 70%;
+        width: 80%;
         border-radius: 2rem;
+        padding: 1rem 2.4rem;
+
+        @include media-tablet-small {
+          height: 45%;
+        }
+
+        @include media-medium-big {
+          display: none;
+        }
       }
     }
 
@@ -83,6 +109,10 @@
         font-size: font-size(font-size-regular);
         color: var(--main-color);
         font-weight: font-weight(font-weight-light);
+
+        @include media-small {
+          top: 0;
+        }
       }
 
       &__heading--box {
@@ -92,6 +122,14 @@
         @include flexbox--center--all;
 
         gap: 2rem;
+
+        @include media-medium-big {
+          top: 3rem;
+        }
+
+        @include media-small {
+          top: 2rem;
+        }
 
         h3 {
           font-size: font-size(font-size-small);
@@ -199,12 +237,24 @@
   gap: 1rem;
   width: 100%;
   height: 100%;
+  padding: 1.2rem 2.4rem;
+
+  @include media-tablet-small {
+    padding: 0;
+  }
 }
 
 .carousel--para {
   font-size: font-size(font-size-small);
   color: var(--white-color);
   white-space: normal;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  @include media-tablet-small {
+    font-size: 1.2rem !important;
+  }
 }
 
 .carousel__user--box {
@@ -215,11 +265,19 @@
     height: auto;
     border-radius: 50%;
     height: 4rem;
+
+    @include media-tablet-small {
+      height: 2.5rem;
+    }
   }
 
   span {
     font-size: font-size(font-size-small);
     color: var(--white-color);
+
+    @include media-tablet-small {
+      font-size: 1.2rem !important;
+    }
   }
 }
 
@@ -233,4 +291,17 @@
   min-width: 30rem;
   max-width: 40rem;
   font-size: font-size(font-size-regular);
+}
+
+dx-gallery {
+  width: auto;
+  text-align: center;
+}
+
+.dx-template-wrapper,
+.dx-item-content,
+.dx-gallery-item-content,
+.dx-gallery-item-invisible {
+  width: 100%;
+  text-align: center;
 }

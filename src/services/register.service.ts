@@ -6,17 +6,17 @@ export class RegisterService {
   carouselArray: Carousel[] = [
     {
       userOpinion:
-        'I haveve been using this app for over a year now, and it is transformed my saving habits. The secure transactions make me feel confident about my financial data, and the 5% boost in savings is real! Plus, tracking my finances has never been easier. Highly recommend!',
+        'The secure transactions make me feel confident about my financial data, and the 5% boost in savings is real! Plus, tracking my finances has never been easier. Highly recommend!',
       userName: 'Mark Willson',
     },
     {
       userOpinion:
-        'It is super user-friendly, and I appreciate the added layer of security. The only reason I am not giving it 5 stars is that I wish they had more investment options. But overall, it is a fantastic platform for saving and investing.',
+        'It is super user-friendly, and I appreciate the added layer of security. The only reason I am not giving it 5 stars is that I wish they had more investment options.',
       userName: 'Jonna Morgan',
     },
     {
       userOpinion:
-        'FinancY has been a game-changer for me. The 5% increase in savings is no joke, and I have been able to reach my financial goals faster than I ever thought possible. Tracking my expenses has made me much more mindful of my spending.',
+        'The 5% increase in savings is no joke, and I have been able to reach my financial goals faster than I ever thought possible. Tracking my expenses has made me much more mindful.',
       userName: 'Bob Teemo',
     },
   ];

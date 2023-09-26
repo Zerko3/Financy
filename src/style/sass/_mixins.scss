@@ -48,6 +48,7 @@
   }
 }
 
+// 1300px
 @mixin media-desktop-small {
   @media screen and (max-width: break-point(break-point-desktop-small)) {
     @content;

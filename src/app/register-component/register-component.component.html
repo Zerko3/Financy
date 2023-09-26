@@ -18,10 +18,10 @@
             <dx-gallery
               [dataSource]="userCarouselArray"
               [height]="200"
+              width="100%"
+              [showIndicator]="false"
               [slideshowDelay]="slideshowDelay"
               [loop]="true"
-              [showNavButtons]="true"
-              [showIndicator]="true"
               ><div *dxTemplate="let user of 'item'">
                 <div class="carousel">
                   <p class="carousel--para">
