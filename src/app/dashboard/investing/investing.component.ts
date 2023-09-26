@@ -26,6 +26,10 @@ export class InvestingComponent implements OnInit, OnDestroy {
   previousInvestingTotalAmount: number = 0;
   moneyRelativeIncrese: number = 0;
 
+  allowedPageSizes: [number] = [10];
+  showPageSizeSelector: boolean = true;
+  showInfo: boolean = true;
+  showNavButtons: boolean = true;
   investingAmount: Stock[] = [];
   types: string[] = [
     'splinearea',
@@ -36,11 +40,6 @@ export class InvestingComponent implements OnInit, OnDestroy {
   hideMoneyBalance: boolean = false;
 
   constructor(private state: State, private router: Router) {}
-
-  // BUGS:
-  // 1. When i add an investemnt it does not append right away -> subject
-
-  // 3. The money pool does not get updated
 
   // TODO:
   // 1. Choose if i will have an API here to track investing stocks
@@ -63,14 +62,12 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
     for (const investment of this.investingDataArray) {
       this.investingTotalAmount += investment.money;
-      // get data into an object to push it into valid array
 
       // the chart needs to show how the TOTAL balance is moveing on the day to day
       const stock = {
         investedDate: investment.date,
         investedAmount: this.investingTotalAmount,
       };
-      console.log(stock);
 
       // display on DOM
       this.investingAmount.push(stock);
@@ -92,14 +89,13 @@ export class InvestingComponent implements OnInit, OnDestroy {
         // display on DOM
         this.investingAmount.push(stock);
 
-        console.log(this.investingAmount);
-
+        // calculate the increse in money
         const moneyIncrese =
           ((this.investingTotalAmount - this.previousInvestingTotalAmount) /
             this.previousInvestingTotalAmount) *
           100;
-        console.log(moneyIncrese);
 
+        // get 2 decimals for the number (needs to be + since .toFixed(n) returns a string!)
         this.moneyRelativeIncrese = +moneyIncrese.toFixed(2);
       }
     );
@@ -112,17 +108,6 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   userFormNavigate() {
     this.router.navigate(['investing/investingForm']);
-  }
-
-  calculateMoneyBalanceIncrese() {
-    // ...
-    // 1. get total money prior to increse
-    // 2. get new total money
-    // 3. get % of increse
-
-    const moneyIncrese =
-      this.previousInvestingTotalAmount / this.investingTotalAmount;
-    console.log(moneyIncrese);
   }
 
   hideInvestingBalance(e: any) {

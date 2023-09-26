@@ -58,6 +58,15 @@
         class="section--investing__investing--box__investings__investing--list"
       >
         <dx-data-grid [dataSource]="investingDataArray" [showBorders]="true">
+          <dxo-paging [pageSize]="10"> </dxo-paging>
+          <dxo-pager
+            [visible]="true"
+            [allowedPageSizes]="allowedPageSizes"
+            [showPageSizeSelector]="showPageSizeSelector"
+            [showInfo]="showInfo"
+            [showNavigationButtons]="showNavButtons"
+          >
+          </dxo-pager>
           <dxo-selection mode="single"></dxo-selection>
           <dxi-column dataField="date"></dxi-column>
           <dxi-column dataField="coins"></dxi-column>
@@ -76,5 +85,5 @@
     </div>
   </div>
 </section>
-<!-- TODO: -->
+
 <router-outlet></router-outlet>
