@@ -11,6 +11,11 @@
   &__navigation--box {
     position: absolute;
     width: 10%;
+
+    @include media-medium-big {
+      bottom: 47px;
+      z-index: 10;
+    }
   }
 
   &__content--box {

@@ -5,6 +5,11 @@ aside {
   position: absolute;
   height: 100vh;
   width: 5vw;
+
+  @include media-medium-big {
+    height: 5vh;
+    width: 100vw;
+  }
 }
 
 .section--navigation {
@@ -22,6 +27,10 @@ aside {
 
     gap: 3rem;
     width: 100%;
+
+    @include media-medium-big {
+      flex-direction: row;
+    }
 
     a {
       i {
@@ -58,12 +67,27 @@ aside {
 
 .logout--yes {
   top: 1rem;
+
+  @include media-medium-big {
+    left: 2rem;
+    top: -11px;
+  }
 }
+
 .logout--no {
   top: 4rem;
+
+  @include media-medium-big {
+    left: 4rem;
+    top: -11px;
+  }
 }
 
 .logout--prompt {
   top: -2rem;
   font-size: 1.2rem;
+
+  @include media-medium-big {
+    top: -6px;
+  }
 }
