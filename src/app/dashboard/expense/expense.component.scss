@@ -27,10 +27,7 @@
     &--add {
       cursor: pointer;
       font-size: font-size(font-size-small);
-      background-color: var(--main-color);
-      color: var(--white-color);
-      padding: 0.5rem 1rem;
-      border-radius: 9px;
+      color: var(--main-color);
     }
 
     &--heading {
@@ -83,11 +80,21 @@
 
 .dx-widget,
 .dx-widget *,
-.dx-widget ::after,
-.dx-widget ::before,
+.dx-widget::after,
+.dx-widget::before,
 .dx-widget::after,
 .dx-widget::before {
   font-size: 1.4rem !important;
   background-color: transparent;
-  width: 150rem;
+}
+
+dx-data-grid {
+  height: 40rem;
+  max-width: 130rem;
+  min-width: 50rem;
+}
+
+#icon {
+  font-size: font-size(font-size-small) !important;
+  margin-right: 0.5rem;
 }

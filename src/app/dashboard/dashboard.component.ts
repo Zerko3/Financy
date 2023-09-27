@@ -26,6 +26,7 @@ import { State } from 'src/services/state.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('navigation') addCards: ElementRef;
   @ViewChild('hideBalance') hideBalance: ElementRef;
+
   bankCardsArray: BankAccount[] = [];
   expenseData: Expense[] = [];
   savingsData: Saveings[] = [];

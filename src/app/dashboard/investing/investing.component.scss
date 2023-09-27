@@ -35,10 +35,10 @@
         a {
           cursor: pointer;
           font-size: font-size(font-size-small);
-          background-color: var(--main-color);
-          color: var(--white-color);
-          padding: 0.5rem 1rem;
-          border-radius: 9px;
+          color: var(--main-color);
+          i {
+            margin-right: 0.5rem;
+          }
         }
       }
 

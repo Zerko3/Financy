@@ -4,12 +4,7 @@
   </div>
   <div class="section--expense__expense--box">
     <div class="section--expense__expense--box__heading--box">
-      <h1 class="section--expense__expense--box--heading">Invoice</h1>
-      <a
-        class="section--expense__expense--box--add"
-        (click)="userFormNavigation()"
-        >Add transaction</a
-      >
+      <h1 class="section--expense__expense--box--heading">Expenses overview</h1>
     </div>
     <div class="section--expense__expense--box__invoice">
       <div class="section--expense__expense--box__invoice--subcriptions">
@@ -37,6 +32,14 @@
         <h1>Clothes</h1>
         <span>{{ clothesMoney === 0 ? 0 : clothesMoney }}EUR</span>
       </div>
+    </div>
+    <div class="section--expense__expense--box__heading--box">
+      <h1 class="section--expense__expense--box--heading">Invoice</h1>
+      <a
+        class="section--expense__expense--box--add"
+        (click)="userFormNavigation()"
+        ><i id="icon" class="dx-icon-add"></i>Add transaction</a
+      >
     </div>
     <div class="section--expense__expense--box__tracking">
       <dx-data-grid
@@ -68,13 +71,7 @@
           dataType="datetime"
           format="M/d/yyyy, HH:mm"
         ></dxi-column>
-        <dxi-column
-          alignment="left"
-          [width]="200"
-          dataField="money"
-          format="currency"
-          [editorOptions]="{ format: 'currency', showClearButton: true }"
-        ></dxi-column>
+
         <dxi-column
           alignment="left"
           [width]="200"
@@ -95,6 +92,21 @@
           [width]="200"
           dataField="billStatus"
         ></dxi-column>
+        <dxi-column
+          alignment="left"
+          [width]="200"
+          dataField="money"
+          format="currency"
+          [editorOptions]="{ format: 'currency', showClearButton: true }"
+        ></dxi-column>
+        <dxo-summary>
+          <dxi-total-item
+            column="money"
+            summaryType="sum"
+            valueFormat="currency"
+          >
+          </dxi-total-item>
+        </dxo-summary>
       </dx-data-grid>
     </div>
   </div>
