@@ -1,5 +1,5 @@
 @use "global-variables" as *;
-
+@use "../../style/sass/mixins" as *;
 *,
 *::after,
 *::before {
@@ -26,4 +26,8 @@ a {
 .dx-widget::after,
 .dx-widget::before {
   font-size: 1.4rem !important;
+
+  @include media-small-extra {
+    font-size: 1rem !important;
+  }
 }

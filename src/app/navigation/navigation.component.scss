@@ -5,11 +5,13 @@ aside {
   position: absolute;
   height: 100vh;
   width: 5vw;
+  z-index: 1000000;
 
-  @include media-medium-big {
+  @include media-tablet-small {
     height: 5vh;
     width: 100vw;
     bottom: 0;
+    position: fixed;
   }
 }
 
@@ -29,7 +31,7 @@ aside {
     gap: 3rem;
     width: 100%;
 
-    @include media-medium-big {
+    @include media-tablet-small {
       flex-direction: row;
     }
 
@@ -69,7 +71,7 @@ aside {
 .logout--yes {
   top: 1rem;
 
-  @include media-medium-big {
+  @include media-tablet-small {
     left: 2rem;
     top: -11px;
   }
@@ -83,7 +85,7 @@ aside {
 .logout--no {
   top: 4rem;
 
-  @include media-medium-big {
+  @include media-tablet-small {
     left: 4rem;
     top: -11px;
   }
@@ -98,7 +100,7 @@ aside {
   top: -2rem;
   font-size: 1.2rem;
 
-  @include media-medium-big {
+  @include media-tablet-small {
     top: -6px;
   }
 }

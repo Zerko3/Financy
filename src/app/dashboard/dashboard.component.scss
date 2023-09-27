@@ -8,13 +8,18 @@
   position: relative;
   overflow: hidden;
 
+  @include media-tablet-small {
+    overflow: initial;
+  }
+
   &__navigation--box {
     position: absolute;
     width: 10%;
 
-    @include media-medium-big {
+    @include media-medium-small {
       bottom: 0;
       z-index: 10;
+      position: fixed;
     }
   }
 
@@ -161,6 +166,10 @@
       background-color: var(--background-color);
       border-radius: 11px;
 
+      @include media-tablet-small {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
       &--transactions {
         padding: 1.2rem 2.4rem;
         width: 100%;
@@ -228,6 +237,30 @@
 
 dx-pie-chart {
   height: auto;
+  width: 50rem;
+
+  @include media-tablet-big {
+    width: 30rem;
+  }
+
+  @include media-small-extra {
+    width: 25rem;
+  }
+}
+
+dx-list {
+  @include media-small-extra {
+    width: 20rem;
+
+    .dx-widget,
+    .dx-widget *,
+    .dx-widget::after,
+    .dx-widget::before,
+    .dx-widget::after,
+    .dx-widget::before {
+      font-size: 1rem !important;
+    }
+  }
 }
 
 .card--deletion--btn i,
