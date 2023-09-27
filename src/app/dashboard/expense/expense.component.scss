@@ -17,6 +17,10 @@
     height: auto;
     width: -webkit-fill-available;
 
+    @include media-tablet-small {
+      left: initial;
+    }
+
     &__heading--box {
       @include flexbox--flex-start;
 
@@ -42,21 +46,39 @@
       height: auto;
       width: auto;
       @include flexbox--center--all;
+      padding: 1.2rem 2.4rem;
 
       gap: 3rem;
+
+      @include media-small-extra {
+        gap: 1rem;
+      }
 
       &--subcriptions,
       &--food,
       &--fun,
       &--bills,
       &--random {
-        text-align: center;
-        font-size: 3rem;
+        @include flexbox--center--all;
+        flex-direction: column;
+
+        font-size: font-size(font-size-regular);
         padding: 1.2rem 2.4rem;
-        width: 15rem;
-        height: 15rem;
+        max-width: 15rem;
+        max-height: 15rem;
+        min-height: 5rem;
+        min-width: 5rem;
         outline: 1px solid var(--gray-color);
         border-radius: 2rem;
+
+        @include media-medium-big {
+          font-size: font-size(font-size-small);
+        }
+
+        @include media-small-extra {
+          height: 3rem;
+          width: 3rem;
+        }
       }
     }
 
@@ -90,8 +112,7 @@
 
 dx-data-grid {
   height: 40rem;
-  max-width: 130rem;
-  min-width: 50rem;
+  width: 90%;
 }
 
 #icon {
