@@ -9,6 +9,7 @@ aside {
   @include media-medium-big {
     height: 5vh;
     width: 100vw;
+    bottom: 0;
   }
 }
 
@@ -72,6 +73,11 @@ aside {
     left: 2rem;
     top: -11px;
   }
+
+  @include media-bigger-small {
+    left: -2.4rem;
+    top: -2rem;
+  }
 }
 
 .logout--no {
@@ -80,6 +86,11 @@ aside {
   @include media-medium-big {
     left: 4rem;
     top: -11px;
+  }
+
+  @include media-bigger-small {
+    left: -0.4rem;
+    top: -2rem;
   }
 }
 
