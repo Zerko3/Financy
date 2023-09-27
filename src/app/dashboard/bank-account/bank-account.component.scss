@@ -11,6 +11,10 @@
   z-index: 20;
   width: auto;
   @include flexbox--center--all;
+
+  @include media-medium {
+    width: 70%;
+  }
 }
 
 div i {

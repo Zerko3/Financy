@@ -138,6 +138,7 @@ dx-data-grid {
 
 #chart {
   height: auto;
+  width: 90%;
 
   @include media-medium-small {
     height: 25rem;
