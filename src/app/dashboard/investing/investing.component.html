@@ -32,7 +32,11 @@
         <div
           class="section--investing__investing--box__investings--overview__money--box__chart--box"
         >
-          <dx-chart palette="Harmony Light" [dataSource]="investingAmount">
+          <dx-chart
+            id="chart"
+            palette="Harmony Light"
+            [dataSource]="investingAmount"
+          >
             <dxi-series valueField="investedAmount"></dxi-series>
             <dxo-argument-axis
               [valueMarginsEnabled]="false"
@@ -45,9 +49,6 @@
           </dx-chart>
         </div>
       </div>
-      <div
-        class="section--investing__investing--box__investings--overview__portfolio--box"
-      ></div>
     </div>
     <div class="section--investing__investing--box__investings">
       <div class="section--investing__investing--box__investings__heading--box">
@@ -59,7 +60,11 @@
       <div
         class="section--investing__investing--box__investings__investing--list"
       >
-        <dx-data-grid [dataSource]="investingDataArray" [showBorders]="true">
+        <dx-data-grid
+          width="100%"
+          [dataSource]="investingDataArray"
+          [showBorders]="true"
+        >
           <dxo-paging [pageSize]="10"> </dxo-paging>
           <dxo-pager
             [visible]="true"
