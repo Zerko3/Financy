@@ -104,14 +104,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       // pass data to state
       this.state.passBankCardToState(data);
 
-      this.toastSignal = this.state.getToastSignal();
-      console.log(this.toastSignal);
-
-      if (this.toastSignal) {
-        this.message = `The maximum number of cards has been added.`;
-        this.isVisibleToast = true;
-      }
-
       // as soon as the data is passed into state call the return function on the array
       this.bankCardsArray = this.state.getBankCard();
     });

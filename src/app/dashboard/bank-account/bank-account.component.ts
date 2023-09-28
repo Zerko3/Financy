@@ -14,7 +14,7 @@ import { State } from 'src/services/state.service';
 export class BankAccountComponent {
   @ViewChild('form') form: NgForm;
   isVisibleToast: boolean = false;
-  type: string = 'success';
+  type: string = '';
   message: string = '';
   cards = ['Visa', 'Mastercard'];
   cardGoal = ['Saveings', 'Spending'];
@@ -50,6 +50,8 @@ export class BankAccountComponent {
     value: '',
   };
 
+  isCardAmmountReached: boolean = false;
+
   constructor(
     private state: State,
     private router: Router,
@@ -67,9 +69,24 @@ export class BankAccountComponent {
     // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
 
+    // here is where i need to get the lenght of the array in boolean
+    this.isCardAmmountReached = this.state.getToastSignal();
+    console.log(this.isVisibleToast);
+
+    // only run this code if the form is valid
     if (this.form.status === 'VALID') {
-      this.message = `The card named: ${data.bankAccountCustomName} was created.`;
       this.isVisibleToast = true;
+      // this is activated if we have reched the max card amount
+      if (this.isCardAmmountReached) {
+        this.isCardAmmountReached = true;
+        console.log(this.isCardAmmountReached);
+      }
+
+      this.type = this.isCardAmmountReached ? 'error' : 'success';
+
+      this.message = this.isCardAmmountReached
+        ? `The maximum number of cards has been added.`
+        : `The card named: ${data.bankAccountCustomName} was created.`;
     }
   }
 }

@@ -128,10 +128,18 @@
       position: relative;
       overflow-x: scroll;
 
+      @include media-medium-small-extra {
+        flex-direction: column;
+      }
+
       &--card {
         height: auto;
         width: 30rem;
         position: relative;
+
+        @include media-medium-small-extra {
+          width: 10rem;
+        }
 
         .delete--card {
           font-size: font-size(font-size-regular);
@@ -142,12 +150,9 @@
           width: auto;
           cursor: pointer;
 
-          @include media-medium-small {
+          @include media-medium {
             color: var(--gray-color);
             font-weight: font-weight(font-weight-bold);
-          }
-
-          @include media-small {
             top: 1rem;
             right: 2rem;
           }
@@ -157,7 +162,7 @@
           height: auto;
           width: 100%;
 
-          @include media-medium-small {
+          @include media-medium {
             opacity: 0.35;
           }
         }
@@ -169,9 +174,13 @@
           top: 3rem;
           left: 3rem;
 
-          @include media-medium-small {
+          @include media-medium {
             color: var(--gray-color);
             font-weight: font-weight(font-weight-bold);
+          }
+
+          @include media-bigger-small {
+            font-size: font-size(font-size-small);
           }
         }
       }

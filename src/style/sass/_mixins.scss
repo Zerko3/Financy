@@ -75,7 +75,7 @@
   }
 }
 
-//*-*-*-*-*-*-*-*-*-*-- The 635px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
+//*-*-*-*-*-*-*-*-*-*-- The 700px Mark Break Point*-*-*-*-*-*-*-*-*-*-*
 @mixin media-medium-big {
   @media screen and (max-width: break-point(break-point-medium-big)) {
     @content;
