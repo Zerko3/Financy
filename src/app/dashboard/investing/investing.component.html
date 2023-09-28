@@ -56,17 +56,43 @@
             <div
               class="section--investing__investing--box__investings--overview__money--box__chart--box__crypto--box"
             >
-              <!-- <img src="" alt="" /> -->
-              <h4>Coin name</h4>
-              <div>
-                <dx-sparkline
-                  type="line"
-                  argumentField="month"
-                  [dataSource]="coinPrice"
-                  ><dxo-tooltip format="currency"></dxo-tooltip
-                ></dx-sparkline>
+              <div
+                class="crypto--coin"
+                *ngFor="let coin of coinPriceArray; let i = index"
+              >
+                <img src="{{ coin.image }}" alt="" />
+                <h4>{{ coin.name }}</h4>
+                <span>Current price: {{ coin.current_price }}EUR</span>
+                <span
+                  >Total amount invested:
+                  {{ totalAmountInvestedPerCoin[i].totalAmount }} EUR
+                </span>
+                <dx-button
+                  (onClick)="showAdditionalInfo(coin.id)"
+                  text="Additional info"
+                ></dx-button>
+                <dx-popup
+                  [width]="300"
+                  [height]="280"
+                  [showTitle]="true"
+                  [hideOnOutsideClick]="true"
+                  [(visible)]="popupVisible"
+                  title="Additional information"
+                  ><dxi-toolbar-item
+                    widget="dxButton"
+                    toolbar="bottom"
+                    location="after"
+                    [options]="closeButtonOptions"
+                  >
+                  </dxi-toolbar-item>
+                  <p class="popup-text">Market cap: {{ coin.market_cap }}</p>
+                  <p class="popup-text">Max supply: {{ coin.max_supply }}</p>
+                  <p class="popup-text">
+                    Circulating supply: {{ coin.circulating_supply }}
+                  </p>
+                  <p class="popup-text">ATH: {{ coin.ath }}</p>
+                </dx-popup>
               </div>
-              <span>price</span>
             </div>
           </ng-container>
         </div>

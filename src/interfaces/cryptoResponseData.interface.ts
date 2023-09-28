@@ -25,4 +25,5 @@ export interface CryptoResponseData {
   atl_date: Date | string;
   roi: null;
   last_updated: Date | string;
+  sparkline_in_7d: { price: number[] };
 }

@@ -59,6 +59,33 @@
 
         &__chart--box {
           width: 100%;
+
+          &__crypto--box {
+            @include flexbox--center--all;
+            gap: 3rem;
+
+            .crypto--coin {
+              height: auto;
+              width: 25rem;
+              @include flexbox--center--all;
+              flex-direction: column;
+              gap: 2rem;
+            }
+
+            img {
+              height: auto;
+              width: 5rem;
+            }
+
+            h4 {
+              font-size: font-size(font-size-regular);
+              border-bottom: 1px solid black;
+            }
+
+            span {
+              font-size: font-size(font-size-small);
+            }
+          }
         }
 
         &__money--overall {
@@ -143,4 +170,8 @@ dx-data-grid {
   @include media-medium-small {
     height: 25rem;
   }
+}
+
+.popup-text {
+  font-size: font-size(font-size-small);
 }

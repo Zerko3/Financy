@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CryptoResponseData } from 'src/interfaces/cryptoResponseData.interface';
 
 import { Stock } from 'src/interfaces/stock.interface';
 import { Investing } from 'src/interfaces/userMoneySpending.interface';
@@ -22,10 +23,20 @@ export class InvestingComponent implements OnInit, OnDestroy {
   @ViewChild('hideBalance', { static: false }) hideBalance: ElementRef;
   investingDataArray: Investing[] = [];
   investingSubscribe: Subscription;
+  coinSubscribe: Subscription;
 
   investingTotalAmount: number = 0;
   previousInvestingTotalAmount: number = 0;
   moneyRelativeIncrese: number = 0;
+  totalAmountInvestedPerCoin: [
+    { coins: string; totalAmount: number },
+    { coins: string; totalAmount: number },
+    { coins: string; totalAmount: number }
+  ] = [
+    { coins: 'Bitcoin', totalAmount: 0 },
+    { coins: 'Ethereum', totalAmount: 0 },
+    { coins: 'BNB', totalAmount: 0 },
+  ];
 
   allowedPageSizes: [number] = [10];
   showPageSizeSelector: boolean = true;
@@ -40,8 +51,16 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   hideMoneyBalance: boolean = false;
   toggleChartView: boolean = false;
+  popupVisible: boolean = false;
 
-  coinPrice;
+  coinPriceArray: CryptoResponseData[] = [];
+
+  closeButtonOptions = {
+    text: 'Close',
+    onClick(e) {
+      this.popupVisible = false;
+    },
+  };
 
   constructor(
     private state: State,
@@ -79,6 +98,15 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
       // display on DOM
       this.investingAmount.push(stock);
+
+      // pass money into the correct path to display on the DOM
+      if (investment.coins === 'BTC') {
+        this.totalAmountInvestedPerCoin[0].totalAmount += investment.money;
+      } else if (investment.coins === 'ETH') {
+        this.totalAmountInvestedPerCoin[1].totalAmount += investment.money;
+      } else if (investment.coins === 'BNB') {
+        this.totalAmountInvestedPerCoin[2].totalAmount += investment.money;
+      }
     }
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
@@ -105,16 +133,42 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
         // get 2 decimals for the number (needs to be + since .toFixed(n) returns a string!)
         this.moneyRelativeIncrese = +moneyIncrese.toFixed(2);
+
+        // pass money into the correct path to display on the DOM
+        if (data.coins === 'BTC') {
+          this.totalAmountInvestedPerCoin[0].totalAmount += data.money;
+        } else if (data.coins === 'ETH') {
+          this.totalAmountInvestedPerCoin[1].totalAmount += data.money;
+        } else if (data.coins === 'BNB') {
+          this.totalAmountInvestedPerCoin[2].totalAmount += data.money;
+        }
       }
     );
 
-    // call API here, mby will add it somewhare else later
+    // call API here, mby will add it somewhare else later (dashboard mby?)
     this.cryptoApiData.getCoinDataFromBackend();
+
+    // we call the cacheData if there is something in there. This will still get us the data if we dont call the server
+    if (this.cryptoApiData.cacheData.length > 0) {
+      this.coinPriceArray = this.cryptoApiData.cacheData;
+      console.log('CAHCE ACTIVATED');
+      console.log(this.coinPriceArray);
+    } else {
+      // since the API needs a subject to get the data we do it here
+      this.coinSubscribe = this.cryptoApiData.coinSubjet.subscribe(
+        (responseData: CryptoResponseData[]) => {
+          this.coinPriceArray = responseData;
+          console.log('called crypto');
+          console.log(this.coinPriceArray);
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {
     console.log('UNSUBSCRIBE - INVESTING');
     this.investingSubscribe.unsubscribe();
+    this.coinSubscribe.unsubscribe();
   }
 
   userFormNavigate() {
@@ -129,5 +183,11 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   toggleViewOfChart() {
     this.toggleChartView = !this.toggleChartView;
+  }
+
+  showAdditionalInfo(coin: string) {
+    // ...
+
+    if (coin) this.popupVisible = true;
   }
 }
