@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 
 import { Stock } from 'src/interfaces/stock.interface';
 import { Investing } from 'src/interfaces/userMoneySpending.interface';
+import { CryptoAPI } from 'src/services/crypto-api.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -38,8 +39,15 @@ export class InvestingComponent implements OnInit, OnDestroy {
   ];
 
   hideMoneyBalance: boolean = false;
+  toggleChartView: boolean = false;
 
-  constructor(private state: State, private router: Router) {}
+  coinPrice;
+
+  constructor(
+    private state: State,
+    private router: Router,
+    private cryptoApiData: CryptoAPI
+  ) {}
 
   // TODO:
   // 1. Choose if i will have an API here to track investing stocks
@@ -99,6 +107,9 @@ export class InvestingComponent implements OnInit, OnDestroy {
         this.moneyRelativeIncrese = +moneyIncrese.toFixed(2);
       }
     );
+
+    // call API here, mby will add it somewhare else later
+    this.cryptoApiData.getCoinDataFromBackend();
   }
 
   ngOnDestroy(): void {
@@ -114,5 +125,9 @@ export class InvestingComponent implements OnInit, OnDestroy {
     if (e.target.textContent === 'Hide balance') {
       this.hideMoneyBalance = !this.hideMoneyBalance;
     }
+  }
+
+  toggleViewOfChart() {
+    this.toggleChartView = !this.toggleChartView;
   }
 }

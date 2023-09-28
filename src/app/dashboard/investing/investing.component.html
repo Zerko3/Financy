@@ -27,26 +27,48 @@
           >
             {{ !hideMoneyBalance ? moneyRelativeIncrese : "***" }}%</span
           >
-          <a class="porfolio--btn">View portfolio</a>
+          <a (click)="toggleViewOfChart()" class="porfolio--btn"
+            >View portfolio</a
+          >
         </div>
         <div
           class="section--investing__investing--box__investings--overview__money--box__chart--box"
         >
-          <dx-chart
-            id="chart"
-            palette="Harmony Light"
-            [dataSource]="investingAmount"
-          >
-            <dxi-series valueField="investedAmount"></dxi-series>
-            <dxo-argument-axis
-              [valueMarginsEnabled]="false"
-            ></dxo-argument-axis>
-            <dxo-common-series-settings
-              #commonSeries
-              argumentField="investedDate"
-              [type]="types[0]"
-            ></dxo-common-series-settings>
-          </dx-chart>
+          <ng-container *ngIf="!toggleChartView">
+            <dx-chart
+              id="chart"
+              palette="Harmony Light"
+              [dataSource]="investingAmount"
+            >
+              <dxi-series valueField="investedAmount"></dxi-series>
+              <dxo-argument-axis
+                [valueMarginsEnabled]="false"
+              ></dxo-argument-axis>
+              <dxo-common-series-settings
+                #commonSeries
+                argumentField="investedDate"
+                [type]="types[0]"
+              ></dxo-common-series-settings>
+            </dx-chart>
+          </ng-container>
+          <ng-container *ngIf="toggleChartView">
+            <!-- .... -->
+            <div
+              class="section--investing__investing--box__investings--overview__money--box__chart--box__crypto--box"
+            >
+              <!-- <img src="" alt="" /> -->
+              <h4>Coin name</h4>
+              <div>
+                <dx-sparkline
+                  type="line"
+                  argumentField="month"
+                  [dataSource]="coinPrice"
+                  ><dxo-tooltip format="currency"></dxo-tooltip
+                ></dx-sparkline>
+              </div>
+              <span>price</span>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
