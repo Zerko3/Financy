@@ -60,9 +60,6 @@ export class LoginComponentComponent implements OnInit {
       password: e.form.value.password,
     };
 
-    // Somehow i need to check if i dont have data in the backend
-    // this.userLoggedIn = true;
-
     // pass the userLoggedin boolean to service
     this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
 
@@ -106,8 +103,6 @@ export class LoginComponentComponent implements OnInit {
 
         // handle error messaging and redirection in here
         if (this.errorStatus) {
-          console.log('ERROR WAS TRUE');
-
           // reset form and navigate back to login
           e.resetForm();
           this.router.navigate(['/login']);

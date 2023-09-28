@@ -71,7 +71,6 @@ export class BankAccountComponent {
 
     // here is where i need to get the lenght of the array in boolean
     this.isCardAmmountReached = this.state.getToastSignal();
-    console.log(this.isVisibleToast);
 
     // only run this code if the form is valid
     if (this.form.status === 'VALID') {

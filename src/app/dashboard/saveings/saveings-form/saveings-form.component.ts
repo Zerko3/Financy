@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Saveings } from 'src/interfaces/userMoneySpending.interface';
-
-import { SaveingsService } from 'src/services/saveings.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -50,11 +48,7 @@ export class SaveingsFormComponent implements OnInit {
     type: 'normal',
     useSubmitBehavior: true,
   };
-  constructor(
-    private state: State,
-    private saveingsService: SaveingsService,
-    private router: Router
-  ) {}
+  constructor(private state: State, private router: Router) {}
 
   ngOnInit(): void {
     this.account = this.state.getAccountNames();
