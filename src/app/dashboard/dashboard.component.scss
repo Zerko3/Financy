@@ -83,7 +83,7 @@
 
       gap: 1rem;
       @include flexbox--center--all;
-
+      overflow-x: scroll;
       position: relative;
 
       &__subscription--box {
@@ -122,9 +122,11 @@
 
       padding: 1.2rem 2.4rem;
       width: 100%;
+
       height: auto;
       border-radius: 11px;
       position: relative;
+      overflow-x: scroll;
 
       &--card {
         height: auto;
@@ -139,11 +141,25 @@
           top: 3rem;
           width: auto;
           cursor: pointer;
+
+          @include media-medium-small {
+            color: var(--gray-color);
+            font-weight: font-weight(font-weight-bold);
+          }
+
+          @include media-small {
+            top: 1rem;
+            right: 2rem;
+          }
         }
 
         img {
           height: auto;
           width: 100%;
+
+          @include media-medium-small {
+            opacity: 0.35;
+          }
         }
 
         span {
@@ -152,6 +168,11 @@
           position: absolute;
           top: 3rem;
           left: 3rem;
+
+          @include media-medium-small {
+            color: var(--gray-color);
+            font-weight: font-weight(font-weight-bold);
+          }
         }
       }
     }
@@ -236,7 +257,7 @@
 }
 
 dx-pie-chart {
-  height: auto;
+  height: 30rem;
   width: 50rem;
 
   @include media-tablet-big {

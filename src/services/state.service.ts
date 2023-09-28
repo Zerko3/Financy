@@ -239,28 +239,38 @@ export class State {
   // Store Data
 
   passBankCardToState(data: BankAccount): void {
-    this.cardNames.push(data.bankAccountCustomName);
+    // TODO:
+    // 1. Add logic to see if the array lenght is more than N number and if so dont push and throw an error to singal the user that the max cards are reached
 
-    this.bankCardsArray.push(data);
+    // guard clause check
+    if (this.bankCardsArray.length < 4) {
+      // push the card into the array to display it on the DOM
+      this.bankCardsArray.push(data);
+      // get the cards names for the forms to allow the user to get the correct card data later
+      this.cardNames.push(data.bankAccountCustomName);
 
-    // Store valid card based on the type into its array
-    if (data.bankAccountName === 'Saveings') {
-      this.bankCardSaveingTypeArray.push(data);
+      // Store valid card based on the type into its array
+      if (data.bankAccountName === 'Saveings') {
+        this.bankCardSaveingTypeArray.push(data);
 
-      // calc for saveings account
-      this.totalMoneyInSaveingAccounts += data.bankMoneyStatus;
+        // calc for saveings account
+        this.totalMoneyInSaveingAccounts += data.bankMoneyStatus;
+      }
+
+      if (data.bankAccountName === 'Spending') {
+        this.bankCardSpendingTypeArray.push(data);
+
+        // calc for spending account number
+        this.totalMoneyInSpendingAccounts += data.bankMoneyStatus;
+      }
+
+      // calc for total balance
+      this.totalMoneyInBankAccount =
+        this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
+    } else {
+      // logic for toast here
+      this.toastSignal = true;
     }
-
-    if (data.bankAccountName === 'Spending') {
-      this.bankCardSpendingTypeArray.push(data);
-
-      // calc for spending account number
-      this.totalMoneyInSpendingAccounts += data.bankMoneyStatus;
-    }
-
-    // calc for total balance
-    this.totalMoneyInBankAccount =
-      this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
   }
 
   overwriteBankCardsArray(bankCards: BankAccount[]): BankAccount[] {
@@ -366,5 +376,9 @@ export class State {
 
   getAccountNames(): string[] {
     return this.cardNames.slice();
+  }
+
+  getToastSignal(): boolean {
+    return this.toastSignal;
   }
 }
