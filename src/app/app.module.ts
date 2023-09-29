@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HeroComponentComponent } from './hero-component/hero-component.component';
@@ -12,6 +12,7 @@ import { RegisterComponentComponent } from './register-component/register-compon
 
 // DEVEXTREME -> global
 import { DxGalleryModule, DxToastModule } from 'devextreme-angular';
+import { ErrorInterceptor } from 'src/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { DxGalleryModule, DxToastModule } from 'devextreme-angular';
     DxToastModule,
     DxGalleryModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

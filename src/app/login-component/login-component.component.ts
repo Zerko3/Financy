@@ -28,8 +28,7 @@ export class LoginComponentComponent implements OnInit {
   type: string = '';
   message: string = '';
   loginValid: boolean = false;
-
-  // test
+  userClickedOnDemo: boolean = false;
   userLoggedIn: boolean = false;
 
   constructor(
@@ -53,15 +52,28 @@ export class LoginComponentComponent implements OnInit {
     }
   }
 
-  onSubmit(e: NgForm) {
-    this.userAccount = {
-      email: e.form.value.email,
-      username: e.form.value.username,
-      password: e.form.value.password,
-    };
+  onClickDemo() {
+    this.userClickedOnDemo = true;
+  }
 
+  onSubmit(e: NgForm) {
+    if (this.userClickedOnDemo) {
+      this.userAccount = {
+        email: 'admin@admin.admin',
+        username: 'admin',
+        password: 'admin123',
+      };
+    } else {
+      this.userAccount = {
+        email: e.form.value.email,
+        username: e.form.value.username,
+        password: e.form.value.password,
+      };
+    }
+
+    // TODO:
     // pass the userLoggedin boolean to service
-    this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
+    // this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
 
     // how to get username out of the Acount?
     this.loginService.storeUsername(this.userAccount.username);
@@ -72,11 +84,12 @@ export class LoginComponentComponent implements OnInit {
     this.accountService.loginUser(this.userAccount).subscribe(
       (data: AuthResponseData) => {
         this.loginValid = true;
+        // auth guard
         this.loginService.userLoggedIn(this.loginValid);
 
         data.email = this.userAccount.username;
         // handle valid data in here
-        if (e.form.status === 'VALID') {
+        if (e.form.status === 'VALID' || this.userClickedOnDemo) {
           // pass logedin user to service
           this.loginService.storeUsername(data.email);
 

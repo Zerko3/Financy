@@ -16,7 +16,6 @@ export class CryptoAPI {
   getCoinDataFromBackend() {
     // guard clause -> if there is data in cache dont call the API (we limit the API calls and load on the server like this)
     if (this.cacheData.length !== 0) {
-      console.log('SOMETHING IS IN HERE!!!');
       return this.cacheData;
     }
 
@@ -26,7 +25,6 @@ export class CryptoAPI {
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20ethereum%2Cbinancecoin&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en`
         )
         .subscribe((responseData: CryptoResponseData[]) => {
-          console.log(responseData);
           this.coinSubjet.next(responseData);
 
           // store data in here so we wont call the server everytime we load the component
