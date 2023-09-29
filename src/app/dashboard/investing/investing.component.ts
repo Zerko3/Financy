@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { CryptoResponseData } from 'src/interfaces/cryptoResponseData.interface';
 
 import { Stock } from 'src/interfaces/stock.interface';
@@ -135,18 +135,17 @@ export class InvestingComponent implements OnInit, OnDestroy {
       this.coinPriceArray = this.cryptoApiData.cacheData;
     } else {
       // since the API needs a subject to get the data we do it here
-      this.coinSubscribe = this.cryptoApiData.coinSubjet.subscribe(
-        (responseData: CryptoResponseData[]) => {
+      this.coinSubscribe = this.cryptoApiData.coinSubjet
+        .pipe(take(1))
+        .subscribe((responseData: CryptoResponseData[]) => {
           this.coinPriceArray = responseData;
-        }
-      );
+        });
     }
   }
 
   ngOnDestroy(): void {
     console.log('UNSUBSCRIBE - INVESTING');
     this.investingSubscribe.unsubscribe();
-    this.coinSubscribe.unsubscribe();
   }
 
   userFormNavigate() {
