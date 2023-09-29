@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CryptoResponseData } from 'src/interfaces/cryptoResponseData.interface';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({ providedIn: 'root' })
 export class CryptoAPI {
@@ -21,9 +22,7 @@ export class CryptoAPI {
 
     return (
       this.http
-        .get<CryptoResponseData[]>(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20ethereum%2Cbinancecoin&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en`
-        )
+        .get<CryptoResponseData[]>(environment._COIN_GECKO_END_POINT)
         .subscribe((responseData: CryptoResponseData[]) => {
           this.coinSubjet.next(responseData);
 

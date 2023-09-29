@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { AuthResponseData } from 'src/interfaces/authResponse.interface';
 import { Login } from 'src/interfaces/login.interface';
 import { Account } from 'src/models/account.model';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   user: Account;
-  API_KEY: string = 'AIzaSyCf3BIrBUhY0z162tcEbA7slwckvyG8jVQ';
+  API_KEY: string = environment._API_KEY;
   constructor(private http: HttpClient) {}
 
   singupUser(newUser: Account) {

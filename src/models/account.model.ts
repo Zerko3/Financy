@@ -15,8 +15,4 @@ export class Account {
     this.accType = accType;
     this.password = password;
   }
-
-  // TODO:
-
-  // is it good to add arrays in here to store data for an account. so that the data will be loaded when the user registers.
 }

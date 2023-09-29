@@ -49,7 +49,7 @@ export class DataStorage {
     return (
       this.http
         .get<BankAccount[] | null>(
-          `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}1/cards.json`
+          `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards.json`
         )
         .subscribe((data: BankAccount[] | null) => {
           // if i get null return
