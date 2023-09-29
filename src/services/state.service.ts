@@ -42,8 +42,6 @@ export class State {
 
   // TODO:
 
-  // 1. Finish Investing logic
-
   // 3. Refactor the code
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
@@ -239,9 +237,6 @@ export class State {
   // Store Data
 
   passBankCardToState(data: BankAccount): void {
-    // TODO:
-    // 1. Add logic to see if the array lenght is more than N number and if so dont push and throw an error to singal the user that the max cards are reached
-
     // guard clause check
     if (this.bankCardsArray.length < 4) {
       // push the card into the array to display it on the DOM
