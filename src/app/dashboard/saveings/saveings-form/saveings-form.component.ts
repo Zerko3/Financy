@@ -56,7 +56,7 @@ export class SaveingsFormComponent implements OnInit {
   }
 
   onUserCloseForm() {
-    this.router.navigate(['saveings']);
+    this.router.navigate(['dashboard/saveings']);
   }
 
   onSubmitForm() {

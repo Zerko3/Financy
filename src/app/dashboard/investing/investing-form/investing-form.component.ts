@@ -69,7 +69,7 @@ export class InvestingFormComponent implements OnInit {
   }
 
   onUserCloseForm() {
-    this.router.navigate(['investing']);
+    this.router.navigate(['dashboard/investing']);
   }
 
   onSubmitForm() {

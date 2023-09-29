@@ -14,7 +14,7 @@ import { WildcardComponentComponent } from '../wildcard-component/wildcard-compo
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
@@ -22,30 +22,32 @@ const routes: Routes = [
         path: 'createCard',
         component: BankAccountComponent,
       },
+      {
+        path: 'expense',
+        component: ExpenseComponent,
+        children: [{ path: 'expenseForm', component: ExpenseFormComponent }],
+      },
+
+      {
+        path: 'investing',
+        component: InvestingComponent,
+        children: [
+          { path: 'investingForm', component: InvestingFormComponent },
+        ],
+      },
+      {
+        path: 'saveings',
+        component: SaveingsComponent,
+        children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
+      },
     ],
   },
-  {
-    path: 'expense',
-    component: ExpenseComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: 'expenseForm', component: ExpenseFormComponent }],
-  },
-  {
-    path: 'investing',
-    component: InvestingComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: 'investingForm', component: InvestingFormComponent }],
-  },
-  {
-    path: 'saveings',
-    component: SaveingsComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
-  },
+
   { path: '**', component: WildcardComponentComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class DashboardRoutingModule {}

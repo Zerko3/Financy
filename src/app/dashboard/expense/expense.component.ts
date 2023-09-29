@@ -83,7 +83,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   }
 
   userFormNavigation() {
-    this.router.navigate(['expense/expenseForm']);
+    this.router.navigate(['dashboard/expense/expenseForm']);
   }
 
   // TODO:

@@ -52,7 +52,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   }
 
   userNavigationForm() {
-    this.router.navigate(['saveings/saveingsForm']);
+    this.router.navigate(['dashboard/saveings/saveingsForm']);
   }
 
   // TODO

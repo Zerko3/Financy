@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 import { HeroComponentComponent } from './hero-component/hero-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
@@ -31,9 +30,6 @@ import { DxGalleryModule, DxToastModule } from 'devextreme-angular';
     // devextreme
     DxToastModule,
     DxGalleryModule,
-
-    // components
-    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,6 +9,15 @@ const routes: Routes = [
   { path: 'hero', component: HeroComponentComponent },
   { path: 'login', component: LoginComponentComponent },
   { path: 'register', component: RegisterComponentComponent },
+
+  // lazy loading
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then(
+        (module) => module.DashboardModule
+      ),
+  },
 ];
 
 @NgModule({

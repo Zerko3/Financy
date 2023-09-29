@@ -145,7 +145,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
   }
 
   userFormNavigate() {
-    this.router.navigate(['investing/investingForm']);
+    this.router.navigate(['dashboard/investing/investingForm']);
   }
 
   hideInvestingBalance(e: any) {
