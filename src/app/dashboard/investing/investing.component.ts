@@ -54,13 +54,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
   popupVisible: boolean = false;
 
   coinPriceArray: CryptoResponseData[] = [];
-
-  closeButtonOptions = {
-    text: 'Close',
-    onClick(e) {
-      this.popupVisible = false;
-    },
-  };
+  currentCoin: CryptoResponseData;
 
   constructor(
     private state: State,
@@ -68,20 +62,8 @@ export class InvestingComponent implements OnInit, OnDestroy {
     private cryptoApiData: CryptoAPI
   ) {}
 
-  // TODO:
-  // 1. Choose if i will have an API here to track investing stocks
-  // 2. Get data for all the invested money
-  // 3. If i will have API call then i can track the sucess rate of my investing
-  // 4. Button to swich views between invested amount and the current state of the money
-
-  // API to call will be coingeko free api
-
-  // GOAL
-  // 1. Display X amoount of coins you can buy
-  // 2. Add coin price rate market rate
-  // 3. Deduct money from wallet that bought coin
-  // 4. Add money to investting amount
-  // 5. If api allows tracking realtime i think i can make a makeshitft money tracker
+  // BUG:
+  // 1. App crashes if i have coin view and go to another component and back
 
   ngOnInit(): void {
     // get data on component load
@@ -151,15 +133,11 @@ export class InvestingComponent implements OnInit, OnDestroy {
     // we call the cacheData if there is something in there. This will still get us the data if we dont call the server
     if (this.cryptoApiData.cacheData.length > 0) {
       this.coinPriceArray = this.cryptoApiData.cacheData;
-      console.log('CAHCE ACTIVATED');
-      console.log(this.coinPriceArray);
     } else {
       // since the API needs a subject to get the data we do it here
       this.coinSubscribe = this.cryptoApiData.coinSubjet.subscribe(
         (responseData: CryptoResponseData[]) => {
           this.coinPriceArray = responseData;
-          console.log('called crypto');
-          console.log(this.coinPriceArray);
         }
       );
     }
@@ -185,9 +163,10 @@ export class InvestingComponent implements OnInit, OnDestroy {
     this.toggleChartView = !this.toggleChartView;
   }
 
-  showAdditionalInfo(coin: string) {
-    // ...
+  showAdditionalInfo(coin: CryptoResponseData) {
+    this.popupVisible = true;
 
-    if (coin) this.popupVisible = true;
+    // set the data specifif to the popup
+    this.currentCoin = coin;
   }
 }

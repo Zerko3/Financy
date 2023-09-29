@@ -63,10 +63,16 @@
           &__crypto--box {
             @include flexbox--center--all;
             gap: 3rem;
+            width: 100%;
+
+            @include media-medium-small {
+              flex-direction: column;
+            }
 
             .crypto--coin {
               height: auto;
-              width: 25rem;
+              max-width: 25rem;
+              min-width: 10rem;
               @include flexbox--center--all;
               flex-direction: column;
               gap: 2rem;
@@ -174,4 +180,10 @@ dx-data-grid {
 
 .popup-text {
   font-size: font-size(font-size-small);
+}
+
+dx-popup {
+  @include media-medium-small {
+    width: 20rem;
+  }
 }

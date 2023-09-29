@@ -68,31 +68,32 @@
                   {{ totalAmountInvestedPerCoin[i].totalAmount }} EUR
                 </span>
                 <dx-button
-                  (onClick)="showAdditionalInfo(coin.id)"
+                  width="100%"
+                  (onClick)="showAdditionalInfo(coin)"
                   text="Additional info"
                 ></dx-button>
-                <dx-popup
-                  [width]="300"
-                  [height]="280"
-                  [showTitle]="true"
-                  [hideOnOutsideClick]="true"
-                  [(visible)]="popupVisible"
-                  title="Additional information"
-                  ><dxi-toolbar-item
-                    widget="dxButton"
-                    toolbar="bottom"
-                    location="after"
-                    [options]="closeButtonOptions"
-                  >
-                  </dxi-toolbar-item>
-                  <p class="popup-text">Market cap: {{ coin.market_cap }}</p>
-                  <p class="popup-text">Max supply: {{ coin.max_supply }}</p>
-                  <p class="popup-text">
-                    Circulating supply: {{ coin.circulating_supply }}
-                  </p>
-                  <p class="popup-text">ATH: {{ coin.ath }}</p>
-                </dx-popup>
               </div>
+              <dx-popup
+                [width]="300"
+                [height]="280"
+                [showTitle]="true"
+                [hideOnOutsideClick]="true"
+                [(visible)]="popupVisible"
+                title="Additional information"
+              >
+                <div *dxTemplate="let data of 'content'">
+                  <p class="popup-text">
+                    Market cap: {{ currentCoin.market_cap }}
+                  </p>
+                  <p class="popup-text">
+                    Max supply: {{ currentCoin.max_supply }}
+                  </p>
+                  <p class="popup-text">
+                    Circulating supply: {{ currentCoin.circulating_supply }}
+                  </p>
+                  <p class="popup-text">ATH: {{ currentCoin.ath }}</p>
+                </div>
+              </dx-popup>
             </div>
           </ng-container>
         </div>
