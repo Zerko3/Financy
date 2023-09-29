@@ -79,7 +79,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('UNSUBSCRIBED');
     this.expenseServiceSubscribable.unsubscribe();
   }
 

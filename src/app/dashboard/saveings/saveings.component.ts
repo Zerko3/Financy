@@ -48,7 +48,6 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('UNSUBSCRIBE - SAVEING');
     this.saveingSubscribe.unsubscribe();
   }
 

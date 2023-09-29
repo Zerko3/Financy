@@ -57,8 +57,6 @@ export class InvestingFormComponent implements OnInit {
   type: string = 'success';
   message: string = '';
 
-  // TODO:
-  // 1. delnice
   constructor(
     private state: State,
     private investingDataService: InvestingService,

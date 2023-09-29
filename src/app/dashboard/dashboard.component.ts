@@ -133,7 +133,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('UNSUBSCRIBE - DASHBOARD');
     this.bankCardSubscribe.unsubscribe();
     this.firebaseSubscribe.unsubscribe();
   }

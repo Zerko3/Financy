@@ -62,9 +62,6 @@ export class InvestingComponent implements OnInit, OnDestroy {
     private cryptoApiData: CryptoAPI
   ) {}
 
-  // BUG:
-  // 1. App crashes if i have coin view and go to another component and back
-
   ngOnInit(): void {
     // get data on component load
     this.investingDataArray = this.state.getInvestingData();
@@ -144,7 +141,6 @@ export class InvestingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('UNSUBSCRIBE - INVESTING');
     this.investingSubscribe.unsubscribe();
   }
 

@@ -105,8 +105,6 @@ export class RegisterComponentComponent implements OnInit {
 
         // handle error messaging and redirection in here
         if (this.errorStatus) {
-          console.log('ERROR WAS TRUE');
-
           // reset form and navigate back to register
           e.resetForm();
           this.router.navigate(['/register']);
