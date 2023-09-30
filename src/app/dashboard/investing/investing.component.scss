@@ -187,3 +187,9 @@ dx-popup {
     width: 20rem;
   }
 }
+
+::ng-deep .dx-toast-content {
+  min-width: 30rem;
+  max-width: 40rem;
+  font-size: font-size(font-size-regular);
+}

@@ -73,7 +73,7 @@ export class LoginComponentComponent implements OnInit {
 
     // TODO:
     // pass the userLoggedin boolean to service
-    // this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
+    this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
 
     // how to get username out of the Acount?
     this.loginService.storeUsername(this.userAccount.username);

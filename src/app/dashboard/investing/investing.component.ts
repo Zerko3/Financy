@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   ElementRef,
@@ -12,6 +13,7 @@ import { CryptoResponseData } from 'src/interfaces/cryptoResponseData.interface'
 import { Stock } from 'src/interfaces/stock.interface';
 import { Investing } from 'src/interfaces/userMoneySpending.interface';
 import { CryptoAPI } from 'src/services/crypto-api.service';
+import { ErrorService } from 'src/services/error.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -56,15 +58,30 @@ export class InvestingComponent implements OnInit, OnDestroy {
   coinPriceArray: CryptoResponseData[] = [];
   currentCoin: CryptoResponseData;
 
+  isVisibleToast: boolean = false;
+  type: string = 'error';
+  message: string = '';
+
   constructor(
     private state: State,
     private router: Router,
-    private cryptoApiData: CryptoAPI
+    private cryptoApiData: CryptoAPI,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
     // get data on component load
     this.investingDataArray = this.state.getInvestingData();
+
+    // error handle status message
+    this.errorService.errorMessage.subscribe(
+      (errorMessage: HttpErrorResponse) => {
+        console.error(errorMessage);
+        this.isVisibleToast = true;
+        // error handle logic in here ...
+        this.message = `Error code: ${errorMessage.status}. Unable to get data, please try again later!`;
+      }
+    );
 
     for (const investment of this.investingDataArray) {
       this.investingTotalAmount += investment.money;
@@ -105,13 +122,18 @@ export class InvestingComponent implements OnInit, OnDestroy {
         this.investingAmount.push(stock);
 
         // calculate the increse in money
-        const moneyIncrese =
-          ((this.investingTotalAmount - this.previousInvestingTotalAmount) /
-            this.previousInvestingTotalAmount) *
-          100;
+        if (
+          this.previousInvestingTotalAmount !== 0 &&
+          this.investingTotalAmount
+        ) {
+          const moneyIncrese =
+            ((this.investingTotalAmount - this.previousInvestingTotalAmount) /
+              this.previousInvestingTotalAmount) *
+            100;
 
-        // get 2 decimals for the number (needs to be + since .toFixed(n) returns a string!)
-        this.moneyRelativeIncrese = +moneyIncrese.toFixed(2);
+          // get 2 decimals for the number (needs to be + since .toFixed(n) returns a string!)
+          this.moneyRelativeIncrese = +moneyIncrese.toFixed(2);
+        }
 
         // pass money into the correct path to display on the DOM
         if (data.coins === 'BTC') {

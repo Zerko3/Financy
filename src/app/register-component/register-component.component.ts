@@ -100,7 +100,10 @@ export class RegisterComponentComponent implements OnInit {
         console.log(error);
         this.isToastVisible = true;
         this.type = error ? 'error' : 'success';
+
+        // error msg for better UX
         this.message = `Invalid user credentials. Please try again.`;
+
         this.errorStatus = true;
 
         // handle error messaging and redirection in here

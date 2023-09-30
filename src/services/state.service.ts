@@ -41,6 +41,7 @@ export class State {
   constructor(private dataStorage: DataStorage) {}
 
   // TODO:
+  // 1. BUG -> When i have a new account the data does not show on the screen!
 
   // 3. Refactor the code
 
