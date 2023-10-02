@@ -42,8 +42,7 @@ export class State {
   constructor(private dataStorage: DataStorage) {}
 
   // TODO:
-  // 1. BUG -> When i have a new account the data does not show on the screen!
-  // 2. BUG -> When new card is created the data does not show in dahsboard
+
   // 3. Refactor the code
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
@@ -105,7 +104,6 @@ export class State {
   }
 
   checkMoneyStatus(userInput: Expense | Saveings): boolean {
-    console.log('CHECKING IF MONEY IS VALID IN STATE');
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Spending') {
@@ -163,7 +161,6 @@ export class State {
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
   ): BankAccount[] {
-    console.log('NOW WE ARE IN VALID METHOD FOR EXPENSE TRACKING IN STATE');
     // update the expense array -> need this for the dashboard DOM
     this.expenseData.push(userInput);
 
@@ -240,7 +237,6 @@ export class State {
   }
 
   storeSubscribeForCardCreation(data: BankAccount) {
-    console.log('DATA IN STATE SUBJECT FOR PASSING');
     this.bankCardSubscribe.next(data);
   }
 
@@ -249,7 +245,6 @@ export class State {
   passBankCardToState(data: BankAccount): void {
     // guard clause check
     if (this.bankCardsArray.length < 4) {
-      console.log('DATA IS IN STATE IN THE CORRECT METHDO');
       // push the card into the array to display it on the DOM
       this.bankCardsArray.push(data);
       // get the cards names for the forms to allow the user to get the correct card data later
@@ -371,7 +366,6 @@ export class State {
 
   // get bankacc cards
   getBankCard(): BankAccount[] {
-    console.log('CALLED ARRAY');
     return this.bankCardsArray.slice();
   }
 

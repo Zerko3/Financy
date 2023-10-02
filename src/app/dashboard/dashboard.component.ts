@@ -53,7 +53,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   cardDeleteSubscribe: Subscription;
   cardUpdate: Subscription;
 
-  calledFirebase: boolean = false;
   toastSignal: boolean = false;
   cardDeleted: boolean = false;
 
@@ -71,19 +70,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
 
   ngOnInit(): void {
-    this.cardUpdate = this.dataStorage.updatedArray.subscribe((data) => {
-      this.expenseData = this.state.getExpenseData();
-      this.subscriptionArray = this.state.getSubscriptionData();
-      this.savingsData = this.state.getSaveingsData();
-      this.investingData = this.state.getInvestingData();
-
-      // TODO:
-      this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
-      this.positiveMoney = this.state.getTotalMoneyInBankAccount();
-      this.overviewExpenses[0].val += this.positiveMoney;
-      this.overviewExpenses[1].val += this.negativeMoney;
-      console.log((this.overviewExpenses[0].val += this.positiveMoney));
-      console.log((this.overviewExpenses[1].val += this.negativeMoney));
+    this.cardUpdate = this.dataStorage.updatedArray.subscribe(() => {
+      this.callStateMethods();
     });
 
     // only call the backend Firebase if bankCardsArray.length is 0.
@@ -103,7 +91,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // card delete subject
     this.cardDeleteSubscribe = this.dataStorage.cardDeletedSubject.subscribe(
       (response: boolean) => {
-        console.log(response);
         this.cardDeleted = response;
         this.isVisibleToast = true;
         this.type = 'success';
@@ -113,34 +100,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
-        // set call to true
-        this.calledFirebase = true;
-
         // give data to the array
         this.bankCardsArray = data;
 
         // pass the data into the state to manipultate other arrays with it
         if (this.bankCardsArray.length > 0) {
           this.state.getBankCardsArrayDataFromFirebase(data);
-          this.expenseData = this.state.getExpenseData();
-          this.subscriptionArray = this.state.getSubscriptionData();
-          this.savingsData = this.state.getSaveingsData();
-          this.investingData = this.state.getInvestingData();
 
-          // get total account balance form firebase
-          this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
-          this.positiveMoney = this.state.getTotalMoneyInBankAccount();
-          this.overviewExpenses[0].val += this.positiveMoney;
-          this.overviewExpenses[1].val += this.negativeMoney;
-          console.log((this.overviewExpenses[0].val += this.positiveMoney));
-          console.log((this.overviewExpenses[1].val += this.negativeMoney));
+          this.callStateMethods();
         } else return;
       }
     );
 
     // get cards as soon as user creates the cards -> pass to array to display on DOM
     this.bankCardSubscribe = this.state.bankCardSubscribe.subscribe((data) => {
-      console.log('DATA IS IN DASHBOARD');
       // pass data to state
       this.state.passBankCardToState(data);
 
@@ -203,5 +176,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
       // 1. set boolean value to true or false
       this.hideBalanceStatus = !this.hideBalanceStatus;
     }
+  }
+
+  callStateMethods() {
+    this.expenseData = this.state.getExpenseData();
+    this.subscriptionArray = this.state.getSubscriptionData();
+    this.savingsData = this.state.getSaveingsData();
+    this.investingData = this.state.getInvestingData();
+
+    this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
+    this.positiveMoney = this.state.getTotalMoneyInBankAccount();
+    this.overviewExpenses[0].val += this.positiveMoney;
+    this.overviewExpenses[1].val += this.negativeMoney;
   }
 }

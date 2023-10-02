@@ -29,7 +29,6 @@ export class SaveingsComponent implements OnInit, OnDestroy {
     // get data from firebase on init
     this.saveingsFormDataArray = this.state.getSaveingsData();
 
-    // TODO:
     //  needs to be overwritten when user spend money
     this.accountBalance = this.state.getAccountBalance();
 
