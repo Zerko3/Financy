@@ -50,10 +50,14 @@ export class ExpenseComponent implements OnInit, OnDestroy {
         this.restaurantMoney +
         this.randomMoney +
         this.clothesMoney;
+
+      // pass the total amount into the service to update the DOM
+      this.state.setTotalExpenseNumber(this.totalMoneyExpense);
     }
 
     this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
       (data) => {
+        console.log('NOW WE ARE IN EXPENSE COMPONENT');
         this.expenses.push(data);
 
         if (data.expenseType === 'Subscription') {
@@ -74,6 +78,9 @@ export class ExpenseComponent implements OnInit, OnDestroy {
           this.restaurantMoney +
           this.randomMoney +
           this.clothesMoney;
+
+        // pass the total amount into the service to update the DOM
+        this.state.setTotalExpenseNumber(this.totalMoneyExpense);
       }
     );
   }

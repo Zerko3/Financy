@@ -65,23 +65,12 @@ export class InvestingComponent implements OnInit, OnDestroy {
   constructor(
     private state: State,
     private router: Router,
-    private cryptoApiData: CryptoAPI,
-    private errorService: ErrorService
+    private cryptoApiData: CryptoAPI
   ) {}
 
   ngOnInit(): void {
     // get data on component load
     this.investingDataArray = this.state.getInvestingData();
-
-    // error handle status message
-    this.errorService.errorMessage.subscribe(
-      (errorMessage: HttpErrorResponse) => {
-        console.error(errorMessage);
-        this.isVisibleToast = true;
-        // error handle logic in here ...
-        this.message = `Error code: ${errorMessage.status}. Unable to get data, please try again later!`;
-      }
-    );
 
     for (const investment of this.investingDataArray) {
       this.investingTotalAmount += investment.money;
@@ -107,6 +96,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
       (data) => {
+        console.log('DASHBOARD -> INVESTING SUBSCRIBE');
         // get the previous total amount (needed for % increse calc -> not modulo!)
         this.previousInvestingTotalAmount = this.investingTotalAmount;
 
@@ -186,4 +176,6 @@ export class InvestingComponent implements OnInit, OnDestroy {
     // set the data specifif to the popup
     this.currentCoin = coin;
   }
+
+  showError() {}
 }

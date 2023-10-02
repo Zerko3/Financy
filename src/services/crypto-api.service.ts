@@ -20,18 +20,13 @@ export class CryptoAPI {
       return this.cacheData;
     }
 
-    return (
-      this.http
-        .get<CryptoResponseData[]>(environment._COIN_GECKO_END_POINT)
-        .subscribe((responseData: CryptoResponseData[]) => {
-          this.coinSubjet.next(responseData);
+    return this.http
+      .get<CryptoResponseData[]>(environment._COIN_GECKO_END_POINT)
+      .subscribe((responseData: CryptoResponseData[]) => {
+        this.coinSubjet.next(responseData);
 
-          // store data in here so we wont call the server everytime we load the component
-          this.cacheData = responseData;
-        }),
-      (error) => {
-        console.log(error);
-      }
-    );
+        // store data in here so we wont call the server everytime we load the component
+        this.cacheData = responseData;
+      });
   }
 }

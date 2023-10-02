@@ -24,12 +24,14 @@ export class SaveingsComponent implements OnInit, OnDestroy {
 
   constructor(private state: State, private router: Router) {}
 
+  // BUG -> Money get appended all the time when i revisit the compponent
   ngOnInit(): void {
     // get data from firebase on init
     this.saveingsFormDataArray = this.state.getSaveingsData();
 
+    // TODO:
     //  needs to be overwritten when user spend money
-    this.accountBalance = this.state.getTotalMoneyInSpendingAccount();
+    this.accountBalance = this.state.getAccountBalance();
 
     // get total money saved on DOM
     this.totalMoneySaved = this.state.getTotalMoneyInSaveingAccount();

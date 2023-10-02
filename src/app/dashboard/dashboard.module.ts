@@ -32,8 +32,6 @@ import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { WildcardComponentComponent } from '../wildcard-component/wildcard-component.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorInterceptor } from 'src/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -71,10 +69,6 @@ import { ErrorInterceptor } from 'src/interceptors/error.interceptor';
     DxPopupModule,
     DxPopoverModule,
     DxSparklineModule,
-  ],
-
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
 })
 export class DashboardModule {}

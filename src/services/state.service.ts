@@ -27,6 +27,7 @@ export class State {
   totalMoneyInBankAccount: number = 0;
   totalMoneyInSpendingAccounts: number = 0;
   totalMoneyInSaveingAccounts: number = 0;
+  totalNegativeMoney: number = 0;
 
   // Subjects
   bankCardSubscribe = new Subject<BankAccount>();
@@ -42,7 +43,7 @@ export class State {
 
   // TODO:
   // 1. BUG -> When i have a new account the data does not show on the screen!
-
+  // 2. BUG -> When new card is created the data does not show in dahsboard
   // 3. Refactor the code
 
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
@@ -84,6 +85,7 @@ export class State {
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
 
         for (const expense of card.expenseOnCard) {
+          this.totalNegativeMoney += expense.money;
           // push only expenses in expense card into this array to display it on expese component
           if (expense.expenseType !== 'Investing') {
             this.expenseDataForTable.push(expense);
@@ -103,6 +105,7 @@ export class State {
   }
 
   checkMoneyStatus(userInput: Expense | Saveings): boolean {
+    console.log('CHECKING IF MONEY IS VALID IN STATE');
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
       if (card.bankAccountName === 'Spending') {
@@ -153,9 +156,14 @@ export class State {
     return this.toastSignal;
   }
 
+  setTotalExpenseNumber(expenseNumber: number) {
+    this.totalNegativeMoney += expenseNumber;
+  }
+
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
   ): BankAccount[] {
+    console.log('NOW WE ARE IN VALID METHOD FOR EXPENSE TRACKING IN STATE');
     // update the expense array -> need this for the dashboard DOM
     this.expenseData.push(userInput);
 
@@ -232,6 +240,7 @@ export class State {
   }
 
   storeSubscribeForCardCreation(data: BankAccount) {
+    console.log('DATA IN STATE SUBJECT FOR PASSING');
     this.bankCardSubscribe.next(data);
   }
 
@@ -240,6 +249,7 @@ export class State {
   passBankCardToState(data: BankAccount): void {
     // guard clause check
     if (this.bankCardsArray.length < 4) {
+      console.log('DATA IS IN STATE IN THE CORRECT METHDO');
       // push the card into the array to display it on the DOM
       this.bankCardsArray.push(data);
       // get the cards names for the forms to allow the user to get the correct card data later
@@ -263,6 +273,9 @@ export class State {
       // calc for total balance
       this.totalMoneyInBankAccount =
         this.totalMoneyInSaveingAccounts + this.totalMoneyInSpendingAccounts;
+
+      // store updates in firebase
+      this.dataStorage.storeValidUserDataInFirebase(this.bankCardsArray);
     } else {
       // logic for toast here
       this.toastSignal = true;
@@ -324,6 +337,10 @@ export class State {
   }
 
   getTotalMoneyInSpendingAccount(): number {
+    return this.totalNegativeMoney;
+  }
+
+  getAccountBalance() {
     return this.totalMoneyInSpendingAccounts;
   }
 
@@ -354,6 +371,7 @@ export class State {
 
   // get bankacc cards
   getBankCard(): BankAccount[] {
+    console.log('CALLED ARRAY');
     return this.bankCardsArray.slice();
   }
 

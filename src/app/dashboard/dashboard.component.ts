@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { OverviewExpense } from 'src/interfaces/overviewExpenses.interface';
 import {
@@ -15,7 +15,6 @@ import {
   Investing,
 } from 'src/interfaces/userMoneySpending.interface';
 import { DataStorage } from 'src/services/data-storage.service';
-import { LoginService } from 'src/services/login.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -50,18 +49,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   bankCardSubscribe: Subscription;
   firebaseSubscribe: Subscription;
+  errorSubscribe: Subscription;
+  cardDeleteSubscribe: Subscription;
+  cardUpdate: Subscription;
 
   calledFirebase: boolean = false;
   toastSignal: boolean = false;
+  cardDeleted: boolean = false;
 
   isVisibleToast: boolean = false;
-  type: string = 'error';
+  type: string = '';
   message: string = '';
 
   constructor(
     private state: State,
     private dataStorage: DataStorage,
-    private loginService: LoginService,
     private router: Router
   ) {}
 
@@ -69,10 +71,45 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
 
   ngOnInit(): void {
+    this.cardUpdate = this.dataStorage.updatedArray.subscribe((data) => {
+      this.expenseData = this.state.getExpenseData();
+      this.subscriptionArray = this.state.getSubscriptionData();
+      this.savingsData = this.state.getSaveingsData();
+      this.investingData = this.state.getInvestingData();
+
+      // TODO:
+      this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
+      this.positiveMoney = this.state.getTotalMoneyInBankAccount();
+      this.overviewExpenses[0].val += this.positiveMoney;
+      this.overviewExpenses[1].val += this.negativeMoney;
+      console.log((this.overviewExpenses[0].val += this.positiveMoney));
+      console.log((this.overviewExpenses[1].val += this.negativeMoney));
+    });
+
     // only call the backend Firebase if bankCardsArray.length is 0.
     if (this.bankCardsArray.length === 0) {
       this.dataStorage.getValidUserDataFromFirebase();
     }
+
+    // error handling subject
+    this.errorSubscribe = this.dataStorage.errorSubject
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.isVisibleToast = true;
+        this.type = 'error';
+        this.message = `Error: ${data.status}. Unable to retrive user data.`;
+      });
+
+    // card delete subject
+    this.cardDeleteSubscribe = this.dataStorage.cardDeletedSubject.subscribe(
+      (response: boolean) => {
+        console.log(response);
+        this.cardDeleted = response;
+        this.isVisibleToast = true;
+        this.type = 'success';
+        this.message = 'Card was deleted.';
+      }
+    );
 
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
@@ -93,48 +130,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
           // get total account balance form firebase
           this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
           this.positiveMoney = this.state.getTotalMoneyInBankAccount();
-          this.overviewExpenses[0].val = this.positiveMoney;
+          this.overviewExpenses[0].val += this.positiveMoney;
           this.overviewExpenses[1].val += this.negativeMoney;
+          console.log((this.overviewExpenses[0].val += this.positiveMoney));
+          console.log((this.overviewExpenses[1].val += this.negativeMoney));
         } else return;
       }
     );
 
     // get cards as soon as user creates the cards -> pass to array to display on DOM
     this.bankCardSubscribe = this.state.bankCardSubscribe.subscribe((data) => {
+      console.log('DATA IS IN DASHBOARD');
       // pass data to state
       this.state.passBankCardToState(data);
 
       // as soon as the data is passed into state call the return function on the array
       this.bankCardsArray = this.state.getBankCard();
     });
-
-    // get cards for DOM -> this is needed to display cards back when we come back to the view
-    this.bankCardsArray = this.state.getBankCard();
-
-    this.username = this.loginService.getUsername();
-
-    // get expense data for DOM
-    this.expenseData = this.state.getExpenseData();
-
-    // get subscription data for DOM
-    this.subscriptionArray = this.state.getSubscriptionData();
-
-    // get investing data for DOM
-    this.investingData = this.state.getInvestingData();
-
-    this.positiveMoney = this.state.getTotalMoneyInBankAccount();
-    this.negativeMoney = this.state.getTotalMoneyInSpendingAccount();
-
-    // 0 is positive
-    this.overviewExpenses[0].val = this.positiveMoney;
-
-    // 1 is negative
-    this.overviewExpenses[1].val += this.negativeMoney;
   }
 
   ngOnDestroy(): void {
     this.bankCardSubscribe.unsubscribe();
     this.firebaseSubscribe.unsubscribe();
+    this.errorSubscribe.unsubscribe();
+    this.cardDeleteSubscribe.unsubscribe();
+    this.cardUpdate.unsubscribe();
   }
 
   onUserNavigate(e): void {

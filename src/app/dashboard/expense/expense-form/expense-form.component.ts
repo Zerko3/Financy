@@ -71,11 +71,13 @@ export class ExpenseFormComponent implements OnInit {
   onSubmitForm() {
     this.expenseData.ID = this.expenseData.account;
     let data = this.expenseData;
+    console.log('EXPENSE SUBMITTED', data);
 
     // check money status -> if false then allow other methods to run if true then show toast
     this.moneyStatusOnCard = this.state.checkMoneyStatus(data);
 
     if (!this.moneyStatusOnCard) {
+      console.log('MONEY IS VALID AND NOW WE ARE IN EXPENSE FORM');
       // pass data to state method for subject -> here we update the exense DOM table
       this.state.storeSubscribeForDataSubject(data);
 
