@@ -59,13 +59,16 @@ export class BankAccountComponent {
     private registerService: RegisterService
   ) {}
 
+  // allows user to navigate via router.
   onUserCloseForm() {
     this.router.navigate(['dashboard']);
   }
 
+  // user submit form
+  // 1. get valid data from form via devextreme
+  // 2. pass it into state
   onSubmitForm() {
     let data = this.bankAccountData;
-    console.log('DATA IS CARD', data);
 
     // pass data to state subject
     this.state.storeSubscribeForCardCreation(data);
@@ -82,8 +85,10 @@ export class BankAccountComponent {
         console.log(this.isCardAmmountReached);
       }
 
+      // display toast ui
       this.type = this.isCardAmmountReached ? 'error' : 'success';
 
+      // display toast message
       this.message = this.isCardAmmountReached
         ? `The maximum number of cards has been added.`
         : `The card named: ${data.bankAccountCustomName} was created.`;

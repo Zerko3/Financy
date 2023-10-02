@@ -66,20 +66,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  // TODO:
-  // 1. Refactor this code in ngoninit since everytime its called all the arrays are activated with the correct methods -> try to trim this calls for better performance
-
   ngOnInit(): void {
+    // OBSERVABLE FOR FIREBASE (state)
+    // 1. Wait for firbease to get updated and subscribe to it.
+    // 2. Call the callStateMethods() method to get valid data renderd on the DOM
     this.cardUpdate = this.dataStorage.updatedArray.subscribe(() => {
       this.callStateMethods();
     });
 
     // only call the backend Firebase if bankCardsArray.length is 0.
+    // 1. call this method as soon as Dashboard is loaded for the first time.
+    // 2. This is needed so that we can subscribe to it and redner the valid data on DOM (this.firebaseSubscribe)
     if (this.bankCardsArray.length === 0) {
       this.dataStorage.getValidUserDataFromFirebase();
     }
 
-    // error handling subject
+    // error handling subject for Firbease
+    // 1. Takes 1 error call and unsubscribes from it.
+    // 2. Render on DOM a toast for better UX.
     this.errorSubscribe = this.dataStorage.errorSubject
       .pipe(take(1))
       .subscribe((data) => {
@@ -89,6 +93,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
 
     // card delete subject
+    // 1. Subscribe to Firebase for .delete().
+    // 2. When it returns a value (null) in state subsribe here
+    // 3. Render toast for better UX
+    // 4. Unsubscribe
     this.cardDeleteSubscribe = this.dataStorage.cardDeletedSubject.subscribe(
       (response: boolean) => {
         this.cardDeleted = response;
@@ -98,6 +106,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     );
 
+    // When application first starts call this method.
+    // 1. Subscribe to Firbease to load the valid data on DOM when users logsin.
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
         // give data to the array
@@ -122,6 +132,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  // ubsubsribe to all subscriptions
   ngOnDestroy(): void {
     this.bankCardSubscribe.unsubscribe();
     this.firebaseSubscribe.unsubscribe();
@@ -130,6 +141,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.cardUpdate.unsubscribe();
   }
 
+  // Allows the user to navigate via the router.
   onUserNavigate(e): void {
     if (e.target.textContent === 'Add cards') {
       this.router.navigate(['dashboard/createCard']);
@@ -144,12 +156,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  // on click on the "X" DOM element the card will show options for deletion.
   onClickForDelete(e: any): void {
     this.clickedOnDeleteButton = !this.clickedOnDeleteButton;
 
     this.correctCard = e;
   }
 
+  // If user wants to delete the card get its ID and pass it into the .splice method to delete it from the array and call the Firbase to update the data.
   onCardClick(e): BankAccount[] {
     // 1. Get the correct card
     const testData = e.target.offsetParent;
@@ -169,6 +183,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.bankCardsArray;
   }
 
+  // If user clicks on "hide balance" the money will be hidden and "***" shown.
   hideMoneyBalanceOnCard(e: any): void {
     console.log(e.target.textContent);
 
@@ -178,6 +193,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  // call this method inside the subscribe
   callStateMethods() {
     this.expenseData = this.state.getExpenseData();
     this.subscriptionArray = this.state.getSubscriptionData();
