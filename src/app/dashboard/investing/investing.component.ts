@@ -85,18 +85,11 @@ export class InvestingComponent implements OnInit, OnDestroy {
       this.investingAmount.push(stock);
 
       // pass money into the correct path to display on the DOM
-      if (investment.coins === 'BTC') {
-        this.totalAmountInvestedPerCoin[0].totalAmount += investment.money;
-      } else if (investment.coins === 'ETH') {
-        this.totalAmountInvestedPerCoin[1].totalAmount += investment.money;
-      } else if (investment.coins === 'BNB') {
-        this.totalAmountInvestedPerCoin[2].totalAmount += investment.money;
-      }
+      this.renderCoinOnDOM(investment);
     }
 
     this.investingSubscribe = this.state.investingSubscribe.subscribe(
-      (data) => {
-        console.log('DASHBOARD -> INVESTING SUBSCRIBE');
+      (data: Investing) => {
         // get the previous total amount (needed for % increse calc -> not modulo!)
         this.previousInvestingTotalAmount = this.investingTotalAmount;
 
@@ -126,13 +119,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
         }
 
         // pass money into the correct path to display on the DOM
-        if (data.coins === 'BTC') {
-          this.totalAmountInvestedPerCoin[0].totalAmount += data.money;
-        } else if (data.coins === 'ETH') {
-          this.totalAmountInvestedPerCoin[1].totalAmount += data.money;
-        } else if (data.coins === 'BNB') {
-          this.totalAmountInvestedPerCoin[2].totalAmount += data.money;
-        }
+        this.renderCoinOnDOM(data);
       }
     );
 
@@ -154,6 +141,16 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.investingSubscribe.unsubscribe();
+  }
+
+  renderCoinOnDOM(data: Investing) {
+    if (data.coins === 'BTC') {
+      this.totalAmountInvestedPerCoin[0].totalAmount += data.money;
+    } else if (data.coins === 'ETH') {
+      this.totalAmountInvestedPerCoin[1].totalAmount += data.money;
+    } else if (data.coins === 'BNB') {
+      this.totalAmountInvestedPerCoin[2].totalAmount += data.money;
+    }
   }
 
   userFormNavigate() {
