@@ -32,61 +32,44 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.expenses = this.state.getExpenseDataForExpenseComponent();
 
     for (const expense of this.expenses) {
-      if (expense.expenseType === 'Subscription') {
-        this.subscriptionMoney += expense.money;
-      } else if (expense.expenseType === 'Bills') {
-        this.billMoney += expense.money;
-      } else if (expense.expenseType === 'Restaurants') {
-        this.restaurantMoney += expense.money;
-      } else if (expense.expenseType === 'Random') {
-        this.randomMoney += expense.money;
-      } else if (expense.expenseType === 'Clothes') {
-        this.clothesMoney += expense.money;
-      }
-
-      this.totalMoneyExpense =
-        this.subscriptionMoney +
-        this.billMoney +
-        this.restaurantMoney +
-        this.randomMoney +
-        this.clothesMoney;
-
-      // pass the total amount into the service to update the DOM
-      this.state.setTotalExpenseNumber(this.totalMoneyExpense);
+      this.renderExpenseOnDOM(expense);
     }
 
     this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
-      (data) => {
-        console.log('NOW WE ARE IN EXPENSE COMPONENT');
+      (data: Expense) => {
         this.expenses.push(data);
 
-        if (data.expenseType === 'Subscription') {
-          this.subscriptionMoney += data.money;
-        } else if (data.expenseType === 'Bills') {
-          this.billMoney += data.money;
-        } else if (data.expenseType === 'Restaurants') {
-          this.restaurantMoney += data.money;
-        } else if (data.expenseType === 'Random') {
-          this.randomMoney += data.money;
-        } else if (data.expenseType === 'Clothes') {
-          this.clothesMoney += data.money;
-        }
-
-        this.totalMoneyExpense =
-          this.subscriptionMoney +
-          this.billMoney +
-          this.restaurantMoney +
-          this.randomMoney +
-          this.clothesMoney;
-
-        // pass the total amount into the service to update the DOM
-        this.state.setTotalExpenseNumber(this.totalMoneyExpense);
+        this.renderExpenseOnDOM(data);
       }
     );
   }
 
   ngOnDestroy(): void {
     this.expenseServiceSubscribable.unsubscribe();
+  }
+
+  renderExpenseOnDOM(data: Expense) {
+    if (data.expenseType === 'Subscription') {
+      this.subscriptionMoney += data.money;
+    } else if (data.expenseType === 'Bills') {
+      this.billMoney += data.money;
+    } else if (data.expenseType === 'Restaurants') {
+      this.restaurantMoney += data.money;
+    } else if (data.expenseType === 'Random') {
+      this.randomMoney += data.money;
+    } else if (data.expenseType === 'Clothes') {
+      this.clothesMoney += data.money;
+    }
+
+    this.totalMoneyExpense =
+      this.subscriptionMoney +
+      this.billMoney +
+      this.restaurantMoney +
+      this.randomMoney +
+      this.clothesMoney;
+
+    // pass the total amount into the service to update the DOM
+    this.state.setTotalExpenseNumber(this.totalMoneyExpense);
   }
 
   userFormNavigation() {
