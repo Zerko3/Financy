@@ -13,7 +13,7 @@ import { CryptoResponseData } from 'src/interfaces/cryptoResponseData.interface'
 import { Stock } from 'src/interfaces/stock.interface';
 import { Investing } from 'src/interfaces/userMoneySpending.interface';
 import { CryptoAPI } from 'src/services/crypto-api.service';
-import { ErrorService } from 'src/services/error.service';
+
 import { State } from 'src/services/state.service';
 
 @Component({

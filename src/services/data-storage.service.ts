@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Subject } from 'rxjs';
-import { ErrorService } from './error.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
@@ -10,13 +9,14 @@ export class DataStorage {
   errorSubject = new Subject<HttpErrorResponse>();
   cardDeletedSubject = new Subject<unknown>();
   updatedArray = new Subject<BankAccount[]>();
-  cacheData: BankAccount[] | null = null;
-  user: string = '';
-  userRegistered: boolean = false;
-  userLoggedIn: boolean = false;
-  cardDeleted: boolean = false;
+  private cacheData: BankAccount[] | null = null;
+  private userRegistered: boolean = false;
+  private userLoggedIn: boolean = false;
+  private cardDeleted: boolean = false;
 
-  constructor(private http: HttpClient, private errorService: ErrorService) {}
+  public user: string = '';
+
+  constructor(private http: HttpClient) {}
 
   getCorrectUser(user: string) {
     this.user = user;
@@ -39,9 +39,6 @@ export class DataStorage {
         data
       )
       .subscribe((response: BankAccount[]) => {
-        console.log(response);
-        // some UX visuals
-        // subject?
         this.updatedArray.next(response);
       });
   }

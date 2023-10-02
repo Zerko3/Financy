@@ -41,10 +41,6 @@ export class State {
 
   constructor(private dataStorage: DataStorage) {}
 
-  // TODO:
-
-  // 3. Refactor the code
-
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
     for (const card of data) {
       // get card names
@@ -154,7 +150,7 @@ export class State {
     return this.toastSignal;
   }
 
-  setTotalExpenseNumber(expenseNumber: number) {
+  setTotalExpenseNumber(expenseNumber: number): void {
     this.totalNegativeMoney += expenseNumber;
   }
 
@@ -335,7 +331,7 @@ export class State {
     return this.totalNegativeMoney;
   }
 
-  getAccountBalance() {
+  getAccountBalance(): number {
     return this.totalMoneyInSpendingAccounts;
   }
 
