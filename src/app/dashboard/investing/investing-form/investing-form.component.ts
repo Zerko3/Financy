@@ -64,14 +64,19 @@ export class InvestingFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // get valid card names
     this.accounts = this.state.getAccountNames();
+
+    // show valid names in form
     this.positionEditorOptions.items = this.state.getAccountNames();
   }
 
+  // allows user to navigate via router
   onUserCloseForm() {
     this.router.navigate(['dashboard/investing']);
   }
 
+  // get valid data from form and pass into the service
   onSubmitForm() {
     this.investingData.ID = this.investingData.account;
     let data = this.investingData;

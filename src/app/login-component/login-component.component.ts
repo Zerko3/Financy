@@ -42,6 +42,7 @@ export class LoginComponentComponent implements OnInit {
     this.userCarouselArray = this.loginService.carouselArray;
   }
 
+  // allows user to navigate via router
   userHeroNavigation(e: any) {
     if (e.target.textContent === 'Register') {
       this.router.navigate(['/register']);
@@ -52,11 +53,14 @@ export class LoginComponentComponent implements OnInit {
     }
   }
 
+  // allow the user to use demo
   onClickDemo() {
     this.userClickedOnDemo = true;
   }
 
+  // get valid data from from
   onSubmit(e: NgForm) {
+    // this will pass you on with the demo account
     if (this.userClickedOnDemo) {
       this.userAccount = {
         email: 'admin@admin.admin',
@@ -71,7 +75,6 @@ export class LoginComponentComponent implements OnInit {
       };
     }
 
-    // TODO:
     // pass the userLoggedin boolean to service
     this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
 
@@ -81,10 +84,12 @@ export class LoginComponentComponent implements OnInit {
     // this method getCorrectUser is used for linking the firebase to a specific user
     this.dataStorage.getCorrectUser(this.userAccount.username);
 
+    // get user info from firebase -> pass data in and see if its true
     this.accountService.loginUser(this.userAccount).subscribe(
       (data: AuthResponseData) => {
         this.loginValid = true;
-        // auth guard
+
+        // auth guard -> needs to be true to be able to use app
         this.loginService.userLoggedIn(this.loginValid);
 
         data.email = this.userAccount.username;
