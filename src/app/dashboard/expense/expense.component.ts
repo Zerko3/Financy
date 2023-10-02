@@ -31,10 +31,12 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     // this gets called only when i come back to the component
     this.expenses = this.state.getExpenseDataForExpenseComponent();
 
+    // loop over the expenses array and for each expense (object) call renderExpenseOnDOM()
     for (const expense of this.expenses) {
       this.renderExpenseOnDOM(expense);
     }
 
+    // subscribe to form so when the user inputs and submits data the valid data gets renderd on DOM.
     this.expenseServiceSubscribable = this.state.dataSubject.subscribe(
       (data: Expense) => {
         this.expenses.push(data);
@@ -48,6 +50,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.expenseServiceSubscribable.unsubscribe();
   }
 
+  // render valid numbers on DOM
   renderExpenseOnDOM(data: Expense) {
     if (data.expenseType === 'Subscription') {
       this.subscriptionMoney += data.money;
@@ -72,6 +75,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.state.setTotalExpenseNumber(this.totalMoneyExpense);
   }
 
+  // allows user to navigate via navigate
   userFormNavigation() {
     this.router.navigate(['dashboard/expense/expenseForm']);
   }

@@ -59,10 +59,14 @@ export class ExpenseFormComponent implements OnInit {
   constructor(private state: State, private router: Router) {}
 
   ngOnInit(): void {
+    // get account names for form
     this.accounts = this.state.getAccountNames();
+
+    // add them into the form
     this.positionEditorOptions.items = this.accounts;
   }
 
+  // allows user to navigate via router
   onUserCloseForm() {
     this.router.navigate(['dashboard/expense']);
   }
@@ -71,11 +75,11 @@ export class ExpenseFormComponent implements OnInit {
   onSubmitForm() {
     this.expenseData.ID = this.expenseData.account;
     let data = this.expenseData;
-    console.log('EXPENSE SUBMITTED', data);
 
     // check money status -> if false then allow other methods to run if true then show toast
     this.moneyStatusOnCard = this.state.checkMoneyStatus(data);
 
+    // if moneystatus is false the we can continue (false -> we have money on card or we can afford the expense)
     if (!this.moneyStatusOnCard) {
       console.log('MONEY IS VALID AND NOW WE ARE IN EXPENSE FORM');
       // pass data to state method for subject -> here we update the exense DOM table
@@ -85,6 +89,7 @@ export class ExpenseFormComponent implements OnInit {
       this.state.getMoneyChangeAndUpdateFirebase(data);
     }
 
+    // if form is valid then show toast for better UX
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
       this.message = `The expense: ${data.expenseType} with ${data.money} dolars was added.`;

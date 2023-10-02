@@ -123,7 +123,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
       }
     );
 
-    // call API here, mby will add it somewhare else later (dashboard mby?)
+    // call API so we can get data
     this.cryptoApiData.getCoinDataFromBackend();
 
     // we call the cacheData if there is something in there. This will still get us the data if we dont call the server
@@ -143,6 +143,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
     this.investingSubscribe.unsubscribe();
   }
 
+  // with this method we render valid data on DOM
   renderCoinOnDOM(data: Investing) {
     if (data.coins === 'BTC') {
       this.totalAmountInvestedPerCoin[0].totalAmount += data.money;
@@ -153,26 +154,28 @@ export class InvestingComponent implements OnInit, OnDestroy {
     }
   }
 
+  // allows user to navigate via router
   userFormNavigate() {
     this.router.navigate(['dashboard/investing/investingForm']);
   }
 
+  // If user clicks on "hide balance" the money will be hidden and "***" shown.
   hideInvestingBalance(e: any) {
     if (e.target.textContent === 'Hide balance') {
       this.hideMoneyBalance = !this.hideMoneyBalance;
     }
   }
 
+  // toggles view between chart and coins
   toggleViewOfChart() {
     this.toggleChartView = !this.toggleChartView;
   }
 
+  // if user clicks on button additional info a popup will appear.
   showAdditionalInfo(coin: CryptoResponseData) {
     this.popupVisible = true;
 
     // set the data specifif to the popup
     this.currentCoin = coin;
   }
-
-  showError() {}
 }
