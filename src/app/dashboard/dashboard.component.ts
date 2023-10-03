@@ -148,11 +148,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     if (e.target.textContent === 'Add subscription') {
-      this.router.navigate(['dashboard/expense/expenseForm']);
+      this.router.navigate(['expense/expenseForm']);
     }
 
     if (e.target.textContent === 'Add transaction') {
-      this.router.navigate(['dashboard/expense/expenseForm']);
+      this.router.navigate(['expense/expenseForm']);
     }
   }
 

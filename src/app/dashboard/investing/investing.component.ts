@@ -156,7 +156,7 @@ export class InvestingComponent implements OnInit, OnDestroy {
 
   // allows user to navigate via router
   userFormNavigate() {
-    this.router.navigate(['dashboard/investing/investingForm']);
+    this.router.navigate(['/investing/investingForm']);
   }
 
   // If user clicks on "hide balance" the money will be hidden and "***" shown.

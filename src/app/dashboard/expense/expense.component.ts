@@ -77,7 +77,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   // allows user to navigate via navigate
   userFormNavigation() {
-    this.router.navigate(['dashboard/expense/expenseForm']);
+    this.router.navigate(['/expense/expenseForm']);
   }
 
   // TODO:

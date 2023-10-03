@@ -22,24 +22,6 @@ const routes: Routes = [
         path: 'createCard',
         component: BankAccountComponent,
       },
-      {
-        path: 'expense',
-        component: ExpenseComponent,
-        children: [{ path: 'expenseForm', component: ExpenseFormComponent }],
-      },
-
-      {
-        path: 'investing',
-        component: InvestingComponent,
-        children: [
-          { path: 'investingForm', component: InvestingFormComponent },
-        ],
-      },
-      {
-        path: 'saveings',
-        component: SaveingsComponent,
-        children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
-      },
     ],
   },
 

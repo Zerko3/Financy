@@ -73,7 +73,7 @@ export class InvestingFormComponent implements OnInit {
 
   // allows user to navigate via router
   onUserCloseForm() {
-    this.router.navigate(['dashboard/investing']);
+    this.router.navigate(['/investing']);
   }
 
   // get valid data from form and pass into the service

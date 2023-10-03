@@ -68,7 +68,7 @@ export class ExpenseFormComponent implements OnInit {
 
   // allows user to navigate via router
   onUserCloseForm() {
-    this.router.navigate(['dashboard/expense']);
+    this.router.navigate(['/expense']);
   }
 
   // get data from form and pass to serive
