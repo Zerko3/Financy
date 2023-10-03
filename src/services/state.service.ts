@@ -42,9 +42,12 @@ export class State {
   constructor(private dataStorage: DataStorage) {}
 
   // TODO:
-  // 1. BUG: When I change the router view to another component that component gets appended below -> not the correct way
+  // 1. Responsive design is not 100% complete fix it.
   // 2. App is slow (could be faster). Somehow fix this.
   // 3. Add spinners
+  // 4. router links do not work like they should in the live version. on refresh i get netlify error page not found.
+  // 5. imgs load slow, so add a lower resolution
+  // 6. username not displayed
 
   // THIS NEEDS REFACTORING TO MANY FORLOOPS
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {

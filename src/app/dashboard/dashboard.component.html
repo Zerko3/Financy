@@ -40,11 +40,11 @@
         [id]="card.ID"
       >
         <ng-container *ngIf="card.bankAccountCard === 'Mastercard'">
-          <img src="../../assets/img/master_card.png" alt="card" />
+          <img src="../../assets/img/master_card.webp" alt="card" />
         </ng-container>
 
         <ng-container *ngIf="card.bankAccountCard === 'Visa'">
-          <img src="../../assets/img/visa_card.png" alt="card" />
+          <img src="../../assets/img/visa_card.webp" alt="card" />
         </ng-container>
         <p
           [attr.data-card-id]="card.ID"
@@ -102,14 +102,14 @@
             <ng-container *ngIf="card.bankAccountCard === 'Mastercard'">
               <img
                 class="img--sub"
-                src="../../assets/img/master_card.png"
+                src="../../assets/img/master_card.webp"
                 alt="card"
               />
             </ng-container>
             <ng-container *ngIf="card.bankAccountCard === 'Visa'">
               <img
                 class="img--sub"
-                src="../../assets/img/visa_card.png"
+                src="../../assets/img/visa_card.webp"
                 alt="card"
               />
             </ng-container>
