@@ -46,6 +46,7 @@ export class State {
   // 2. App is slow (could be faster). Somehow fix this.
   // 3. Add spinners
 
+  // THIS NEEDS REFACTORING TO MANY FORLOOPS
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
     for (const card of data) {
       // get card names
@@ -53,14 +54,31 @@ export class State {
 
       // get expenses
       if (card.expenseOnCard.length > 0) {
-        for (const expese of card.expenseOnCard) {
-          this.expenseData.push(expese);
+        for (const expense of card.expenseOnCard) {
+          this.expenseData.push(expense);
 
-          if (expese.expenseType === 'Subscription') {
-            this.subscriptionArray.push(expese);
+          // push only expenses in expense card into this array to display it on expese component
+          if (
+            expense.expenseType !== 'Investing' ||
+            expense.expenseType !== 'Saveing'
+          ) {
+            this.totalNegativeMoney += expense.money;
+            this.expenseDataForTable.push(expense);
           }
-          if (expese.expenseType === 'Investing') {
-            this.investingData.push(expese);
+
+          // push to subscription array
+          if (expense.expenseType === 'Subscription') {
+            this.subscriptionArray.push(expense);
+          }
+
+          // push to investing array
+          if (expense.expenseType === 'Investing') {
+            this.investingData.push(expense);
+          }
+
+          // push to saveings array
+          if (expense.expenseType === 'Saveing') {
+            this.savingsData.push(expense);
           }
         }
       }
@@ -71,11 +89,6 @@ export class State {
 
         // calc for saveings account
         this.totalMoneyInSaveingAccounts += card.bankMoneyStatus;
-
-        // loop over the arrays inside saveings cards
-        for (const expense of card.expenseOnCard) {
-          this.savingsData.push(expense);
-        }
       }
 
       if (card.bankAccountName === 'Spending') {
@@ -83,14 +96,6 @@ export class State {
 
         // calc for spending account number
         this.totalMoneyInSpendingAccounts += card.bankMoneyStatus;
-
-        for (const expense of card.expenseOnCard) {
-          this.totalNegativeMoney += expense.money;
-          // push only expenses in expense card into this array to display it on expese component
-          if (expense.expenseType !== 'Investing') {
-            this.expenseDataForTable.push(expense);
-          }
-        }
       }
     }
 
@@ -159,6 +164,7 @@ export class State {
     this.totalNegativeMoney += expenseNumber;
   }
 
+  // refector this
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
   ): BankAccount[] {
@@ -173,6 +179,10 @@ export class State {
     // update money in the card and show on DOM
     let newMoney = 0;
     for (const card of this.bankCardsArray) {
+      if (userInput.ID === card.bankAccountCustomName) {
+        card.expenseOnCard.push(userInput);
+      }
+
       if (card.bankAccountName === 'Saveings') {
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus + userInput.money;
@@ -202,13 +212,6 @@ export class State {
 
           break;
         }
-      }
-    }
-
-    // push the expense | inesting | saveings into the valid card
-    for (const card of this.bankCardsArray) {
-      if (userInput.ID === card.bankAccountCustomName) {
-        card.expenseOnCard.push(userInput);
       }
     }
 

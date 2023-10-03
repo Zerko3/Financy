@@ -67,12 +67,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // OBSERVABLE FOR FIREBASE (state)
-    // 1. Wait for firbease to get updated and subscribe to it.
-    // 2. Call the callStateMethods() method to get valid data renderd on the DOM
-    this.cardUpdate = this.dataStorage.updatedArray.subscribe(() => {
-      this.callStateMethods();
-    });
+    // on load render valid data
+    console.log('CALLED STATE METHHODS');
+    this.callStateMethods();
+    this.bankCardsArray = this.state.getBankCard();
 
     // only call the backend Firebase if bankCardsArray.length is 0.
     // 1. call this method as soon as Dashboard is loaded for the first time.
@@ -80,6 +78,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.bankCardsArray.length === 0) {
       this.dataStorage.getValidUserDataFromFirebase();
     }
+
+    // OBSERVABLE FOR FIREBASE (state)
+    // 1. Wait for firbease to get updated and subscribe to it.
+    // 2. Call the callStateMethods() method to get valid data renderd on the DOM
+    this.cardUpdate = this.dataStorage.updatedArray.subscribe(() => {
+      this.callStateMethods();
+    });
 
     // error handling subject for Firbease
     // 1. Takes 1 error call and unsubscribes from it.

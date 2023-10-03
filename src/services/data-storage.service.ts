@@ -40,6 +40,9 @@ export class DataStorage {
       )
       .subscribe((response: BankAccount[]) => {
         this.updatedArray.next(response);
+
+        // update cache
+        this.cacheData = response;
       });
   }
 
