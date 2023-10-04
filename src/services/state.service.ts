@@ -46,8 +46,6 @@ export class State {
   // 2. App is slow (could be faster). Somehow fix this.
   // 3. Add spinners
   // 4. router links do not work like they should in the live version. on refresh i get netlify error page not found.
-  // 5. imgs load slow, so add a lower resolution
-  // 6. username not displayed
 
   // THIS NEEDS REFACTORING TO MANY FORLOOPS
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {

@@ -8,7 +8,7 @@ export class DataStorage {
   cardsArraySubject = new Subject<BankAccount[]>();
   errorSubject = new Subject<HttpErrorResponse>();
   cardDeletedSubject = new Subject<unknown>();
-  updatedArray = new Subject<BankAccount[]>();
+
   private cacheData: BankAccount[] | null = null;
   private userRegistered: boolean = false;
   private userLoggedIn: boolean = false;
@@ -39,8 +39,6 @@ export class DataStorage {
         data
       )
       .subscribe((response: BankAccount[]) => {
-        this.updatedArray.next(response);
-
         // update cache
         this.cacheData = response;
       });
@@ -90,5 +88,9 @@ export class DataStorage {
         this.cardDeleted = true;
         this.cardDeletedSubject.next(this.cardDeleted);
       });
+  }
+
+  getCacheData(): BankAccount[] {
+    return this.cacheData;
   }
 }

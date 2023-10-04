@@ -15,6 +15,7 @@ import {
   Investing,
 } from 'src/interfaces/userMoneySpending.interface';
 import { DataStorage } from 'src/services/data-storage.service';
+import { LoginService } from 'src/services/login.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   clickedOnDeleteButton: boolean = false;
   hideBalanceStatus: boolean = false;
   correctCard: string = '';
-  username: string;
+  username: string = '';
 
   // this is for pie
   overviewExpenses: [OverviewExpense, OverviewExpense] = [
@@ -51,7 +52,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   firebaseSubscribe: Subscription;
   errorSubscribe: Subscription;
   cardDeleteSubscribe: Subscription;
-  cardUpdate: Subscription;
 
   toastSignal: boolean = false;
   cardDeleted: boolean = false;
@@ -63,14 +63,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private state: State,
     private dataStorage: DataStorage,
+    private loginService: LoginService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     // on load render valid data
-    console.log('CALLED STATE METHHODS');
-    this.callStateMethods();
     this.bankCardsArray = this.state.getBankCard();
+
+    // on load call state methods
+    this.callStateMethods();
+
+    // always render the username
+    this.username = this.loginService.getUsername();
 
     // only call the backend Firebase if bankCardsArray.length is 0.
     // 1. call this method as soon as Dashboard is loaded for the first time.
@@ -78,13 +83,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.bankCardsArray.length === 0) {
       this.dataStorage.getValidUserDataFromFirebase();
     }
-
-    // OBSERVABLE FOR FIREBASE (state)
-    // 1. Wait for firbease to get updated and subscribe to it.
-    // 2. Call the callStateMethods() method to get valid data renderd on the DOM
-    this.cardUpdate = this.dataStorage.updatedArray.subscribe(() => {
-      this.callStateMethods();
-    });
 
     // error handling subject for Firbease
     // 1. Takes 1 error call and unsubscribes from it.
@@ -143,7 +141,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.firebaseSubscribe.unsubscribe();
     this.errorSubscribe.unsubscribe();
     this.cardDeleteSubscribe.unsubscribe();
-    this.cardUpdate.unsubscribe();
   }
 
   // Allows the user to navigate via the router.

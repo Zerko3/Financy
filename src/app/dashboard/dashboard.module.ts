@@ -27,6 +27,7 @@ import {
   DxFormModule,
   DxToastModule,
   DxButtonModule,
+  DxLoadIndicatorModule,
 } from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from '../navigation/navigation.component';
@@ -69,6 +70,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     DxPopupModule,
     DxPopoverModule,
     DxSparklineModule,
+    DxLoadIndicatorModule,
   ],
 })
 export class DashboardModule {}
