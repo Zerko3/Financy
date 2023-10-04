@@ -4,12 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { DashboardComponent } from './dashboard.component';
-import { ExpenseFormComponent } from './expense/expense-form/expense-form.component';
-import { ExpenseComponent } from './expense/expense.component';
-import { InvestingFormComponent } from './investing/investing-form/investing-form.component';
-import { InvestingComponent } from './investing/investing.component';
-import { SaveingsFormComponent } from './saveings/saveings-form/saveings-form.component';
-import { SaveingsComponent } from './saveings/saveings.component';
 import { WildcardComponentComponent } from '../wildcard-component/wildcard-component.component';
 
 const routes: Routes = [
