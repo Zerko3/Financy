@@ -56,7 +56,6 @@ export class DataStorage {
     this.user = userID;
     // if i have data on DOM then do NOT call this HTTP request
     if (this.cacheData !== null || this.userRegistered || this.userLoggedIn) {
-      console.log('PRESENT DATA ON DOM OR USER REGISTERED.');
       return this.cacheData;
     }
 
@@ -66,8 +65,6 @@ export class DataStorage {
       )
       .subscribe(
         (data: BankAccount[] | null) => {
-          console.log('yo');
-          console.log(data);
           // if i get null return
           if (data === null) return;
 
@@ -91,8 +88,6 @@ export class DataStorage {
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards/${card}.json`
       )
       .subscribe((response: null) => {
-        console.log(response);
-
         // do logic for card deletion UX in here since its not an error but a response
         this.cardDeleted = true;
         this.cardDeletedSubject.next(this.cardDeleted);

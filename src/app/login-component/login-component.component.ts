@@ -92,7 +92,7 @@ export class LoginComponentComponent implements OnInit {
         // auth guard -> needs to be true to be able to use app
         this.loginService.userLoggedIn(this.loginValid);
 
-        data.email = this.userAccount.username;
+        // data.email = this.userAccount.username;
         // handle valid data in here
         if (e.form.status === 'VALID' || this.userClickedOnDemo) {
           // pass logedin user to service

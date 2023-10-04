@@ -9,9 +9,9 @@ import { User } from 'src/models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  user = new BehaviorSubject<User>(null);
   userLoggedIn: User;
   API_KEY: string = environment._API_KEY;
+  private userID: string;
 
   constructor(private http: HttpClient) {}
 
@@ -38,8 +38,6 @@ export class AccountService {
             responseData.idToken,
             experationDate
           );
-
-          this.user.next(user);
         })
       );
   }
@@ -70,7 +68,8 @@ export class AccountService {
             experationDate
           );
 
-          this.user.next(this.userLoggedIn);
+          // set user ID
+          this.userID = responseData.localId;
         })
       );
   }
@@ -78,5 +77,9 @@ export class AccountService {
   // logout
   logout(setStatus: null) {
     this.userLoggedIn = setStatus;
+  }
+
+  getUserId() {
+    return this.userID;
   }
 }

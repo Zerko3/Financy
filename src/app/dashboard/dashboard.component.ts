@@ -18,6 +18,7 @@ import { User } from 'src/models/user.model';
 import { AccountService } from 'src/services/account.service';
 import { DataStorage } from 'src/services/data-storage.service';
 import { LoginService } from 'src/services/login.service';
+import { RegisterService } from 'src/services/register.service';
 import { State } from 'src/services/state.service';
 
 @Component({
@@ -68,6 +69,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private state: State,
     private dataStorage: DataStorage,
     private loginService: LoginService,
+    private registerService: RegisterService,
     private accountService: AccountService,
     private router: Router
   ) {}
@@ -80,16 +82,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.callStateMethods();
 
     // always render the username
-    this.username = this.loginService.getUsername();
+    if (this.loginService.userLoggedIn) {
+      this.username = this.loginService.getUsername();
+    } else {
+      this.username = this.registerService.getUsername();
+    }
+
+    // get userID
+    this.userID = this.accountService.getUserId();
 
     // Call Firebase for the first time here after login
-    this.accountService.user.pipe(take(1)).subscribe((data: User) => {
-      console.log(data);
-
-      this.userID = data.id;
-
-      this.dataStorage.getValidUserDataFromFirebase(this.userID);
-    });
+    this.dataStorage.getValidUserDataFromFirebase(this.userID);
 
     // error handling subject for Firbease
     // 1. Takes 1 error call and unsubscribes from it.
@@ -120,7 +123,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // 1. Subscribe to Firbease to load the valid data on DOM when users logsin.
     this.firebaseSubscribe = this.dataStorage.cardsArraySubject.subscribe(
       (data) => {
-        console.log(data);
         // give data to the array
         this.bankCardsArray = data;
 

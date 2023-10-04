@@ -81,7 +81,6 @@ export class ExpenseFormComponent implements OnInit {
 
     // if moneystatus is false the we can continue (false -> we have money on card or we can afford the expense)
     if (!this.moneyStatusOnCard) {
-      console.log('MONEY IS VALID AND NOW WE ARE IN EXPENSE FORM');
       // pass data to state method for subject -> here we update the exense DOM table
       this.state.storeSubscribeForDataSubject(data);
 
