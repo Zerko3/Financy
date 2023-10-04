@@ -81,9 +81,6 @@ export class LoginComponentComponent implements OnInit {
     // get username to dashboard
     this.loginService.storeUsername(this.userAccount.username);
 
-    // this method getCorrectUser is used for linking the firebase to a specific user
-    // this.dataStorage.getCorrectUser(this.userAccount.username);
-
     // get user info from firebase -> pass data in and see if its true
     this.accountService.loginUser(this.userAccount).subscribe(
       (data: AuthResponseData) => {
@@ -92,11 +89,10 @@ export class LoginComponentComponent implements OnInit {
         // auth guard -> needs to be true to be able to use app
         this.loginService.userLoggedIn(this.loginValid);
 
-        // data.email = this.userAccount.username;
         // handle valid data in here
         if (e.form.status === 'VALID' || this.userClickedOnDemo) {
-          // pass logedin user to service
-          this.loginService.storeUsername(data.email);
+          // pass username to service to render on DOM
+          this.loginService.storeUsername(this.userAccount.username);
 
           // toast
           this.isToastVisible = true;

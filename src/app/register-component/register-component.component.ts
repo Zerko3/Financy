@@ -69,9 +69,6 @@ export class RegisterComponentComponent implements OnInit {
     // pass the username into the firebase to create a link for the api
     // this.dataStorage.getCorrectUser(newUser.username);
 
-    // pass the username into service to store it to display it in objects and on DOM
-    this.registerService.storeUsername(newUser.username);
-
     this.accountService.singupUser(newUser).subscribe(
       (responseData) => {
         this.registerStatus = true;
@@ -82,6 +79,9 @@ export class RegisterComponentComponent implements OnInit {
         this.registerService.storeRegisterAccount(this.registerStatus);
 
         if (e.form.status === 'VALID') {
+          // pass the username into service to store it to display it in objects and on DOM
+          this.registerService.storeUsername(newUser.username);
+
           // toast
           this.isToastVisible = true;
           this.type = 'success';
