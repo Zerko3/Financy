@@ -27,9 +27,11 @@ export class RegisterService {
 
   storeUsername(username: string) {
     this.username = username;
+    console.log(username);
   }
 
   getUsername() {
+    console.log(this.username);
     return this.username;
   }
 

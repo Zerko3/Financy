@@ -14,7 +14,6 @@ import {
   Saveings,
   Investing,
 } from 'src/interfaces/userMoneySpending.interface';
-import { User } from 'src/models/user.model';
 import { AccountService } from 'src/services/account.service';
 import { DataStorage } from 'src/services/data-storage.service';
 import { LoginService } from 'src/services/login.service';
@@ -42,6 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   clickOnNavigation: boolean = false;
   clickedOnDeleteButton: boolean = false;
   hideBalanceStatus: boolean = false;
+  spinnerActive: boolean = false;
   correctCard: string = '';
   username: string = '';
 
@@ -78,14 +78,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // on load render valid data
     this.bankCardsArray = this.state.getBankCard();
 
+    this.username = this.registerService.getUsername();
+
     // on load call state methods
     this.callStateMethods();
 
     // always render the username
-    if (this.loginService.userLoggedIn) {
-      this.username = this.loginService.getUsername();
-    } else {
-      this.username = this.registerService.getUsername();
+
+    this.username = this.loginService.getUsername();
+
+    // render spinner on DOM
+    if (this.bankCardsArray.length < 1) {
+      this.spinnerActive = true;
+
+      setTimeout(() => {
+        this.spinnerActive = false;
+      }, 2000);
     }
 
     // get userID
