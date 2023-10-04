@@ -8,19 +8,22 @@ export class DataStorage {
   cardsArraySubject = new Subject<BankAccount[]>();
   errorSubject = new Subject<HttpErrorResponse>();
   cardDeletedSubject = new Subject<unknown>();
-
+  updatedArray = new Subject<BankAccount[]>();
   private cacheData: BankAccount[] | null = null;
   private userRegistered: boolean = false;
   private userLoggedIn: boolean = false;
   private cardDeleted: boolean = false;
 
-  public user: string = '';
+  private user: string = '';
 
   constructor(private http: HttpClient) {}
 
-  getCorrectUser(user: string) {
-    this.user = user;
-  }
+  // 1. get user specific ID token and store it under that
+  // 2. always check for that ID token
+
+  // getCorrectUser(user: string) {
+  //   this.user = user;
+  // }
 
   userIsRegistered(register: boolean) {
     // if we get a user in here that means we are registered
@@ -39,6 +42,8 @@ export class DataStorage {
         data
       )
       .subscribe((response: BankAccount[]) => {
+        this.updatedArray.next(response);
+
         // update cache
         this.cacheData = response;
       });
@@ -46,7 +51,9 @@ export class DataStorage {
 
   // get data from Firebase
 
-  getValidUserDataFromFirebase() {
+  getValidUserDataFromFirebase(userID: string) {
+    // set userID for the app
+    this.user = userID;
     // if i have data on DOM then do NOT call this HTTP request
     if (this.cacheData !== null || this.userRegistered || this.userLoggedIn) {
       console.log('PRESENT DATA ON DOM OR USER REGISTERED.');
@@ -55,10 +62,12 @@ export class DataStorage {
 
     return this.http
       .get<BankAccount[] | null>(
-        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards.json`
+        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${userID}/cards.json`
       )
       .subscribe(
         (data: BankAccount[] | null) => {
+          console.log('yo');
+          console.log(data);
           // if i get null return
           if (data === null) return;
 
@@ -91,6 +100,11 @@ export class DataStorage {
   }
 
   getCacheData(): BankAccount[] {
+    return this.cacheData;
+  }
+
+  deleteCacheDataOnLogout() {
+    this.cacheData = null;
     return this.cacheData;
   }
 }

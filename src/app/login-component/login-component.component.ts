@@ -78,11 +78,11 @@ export class LoginComponentComponent implements OnInit {
     // pass the userLoggedin boolean to service
     this.dataStorage.userIsLoggedInButNoDataOnDom(this.userLoggedIn);
 
-    // how to get username out of the Acount?
+    // get username to dashboard
     this.loginService.storeUsername(this.userAccount.username);
 
     // this method getCorrectUser is used for linking the firebase to a specific user
-    this.dataStorage.getCorrectUser(this.userAccount.username);
+    // this.dataStorage.getCorrectUser(this.userAccount.username);
 
     // get user info from firebase -> pass data in and see if its true
     this.accountService.loginUser(this.userAccount).subscribe(

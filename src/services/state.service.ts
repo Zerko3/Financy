@@ -43,9 +43,7 @@ export class State {
 
   // TODO:
   // 1. Responsive design is not 100% complete fix it.
-  // 2. App is slow (could be faster). Somehow fix this.
-
-  // 4. router links do not work like they should in the live version. on refresh i get netlify error page not found.
+  // 2. Spinners need to go away in lets say 2 seconds
 
   // THIS NEEDS REFACTORING TO MANY FORLOOPS
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
@@ -331,6 +329,24 @@ export class State {
   }
 
   // Get Data
+
+  onLogOutClearData() {
+    this.bankCardsArray = [];
+    this.expenseData = [];
+    this.savingsData = [];
+    this.investingData = [];
+    this.subscriptionArray = [];
+    this.expenseDataForTable = [];
+    this.cardNames = [];
+    this.bankCardSaveingTypeArray = [];
+    this.bankCardSpendingTypeArray = [];
+
+    // money numbers
+    this.totalMoneyInBankAccount = 0;
+    this.totalMoneyInSpendingAccounts = 0;
+    this.totalMoneyInSaveingAccounts = 0;
+    this.totalNegativeMoney = 0;
+  }
 
   getTotalMoneyInSaveingAccount(): number {
     return this.totalMoneyInSaveingAccounts;
