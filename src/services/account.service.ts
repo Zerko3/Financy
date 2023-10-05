@@ -4,7 +4,7 @@ import { AuthResponseData } from 'src/interfaces/authResponse.interface';
 import { Login } from 'src/interfaces/login.interface';
 import { Account } from 'src/models/account.model';
 import { environment } from 'src/environments/environment.development';
-import { BehaviorSubject, take, tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { User } from 'src/models/user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -15,9 +15,6 @@ export class AccountService {
   private userToken: string;
 
   constructor(private http: HttpClient) {}
-
-  // TODO:
-  // 1. Pass the user token into the fetch req in data-storage to auth it!
 
   singupUser(newUser: Account) {
     // store the data in the backend
@@ -44,6 +41,12 @@ export class AccountService {
           );
 
           // pass on the user to the data-storage
+
+          // set user ID
+          this.userID = responseData.localId;
+
+          // set the user token
+          this.userToken = responseData.idToken;
         })
       );
   }
@@ -79,9 +82,6 @@ export class AccountService {
 
           // set the user token
           this.userToken = responseData.idToken;
-
-          // // pass on the user to the data-storage
-          // this.userSubject.next(this.userLoggedIn);
         })
       );
   }

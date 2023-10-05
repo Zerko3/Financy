@@ -7,7 +7,6 @@ import {
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Subject } from 'rxjs';
-import { AccountService } from './account.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
@@ -23,13 +22,7 @@ export class DataStorage {
   private user: string = '';
   private userToken: string;
 
-  constructor(
-    private http: HttpClient,
-    private accountService: AccountService
-  ) {}
-
-  // 1. get user specific ID token and store it under that
-  // 2. always check for that ID token
+  constructor(private http: HttpClient) {}
 
   // getCorrectUser(user: string) {
   //   this.user = user;
