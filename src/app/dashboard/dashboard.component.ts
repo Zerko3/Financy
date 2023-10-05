@@ -63,7 +63,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   type: string = '';
   message: string = '';
 
-  userID: string;
+  private userID: string;
+  private userToken: string;
 
   constructor(
     private state: State,
@@ -99,8 +100,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // get userID
     this.userID = this.accountService.getUserId();
 
+    // get user token
+    this.userToken = this.accountService.getUserToken();
+
     // Call Firebase for the first time here after login
-    this.dataStorage.getValidUserDataFromFirebase(this.userID);
+    this.dataStorage.getValidUserDataFromFirebase(this.userID, this.userToken);
 
     // error handling subject for Firbease
     // 1. Takes 1 error call and unsubscribes from it.

@@ -6,7 +6,7 @@
   height: 100vh;
   width: 100vw;
   position: relative;
-  // overflow: hidden;
+  overflow: hidden;
 
   @include media-tablet-small {
     overflow: initial;
@@ -250,7 +250,7 @@
       &--money {
         width: 100%;
         height: 100%;
-        @include flexbox--center--all;
+        @include flexbox--aling-flex__start__justify-center;
 
         .chart-container {
           width: 100%;

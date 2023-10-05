@@ -1,7 +1,13 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BankAccount } from 'src/interfaces/bankAccount.interface';
 import { Subject } from 'rxjs';
+import { AccountService } from './account.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorage {
@@ -16,7 +22,10 @@ export class DataStorage {
 
   private user: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private accountService: AccountService
+  ) {}
 
   // 1. get user specific ID token and store it under that
   // 2. always check for that ID token
@@ -33,6 +42,8 @@ export class DataStorage {
   userIsLoggedInButNoDataOnDom(loggedIn: boolean) {
     this.userLoggedIn = loggedIn;
   }
+
+  // JWT
 
   // store data in Firebase
   storeValidUserDataInFirebase(data: BankAccount[]) {
@@ -51,7 +62,7 @@ export class DataStorage {
 
   // get data from Firebase
 
-  getValidUserDataFromFirebase(userID: string) {
+  getValidUserDataFromFirebase(userID: string, userToken: string) {
     // set userID for the app
     this.user = userID;
     // if i have data on DOM then do NOT call this HTTP request
@@ -61,7 +72,10 @@ export class DataStorage {
 
     return this.http
       .get<BankAccount[] | null>(
-        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${userID}/cards.json`
+        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${userID}/cards.json`,
+        {
+          params: new HttpParams().set('auth', userToken),
+        }
       )
       .subscribe(
         (data: BankAccount[] | null) => {

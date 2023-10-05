@@ -12,8 +12,12 @@ export class AccountService {
   userLoggedIn: User;
   API_KEY: string = environment._API_KEY;
   private userID: string;
+  private userToken: string;
 
   constructor(private http: HttpClient) {}
+
+  // TODO:
+  // 1. Pass the user token into the fetch req in data-storage to auth it!
 
   singupUser(newUser: Account) {
     // store the data in the backend
@@ -32,12 +36,14 @@ export class AccountService {
             new Date().getTime() + +responseData.expiresIn * 1000
           );
 
-          const user = new User(
+          this.userLoggedIn = new User(
             responseData.email,
             responseData.localId,
             responseData.idToken,
             experationDate
           );
+
+          // pass on the user to the data-storage
         })
       );
   }
@@ -70,6 +76,12 @@ export class AccountService {
 
           // set user ID
           this.userID = responseData.localId;
+
+          // set the user token
+          this.userToken = responseData.idToken;
+
+          // // pass on the user to the data-storage
+          // this.userSubject.next(this.userLoggedIn);
         })
       );
   }
@@ -81,5 +93,9 @@ export class AccountService {
 
   getUserId() {
     return this.userID;
+  }
+
+  getUserToken() {
+    return this.userToken;
   }
 }
