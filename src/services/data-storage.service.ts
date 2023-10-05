@@ -21,6 +21,7 @@ export class DataStorage {
   private cardDeleted: boolean = false;
 
   private user: string = '';
+  private userToken: string;
 
   constructor(
     private http: HttpClient,
@@ -50,7 +51,10 @@ export class DataStorage {
     this.http
       .put(
         `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards.json`,
-        data
+        data,
+        {
+          params: new HttpParams().set('auth', this.userToken),
+        }
       )
       .subscribe((response: BankAccount[]) => {
         this.updatedArray.next(response);
@@ -65,6 +69,8 @@ export class DataStorage {
   getValidUserDataFromFirebase(userID: string, userToken: string) {
     // set userID for the app
     this.user = userID;
+    // set userToken for the app
+    this.userToken = userToken;
     // if i have data on DOM then do NOT call this HTTP request
     if (this.cacheData !== null || this.userRegistered || this.userLoggedIn) {
       return this.cacheData;
@@ -99,7 +105,10 @@ export class DataStorage {
   deleteCardFromFirebase(card: number): void {
     this.http
       .delete(
-        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards/${card}.json`
+        `https://angular---financy-default-rtdb.europe-west1.firebasedatabase.app/users/${this.user}/cards/${card}.json`,
+        {
+          params: new HttpParams().set('auth', this.userToken),
+        }
       )
       .subscribe((response: null) => {
         // do logic for card deletion UX in here since its not an error but a response
