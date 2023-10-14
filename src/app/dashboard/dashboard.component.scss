@@ -137,6 +137,11 @@
         width: 30rem;
         position: relative;
 
+        @include height-desktop {
+          height: auto;
+          width: 25rem;
+        }
+
         @include media-medium-small-extra {
           width: 10rem;
         }
@@ -268,6 +273,10 @@
 dx-pie-chart {
   height: 30rem;
   width: 50rem;
+
+  @include height-desktop {
+    height: 20rem;
+  }
 
   @include media-tablet-big {
     width: 30rem;

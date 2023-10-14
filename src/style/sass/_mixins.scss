@@ -42,6 +42,15 @@
 }
 
 // media queries
+
+// 1300px
+//*-*-*-*-*-*-*-*-*-*-- The 950px Mark Break Point for height*-*-*-*-*-*-*-*-*-*-*
+@mixin height-desktop {
+  @media screen and (max-height: break-point(break-point-height)) {
+    @content;
+  }
+}
+
 @mixin media-desktop {
   @media screen and (min-width: break-point(break-point-desktop)) {
     @content;

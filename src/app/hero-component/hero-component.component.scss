@@ -4,6 +4,7 @@
 .section--hero {
   height: 100vh;
   width: 100vw;
+  padding: 1.2rem 2.43rem;
   @include flexbox--center--all;
   @include flexbox--collumn;
 
