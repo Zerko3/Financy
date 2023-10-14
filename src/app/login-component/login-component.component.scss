@@ -96,6 +96,7 @@
         p,
         a {
           font-size: font-size(font-size-small);
+          cursor: pointer;
         }
       }
 
@@ -142,6 +143,7 @@
 .carousel {
   @include flexbox--center--all;
   @include flexbox--collumn;
+  padding: 1.2rem;
 
   gap: 1rem;
   width: 100%;

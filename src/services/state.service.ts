@@ -43,7 +43,6 @@ export class State {
 
   // TODO:
   // 1. Responsive design is not 100% complete fix it.
-  // 2. Spinners need to go away in lets say 2 seconds
 
   // THIS NEEDS REFACTORING TO MANY FORLOOPS
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
