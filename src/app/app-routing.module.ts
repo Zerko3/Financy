@@ -11,6 +11,7 @@ import { InvestingFormComponent } from './dashboard/investing/investing-form/inv
 import { InvestingComponent } from './dashboard/investing/investing.component';
 import { SaveingsFormComponent } from './dashboard/saveings/saveings-form/saveings-form.component';
 import { SaveingsComponent } from './dashboard/saveings/saveings.component';
+import { WildcardComponentComponent } from './wildcard-component/wildcard-component.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hero', pathMatch: 'full' },
@@ -46,6 +47,7 @@ const routes: Routes = [
     component: SaveingsComponent,
     children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
   },
+  { path: '**', component: WildcardComponentComponent },
 ];
 
 @NgModule({

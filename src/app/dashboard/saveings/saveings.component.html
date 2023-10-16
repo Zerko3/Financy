@@ -66,7 +66,6 @@
     <div class="section--saveings__content--box__adding--money">
       <dx-data-grid
         [repaintChangesOnly]="true"
-        (onCellPrepared)="cellStyle($event)"
         [showBorders]="true"
         [dataSource]="saveingsFormDataArray"
         [columns]="columns"

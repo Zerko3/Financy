@@ -80,13 +80,11 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.router.navigate(['/expense/expenseForm']);
   }
 
-  // TODO:
-  // 1. Get valid row
-  // 2. Get valid data and pass on the color
-  // 3. Add multiple color options for paid unpaid subscription food ,....
   cellStyle(e) {
-    if (e.rowType === 'data' && e.column.dataField === 'billStatus') {
-      e.cellElement.classList.add('test');
+    if (e.rowType === 'data') {
+      if (e.column.dataField === 'billStatus' && e.data.billStatus === 'paid') {
+        e.cellElement.style.cssText = 'color: green';
+      }
     }
   }
 }

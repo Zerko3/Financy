@@ -56,11 +56,4 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   userNavigationForm() {
     this.router.navigate(['/saveings/saveingsForm']);
   }
-
-  // TODO
-  cellStyle(e) {
-    if (e.rowType === 'data' && e.column.dataField === 'Status') {
-      // e.cellElement.classList.add('test');
-    }
-  }
 }
