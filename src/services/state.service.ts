@@ -41,10 +41,6 @@ export class State {
 
   constructor(private dataStorage: DataStorage) {}
 
-  // TODO:
-  // 1. Responsive design is not 100% complete fix it.
-
-  // THIS NEEDS REFACTORING TO MANY FORLOOPS
   getBankCardsArrayDataFromFirebase(data: BankAccount[]): BankAccount[] {
     for (const card of data) {
       // get card names

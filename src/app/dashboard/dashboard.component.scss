@@ -86,6 +86,10 @@
       overflow-x: scroll;
       position: relative;
 
+      @include height-desktop {
+        margin: 0;
+      }
+
       &__subscription--box {
         height: auto;
         width: auto;
@@ -212,6 +216,10 @@
         position: relative;
         @include flexbox--aling-flex__start__justify-space__between;
 
+        @include height-desktop {
+          height: 60%;
+        }
+
         h1 {
           font-size: font-size(font-size-medium);
           margin-bottom: 3.2rem;
@@ -288,6 +296,8 @@ dx-pie-chart {
 }
 
 dx-list {
+  overflow: scroll;
+
   @include media-small-extra {
     width: 20rem;
 
