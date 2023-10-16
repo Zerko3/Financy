@@ -209,8 +209,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // If user clicks on "hide balance" the money will be hidden and "***" shown.
   hideMoneyBalanceOnCard(e: any): void {
-    console.log(e.target.textContent);
-
     if (e.target.textContent === 'Hide balance') {
       // 1. set boolean value to true or false
       this.hideBalanceStatus = !this.hideBalanceStatus;

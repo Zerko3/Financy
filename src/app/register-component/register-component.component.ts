@@ -58,62 +58,68 @@ export class RegisterComponentComponent implements OnInit {
     this.accountType = e.value.accType;
     this.password = e.value.password;
 
-    // create new Account
-    const newUser = new Account(
-      this.username,
-      this.email,
-      this.accountType,
-      this.password
-    );
+    if (!this.email.endsWith('@gmail.com')) {
+      this.isToastVisible = true;
+      this.type = 'error';
 
-    // pass the username into the firebase to create a link for the api
-    // this.dataStorage.getCorrectUser(newUser.username);
+      // error msg for better UX
+      this.message = `Invalid user credentials. Please try again.`;
 
-    this.accountService.singupUser(newUser).subscribe(
-      (responseData) => {
-        this.registerStatus = true;
+      this.errorStatus = true;
+    } else {
+      // create new Account
+      const newUser = new Account(
+        this.username,
+        this.email,
+        this.accountType,
+        this.password
+      );
 
-        this.dataStorage.userIsRegistered(this.registerStatus);
+      this.accountService.singupUser(newUser).subscribe(
+        (responseData) => {
+          this.registerStatus = true;
 
-        // pass account to register service
-        this.registerService.storeRegisterAccount(this.registerStatus);
+          this.dataStorage.userIsRegistered(this.registerStatus);
 
-        if (e.form.status === 'VALID') {
-          // pass the username into service to store it to display it in objects and on DOM
-          this.registerService.storeUsername(newUser.username);
+          // pass account to register service
+          this.registerService.storeRegisterAccount(this.registerStatus);
 
-          // toast
+          if (e.form.status === 'VALID') {
+            // pass the username into service to store it to display it in objects and on DOM
+            this.registerService.storeUsername(newUser.username);
+
+            // toast
+            this.isToastVisible = true;
+            this.type = 'success';
+            this.message = `You have registered. Welcome!`;
+
+            // reset the form
+            e.resetForm();
+
+            // navigate to dashboard
+            setTimeout(() => {
+              this.router.navigate(['/dashboard']);
+            }, 1500);
+          }
+        },
+        (error) => {
           this.isToastVisible = true;
-          this.type = 'success';
-          this.message = `You have registered. Welcome!`;
+          this.type = error ? 'error' : 'success';
 
-          // reset the form
-          e.resetForm();
+          // error msg for better UX
+          this.message = `Invalid user credentials. Please try again.`;
 
-          // navigate to dashboard
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 1500);
+          this.errorStatus = true;
+
+          // handle error messaging and redirection in here
+          if (this.errorStatus) {
+            // reset form and navigate back to register
+            e.resetForm();
+            this.router.navigate(['/register']);
+          }
+          return;
         }
-      },
-      (error) => {
-        console.log(error);
-        this.isToastVisible = true;
-        this.type = error ? 'error' : 'success';
-
-        // error msg for better UX
-        this.message = `Invalid user credentials. Please try again.`;
-
-        this.errorStatus = true;
-
-        // handle error messaging and redirection in here
-        if (this.errorStatus) {
-          // reset form and navigate back to register
-          e.resetForm();
-          this.router.navigate(['/register']);
-        }
-        return;
-      }
-    );
+      );
+    }
   }
 }

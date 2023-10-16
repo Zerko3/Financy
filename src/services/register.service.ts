@@ -31,7 +31,6 @@ export class RegisterService {
   }
 
   getUsername() {
-    console.log(this.username);
     return this.username;
   }
 
