@@ -15,7 +15,7 @@ export class SaveingsFormComponent implements OnInit {
   type: string = 'success';
   message: string = '';
   saveingsData: Saveings = {
-    expenseType: 'Saveing',
+    expenseType: 'Saving',
     money: 0,
     date: new Date(),
     typeOfSaveings: '',

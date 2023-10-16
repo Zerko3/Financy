@@ -17,7 +17,7 @@ export class BankAccountComponent {
   type: string = '';
   message: string = '';
   cards = ['Visa', 'Mastercard'];
-  cardGoal = ['Saveings', 'Spending'];
+  cardGoal = ['Savings', 'Spending'];
   loggedInUsername: string = this.loginService.username
     ? this.loginService.username
     : this.registerService.username;

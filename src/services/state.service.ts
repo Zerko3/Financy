@@ -53,8 +53,8 @@ export class State {
 
           // push only expenses in expense card into this array to display it on expese component
           if (
-            expense.expenseType !== 'Investing' ||
-            expense.expenseType !== 'Saveing'
+            expense.expenseType !== 'Investing' &&
+            expense.expenseType !== 'Saving'
           ) {
             this.totalNegativeMoney += expense.money;
             this.expenseDataForTable.push(expense);
@@ -71,14 +71,14 @@ export class State {
           }
 
           // push to saveings array
-          if (expense.expenseType === 'Saveing') {
+          if (expense.expenseType === 'Saving') {
             this.savingsData.push(expense);
           }
         }
       }
 
       // Store valid card based on the type into its array
-      if (card.bankAccountName === 'Saveings') {
+      if (card.bankAccountName === 'Savings') {
         this.bankCardSaveingTypeArray.push(card);
 
         // calc for saveings account
@@ -129,7 +129,7 @@ export class State {
         }
       }
 
-      if (card.bankAccountName === 'Saveings') {
+      if (card.bankAccountName === 'Savings') {
         if (card.bankMoneyStatus < 0) {
           this.toastSignal = true;
         } else {
@@ -177,7 +177,7 @@ export class State {
         card.expenseOnCard.push(userInput);
       }
 
-      if (card.bankAccountName === 'Saveings') {
+      if (card.bankAccountName === 'Savings') {
         if (card.bankAccountCustomName === userInput.ID) {
           newMoney = card.bankMoneyStatus + userInput.money;
           card.bankMoneyStatus = newMoney;
@@ -191,7 +191,7 @@ export class State {
       if (card.bankAccountName === 'Spending') {
         // update the expense array for expense component DOM
         if (
-          userInput.expenseType !== 'Saveings' &&
+          userInput.expenseType !== 'Saving' &&
           userInput.expenseType !== 'Investing'
         ) {
           this.expenseDataForTable.push(userInput);
@@ -249,7 +249,7 @@ export class State {
       this.cardNames.push(data.bankAccountCustomName);
 
       // Store valid card based on the type into its array
-      if (data.bankAccountName === 'Saveings') {
+      if (data.bankAccountName === 'Savings') {
         this.bankCardSaveingTypeArray.push(data);
 
         // calc for saveings account
@@ -290,7 +290,7 @@ export class State {
 
     // When the last card is deleted the function gets passed "null" so it wont activate the storedMoney and overwrite the totalMoneyInSaveingAccounts
     for (const card of bankCards) {
-      if (card.bankAccountName === 'Saveings') {
+      if (card.bankAccountName === 'Savings') {
         this.bankCardSaveingTypeArray.push(card);
 
         savedMoney += card.bankMoneyStatus;
