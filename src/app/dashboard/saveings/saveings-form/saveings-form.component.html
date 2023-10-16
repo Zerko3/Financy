@@ -6,17 +6,35 @@
       </div>
       <dx-form width="100%" labelLocation="top" [formData]="saveingsData">
         <dxi-item itemType="group" caption="Track your savings" [colCount]="1">
-          <dxi-item dataField="date"></dxi-item>
-          <dxi-item dataField="money"></dxi-item>
+          <dxi-item dataField="date">
+            <dxi-validation-rule type="required" message="Date is required">
+            </dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="money">
+            <dxi-validation-rule
+              type="required"
+              message="Money for saving is required"
+            >
+            </dxi-validation-rule>
+          </dxi-item>
           <dxi-item
             editorType="dxSelectBox"
             dataField="account"
             [editorOptions]="positionEditorOptions"
+          >
+            <dxi-validation-rule type="required" message="Account is required">
+            </dxi-validation-rule
           ></dxi-item>
           <dxi-item
             editorType="dxSelectBox"
             dataField="typeOfSavings"
             [editorOptions]="positionEditorOptionsTypeOfSaving"
+          >
+            <dxi-validation-rule
+              type="required"
+              message="Type of saving is required"
+            >
+            </dxi-validation-rule
           ></dxi-item>
           <dxi-item
             itemType="button"

@@ -17,9 +17,18 @@
             ></dxi-validation-rule>
             <dxo-label template="Expense"></dxo-label
           ></dxi-item>
-          <dxi-item dataField="date"></dxi-item>
+          <dxi-item dataField="date">
+            <dxi-validation-rule type="required" message="Date is required">
+            </dxi-validation-rule
+          ></dxi-item>
 
-          <dxi-item dataField="companyName"></dxi-item>
+          <dxi-item dataField="companyName">
+            <dxi-validation-rule
+              type="required"
+              message="Company name is required"
+            >
+            </dxi-validation-rule
+          ></dxi-item>
           <dxi-item
             dataField="account"
             editorType="dxSelectBox"
@@ -43,7 +52,13 @@
             ></dxi-validation-rule>
             <dxo-label template="Status"></dxo-label
           ></dxi-item>
-          <dxi-item dataField="money"></dxi-item>
+          <dxi-item dataField="money">
+            <dxi-validation-rule
+              type="required"
+              message="Expense amount is required"
+            >
+            </dxi-validation-rule
+          ></dxi-item>
           <dxi-item
             [colSpan]="2"
             itemType="button"

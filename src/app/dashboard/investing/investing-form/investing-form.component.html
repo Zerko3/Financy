@@ -4,22 +4,43 @@
   </div>
   <dx-form width="50rem" labelLocation="top" [formData]="investingData">
     <dxi-item itemType="group" caption="Track your savings" [colCount]="1">
-      <dxi-item dataField="date"></dxi-item>
-      <dxi-item dataField="money"></dxi-item>
+      <dxi-item dataField="date">
+        <dxi-validation-rule type="required" message="Date is required">
+        </dxi-validation-rule
+      ></dxi-item>
+      <dxi-item dataField="money">
+        <dxi-validation-rule
+          type="required"
+          message="Investing amount is required"
+        >
+        </dxi-validation-rule
+      ></dxi-item>
       <dxi-item
         editorType="dxSelectBox"
         dataField="coins"
         [editorOptions]="positionEditorOptionsCoinsToBuy"
+      >
+        <dxi-validation-rule type="required" message="Investment is required">
+        </dxi-validation-rule
       ></dxi-item>
       <dxi-item
         editorType="dxSelectBox"
         dataField="account"
         [editorOptions]="positionEditorOptions"
+      >
+        <dxi-validation-rule type="required" message="Account is required">
+        </dxi-validation-rule
       ></dxi-item>
       <dxi-item
         editorType="dxSelectBox"
         dataField="typeOfInvesting"
         [editorOptions]="positionEditorOptionsTypeOfInvesting"
+      >
+        <dxi-validation-rule
+          type="required"
+          message="Type of investing is required"
+        >
+        </dxi-validation-rule
       ></dxi-item>
       <dxi-item
         itemType="button"

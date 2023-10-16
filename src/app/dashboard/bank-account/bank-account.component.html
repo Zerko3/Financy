@@ -4,12 +4,21 @@
   </div>
   <dx-form width="50rem" labelLocation="top" [formData]="bankAccountData">
     <dxi-item itemType="group" caption="Track your expanse" [colCount]="1">
-      <dxi-item dataField="bankAccountCustomName"></dxi-item>
+      <dxi-item dataField="bankAccountCustomName">
+        <dxi-validation-rule type="required" message="Custom name is required">
+        </dxi-validation-rule
+      ></dxi-item>
 
       <dxi-item
         editorType="dxSelectBox"
         [editorOptions]="positionEditorOptionsCardGoal"
         dataField="bankAccountName"
+      >
+        <dxi-validation-rule
+          type="required"
+          message="Name for the card is required"
+        >
+        </dxi-validation-rule
       ></dxi-item>
       <dxi-item
         editorType="dxSelectBox"
@@ -22,8 +31,20 @@
         ></dxi-validation-rule>
         <dxo-label template="Card type"></dxo-label
       ></dxi-item>
-      <dxi-item dataField="bankAccountValidDate"></dxi-item>
-      <dxi-item dataField="bankMoneyStatus"></dxi-item>
+      <dxi-item dataField="bankAccountValidDate">
+        <dxi-validation-rule
+          type="required"
+          message="Valid date for the card is required"
+        >
+        </dxi-validation-rule
+      ></dxi-item>
+      <dxi-item dataField="bankMoneyStatus">
+        <dxi-validation-rule
+          type="required"
+          message="Card money balance is required"
+        >
+        </dxi-validation-rule>
+      </dxi-item>
       <dxi-item
         [colSpan]="1"
         itemType="button"
