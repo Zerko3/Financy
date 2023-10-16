@@ -124,12 +124,17 @@
           >
           </dxo-pager>
           <dxo-selection mode="single"></dxo-selection>
-          <dxi-column dataField="date"></dxi-column>
-          <dxi-column dataField="coins"></dxi-column>
-          <dxi-column dataField="typeOfInvesting"></dxi-column>
-          <dxi-column format="currency" dataField="money"></dxi-column>
+          <dxi-column aligment="left" dataField="date"></dxi-column>
+          <dxi-column aligment="left" dataField="coins"></dxi-column>
+          <dxi-column aligment="left" dataField="typeOfInvesting"></dxi-column>
+          <dxi-column
+            aligment="left"
+            format="currency"
+            dataField="money"
+          ></dxi-column>
           <dxo-summary>
             <dxi-total-item
+              aligment="left"
               column="money"
               summaryType="sum"
               valueFormat="currency"

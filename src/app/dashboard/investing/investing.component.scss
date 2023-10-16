@@ -163,6 +163,7 @@
 dx-data-grid {
   height: 30rem;
   width: 90%;
+  text-align: left;
 
   @include media-medium-small {
     height: 25rem;
@@ -192,4 +193,8 @@ dx-popup {
   min-width: 30rem;
   max-width: 40rem;
   font-size: font-size(font-size-regular);
+}
+
+dxi-column {
+  text-align: left !important;
 }
