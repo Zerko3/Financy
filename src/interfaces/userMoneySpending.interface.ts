@@ -7,8 +7,8 @@ export interface UserMoneySpending {
 }
 
 export interface Investing extends UserMoneySpending {
-  coins: string;
-  typeOfInvesting: string;
+  coins?: string;
+  typeOfInvesting?: string;
 }
 
 export interface Expense extends UserMoneySpending {

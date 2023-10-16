@@ -158,7 +158,6 @@ export class State {
     this.totalNegativeMoney += expenseNumber;
   }
 
-  // refector this
   getMoneyChangeAndUpdateFirebase(
     userInput: UserMoneySpending | Expense | Saveings | Investing
   ): BankAccount[] {
@@ -168,6 +167,11 @@ export class State {
     // update the subscription array
     if (userInput.expenseType === 'Subscription') {
       this.subscriptionArray.push(userInput);
+    }
+
+    // push to investing array
+    if (userInput.expenseType === 'Investing') {
+      this.investingData.push(userInput);
     }
 
     // update money in the card and show on DOM
