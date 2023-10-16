@@ -16,7 +16,7 @@ export class SaveingsComponent implements OnInit, OnDestroy {
   showInfo: boolean = true;
   showNavButtons: boolean = true;
   saveingsFormDataArray: Saveings[] = [];
-  columns: string[] = ['Date', 'Money', 'Status', 'Account'];
+  columns: string[] = ['Date', 'Money', 'Status', 'Account', 'typeOfSavings'];
   saveingSubscribe: Subscription;
   totalMoneySaved: number = 0;
   totalAccountMoney: number = 0;
@@ -54,6 +54,6 @@ export class SaveingsComponent implements OnInit, OnDestroy {
 
   // allow user navigation via router
   userNavigationForm() {
-    this.router.navigate(['/saveings/saveingsForm']);
+    this.router.navigate(['/savings/savingsForm']);
   }
 }

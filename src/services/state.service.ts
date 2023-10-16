@@ -174,6 +174,11 @@ export class State {
       this.investingData.push(userInput);
     }
 
+    // push to saveings array
+    if (userInput.expenseType === 'Saving') {
+      this.savingsData.push(userInput);
+    }
+
     // update money in the card and show on DOM
     let newMoney = 0;
     for (const card of this.bankCardsArray) {

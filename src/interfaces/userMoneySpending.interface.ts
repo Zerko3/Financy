@@ -17,5 +17,5 @@ export interface Expense extends UserMoneySpending {
 }
 
 export interface Saveings extends UserMoneySpending {
-  typeOfSaveings?: string;
+  typeOfSavings?: string;
 }

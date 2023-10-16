@@ -42,10 +42,10 @@ const routes: Routes = [
     children: [{ path: 'investingForm', component: InvestingFormComponent }],
   },
   {
-    path: 'saveings',
+    path: 'savings',
     canActivate: [AuthGuard],
     component: SaveingsComponent,
-    children: [{ path: 'saveingsForm', component: SaveingsFormComponent }],
+    children: [{ path: 'savingsForm', component: SaveingsFormComponent }],
   },
   { path: '**', component: WildcardComponentComponent },
 ];

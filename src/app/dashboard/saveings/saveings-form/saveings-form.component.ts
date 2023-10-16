@@ -18,17 +18,17 @@ export class SaveingsFormComponent implements OnInit {
     expenseType: 'Saving',
     money: 0,
     date: new Date(),
-    typeOfSaveings: '',
+    typeOfSavings: '',
     account: '',
     ID: '',
   };
 
   account: string[] = [];
-  typeOfSaveings: string[] = [
-    'Daily saveing',
-    'Weekly saveing',
-    'Monthly saveing',
-    'Additional saveing',
+  typeOfSavings: string[] = [
+    'Daily saving',
+    'Weekly saving',
+    'Monthly saving',
+    'Additional saving',
   ];
 
   positionEditorOptions = {
@@ -37,8 +37,8 @@ export class SaveingsFormComponent implements OnInit {
     value: '',
   };
 
-  positionEditorOptionsTypeOfSaveing = {
-    items: this.typeOfSaveings,
+  positionEditorOptionsTypeOfSaving = {
+    items: this.typeOfSavings,
     searchEnabled: true,
     value: '',
   };
@@ -56,7 +56,7 @@ export class SaveingsFormComponent implements OnInit {
   }
 
   onUserCloseForm() {
-    this.router.navigate(['/saveings']);
+    this.router.navigate(['/savings']);
   }
 
   onSubmitForm() {
@@ -71,7 +71,7 @@ export class SaveingsFormComponent implements OnInit {
 
     if (this.form.status === 'VALID') {
       this.isVisibleToast = true;
-      this.message = `Saving added: ${data.typeOfSaveings} with ${data.money} dolars.`;
+      this.message = `Saving added: ${data.typeOfSavings} with ${data.money} dolars.`;
     }
   }
 }
